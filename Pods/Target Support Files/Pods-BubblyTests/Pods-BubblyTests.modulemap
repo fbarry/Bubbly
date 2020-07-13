@@ -1,0 +1,6 @@
+framework module Pods_BubblyTests {
+  umbrella header "Pods-BubblyTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
