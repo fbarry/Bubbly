@@ -7,8 +7,13 @@
 //
 
 #import "LoginViewController.h"
+#import "Utilities.h"
+#import "User.h"
 
 @interface LoginViewController ()
+
+@property (weak, nonatomic) IBOutlet UITextField *usernameField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordField;
 
 @end
 
@@ -19,14 +24,32 @@
     // Do any additional setup after loading the view.
 }
 
-/*
+- (IBAction)didTapLogin:(id)sender {
+    NSString *username = self.usernameField.text;
+    NSString *password = self.passwordField.text;
+    
+    [User logInWithUsernameInBackground:username password:password block:^(PFUser * _Nullable user, NSError * _Nullable error) {
+        if (error) {
+            [Utilities presentOkAlertControllerInViewController:self
+                                                      withTitle:@"Error Logging In"
+                                                        message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
+        } else {
+            [self performSegueWithIdentifier:@"Home" sender:self];
+        }
+    }];
+}
+
+- (IBAction)didTapBack:(id)sender {
+    [self performSegueWithIdentifier:@"Welcome" sender:self];
+}
+
+- (IBAction)didTapBackground:(id)sender {
+    [self.view endEditing:YES];
+}
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
 }
-*/
 
 @end

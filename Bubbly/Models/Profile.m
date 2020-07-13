@@ -10,4 +10,8 @@
 
 @implementation Profile
 
++ (nonnull NSString *)parseClassName {
+    return @"Profile";
+}
+
 @end

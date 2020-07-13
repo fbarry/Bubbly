@@ -10,4 +10,8 @@
 
 @implementation Settings
 
++ (nonnull NSString *)parseClassName {
+    return @"Settings";
+}
+
 @end

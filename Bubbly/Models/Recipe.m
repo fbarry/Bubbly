@@ -10,4 +10,8 @@
 
 @implementation Recipe
 
++ (nonnull NSString *)parseClassName {
+    return @"Recipe";
+}
+
 @end

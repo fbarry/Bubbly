@@ -7,7 +7,6 @@
 //
 
 #import <Parse/Parse.h>
-#import "Account.h"
 #import "Profile.h"
 #import "Health.h"
 #import "Settings.h"
@@ -16,7 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface User : PFUser
 
-@property (strong, nonatomic) Account *account;
 @property (strong, nonatomic) Profile *profile;
 @property (strong, nonatomic) Health *health;
 @property (strong, nonatomic) Settings *settings;

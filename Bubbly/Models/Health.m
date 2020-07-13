@@ -10,4 +10,8 @@
 
 @implementation Health
 
++ (nonnull NSString *)parseClassName {
+    return @"Health";
+}
+
 @end

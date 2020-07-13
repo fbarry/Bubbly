@@ -10,4 +10,8 @@
 
 @implementation IntakeLog
 
++ (nonnull NSString *)parseClassName {
+    return @"IntakeLog";
+}
+
 @end

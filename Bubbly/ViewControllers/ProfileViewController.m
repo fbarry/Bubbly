@@ -7,6 +7,10 @@
 //
 
 #import "ProfileViewController.h"
+#import "Utilities.h"
+#import "SceneDelegate.h"
+#import "WelcomeViewController.h"
+#import "User.h"
 
 @interface ProfileViewController ()
 
@@ -17,6 +21,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+- (IBAction)didTapLogout:(id)sender {
+    [Utilities presentConfirmationInViewController:self withTitle:@"Are you sure you want to logout?" yesHandler:^(UIAlertAction * _Nonnull action) {
+        SceneDelegate *sceneDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
+
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        WelcomeViewController *welcomeViewController = [storyboard instantiateViewControllerWithIdentifier:@"WelcomeViewController"];
+        sceneDelegate.window.rootViewController = welcomeViewController;
+
+        [User logOut];
+    }];
 }
 
 /*

@@ -10,4 +10,8 @@
 
 @implementation User
 
+@dynamic profile;
+@dynamic health;
+@dynamic settings;
+
 @end
