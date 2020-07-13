@@ -3,20 +3,35 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		66B846089D380846B8E35F69 /* Pods_Bubbly_BubblyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D931F003FEC0C6FA81BF4B /* Pods_Bubbly_BubblyUITests.framework */; };
 		8C9EBFA324BCC1330031380E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFA224BCC1330031380E /* AppDelegate.m */; };
 		8C9EBFA624BCC1330031380E /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFA524BCC1330031380E /* SceneDelegate.m */; };
-		8C9EBFA924BCC1330031380E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFA824BCC1330031380E /* ViewController.m */; };
 		8C9EBFAC24BCC1330031380E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C9EBFAA24BCC1330031380E /* Main.storyboard */; };
 		8C9EBFAE24BCC1340031380E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C9EBFAD24BCC1340031380E /* Assets.xcassets */; };
 		8C9EBFB124BCC1340031380E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C9EBFAF24BCC1340031380E /* LaunchScreen.storyboard */; };
 		8C9EBFB424BCC1340031380E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFB324BCC1340031380E /* main.m */; };
 		8C9EBFBE24BCC1340031380E /* BubblyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFBD24BCC1340031380E /* BubblyTests.m */; };
 		8C9EBFC924BCC1340031380E /* BubblyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFC824BCC1340031380E /* BubblyUITests.m */; };
+		8C9EBFDC24BCD27E0031380E /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFDB24BCD27E0031380E /* Utilities.m */; };
+		8C9EBFDF24BCD2AC0031380E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFDE24BCD2AC0031380E /* User.m */; };
+		8C9EBFE224BCD2B40031380E /* Recipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFE124BCD2B40031380E /* Recipe.m */; };
+		8C9EBFE524BCD2BC0031380E /* IntakeLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFE424BCD2BC0031380E /* IntakeLog.m */; };
+		8C9EBFE824BCD2ED0031380E /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFE724BCD2ED0031380E /* Account.m */; };
+		8C9EBFEB24BCD2F60031380E /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFEA24BCD2F60031380E /* Profile.m */; };
+		8C9EBFEE24BCD2FE0031380E /* Health.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFED24BCD2FE0031380E /* Health.m */; };
+		8C9EBFF124BCD30A0031380E /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFF024BCD30A0031380E /* Settings.m */; };
+		8C9EBFF724BCDF1F0031380E /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFF624BCDF1F0031380E /* WelcomeViewController.m */; };
+		8C9EBFFA24BCDF270031380E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFF924BCDF270031380E /* LoginViewController.m */; };
+		8C9EBFFD24BCDF2E0031380E /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFFC24BCDF2E0031380E /* SignUpViewController.m */; };
+		8C9EC00024BCDF370031380E /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFFF24BCDF370031380E /* HomeViewController.m */; };
+		8C9EC00324BCDF3E0031380E /* BrowseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EC00224BCDF3E0031380E /* BrowseViewController.m */; };
+		8C9EC00624BCDF440031380E /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EC00524BCDF440031380E /* DetailsViewController.m */; };
+		8C9EC00924BCDF4E0031380E /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EC00824BCDF4E0031380E /* ProfileViewController.m */; };
+		8C9EC00C24BCDF5B0031380E /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EC00B24BCDF5B0031380E /* SettingsViewController.m */; };
 		D5F86BBE48D742F4E7D9FEF4 /* Pods_BubblyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335D8992D3546B1CB7049452 /* Pods_BubblyTests.framework */; };
 		D624D6578B2788BD780DD002 /* Pods_Bubbly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E1106D8528734F0FB06689E /* Pods_Bubbly.framework */; };
 /* End PBXBuildFile section */
@@ -51,8 +66,6 @@
 		8C9EBFA224BCC1330031380E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		8C9EBFA424BCC1330031380E /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		8C9EBFA524BCC1330031380E /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		8C9EBFA724BCC1330031380E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		8C9EBFA824BCC1330031380E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		8C9EBFAB24BCC1330031380E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8C9EBFAD24BCC1340031380E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8C9EBFB024BCC1340031380E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -64,6 +77,38 @@
 		8C9EBFC424BCC1340031380E /* BubblyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BubblyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C9EBFC824BCC1340031380E /* BubblyUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BubblyUITests.m; sourceTree = "<group>"; };
 		8C9EBFCA24BCC1340031380E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8C9EBFDA24BCD27E0031380E /* Utilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
+		8C9EBFDB24BCD27E0031380E /* Utilities.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
+		8C9EBFDD24BCD2AC0031380E /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		8C9EBFDE24BCD2AC0031380E /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		8C9EBFE024BCD2B40031380E /* Recipe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Recipe.h; sourceTree = "<group>"; };
+		8C9EBFE124BCD2B40031380E /* Recipe.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Recipe.m; sourceTree = "<group>"; };
+		8C9EBFE324BCD2BC0031380E /* IntakeLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntakeLog.h; sourceTree = "<group>"; };
+		8C9EBFE424BCD2BC0031380E /* IntakeLog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntakeLog.m; sourceTree = "<group>"; };
+		8C9EBFE624BCD2ED0031380E /* Account.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Account.h; sourceTree = "<group>"; };
+		8C9EBFE724BCD2ED0031380E /* Account.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Account.m; sourceTree = "<group>"; };
+		8C9EBFE924BCD2F60031380E /* Profile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Profile.h; sourceTree = "<group>"; };
+		8C9EBFEA24BCD2F60031380E /* Profile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Profile.m; sourceTree = "<group>"; };
+		8C9EBFEC24BCD2FE0031380E /* Health.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Health.h; sourceTree = "<group>"; };
+		8C9EBFED24BCD2FE0031380E /* Health.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Health.m; sourceTree = "<group>"; };
+		8C9EBFEF24BCD30A0031380E /* Settings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
+		8C9EBFF024BCD30A0031380E /* Settings.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
+		8C9EBFF524BCDF1F0031380E /* WelcomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
+		8C9EBFF624BCDF1F0031380E /* WelcomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
+		8C9EBFF824BCDF270031380E /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		8C9EBFF924BCDF270031380E /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		8C9EBFFB24BCDF2E0031380E /* SignUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
+		8C9EBFFC24BCDF2E0031380E /* SignUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
+		8C9EBFFE24BCDF370031380E /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		8C9EBFFF24BCDF370031380E /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		8C9EC00124BCDF3E0031380E /* BrowseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrowseViewController.h; sourceTree = "<group>"; };
+		8C9EC00224BCDF3E0031380E /* BrowseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrowseViewController.m; sourceTree = "<group>"; };
+		8C9EC00424BCDF440031380E /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
+		8C9EC00524BCDF440031380E /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
+		8C9EC00724BCDF4E0031380E /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		8C9EC00824BCDF4E0031380E /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		8C9EC00A24BCDF5B0031380E /* SettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		8C9EC00B24BCDF5B0031380E /* SettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		9CC48BDB369BFC801730ABB6 /* Pods-Bubbly-BubblyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bubbly-BubblyUITests.release.xcconfig"; path = "Target Support Files/Pods-Bubbly-BubblyUITests/Pods-Bubbly-BubblyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F1FDC2BC347BEE9CA2E2E202 /* Pods-BubblyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BubblyTests.debug.xcconfig"; path = "Target Support Files/Pods-BubblyTests/Pods-BubblyTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -116,7 +161,6 @@
 				F1FDC2BC347BEE9CA2E2E202 /* Pods-BubblyTests.debug.xcconfig */,
 				29950D71DE36A76870AA69F9 /* Pods-BubblyTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -145,17 +189,20 @@
 		8C9EBFA024BCC1330031380E /* Bubbly */ = {
 			isa = PBXGroup;
 			children = (
+				8C9EBFD824BCD1FD0031380E /* ViewControllers */,
+				8C9EBFD724BCD1F80031380E /* Models */,
+				8C9EBFD624BCD1E00031380E /* Views */,
 				8C9EBFA124BCC1330031380E /* AppDelegate.h */,
 				8C9EBFA224BCC1330031380E /* AppDelegate.m */,
 				8C9EBFA424BCC1330031380E /* SceneDelegate.h */,
 				8C9EBFA524BCC1330031380E /* SceneDelegate.m */,
-				8C9EBFA724BCC1330031380E /* ViewController.h */,
-				8C9EBFA824BCC1330031380E /* ViewController.m */,
 				8C9EBFAA24BCC1330031380E /* Main.storyboard */,
 				8C9EBFAD24BCC1340031380E /* Assets.xcassets */,
 				8C9EBFAF24BCC1340031380E /* LaunchScreen.storyboard */,
 				8C9EBFB224BCC1340031380E /* Info.plist */,
 				8C9EBFB324BCC1340031380E /* main.m */,
+				8C9EBFDA24BCD27E0031380E /* Utilities.h */,
+				8C9EBFDB24BCD27E0031380E /* Utilities.m */,
 			);
 			path = Bubbly;
 			sourceTree = "<group>";
@@ -176,6 +223,57 @@
 				8C9EBFCA24BCC1340031380E /* Info.plist */,
 			);
 			path = BubblyUITests;
+			sourceTree = "<group>";
+		};
+		8C9EBFD624BCD1E00031380E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8C9EBFD724BCD1F80031380E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8C9EBFDD24BCD2AC0031380E /* User.h */,
+				8C9EBFDE24BCD2AC0031380E /* User.m */,
+				8C9EBFE024BCD2B40031380E /* Recipe.h */,
+				8C9EBFE124BCD2B40031380E /* Recipe.m */,
+				8C9EBFE324BCD2BC0031380E /* IntakeLog.h */,
+				8C9EBFE424BCD2BC0031380E /* IntakeLog.m */,
+				8C9EBFE624BCD2ED0031380E /* Account.h */,
+				8C9EBFE724BCD2ED0031380E /* Account.m */,
+				8C9EBFE924BCD2F60031380E /* Profile.h */,
+				8C9EBFEA24BCD2F60031380E /* Profile.m */,
+				8C9EBFEC24BCD2FE0031380E /* Health.h */,
+				8C9EBFED24BCD2FE0031380E /* Health.m */,
+				8C9EBFEF24BCD30A0031380E /* Settings.h */,
+				8C9EBFF024BCD30A0031380E /* Settings.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8C9EBFD824BCD1FD0031380E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8C9EBFF524BCDF1F0031380E /* WelcomeViewController.h */,
+				8C9EBFF624BCDF1F0031380E /* WelcomeViewController.m */,
+				8C9EBFF824BCDF270031380E /* LoginViewController.h */,
+				8C9EBFF924BCDF270031380E /* LoginViewController.m */,
+				8C9EBFFB24BCDF2E0031380E /* SignUpViewController.h */,
+				8C9EBFFC24BCDF2E0031380E /* SignUpViewController.m */,
+				8C9EBFFE24BCDF370031380E /* HomeViewController.h */,
+				8C9EBFFF24BCDF370031380E /* HomeViewController.m */,
+				8C9EC00124BCDF3E0031380E /* BrowseViewController.h */,
+				8C9EC00224BCDF3E0031380E /* BrowseViewController.m */,
+				8C9EC00424BCDF440031380E /* DetailsViewController.h */,
+				8C9EC00524BCDF440031380E /* DetailsViewController.m */,
+				8C9EC00724BCDF4E0031380E /* ProfileViewController.h */,
+				8C9EC00824BCDF4E0031380E /* ProfileViewController.m */,
+				8C9EC00A24BCDF5B0031380E /* SettingsViewController.h */,
+				8C9EC00B24BCDF5B0031380E /* SettingsViewController.m */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -416,10 +514,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C9EBFA924BCC1330031380E /* ViewController.m in Sources */,
+				8C9EBFDF24BCD2AC0031380E /* User.m in Sources */,
+				8C9EBFE824BCD2ED0031380E /* Account.m in Sources */,
+				8C9EC00324BCDF3E0031380E /* BrowseViewController.m in Sources */,
+				8C9EBFFA24BCDF270031380E /* LoginViewController.m in Sources */,
+				8C9EBFE524BCD2BC0031380E /* IntakeLog.m in Sources */,
+				8C9EBFF124BCD30A0031380E /* Settings.m in Sources */,
+				8C9EBFEB24BCD2F60031380E /* Profile.m in Sources */,
+				8C9EBFF724BCDF1F0031380E /* WelcomeViewController.m in Sources */,
+				8C9EBFE224BCD2B40031380E /* Recipe.m in Sources */,
+				8C9EC00024BCDF370031380E /* HomeViewController.m in Sources */,
+				8C9EC00924BCDF4E0031380E /* ProfileViewController.m in Sources */,
+				8C9EC00C24BCDF5B0031380E /* SettingsViewController.m in Sources */,
+				8C9EC00624BCDF440031380E /* DetailsViewController.m in Sources */,
 				8C9EBFA324BCC1330031380E /* AppDelegate.m in Sources */,
 				8C9EBFB424BCC1340031380E /* main.m in Sources */,
+				8C9EBFDC24BCD27E0031380E /* Utilities.m in Sources */,
 				8C9EBFA624BCC1330031380E /* SceneDelegate.m in Sources */,
+				8C9EBFFD24BCDF2E0031380E /* SignUpViewController.m in Sources */,
+				8C9EBFEE24BCD2FE0031380E /* Health.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
