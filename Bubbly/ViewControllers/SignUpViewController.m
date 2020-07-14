@@ -28,7 +28,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [Utilities roundImage:(UIImageView *)self.profilePicture];
 }
 
 - (IBAction)didTapProfile:(id)sender {
@@ -58,18 +59,14 @@
         user.password = self.passwordField.text;
         user.email = self.emailField.text;
         
-        user.profile = [Profile new];
-        user.health = [Health new];
-        user.settings = [Settings new];
+        user.name = self.nameField.text;
+        user.profilePicture = [Utilities getPFFileFromImage:self.profilePicture.imageView.image];
         
-        user.profile.name = self.nameField.text;
-        user.profile.profilePicture = [Utilities getPFFileFromImage:self.profilePicture.imageView.image];
+        user.weight = [NSNumber numberWithFloat:[self.weightField.text floatValue]];
+        user.exercise = [NSNumber numberWithFloat:[self.exerciseField.text floatValue]];
         
-        user.health.weight = [NSNumber numberWithFloat:[self.weightField.text floatValue]];
-        user.health.exercise = [NSNumber numberWithFloat:[self.exerciseField.text floatValue]];
-        
-        user.settings.backgroundPicture = [Utilities getPFFileFromImage:[UIImage imageNamed:@"bottle"]];
-        user.settings.logAmounts = @[@1, @2, @4, @8];
+        user.backgroundPicture = [Utilities getPFFileFromImage:[UIImage imageNamed:@"bottle"]];
+        user.logAmounts = @[@1, @2, @4, @8];
         
         [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (error) {
