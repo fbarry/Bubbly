@@ -40,7 +40,7 @@
     IngredientCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"IngredientCell"];
     cell.delegate = self;
     cell.ingredient.text = nil;
-    if (![self.ingredients[indexPath.row] isEqual:@"[Empty]"]) {
+    if (![self.ingredients[indexPath.row] isEqual:@""]) {
         cell.ingredient.text = self.ingredients[indexPath.row];
     }
     return cell;
@@ -51,7 +51,7 @@
 }
 
 - (IBAction)didTapAdd:(id)sender {
-    [self.ingredients insertObject:@"[Empty]" atIndex:self.ingredients.count];
+    [self.ingredients insertObject:@"" atIndex:self.ingredients.count];
     [self.tableView reloadData];
 }
 
@@ -115,7 +115,7 @@
 }
 
 - (BOOL)invalidInput {    
-    [self.ingredients removeObjectIdenticalTo:@"[Empty]"];
+    [self.ingredients removeObjectIdenticalTo:@""];
     [self.tableView reloadData];
     return [self.nameField.text isEqual:@""] || self.ingredients.count == 0;
 }

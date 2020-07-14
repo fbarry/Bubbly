@@ -31,14 +31,16 @@
     self.collectionView.dataSource = self;
     self.searchBar.delegate = self;
         
+    self.collectionView.frame = self.view.frame;
+    
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *) self.collectionView.collectionViewLayout;
     
     layout.minimumInteritemSpacing = 5;
     layout.minimumLineSpacing = 5;
     
-    CGFloat postersPerRow = 3;
+    CGFloat postersPerRow = 2;
     CGFloat itemWidth = (self.collectionView.frame.size.width - layout.minimumInteritemSpacing * (postersPerRow - 1)) / postersPerRow;
-    CGFloat itemHeight = itemWidth * 1.5;
+    CGFloat itemHeight = itemWidth;
     layout.itemSize = CGSizeMake(itemWidth, itemHeight);
     
     [self loadRecipes];
@@ -77,7 +79,7 @@
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     RecipeCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"RecipeCell" forIndexPath:indexPath];
-    cell.recipe = self.filteredRecipes[indexPath.section];
+    cell.recipe = self.filteredRecipes[indexPath.item];
     cell.nameLabel.text = cell.recipe.name;
     [cell.recipePicture setImage:[UIImage systemImageNamed:@"book"]];
     

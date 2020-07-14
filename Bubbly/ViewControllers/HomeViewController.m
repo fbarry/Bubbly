@@ -11,7 +11,6 @@
 #import "IntakeLog.h"
 #import "Utilities.h"
 #import "UIImageView+AFNetworking.h"
-#import <Charts-Swift.h>
 
 @interface HomeViewController ()
 
@@ -29,11 +28,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [Utilities roundImage:self.backgroundPicture];
-    
+        
     self.user = [User currentUser];
-    self.welcomeLabel.text = [NSString stringWithFormat:@"Welcome Back, %@!", self.user.username];
+    self.welcomeLabel.text = [NSString stringWithFormat:@"Welcome Back, %@!", self.user.name];
     
     [self getDayLog];
 }
