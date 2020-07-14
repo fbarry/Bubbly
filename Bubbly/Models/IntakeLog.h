@@ -7,6 +7,7 @@
 //
 
 #import <Parse/Parse.h>
+#import "User.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) NSNumber *goal;
 @property (strong, nonatomic) NSNumber *achieved;
+@property (strong, nonatomic) User *user;
 
 @end
 

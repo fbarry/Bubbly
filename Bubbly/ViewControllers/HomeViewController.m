@@ -37,6 +37,7 @@
 
 - (void)getDayLog {
     PFQuery *logQuery = [PFQuery queryWithClassName:@"IntakeLog"];
+    [logQuery whereKey:@"user" equalTo:self.user];
     [logQuery addDescendingOrder:@"createdAt"];
     logQuery.limit = 1;
     
@@ -50,6 +51,7 @@
                 self.dayLog = [IntakeLog new];
                 self.dayLog.goal = [NSNumber numberWithFloat:[self.user.weight floatValue] * 2.0 / 3.0 + 12.0 * [self.user.exercise floatValue] / 30.0];
                 self.dayLog.achieved = [NSNumber numberWithInt:0];
+                self.dayLog.user = self.user;
                 
                 [self.dayLog saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                     if (error) {
