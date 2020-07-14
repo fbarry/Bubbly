@@ -16,7 +16,7 @@ Bubbly Water Tracker is a water intake tracking assistant that not only allows t
 ### App Evaluation
 [Evaluation of your app across the following attributes]
 - **Category:** Health & Fitness
-- **Mobile:** User can use the camera to customize the background of their home screen and create a profile image. Optional: User can access weather for their location. Optional: User can share when they meet a water goal.
+- **Mobile:** User can use the camera to customize the background of their home screen and create a profile image. User can share when they meet a water goal. Optional: User can access weather for their location.
 - **Story:** For people who want to increase or improve water intake, a tracking app is very helpful. Moreover, for those who do not like the taste of water, ideas for water recipes alongside this app with the ability to save them for later is a great convenience!
 - **Market:** The audience is intended for anyone who wants to track water intake for people who: are currently active, struggle with dehydration, want to improve general well-being, have medical conditions, etc.
 - **Habit:** Water intake is daily, so the intended use for the app is daily. Users primarily consume information from the app.
@@ -38,17 +38,17 @@ Users can:
 * Set customized profile and background pictures using their phone camera
 * Access a home screen where they can view a graphic alongside information about recommended and current water intake
 * Search for recipes based on ingredients
+* A compiled recipe list for saved recipes
+* Access to water consumption over time in a graphic
+* Create and publish recipes
+* Share when a water intake goal is met
 
 **Optional Nice-to-have Stories**
 
 * A schedule for water intake
 * Opt-in/out notifications/reminders for water intake at time intervals
-* A compiled recipe list for saved recipes
-* Access to water consumption over time in a graphic
 * A tab bar option to view weather for their location and recommend more water intake when necessary
 * View profile through side bar navigation to accommodate for all of the tab bar navigation
-* Share when a water intake goal is met
-* Create and publish recipes
 * HealthKit Integration
 
 ### 2. Screen Archetypes
@@ -63,7 +63,7 @@ Users can:
    * View a graphic alongside information about recommended and current water intake
    * OPTIONAL: View a schedule for recommended water intake
    * OPTIONAL: Show pop-up of severe heat
-   * OPTIONAL: Share feature
+   * Share feature
 * Water recipe browse / search screen
     * Save water recipes
     * Search for recipes based on ingredients
@@ -124,8 +124,6 @@ https://www.figma.com/file/7KhIRv2UjLg3eeKU3illfi/Bubbly?node-id=0%3A1
 | bio                 | String            | Description set by user     |
 | weightIb            | Number            | Weight (in pounds) of user  |
 | exercise            | Number            | Minutes of exercise         |
-| intakeLogData       | Array             | Array of logs               |
-| custom              | Array             | Array of custom recipes     |
 
 #### Recipe
 
@@ -138,7 +136,7 @@ https://www.figma.com/file/7KhIRv2UjLg3eeKU3illfi/Bubbly?node-id=0%3A1
 | picture             | File              | Picture of recipe           |
 | url                 | String            | Link to recipe              |
 | descriptionText     | String            | Description of recipe       |
-| savedBy             | Array             | Array of users who saved    |
+| savedBy             | Relation          | Users who saved             |
 | creator             | Pointer to object | User who created            |
 
 #### IntakeLog
@@ -147,6 +145,7 @@ https://www.figma.com/file/7KhIRv2UjLg3eeKU3illfi/Bubbly?node-id=0%3A1
 | ------------------- | ----------------- | --------------------------- |
 | createdAt (default) | Date              | Creation time of user       |
 | id (default)        | String            | Unique id                   |
+| user                | Pointer to Object | User for log data           |
 | goal                | Number            | Target intake of water (oz) |
 | achieved            | Number            | Acheived intake (oz)        |
 
@@ -161,8 +160,6 @@ https://www.figma.com/file/7KhIRv2UjLg3eeKU3illfi/Bubbly?node-id=0%3A1
 | account             | Pointer to object | User's account info         |
 | profile             | Pointer to object | User's profile info         |
 | healthSettings      | Pointer to object | User's health info          |
-| intakeLogData       | Array             | Array of logs               |
-| custom              | Array             | Array of custom recipes     |
 | settings (stretch)  | Pointer to object | Current account settings    |
 
 #### Account
