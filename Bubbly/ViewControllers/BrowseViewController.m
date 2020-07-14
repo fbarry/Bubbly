@@ -7,8 +7,18 @@
 //
 
 #import "BrowseViewController.h"
+#import "DetailsViewController.h"
+#import "RecipeCell.h"
+#import "Recipe.h"
+#import "Utilities.h"
+#import "UIImageView+AFNetworking.h"
 
-@interface BrowseViewController ()
+@interface BrowseViewController () <UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
+
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (strong, nonatomic) NSArray *recipes;
+@property (strong, nonatomic) NSArray *filteredRecipes;
 
 @end
 
@@ -16,17 +26,78 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
+    self.searchBar.delegate = self;
+        
+    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *) self.collectionView.collectionViewLayout;
+    
+    layout.minimumInteritemSpacing = 5;
+    layout.minimumLineSpacing = 5;
+    
+    CGFloat postersPerRow = 3;
+    CGFloat itemWidth = (self.collectionView.frame.size.width - layout.minimumInteritemSpacing * (postersPerRow - 1)) / postersPerRow;
+    CGFloat itemHeight = itemWidth * 1.5;
+    layout.itemSize = CGSizeMake(itemWidth, itemHeight);
+    
+    [self loadRecipes];
 }
 
-/*
-#pragma mark - Navigation
+- (void)loadRecipes {
+    PFQuery *query = [PFQuery queryWithClassName:@"Recipe"];
+    [query includeKey:@"creator"];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (error) {
+            [Utilities presentOkAlertControllerInViewController:self
+                                                      withTitle:@"Error loading recipes"
+                                                        message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
+        } else {
+            self.recipes = objects;
+            self.filteredRecipes = self.recipes;
+            [self.collectionView reloadData];
+        }
+    }];
+}
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    NSArray *words = [searchText componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    words = [words filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF != ''"]];
+        
+    if (searchText.length > 0) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ingredients contains[c] %@" argumentArray:words];
+        self.filteredRecipes = [self.recipes filteredArrayUsingPredicate:predicate];
+    } else {
+        self.filteredRecipes = self.recipes;
+    }
+    
+    [self.collectionView reloadData];
+}
+
+- (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    RecipeCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"RecipeCell" forIndexPath:indexPath];
+    cell.recipe = self.filteredRecipes[indexPath.section];
+    cell.nameLabel.text = cell.recipe.name;
+    [cell.recipePicture setImage:[UIImage systemImageNamed:@"book"]];
+    
+    if (cell.recipe.picture) {
+        [cell.recipePicture setImageWithURL:[NSURL URLWithString:cell.recipe.picture.url]];
+    }
+    
+    return cell;
+}
+
+- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.filteredRecipes.count;
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"Details"]) {
+        DetailsViewController *detailsViewController = [segue destinationViewController];
+        RecipeCell *tappedCell = sender;
+        detailsViewController.recipe = tappedCell.recipe;
+    }
 }
-*/
 
 @end

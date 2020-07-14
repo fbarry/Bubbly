@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Recipe : PFObject <PFSubclassing>
 
 @property (strong, nonatomic) NSString *name;
-@property (strong, nonatomic) NSMutableArray *ingredients;
+@property (strong, nonatomic) NSArray *ingredients;
 @property (strong, nonatomic) PFFileObject *picture;
 @property (strong, nonatomic) NSString *url;
 @property (strong, nonatomic) NSString *descriptionText;

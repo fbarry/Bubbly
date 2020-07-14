@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Recipe.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DetailsViewController : UIViewController
+
+@property (strong, nonatomic) Recipe *recipe;
 
 @end
 
