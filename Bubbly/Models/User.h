@@ -7,17 +7,18 @@
 //
 
 #import <Parse/Parse.h>
-#import "Profile.h"
-#import "Health.h"
-#import "Settings.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface User : PFUser
 
-@property (strong, nonatomic) Profile *profile;
-@property (strong, nonatomic) Health *health;
-@property (strong, nonatomic) Settings *settings;
+@property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) PFFileObject *profilePicture;
+@property (strong, nonatomic) NSString *bio;
+@property (strong, nonatomic) NSNumber *weight;
+@property (strong, nonatomic) NSNumber *exercise;
+@property (strong, nonatomic) PFFileObject *backgroundPicture;
+@property (strong, nonatomic) NSArray *logAmounts;
 
 @end
 

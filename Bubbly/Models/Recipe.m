@@ -10,6 +10,14 @@
 
 @implementation Recipe
 
+@dynamic ingredients;
+@dynamic name;
+@dynamic picture;
+@dynamic descriptionText;
+@dynamic url;
+@dynamic savedBy;
+@dynamic creator;
+
 + (nonnull NSString *)parseClassName {
     return @"Recipe";
 }

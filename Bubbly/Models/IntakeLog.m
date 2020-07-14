@@ -7,8 +7,12 @@
 //
 
 #import "IntakeLog.h"
+#import "User.h"
 
 @implementation IntakeLog
+
+@dynamic goal;
+@dynamic achieved;
 
 + (nonnull NSString *)parseClassName {
     return @"IntakeLog";

@@ -10,8 +10,12 @@
 
 @implementation User
 
-@dynamic profile;
-@dynamic health;
-@dynamic settings;
+@dynamic name;
+@dynamic profilePicture;
+@dynamic bio;
+@dynamic weight;
+@dynamic exercise;
+@dynamic backgroundPicture;
+@dynamic logAmounts;
 
 @end

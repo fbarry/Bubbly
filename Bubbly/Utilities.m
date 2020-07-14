@@ -53,8 +53,9 @@
 
 + (void)roundImage:(UIImageView *)imageView {
     imageView.layer.cornerRadius = imageView.frame.size.width / 2;
-    imageView.layer.masksToBounds = YES;
+    imageView.layer.masksToBounds = NO;
     imageView.layer.borderWidth = 1.0f;
+    imageView.clipsToBounds = YES;
 }
 
 + (void)presentConfirmationInViewController:(UIViewController *)viewController withTitle:(nonnull NSString *)title yesHandler:(void(^)(UIAlertAction * _Nonnull action))yesHandler {
