@@ -863,6 +863,7 @@
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sOc-8e-PBY">
                                                         <rect key="frame" x="116.5" y="0.0" width="181" height="181.5"/>
+                                                        <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="sOc-8e-PBY" secondAttribute="height" multiplier="1:1" id="aOp-T2-DKj"/>
                                                         </constraints>
@@ -1160,13 +1161,71 @@
                     <view key="view" contentMode="scaleToFill" id="KwY-Lq-BQ9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="485"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7Rr-a5-gyg">
+                                <rect key="frame" x="0.0" y="44" width="414" height="441"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="V7B-gQ-Kar">
+                                    <size key="itemSize" width="172" height="166"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RecipeCell" id="46I-Qp-RDZ" customClass="RecipeCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="172" height="166"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ObY-vd-Sn0">
+                                            <rect key="frame" x="0.0" y="0.0" width="172" height="166"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="book" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="pgG-aA-W6A">
+                                                    <rect key="frame" x="0.0" y="1.5" width="172" height="163"/>
+                                                    <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="IEo-kh-zdK">
+                                                    <rect key="frame" x="0.0" y="0.0" width="172" height="55"/>
+                                                    <color key="backgroundColor" red="0.97933279419999997" green="0.97807776489999998" blue="1" alpha="0.50425406679999996" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNextCondensed-Medium" family="Avenir Next Condensed" pointSize="40"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="pgG-aA-W6A" firstAttribute="top" secondItem="ObY-vd-Sn0" secondAttribute="top" id="6Is-SK-DnX"/>
+                                                <constraint firstAttribute="trailing" secondItem="pgG-aA-W6A" secondAttribute="trailing" id="86T-Ss-0CR"/>
+                                                <constraint firstAttribute="trailing" secondItem="IEo-kh-zdK" secondAttribute="trailing" id="FVc-kf-ff7"/>
+                                                <constraint firstItem="IEo-kh-zdK" firstAttribute="leading" secondItem="ObY-vd-Sn0" secondAttribute="leading" id="JYT-jE-eBh"/>
+                                                <constraint firstItem="pgG-aA-W6A" firstAttribute="leading" secondItem="ObY-vd-Sn0" secondAttribute="leading" id="ib4-Ms-qo5"/>
+                                                <constraint firstItem="IEo-kh-zdK" firstAttribute="top" secondItem="ObY-vd-Sn0" secondAttribute="top" id="rgN-Mx-oN8"/>
+                                                <constraint firstAttribute="bottom" secondItem="pgG-aA-W6A" secondAttribute="bottom" id="uo4-JD-xNe"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="172" height="166"/>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="IEo-kh-zdK" id="nR5-hE-uSb"/>
+                                            <outlet property="recipePicture" destination="pgG-aA-W6A" id="VRW-8r-hdq"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="7Rr-a5-gyg" firstAttribute="leading" secondItem="7d5-3S-Bkc" secondAttribute="leading" id="Ad5-gI-fs0"/>
+                            <constraint firstItem="7d5-3S-Bkc" firstAttribute="trailing" secondItem="7Rr-a5-gyg" secondAttribute="trailing" id="K0B-aL-X5r"/>
+                            <constraint firstItem="7d5-3S-Bkc" firstAttribute="bottom" secondItem="7Rr-a5-gyg" secondAttribute="bottom" id="bzO-mx-SJ2"/>
+                            <constraint firstItem="7Rr-a5-gyg" firstAttribute="top" secondItem="7d5-3S-Bkc" secondAttribute="top" id="mvQ-ux-0j4"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="7d5-3S-Bkc"/>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="7Rr-a5-gyg" id="IkV-Di-Vhw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2A2-wv-n1R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1875" y="3688"/>
+            <point key="canvasLocation" x="1873.913043478261" y="3687.3883928571427"/>
         </scene>
         <!--Buy View Controller-->
         <scene sceneID="Uze-9J-2gh">
