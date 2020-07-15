@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ingredientsLabel;
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
+@property (strong, nonatomic) User *user;
 @property (nonatomic) BOOL saved;
 
 @end
@@ -41,7 +42,10 @@
     
     self.ingredientsLabel.text = list;
     
-    PFQuery *query = [self.recipe.savedBy query];
+    self.user = [User currentUser];
+    
+    PFQuery *query = [self.user.savedRecipes query];
+    [query whereKey:@"objectId" equalTo:self.recipe.objectId];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error) {
@@ -49,13 +53,9 @@
                                                       withTitle:@"An Error Occured"
                                                         message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
         } else {
-            NSString *userID = [User currentUser].objectId;
-            for (User *user in objects) {
-                if ([user.objectId isEqualToString:userID]) {
+            if (objects.count > 0) {
                     [self.saveButton setImage:[UIImage systemImageNamed:@"heart.fill"] forState:UIControlStateNormal];
                     self.saved = YES;
-                    break;
-                }
             }
         }
     }];
@@ -63,12 +63,16 @@
 
 - (IBAction)didTapSave:(id)sender {
     PFRelation *relation = [self.recipe relationForKey:@"savedBy"];
+    PFRelation *relation2 = [self.user relationForKey:@"savedRecipes"];
+        
     if (self.saved) {
-        [relation removeObject:[User currentUser]];
+        [relation removeObject:self.user];
+        [relation2 removeObject:self.recipe];
         [self.saveButton setImage:[UIImage systemImageNamed:@"heart"] forState:UIControlStateNormal];
         self.saved = NO;
     } else {
-        [relation addObject:[User currentUser]];
+        [relation addObject:self.user];
+        [relation2 addObject:self.recipe];
         [self.saveButton setImage:[UIImage systemImageNamed:@"heart.fill"] forState:UIControlStateNormal];
         self.saved = YES;
     }
@@ -85,7 +89,21 @@
                 [self.saveButton setImage:[UIImage systemImageNamed:@"heart.fill"] forState:UIControlStateNormal];
             }
         } else {
-            NSLog(@"Saved");
+            [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if (error) {
+                    [Utilities presentOkAlertControllerInViewController:self
+                                                              withTitle:@"Unable to Update Save"
+                                                                message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
+                    self.saved = !self.saved;
+                    if (self.saved) {
+                        [self.saveButton setImage:[UIImage systemImageNamed:@"heart"] forState:UIControlStateNormal];
+                    } else {
+                        [self.saveButton setImage:[UIImage systemImageNamed:@"heart.fill"] forState:UIControlStateNormal];
+                    }
+                } else {
+                    NSLog(@"Saved");
+                }
+            }];
         }
     }];
 }

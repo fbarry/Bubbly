@@ -7,10 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Recipe.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol ComposeViewControllerDelegate <NSObject>
+
+- (void)didPost:(Recipe *)recipe;
+
+@end
+
 @interface ComposeViewController : UIViewController
+
+@property (strong, nonatomic) id <ComposeViewControllerDelegate> delegate;
 
 @end
 

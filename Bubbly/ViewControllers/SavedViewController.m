@@ -15,7 +15,7 @@
 @interface SavedViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (strong, nonatomic) NSMutableArray *recipes;
+@property (strong, nonatomic) NSArray *recipes;
 
 @end
 
@@ -38,8 +38,6 @@
     CGFloat itemWidth = (self.collectionView.frame.size.width - layout.minimumInteritemSpacing * (postersPerRow - 1)) / postersPerRow;
     CGFloat itemHeight = itemWidth;
     layout.itemSize = CGSizeMake(itemWidth, itemHeight);
-    
-    self.recipes = [[NSMutableArray alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -49,34 +47,16 @@
 }
 
 - (void)loadRecipes {
-    PFQuery *query = [PFQuery queryWithClassName:@"Recipe"];
+    PFQuery *query = [[User currentUser].savedRecipes query];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error) {
             [Utilities presentOkAlertControllerInViewController:self
-                                                      withTitle:@"Could not load saved recipes"
+                                                      withTitle:@"An Error Occured"
                                                         message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
         } else {
-            for (Recipe *recipe in objects) {
-                PFRelation *relation = [recipe relationForKey:@"savedBy"];
-                PFQuery *relationQuery = [relation query];
-                [relationQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-                    if (error) {
-                        [Utilities presentOkAlertControllerInViewController:self
-                                                                  withTitle:@"Could not load saved recipes"
-                                                                    message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
-                    } else {
-                        NSString *userID = [User currentUser].objectId;
-                        for (User *user in objects) {
-                            if ([user.objectId isEqualToString:userID]) {
-                                [self.recipes addObject:recipe];
-                                break;
-                            }
-                        }
-                    }
-                    [self.collectionView reloadData];
-                }];
-            }
+            self.recipes = objects;
+            [self.collectionView reloadData];
         }
     }];
 }

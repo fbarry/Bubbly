@@ -12,13 +12,15 @@
 #import "Recipe.h"
 #import "Utilities.h"
 #import "UIImageView+AFNetworking.h"
+#import "ComposeViewController.h"
 
 @interface BrowseViewController () <UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (strong, nonatomic) NSArray *recipes;
-@property (strong, nonatomic) NSArray *filteredRecipes;
+@property (strong, nonatomic) NSMutableArray *recipes;
+@property (strong, nonatomic) NSMutableArray *filteredRecipes;
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *closeKeyboard;
 
 @end
 
@@ -30,7 +32,10 @@
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     self.searchBar.delegate = self;
-        
+     
+    self.collectionView.refreshControl = [[UIRefreshControl alloc] init];
+    [self.collectionView.refreshControl addTarget:self action:@selector(loadRecipes) forControlEvents:UIControlEventValueChanged];
+    
     self.collectionView.frame = self.view.frame;
     
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *) self.collectionView.collectionViewLayout;
@@ -43,6 +48,7 @@
     CGFloat itemHeight = itemWidth;
     layout.itemSize = CGSizeMake(itemWidth, itemHeight);
     
+    [self.closeKeyboard setEnabled:NO];
     [self loadRecipes];
 }
 
@@ -56,20 +62,23 @@
                                                       withTitle:@"Error loading recipes"
                                                         message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
         } else {
-            self.recipes = objects;
+            self.recipes = (NSMutableArray *)objects;
             self.filteredRecipes = self.recipes;
             [self.collectionView reloadData];
         }
+        [self.collectionView.refreshControl endRefreshing];
     }];
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    [self.closeKeyboard setEnabled:YES];
+    
     NSArray *words = [searchText componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     words = [words filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF != ''"]];
         
     if (searchText.length > 0) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ingredients contains[c] %@" argumentArray:words];
-        self.filteredRecipes = [self.recipes filteredArrayUsingPredicate:predicate];
+        self.filteredRecipes = (NSMutableArray *)[self.recipes filteredArrayUsingPredicate:predicate];
     } else {
         self.filteredRecipes = self.recipes;
     }
@@ -92,6 +101,11 @@
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.filteredRecipes.count;
+}
+
+- (IBAction)didTapBackground:(id)sender {
+    [self.view endEditing:YES];
+    [self.closeKeyboard setEnabled:NO];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

@@ -253,9 +253,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9eG-5D-sNV">
                                                 <rect key="frame" x="144.5" y="238" width="125" height="40"/>
                                                 <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="20"/>
-                                                <state key="normal" title="Set Recipe Picture">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
+                                                <state key="normal" title="Set Recipe Picture"/>
                                                 <connections>
                                                     <action selector="didTapPicture:" destination="a4u-T3-6sY" eventType="touchUpInside" id="tT3-L0-UFh"/>
                                                     <action selector="didTapProfile:" destination="FPO-uY-a45" eventType="touchUpInside" id="rAB-zW-ZV2"/>
@@ -323,7 +321,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="g8H-yN-IOA" secondAttribute="height" multiplier="1:1" id="ujT-li-lLi"/>
                                                 </constraints>
-                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" backgroundImage="book" catalog="system">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -353,10 +351,7 @@
                                                     <constraint firstAttribute="height" constant="30" id="IEp-GO-CpA"/>
                                                     <constraint firstAttribute="width" constant="30" id="ZvM-Sk-rRe"/>
                                                 </constraints>
-                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                <state key="normal" backgroundImage="plus.circle" catalog="system">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
+                                                <state key="normal" backgroundImage="plus.circle" catalog="system"/>
                                                 <connections>
                                                     <action selector="didTapAdd:" destination="a4u-T3-6sY" eventType="touchUpInside" id="dE5-3P-iRm"/>
                                                 </connections>
@@ -501,6 +496,7 @@
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="I24-BX-IF9" firstAttribute="trailing" secondItem="Od7-gF-ztt" secondAttribute="trailing" id="7Oq-ts-eCH"/>
                             <constraint firstItem="I24-BX-IF9" firstAttribute="leading" secondItem="Od7-gF-ztt" secondAttribute="leading" id="BIZ-cs-s5B"/>
@@ -511,14 +507,23 @@
                             <constraint firstItem="pAH-az-lKa" firstAttribute="leading" secondItem="Od7-gF-ztt" secondAttribute="leading" id="x5D-xK-Ycx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Od7-gF-ztt"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="1ut-Xd-eDh" appends="YES" id="gAo-H6-pKA"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Browse" id="qL8-ud-6bP"/>
                     <connections>
+                        <outlet property="closeKeyboard" destination="1ut-Xd-eDh" id="MHz-4U-ng3"/>
                         <outlet property="collectionView" destination="pAH-az-lKa" id="qPE-QR-JUr"/>
                         <outlet property="searchBar" destination="I24-BX-IF9" id="PLp-Wi-UJJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rw1-Ul-TrN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="1ut-Xd-eDh">
+                    <connections>
+                        <action selector="didTapBackground:" destination="o8f-z5-EcQ" id="Alv-Ht-2gK"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="3075.6696428571427"/>
         </scene>
@@ -615,9 +620,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xda-Cx-sY0">
                                                 <rect key="frame" x="145.5" y="158" width="123" height="40"/>
                                                 <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="20"/>
-                                                <state key="normal" title="Set Profile Picture">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
+                                                <state key="normal" title="Set Profile Picture"/>
                                                 <connections>
                                                     <action selector="didTapProfile:" destination="FPO-uY-a45" eventType="touchUpInside" id="QC2-95-J8F"/>
                                                 </connections>
@@ -1076,6 +1079,7 @@
                         <outlet property="segmentedControl" destination="535-5L-roG" id="eVH-au-oi2"/>
                         <outlet property="usernameLabel" destination="max-KT-xGl" id="wgw-Rm-mJ7"/>
                         <segue destination="5ti-cd-NXH" kind="show" identifier="Settings" id="a3Q-SC-e6s"/>
+                        <segue destination="alL-iF-aw0" kind="show" identifier="Details" id="aPF-LU-tsu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="neE-G7-fAv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1244,6 +1248,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="aPF-LU-tsu"/>
         <segue reference="Fdh-RY-nhU"/>
         <segue reference="71q-bb-PWo"/>
     </inferredMetricsTieBreakers>

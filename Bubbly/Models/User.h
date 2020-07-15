@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSNumber *exercise;
 @property (strong, nonatomic) PFFileObject *backgroundPicture;
 @property (strong, nonatomic) NSArray *logAmounts;
+@property (strong, nonatomic) PFRelation *savedRecipes;
 
 @end
 

@@ -109,6 +109,7 @@
                                                             message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
             } else {
                 [self.navigationController popViewControllerAnimated:YES];
+                [self.delegate didPost:recipe];
             }
         }];
     }

@@ -7,8 +7,12 @@
 //
 
 #import "BuyViewController.h"
+#import "Recipe.h"
+#import "Utilities.h"
 
 @interface BuyViewController ()
+
+@property (strong, nonatomic) NSMutableSet *ingredients;
 
 @end
 
@@ -16,7 +20,31 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    
+    self.ingredients = [[NSMutableSet alloc] init];
+    [self loadRecipes];
+}
+
+- (void)loadRecipes {
+    PFQuery *query = [[User currentUser].savedRecipes query];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (error) {
+            [Utilities presentOkAlertControllerInViewController:self
+                                                      withTitle:@"An Error Occured"
+                                                        message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
+        } else {
+            for (Recipe *recipe in objects) {
+                [self.ingredients addObjectsFromArray:recipe.ingredients];
+            }
+            NSLog(@"%@", self.ingredients);
+            // reload
+        }
+    }];
 }
 
 /*

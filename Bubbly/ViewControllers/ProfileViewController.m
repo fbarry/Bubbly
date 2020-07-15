@@ -12,6 +12,7 @@
 #import "WelcomeViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import "User.h"
+#import "SavedViewController.h"
 
 @interface ProfileViewController ()
 

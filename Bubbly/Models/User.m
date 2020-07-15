@@ -17,5 +17,6 @@
 @dynamic exercise;
 @dynamic backgroundPicture;
 @dynamic logAmounts;
+@dynamic savedRecipes;
 
 @end
