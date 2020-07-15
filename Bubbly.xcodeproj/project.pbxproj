@@ -32,6 +32,9 @@
 		8CA0DB8324BE164B00B93FEC /* RecipeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA0DB8224BE164B00B93FEC /* RecipeCell.m */; };
 		8CA0DB8624BE24DC00B93FEC /* IngredientCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA0DB8524BE24DC00B93FEC /* IngredientCell.m */; };
 		8CA0DB8924BE266700B93FEC /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA0DB8824BE266700B93FEC /* ComposeViewController.m */; };
+		8CA0DB8C24BF589C00B93FEC /* DataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA0DB8B24BF589C00B93FEC /* DataViewController.m */; };
+		8CA0DB8F24BF58A400B93FEC /* SavedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA0DB8E24BF58A400B93FEC /* SavedViewController.m */; };
+		8CA0DB9224BF58B100B93FEC /* BuyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA0DB9124BF58B100B93FEC /* BuyViewController.m */; };
 		D5F86BBE48D742F4E7D9FEF4 /* Pods_BubblyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335D8992D3546B1CB7049452 /* Pods_BubblyTests.framework */; };
 		D624D6578B2788BD780DD002 /* Pods_Bubbly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E1106D8528734F0FB06689E /* Pods_Bubbly.framework */; };
 /* End PBXBuildFile section */
@@ -109,6 +112,13 @@
 		8CA0DB8524BE24DC00B93FEC /* IngredientCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IngredientCell.m; sourceTree = "<group>"; };
 		8CA0DB8724BE266700B93FEC /* ComposeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComposeViewController.h; sourceTree = "<group>"; };
 		8CA0DB8824BE266700B93FEC /* ComposeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
+		8CA0DB8A24BF589C00B93FEC /* DataViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataViewController.h; sourceTree = "<group>"; };
+		8CA0DB8B24BF589C00B93FEC /* DataViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataViewController.m; sourceTree = "<group>"; };
+		8CA0DB8D24BF58A400B93FEC /* SavedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SavedViewController.h; sourceTree = "<group>"; };
+		8CA0DB8E24BF58A400B93FEC /* SavedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SavedViewController.m; sourceTree = "<group>"; };
+		8CA0DB9024BF58B100B93FEC /* BuyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuyViewController.h; sourceTree = "<group>"; };
+		8CA0DB9124BF58B100B93FEC /* BuyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuyViewController.m; sourceTree = "<group>"; };
+		8CA0DB9324BF59F300B93FEC /* Charts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Charts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CC48BDB369BFC801730ABB6 /* Pods-Bubbly-BubblyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bubbly-BubblyUITests.release.xcconfig"; path = "Target Support Files/Pods-Bubbly-BubblyUITests/Pods-Bubbly-BubblyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F1FDC2BC347BEE9CA2E2E202 /* Pods-BubblyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BubblyTests.debug.xcconfig"; path = "Target Support Files/Pods-BubblyTests/Pods-BubblyTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -144,6 +154,7 @@
 		032D23C0C538C6A4451FBE76 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8CA0DB9324BF59F300B93FEC /* Charts.framework */,
 				7E1106D8528734F0FB06689E /* Pods_Bubbly.framework */,
 				60D931F003FEC0C6FA81BF4B /* Pods_Bubbly_BubblyUITests.framework */,
 				335D8992D3546B1CB7049452 /* Pods_BubblyTests.framework */,
@@ -272,6 +283,12 @@
 				8C9EC00B24BCDF5B0031380E /* SettingsViewController.m */,
 				8CA0DB8724BE266700B93FEC /* ComposeViewController.h */,
 				8CA0DB8824BE266700B93FEC /* ComposeViewController.m */,
+				8CA0DB8A24BF589C00B93FEC /* DataViewController.h */,
+				8CA0DB8B24BF589C00B93FEC /* DataViewController.m */,
+				8CA0DB8D24BF58A400B93FEC /* SavedViewController.h */,
+				8CA0DB8E24BF58A400B93FEC /* SavedViewController.m */,
+				8CA0DB9024BF58B100B93FEC /* BuyViewController.h */,
+				8CA0DB9124BF58B100B93FEC /* BuyViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -515,10 +532,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CA0DB8F24BF58A400B93FEC /* SavedViewController.m in Sources */,
 				8C9EBFDF24BCD2AC0031380E /* User.m in Sources */,
 				8C9EC00324BCDF3E0031380E /* BrowseViewController.m in Sources */,
+				8CA0DB9224BF58B100B93FEC /* BuyViewController.m in Sources */,
 				8C9EBFFA24BCDF270031380E /* LoginViewController.m in Sources */,
 				8C9EBFE524BCD2BC0031380E /* IntakeLog.m in Sources */,
+				8CA0DB8C24BF589C00B93FEC /* DataViewController.m in Sources */,
 				8C9EC00F24BCF7AB0031380E /* CameraView.m in Sources */,
 				8CA0DB8324BE164B00B93FEC /* RecipeCell.m in Sources */,
 				8C9EBFF724BCDF1F0031380E /* WelcomeViewController.m in Sources */,
