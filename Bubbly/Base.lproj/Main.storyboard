@@ -1124,6 +1124,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="485"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="nrl-8f-dLy"/>
                     </view>
                     <connections>
                         <outlet property="lineChart" destination="rgX-Ma-Iut" id="Y5U-5B-5jU"/>
@@ -1141,6 +1142,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="485"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="7d5-3S-Bkc"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2A2-wv-n1R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1155,6 +1157,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="485"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="TVm-hW-fW6"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yDy-Pm-fZX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

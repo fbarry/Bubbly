@@ -28,6 +28,7 @@ double referenceInterval;
     
     [self.lineChart.chartDescription setEnabled:NO];
     [self.lineChart.rightAxis setEnabled:NO];
+    [self.lineChart.legend setEnabled:NO];
     
     referenceDate = [self getDateAtMidnight:[NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay value:-20 toDate:[NSDate date] options:NSCalendarMatchPreviousTimePreservingSmallerUnits]];
     referenceInterval = referenceDate.timeIntervalSince1970;
@@ -36,6 +37,7 @@ double referenceInterval;
     xAxis.valueFormatter = self;
     xAxis.labelPosition = XAxisLabelPositionBottom;
     xAxis.granularity = 1.0;
+    xAxis.labelRotationAngle = -45;
     
     ChartYAxis *yAxis = self.lineChart.leftAxis;
     yAxis.axisMinimum = 0;
@@ -55,7 +57,6 @@ double referenceInterval;
 
 - (void)updateChartData {
     PFQuery *query = [PFQuery queryWithClassName:@"IntakeLog"];
-    query.limit = 20;
     [query whereKey:@"user" equalTo:[User currentUser]];
     [query whereKey:@"createdAt" greaterThan:referenceDate];
     
@@ -81,11 +82,25 @@ double referenceInterval;
 
 - (void)reloadChart {
     LineChartDataSet *dataSet = [[LineChartDataSet alloc] init];
+    NSDate *indexDate = referenceDate;
     for (IntakeLog *log in self.chartData) {
-        double x = [self getXCoordFromDate:[self getDateAtMidnight:log.createdAt]];
-        double y = [log.achieved doubleValue];
+        BOOL err = NO;
+        double x, y;
+        NSDate *midnightDate = [self getDateAtMidnight:log.createdAt];
+        while (![midnightDate isEqualToDate:indexDate]) {
+            x = [self getXCoordFromDate:indexDate];
+            y = 0;
+            ChartDataEntry *dataEntry = [[ChartDataEntry alloc] initWithX:x y:y];
+            if (![dataSet addEntryOrdered:dataEntry]) {
+                err = YES;
+                break;
+            }
+            indexDate = [indexDate dateByAddingTimeInterval:3600 * 24];
+        }
+        x = [self getXCoordFromDate:midnightDate];
+        y = [log.achieved doubleValue];
         ChartDataEntry *dataEntry = [[ChartDataEntry alloc] initWithX:x y:y];
-        if (![dataSet addEntryOrdered:dataEntry]) {
+        if (err || ![dataSet addEntryOrdered:dataEntry]) {
             [Utilities presentOkAlertControllerInViewController:self
                                                       withTitle:@"Error Building Data"
                                                         message:@"Re-enter page to try again"];
@@ -95,6 +110,7 @@ double referenceInterval;
     
     LineChartData *data = [[LineChartData alloc] initWithDataSet:dataSet];
     self.lineChart.data = data;
+    [self.lineChart.data setDrawValues:NO];
 }
 
 - (double)getXCoordFromDate:(NSDate *)date {
