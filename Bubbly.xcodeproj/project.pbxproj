@@ -28,13 +28,13 @@
 		8C9EC00624BCDF440031380E /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EC00524BCDF440031380E /* DetailsViewController.m */; };
 		8C9EC00924BCDF4E0031380E /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EC00824BCDF4E0031380E /* ProfileViewController.m */; };
 		8C9EC00C24BCDF5B0031380E /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EC00B24BCDF5B0031380E /* SettingsViewController.m */; };
-		8C9EC00F24BCF7AB0031380E /* CameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EC00E24BCF7AB0031380E /* CameraView.m */; };
 		8CA0DB8324BE164B00B93FEC /* RecipeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA0DB8224BE164B00B93FEC /* RecipeCell.m */; };
 		8CA0DB8624BE24DC00B93FEC /* IngredientCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA0DB8524BE24DC00B93FEC /* IngredientCell.m */; };
 		8CA0DB8924BE266700B93FEC /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA0DB8824BE266700B93FEC /* ComposeViewController.m */; };
 		8CA0DB8C24BF589C00B93FEC /* DataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA0DB8B24BF589C00B93FEC /* DataViewController.m */; };
 		8CA0DB8F24BF58A400B93FEC /* SavedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA0DB8E24BF58A400B93FEC /* SavedViewController.m */; };
 		8CA0DB9224BF58B100B93FEC /* BuyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA0DB9124BF58B100B93FEC /* BuyViewController.m */; };
+		8CA0DB9924BF918C00B93FEC /* CameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA0DB9824BF918C00B93FEC /* CameraView.m */; };
 		D5F86BBE48D742F4E7D9FEF4 /* Pods_BubblyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335D8992D3546B1CB7049452 /* Pods_BubblyTests.framework */; };
 		D624D6578B2788BD780DD002 /* Pods_Bubbly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E1106D8528734F0FB06689E /* Pods_Bubbly.framework */; };
 /* End PBXBuildFile section */
@@ -104,8 +104,6 @@
 		8C9EC00824BCDF4E0031380E /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		8C9EC00A24BCDF5B0031380E /* SettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		8C9EC00B24BCDF5B0031380E /* SettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
-		8C9EC00D24BCF7AB0031380E /* CameraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CameraView.h; path = ../../../Instagram/Instagram/Views/CameraView.h; sourceTree = "<group>"; };
-		8C9EC00E24BCF7AB0031380E /* CameraView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CameraView.m; path = ../../../Instagram/Instagram/Views/CameraView.m; sourceTree = "<group>"; };
 		8CA0DB8124BE164B00B93FEC /* RecipeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecipeCell.h; sourceTree = "<group>"; };
 		8CA0DB8224BE164B00B93FEC /* RecipeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecipeCell.m; sourceTree = "<group>"; };
 		8CA0DB8424BE24DC00B93FEC /* IngredientCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IngredientCell.h; sourceTree = "<group>"; };
@@ -119,6 +117,8 @@
 		8CA0DB9024BF58B100B93FEC /* BuyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuyViewController.h; sourceTree = "<group>"; };
 		8CA0DB9124BF58B100B93FEC /* BuyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuyViewController.m; sourceTree = "<group>"; };
 		8CA0DB9324BF59F300B93FEC /* Charts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Charts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CA0DB9724BF918C00B93FEC /* CameraView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraView.h; sourceTree = "<group>"; };
+		8CA0DB9824BF918C00B93FEC /* CameraView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraView.m; sourceTree = "<group>"; };
 		9CC48BDB369BFC801730ABB6 /* Pods-Bubbly-BubblyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bubbly-BubblyUITests.release.xcconfig"; path = "Target Support Files/Pods-Bubbly-BubblyUITests/Pods-Bubbly-BubblyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F1FDC2BC347BEE9CA2E2E202 /* Pods-BubblyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BubblyTests.debug.xcconfig"; path = "Target Support Files/Pods-BubblyTests/Pods-BubblyTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -250,14 +250,14 @@
 		8C9EBFD724BCD1F80031380E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				8C9EC00D24BCF7AB0031380E /* CameraView.h */,
-				8C9EC00E24BCF7AB0031380E /* CameraView.m */,
 				8C9EBFDD24BCD2AC0031380E /* User.h */,
 				8C9EBFDE24BCD2AC0031380E /* User.m */,
 				8C9EBFE024BCD2B40031380E /* Recipe.h */,
 				8C9EBFE124BCD2B40031380E /* Recipe.m */,
 				8C9EBFE324BCD2BC0031380E /* IntakeLog.h */,
 				8C9EBFE424BCD2BC0031380E /* IntakeLog.m */,
+				8CA0DB9724BF918C00B93FEC /* CameraView.h */,
+				8CA0DB9824BF918C00B93FEC /* CameraView.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -539,11 +539,11 @@
 				8C9EBFFA24BCDF270031380E /* LoginViewController.m in Sources */,
 				8C9EBFE524BCD2BC0031380E /* IntakeLog.m in Sources */,
 				8CA0DB8C24BF589C00B93FEC /* DataViewController.m in Sources */,
-				8C9EC00F24BCF7AB0031380E /* CameraView.m in Sources */,
 				8CA0DB8324BE164B00B93FEC /* RecipeCell.m in Sources */,
 				8C9EBFF724BCDF1F0031380E /* WelcomeViewController.m in Sources */,
 				8C9EBFE224BCD2B40031380E /* Recipe.m in Sources */,
 				8C9EC00024BCDF370031380E /* HomeViewController.m in Sources */,
+				8CA0DB9924BF918C00B93FEC /* CameraView.m in Sources */,
 				8C9EC00924BCDF4E0031380E /* ProfileViewController.m in Sources */,
 				8C9EC00C24BCDF5B0031380E /* SettingsViewController.m in Sources */,
 				8C9EC00624BCDF440031380E /* DetailsViewController.m in Sources */,
