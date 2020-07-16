@@ -111,7 +111,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uvd-MV-ISW" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="768"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="771"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome Back, User!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="25" translatesAutoresizingMaskIntoConstraints="NO" id="FDl-Ih-rKm">
                                                 <rect key="frame" x="16" y="8" width="382" height="69"/>
@@ -148,7 +148,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Ub8-Pm-rwB">
-                                                <rect key="frame" x="16" y="645" width="382" height="32"/>
+                                                <rect key="frame" x="16" y="645" width="334" height="35"/>
                                                 <segments>
                                                     <segment title="1 oz"/>
                                                     <segment title="2 oz"/>
@@ -160,7 +160,7 @@
                                                 <color key="selectedSegmentTintColor" red="0.45624184610000001" green="0.79364603759999997" blue="0.9176669717" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             </segmentedControl>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MBE-oQ-FdC">
-                                                <rect key="frame" x="167" y="693" width="80" height="57.5"/>
+                                                <rect key="frame" x="167" y="696" width="80" height="57.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="80" id="9Jh-M5-c95"/>
                                                     <constraint firstAttribute="height" constant="60" id="XAR-6u-Gfy"/>
@@ -174,19 +174,30 @@
                                                     <action selector="didTapLog:" destination="mBS-3n-tB3" eventType="touchUpInside" id="350-AS-PcP"/>
                                                 </connections>
                                             </button>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="oz" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Y9K-FU-adN">
+                                                <rect key="frame" x="358" y="645" width="40" height="34"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="RwL-tc-9XC"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="18"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                            </textField>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <gestureRecognizers/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="Ub8-Pm-rwB" secondAttribute="trailing" constant="16" id="4tz-jN-IZS"/>
                                             <constraint firstItem="FDl-Ih-rKm" firstAttribute="leading" secondItem="uvd-MV-ISW" secondAttribute="leading" constant="16" id="DqB-dO-aZu"/>
+                                            <constraint firstItem="Y9K-FU-adN" firstAttribute="centerY" secondItem="Ub8-Pm-rwB" secondAttribute="centerY" id="E2c-wF-oEa"/>
+                                            <constraint firstAttribute="trailing" secondItem="Y9K-FU-adN" secondAttribute="trailing" constant="16" id="FXF-NB-uem"/>
                                             <constraint firstItem="Ety-D0-gvJ" firstAttribute="top" secondItem="uj4-Ft-90J" secondAttribute="bottom" constant="40" id="MCY-ey-VPf"/>
                                             <constraint firstAttribute="trailing" secondItem="FDl-Ih-rKm" secondAttribute="trailing" constant="16" id="Ojf-84-6xx"/>
                                             <constraint firstItem="Ety-D0-gvJ" firstAttribute="centerX" secondItem="uvd-MV-ISW" secondAttribute="centerX" id="PYZ-zy-sQo"/>
                                             <constraint firstItem="MBE-oQ-FdC" firstAttribute="centerX" secondItem="uvd-MV-ISW" secondAttribute="centerX" id="SD8-vg-mjL"/>
                                             <constraint firstItem="Ub8-Pm-rwB" firstAttribute="top" secondItem="scU-3v-OEX" secondAttribute="bottom" constant="40" id="UMM-RJ-gBH"/>
                                             <constraint firstAttribute="trailing" secondItem="uj4-Ft-90J" secondAttribute="trailing" constant="16" id="UuV-1J-0n5"/>
+                                            <constraint firstItem="Y9K-FU-adN" firstAttribute="leading" secondItem="Ub8-Pm-rwB" secondAttribute="trailing" constant="8" id="VN1-Xz-S0m"/>
                                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="MBE-oQ-FdC" secondAttribute="bottom" constant="16" id="VoH-hu-PPc"/>
-                                            <constraint firstItem="Ub8-Pm-rwB" firstAttribute="centerX" secondItem="uvd-MV-ISW" secondAttribute="centerX" id="cd5-k2-HAC"/>
+                                            <constraint firstItem="Y9K-FU-adN" firstAttribute="height" secondItem="Ub8-Pm-rwB" secondAttribute="height" id="agA-qZ-CFr"/>
                                             <constraint firstItem="scU-3v-OEX" firstAttribute="centerX" secondItem="uvd-MV-ISW" secondAttribute="centerX" id="dCZ-zw-E8s"/>
                                             <constraint firstItem="uj4-Ft-90J" firstAttribute="leading" secondItem="uvd-MV-ISW" secondAttribute="leading" constant="16" id="eDi-fY-XPB"/>
                                             <constraint firstItem="uj4-Ft-90J" firstAttribute="top" secondItem="FDl-Ih-rKm" secondAttribute="bottom" constant="16" id="q6A-P1-dLb"/>
@@ -196,6 +207,9 @@
                                             <constraint firstItem="FDl-Ih-rKm" firstAttribute="centerX" secondItem="uvd-MV-ISW" secondAttribute="centerX" id="y4O-AI-FEB"/>
                                             <constraint firstItem="MBE-oQ-FdC" firstAttribute="top" secondItem="Ub8-Pm-rwB" secondAttribute="bottom" constant="16" id="zfF-JA-ySC"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="D1E-1e-fnv" appends="YES" id="hdg-oH-8kO"/>
+                                        </connections>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -227,6 +241,7 @@
                     <connections>
                         <outlet property="acheivedLabel" destination="scU-3v-OEX" id="ukU-zS-L5Z"/>
                         <outlet property="backgroundPicture" destination="lxj-r3-lni" id="4Ht-69-n0u"/>
+                        <outlet property="customValueField" destination="Y9K-FU-adN" id="699-Mt-pwY"/>
                         <outlet property="goalLabel" destination="Ety-D0-gvJ" id="FBh-Uf-BMg"/>
                         <outlet property="segmentedControl" destination="Ub8-Pm-rwB" id="fxS-z7-jyX"/>
                         <outlet property="welcomeLabel" destination="FDl-Ih-rKm" id="yVK-fT-XM8"/>
@@ -234,6 +249,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hvd-hw-cWM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="D1E-1e-fnv">
+                    <connections>
+                        <action selector="didTapBackground:" destination="mBS-3n-tB3" id="2Ug-aY-CM0"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-1643.4782608695652" y="3075.6696428571427"/>
         </scene>

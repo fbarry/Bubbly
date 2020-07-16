@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *goalLabel;
 @property (weak, nonatomic) IBOutlet UILabel *acheivedLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+@property (weak, nonatomic) IBOutlet UITextField *customValueField;
 @property (strong, nonatomic) User *user;
 @property (strong, nonatomic) IntakeLog *dayLog;
 
@@ -102,7 +103,13 @@
 }
 
 - (IBAction)didTapLog:(id)sender {
-    self.dayLog.achieved = [NSNumber numberWithInteger:[self.dayLog.achieved integerValue] + [[self.segmentedControl titleForSegmentAtIndex:self.segmentedControl.selectedSegmentIndex] integerValue]];
+    NSInteger addValue = 0;
+    if (self.segmentedControl.selectedSegmentIndex != 4) {
+        addValue = [[self.segmentedControl titleForSegmentAtIndex:self.segmentedControl.selectedSegmentIndex] integerValue];
+    } else {
+        addValue = [self.customValueField.text integerValue];
+    }
+    self.dayLog.achieved = [NSNumber numberWithInteger:[self.dayLog.achieved integerValue] + addValue];
     
     [self.dayLog saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (error) {
@@ -120,6 +127,10 @@
 
 - (IBAction)didTapCompose:(id)sender {
     [self performSegueWithIdentifier:@"Compose" sender:self];
+}
+
+- (IBAction)didTapBackground:(id)sender {
+    [self.view endEditing:YES];
 }
 
 /*
