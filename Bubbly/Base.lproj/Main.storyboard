@@ -1107,7 +1107,7 @@
                         <outlet property="segmentedControl" destination="535-5L-roG" id="eVH-au-oi2"/>
                         <outlet property="usernameLabel" destination="max-KT-xGl" id="wgw-Rm-mJ7"/>
                         <segue destination="5ti-cd-NXH" kind="show" identifier="Settings" id="a3Q-SC-e6s"/>
-                        <segue destination="alL-iF-aw0" kind="show" identifier="Details" id="aPF-LU-tsu"/>
+                        <segue destination="alL-iF-aw0" kind="show" identifier="Details" id="6RW-1X-xHa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="neE-G7-fAv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1121,14 +1121,39 @@
                     <view key="view" contentMode="scaleToFill" id="nv9-69-O9X">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TUn-dS-sNr">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aXp-Rt-5JD" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="aXp-Rt-5JD" secondAttribute="trailing" id="4Eg-Rh-F5M"/>
+                                    <constraint firstAttribute="bottom" secondItem="aXp-Rt-5JD" secondAttribute="bottom" id="51u-ow-CKp"/>
+                                    <constraint firstItem="aXp-Rt-5JD" firstAttribute="width" secondItem="TUn-dS-sNr" secondAttribute="width" id="Bng-aV-kf5"/>
+                                    <constraint firstItem="aXp-Rt-5JD" firstAttribute="height" secondItem="TUn-dS-sNr" secondAttribute="height" id="Bxu-FJ-BEk"/>
+                                    <constraint firstItem="aXp-Rt-5JD" firstAttribute="leading" secondItem="TUn-dS-sNr" secondAttribute="leading" id="TSZ-2S-Z46"/>
+                                    <constraint firstItem="aXp-Rt-5JD" firstAttribute="top" secondItem="TUn-dS-sNr" secondAttribute="top" id="p1c-f0-3lV"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="I0z-0j-tmz" firstAttribute="trailing" secondItem="TUn-dS-sNr" secondAttribute="trailing" id="aZ6-u7-fzB"/>
+                            <constraint firstItem="I0z-0j-tmz" firstAttribute="bottom" secondItem="TUn-dS-sNr" secondAttribute="bottom" id="fFE-Cr-JZt"/>
+                            <constraint firstItem="TUn-dS-sNr" firstAttribute="top" secondItem="I0z-0j-tmz" secondAttribute="top" id="moB-rg-qt7"/>
+                            <constraint firstItem="TUn-dS-sNr" firstAttribute="leading" secondItem="I0z-0j-tmz" secondAttribute="leading" id="t5a-1A-Ht3"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="I0z-0j-tmz"/>
                     </view>
                     <navigationItem key="navigationItem" id="AtI-XK-fJr"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ofy-Wh-qEz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2796" y="3076"/>
+            <point key="canvasLocation" x="2795.6521739130435" y="3075.6696428571427"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3b7-Pj-sZm">
@@ -1336,7 +1361,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="aPF-LU-tsu"/>
+        <segue reference="6RW-1X-xHa"/>
         <segue reference="Fdh-RY-nhU"/>
         <segue reference="71q-bb-PWo"/>
     </inferredMetricsTieBreakers>

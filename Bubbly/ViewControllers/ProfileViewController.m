@@ -13,6 +13,8 @@
 #import "UIImageView+AFNetworking.h"
 #import "User.h"
 #import "SavedViewController.h"
+#import "DetailsViewController.h"
+#import "Recipe.h"
 
 @interface ProfileViewController ()
 
@@ -85,14 +87,13 @@
     }];
 }
 
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"Details"]) {
+        DetailsViewController *detailsViewController = [segue destinationViewController];
+        detailsViewController.recipe = sender;
+    }
 }
-*/
 
 @end
