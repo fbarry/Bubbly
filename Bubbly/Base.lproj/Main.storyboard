@@ -156,7 +156,8 @@
                                                     <segment title="4 oz"/>
                                                     <segment title="Custom"/>
                                                 </segments>
-                                                <color key="selectedSegmentTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="tintColor" red="0.45624184610000001" green="0.79364603759999997" blue="0.9176669717" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="selectedSegmentTintColor" red="0.45624184610000001" green="0.79364603759999997" blue="0.9176669717" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             </segmentedControl>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MBE-oQ-FdC">
                                                 <rect key="frame" x="167" y="693" width="80" height="57.5"/>
@@ -165,9 +166,9 @@
                                                     <constraint firstAttribute="height" constant="60" id="XAR-6u-Gfy"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="30"/>
-                                                <color key="tintColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="tintColor" red="0.45624184610000001" green="0.79364603759999997" blue="0.9176669717" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <state key="normal" title="Log" backgroundImage="square" catalog="system">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleColor" red="0.45624184610000001" green="0.79364603759999997" blue="0.9176669717" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="didTapLog:" destination="mBS-3n-tB3" eventType="touchUpInside" id="350-AS-PcP"/>
@@ -253,7 +254,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9eG-5D-sNV">
                                                 <rect key="frame" x="144.5" y="238" width="125" height="40"/>
                                                 <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="20"/>
-                                                <state key="normal" title="Set Recipe Picture"/>
+                                                <state key="normal" title="Set Recipe Picture">
+                                                    <color key="titleColor" red="0.45624184610000001" green="0.79364603759999997" blue="0.9176669717" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="didTapPicture:" destination="a4u-T3-6sY" eventType="touchUpInside" id="tT3-L0-UFh"/>
                                                     <action selector="didTapProfile:" destination="FPO-uY-a45" eventType="touchUpInside" id="rAB-zW-ZV2"/>
@@ -351,7 +354,10 @@
                                                     <constraint firstAttribute="height" constant="30" id="IEp-GO-CpA"/>
                                                     <constraint firstAttribute="width" constant="30" id="ZvM-Sk-rRe"/>
                                                 </constraints>
-                                                <state key="normal" backgroundImage="plus.circle" catalog="system"/>
+                                                <color key="tintColor" red="0.45624184610000001" green="0.79364603759999997" blue="0.9176669717" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <state key="normal" backgroundImage="plus.circle" catalog="system">
+                                                    <color key="titleColor" red="0.45624184610000001" green="0.79364603759999997" blue="0.9176669717" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="didTapAdd:" destination="a4u-T3-6sY" eventType="touchUpInside" id="dE5-3P-iRm"/>
                                                 </connections>
@@ -620,7 +626,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xda-Cx-sY0">
                                                 <rect key="frame" x="145.5" y="158" width="123" height="40"/>
                                                 <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="20"/>
-                                                <state key="normal" title="Set Profile Picture"/>
+                                                <state key="normal" title="Set Profile Picture">
+                                                    <color key="titleColor" red="0.45624184610000001" green="0.79364603759999997" blue="0.9176669717" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="didTapProfile:" destination="FPO-uY-a45" eventType="touchUpInside" id="QC2-95-J8F"/>
                                                 </connections>

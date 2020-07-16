@@ -21,7 +21,6 @@
 @implementation DataViewController
 
 NSDate *referenceDate;
-double referenceInterval;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,12 +29,12 @@ double referenceInterval;
     [self.lineChart.rightAxis setEnabled:NO];
     [self.lineChart.legend setEnabled:NO];
     
-    referenceDate = [self getDateAtMidnight:[NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay value:-20 toDate:[NSDate date] options:NSCalendarMatchPreviousTimePreservingSmallerUnits]];
-    referenceInterval = referenceDate.timeIntervalSince1970;
-    
+    referenceDate = [self getDateAtMidnight:[NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay value:-20 toDate:[NSDate date] options:0]];
+        
     ChartXAxis *xAxis = self.lineChart.xAxis;
     xAxis.valueFormatter = self;
     xAxis.labelPosition = XAxisLabelPositionBottom;
+    xAxis.labelCount = 20;
     xAxis.granularity = 1.0;
     xAxis.labelRotationAngle = -45;
     
@@ -46,7 +45,7 @@ double referenceInterval;
 - (NSString *)stringForValue:(double)value axis:(ChartAxisBase *)axis {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MMM dd"];
-    return [dateFormatter stringFromDate:[NSDate dateWithTimeInterval:value * 3600 * 24 sinceDate:referenceDate]];
+    return [dateFormatter stringFromDate:[NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay value:value toDate:referenceDate options:0]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -73,11 +72,7 @@ double referenceInterval;
 }
 
 - (NSDate *)getDateAtMidnight:(NSDate *)date {
-    NSDateComponents *day = [NSCalendar.currentCalendar components:(NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitYear) fromDate:date];
-    day.hour = 0;
-    day.minute = 0;
-    day.second = 0;
-    return [NSCalendar.currentCalendar dateFromComponents:day];
+    return [NSCalendar.currentCalendar startOfDayForDate:date];
 }
 
 - (void)reloadChart {
@@ -95,7 +90,7 @@ double referenceInterval;
                 err = YES;
                 break;
             }
-            indexDate = [indexDate dateByAddingTimeInterval:3600 * 24];
+            indexDate = [NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:indexDate options:0];
         }
         x = [self getXCoordFromDate:midnightDate];
         y = [log.achieved doubleValue];
@@ -106,6 +101,7 @@ double referenceInterval;
                                                         message:@"Re-enter page to try again"];
             break;
         }
+        indexDate = [NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:indexDate options:0];
     }
     
     LineChartData *data = [[LineChartData alloc] initWithDataSet:dataSet];
@@ -114,8 +110,8 @@ double referenceInterval;
 }
 
 - (double)getXCoordFromDate:(NSDate *)date {
-    double timeSince = date.timeIntervalSince1970 - referenceInterval;
-    return timeSince / (3600 * 24);
+    NSDateComponents *diff = [NSCalendar.currentCalendar components:NSCalendarUnitDay fromDate:referenceDate toDate:date options:0];
+    return diff.day;
 }
 
 /*
