@@ -7,8 +7,27 @@
 //
 
 #import "SettingsViewController.h"
+#import "Utilities.h"
+#import "CameraView.h"
+#import "User.h"
+#import "UIImageView+AFNetworking.h"
 
-@interface SettingsViewController ()
+@interface SettingsViewController () <CameraViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UIButton *profilePicture;
+@property (weak, nonatomic) IBOutlet UITextField *nameField;
+@property (weak, nonatomic) IBOutlet UITextField *emailField;
+@property (weak, nonatomic) IBOutlet UITextField *usernameField;
+@property (weak, nonatomic) IBOutlet UITextField *enterPasswordField;
+@property (weak, nonatomic) IBOutlet UITextField *confirmPasswordField;
+@property (weak, nonatomic) IBOutlet UITextField *weightField;
+@property (weak, nonatomic) IBOutlet UITextField *exerciseField;
+@property (weak, nonatomic) IBOutlet UIButton *backgroundPicture;
+@property (weak, nonatomic) IBOutlet UITextField *log0;
+@property (weak, nonatomic) IBOutlet UITextField *log1;
+@property (weak, nonatomic) IBOutlet UITextField *log2;
+@property (weak, nonatomic) IBOutlet UITextField *log3;
+@property (strong, nonatomic) User *user;
 
 @end
 
@@ -16,7 +35,106 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.user = [User currentUser];
+    
+    [Utilities roundImage:(UIImageView *)self.profilePicture];
+    [Utilities roundImage:(UIImageView *)self.backgroundPicture];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+            
+    UIImageView *imageView = [[UIImageView alloc] init];
+    [imageView setImageWithURL:[NSURL URLWithString:self.user.profilePicture.url]];
+    [self.profilePicture setImage:imageView.image forState:UIControlStateNormal];
+    [imageView setImageWithURL:[NSURL URLWithString:self.user.backgroundPicture.url]];
+    [self.backgroundPicture setImage:imageView.image forState:UIControlStateNormal];
+    
+    self.nameField.placeholder = self.user.name;
+    self.emailField.placeholder = self.user.email;
+    self.usernameField.placeholder = self.user.username;
+    self.weightField.placeholder = [NSString stringWithFormat:@"Weight: %@ oz", self.user.weight];
+    self.exerciseField.placeholder = [NSString stringWithFormat:@"Exercise: %@ min", self.user.exercise];
+    self.log0.text = [NSString stringWithFormat:@"%@", self.user.logAmounts[0]];
+    self.log1.text = [NSString stringWithFormat:@"%@", self.user.logAmounts[1]];
+    self.log2.text = [NSString stringWithFormat:@"%@", self.user.logAmounts[2]];
+    self.log3.text = [NSString stringWithFormat:@"%@", self.user.logAmounts[3]];
+}
+
+- (IBAction)didTapProfile:(id)sender {
+    CameraView *camera = [[CameraView alloc] init];
+    camera.delegate = self;
+    camera.viewController = self;
+    camera.name = @"profile";
+    [camera alertConfirmation];
+}
+
+- (IBAction)didTapBackground:(id)sender {
+    CameraView *camera = [[CameraView alloc] init];
+    camera.delegate = self;
+    camera.viewController = self;
+    camera.name = @"background";
+    [camera alertConfirmation];
+}
+
+- (void)setImage:(nonnull UIImage *)image withName:(nonnull NSString *)name {
+    if ([name isEqualToString:@"profile"]) {
+        [self.profilePicture setImage:image forState:UIControlStateNormal];
+    } else if ([name isEqualToString:@"background"]) {
+        [self.backgroundPicture setImage:image forState:UIControlStateNormal];
+    }
+}
+
+- (IBAction)didTapSave:(id)sender {
+    if (![self.enterPasswordField.text isEqualToString:@""]) {
+        if (![self.enterPasswordField.text isEqualToString:self.confirmPasswordField.text]) {
+            [Utilities presentOkAlertControllerInViewController:self
+                                                      withTitle:@"New passwords do not match"
+                                                        message:@"Re-enter to try again"];
+            return;
+        } else {
+            self.user.password = self.enterPasswordField.text;
+        }
+    }
+    if (![self.nameField.text isEqualToString:@""]) {
+        self.user.name = self.nameField.text;
+    }
+    if (![self.emailField.text isEqualToString:@""]) {
+        self.user.email = self.emailField.text;
+    }
+    if (![self.usernameField.text isEqualToString:@""]) {
+        self.user.username = self.usernameField.text;
+    }
+    if (![self.weightField.text isEqualToString:@""]) {
+        self.user.weight = [NSNumber numberWithFloat:[self.weightField.text floatValue]];
+    }
+    if (![self.usernameField.text isEqualToString:@""]) {
+        self.user.exercise = [NSNumber numberWithFloat:[self.exerciseField.text floatValue]];
+    }
+    self.user.profilePicture = [Utilities getPFFileFromImage:self.profilePicture.imageView.image];
+    self.user.backgroundPicture = [Utilities getPFFileFromImage:self.backgroundPicture.imageView.image];
+    self.user.logAmounts = @[self.log0.text, self.log1.text, self.log2.text, self.log3.text];
+    
+    [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error) {
+            [Utilities presentOkAlertControllerInViewController:self
+                                                      withTitle:@"Could not save profile"
+                                                        message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
+        } else {
+            UIAlertController *success = [UIAlertController alertControllerWithTitle:@"Changes saved successfully"
+                                                                             message:nil
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+            [self presentViewController:success animated:YES completion:nil];
+            [success dismissViewControllerAnimated:YES completion:^{
+                [self.navigationController popViewControllerAnimated:YES];
+            }];
+        }
+    }];
+}
+
+- (IBAction)closeKeyboard:(id)sender {
+    [self.view endEditing:YES];
 }
 
 /*

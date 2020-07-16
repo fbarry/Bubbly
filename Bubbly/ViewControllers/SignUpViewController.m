@@ -36,10 +36,11 @@
     CameraView *camera = [[CameraView alloc] init];
     camera.viewController = self;
     camera.delegate = self;
+    camera.name = @"camera";
     [camera alertConfirmation];
 }
 
-- (void)setImage:(UIImage *)image {
+- (void)setImage:(UIImage *)image withName:(NSString *)name {
     [self.profilePicture setImage:image forState:UIControlStateNormal];
 }
 

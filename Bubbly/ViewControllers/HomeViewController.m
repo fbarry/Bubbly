@@ -31,9 +31,14 @@
     [super viewDidLoad];
         
     self.user = [User currentUser];
-    self.welcomeLabel.text = [NSString stringWithFormat:@"Welcome Back, %@!", self.user.name];
     
     [self getDayLog];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    
+    self.welcomeLabel.text = [NSString stringWithFormat:@"Welcome Back, %@!", self.user.name];
 }
 
 - (void)getDayLog {

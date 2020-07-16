@@ -42,7 +42,11 @@
     self.user = [User currentUser];
     
     [Utilities roundImage:self.profilePicture];
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+        
     [self.profilePicture setImageWithURL:[NSURL URLWithString:self.user.profilePicture.url]];
     self.nameLabel.text = self.user.name;
     self.usernameLabel.text = [NSString stringWithFormat:@"@%@", self.user.username];

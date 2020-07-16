@@ -17,7 +17,7 @@ typedef enum {
 
 @protocol CameraViewDelegate <NSObject>
 
-- (void)setImage:(UIImage *)image;
+- (void)setImage:(UIImage *)image withName:(NSString *)name;
 
 @end
 
@@ -25,9 +25,9 @@ typedef enum {
 
 @property (strong, nonatomic) id<CameraViewDelegate>delegate;
 @property (strong, nonatomic) UIViewController *viewController;
+@property (strong, nonatomic) NSString *name;
 
 - (void)alertConfirmation;
-
 
 @end
 

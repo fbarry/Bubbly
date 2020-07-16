@@ -12,7 +12,7 @@
 
 + (void) presentOkAlertControllerInViewController:(UIViewController *)viewController
                                       withTitle:(NSString *)title
-                                        message:(NSString *)message {
+                                        message:(NSString * _Nullable)message {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *button = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [alert dismissViewControllerAnimated:YES completion:nil];
@@ -36,14 +36,12 @@
 }
 
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image {
- 
-    // check if image is not nil
+    
     if (!image) {
         return nil;
     }
     
     NSData *imageData = UIImagePNGRepresentation(image);
-    // get image data and check if that is not nil
     if (!imageData) {
         return nil;
     }

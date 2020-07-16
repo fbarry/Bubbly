@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void) presentOkAlertControllerInViewController:(UIViewController *)viewController
                                         withTitle:(NSString *)title
-                                          message:(NSString *)message;
+                                          message:(NSString * _Nullable)message;
 
 + (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size;
 
