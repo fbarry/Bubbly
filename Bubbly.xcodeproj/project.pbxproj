@@ -35,6 +35,7 @@
 		8CA0DB8F24BF58A400B93FEC /* SavedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA0DB8E24BF58A400B93FEC /* SavedViewController.m */; };
 		8CA0DB9224BF58B100B93FEC /* BuyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA0DB9124BF58B100B93FEC /* BuyViewController.m */; };
 		8CA0DB9924BF918C00B93FEC /* CameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA0DB9824BF918C00B93FEC /* CameraView.m */; };
+		8CBB59A624C0BB9E0062FB0F /* BuyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB59A524C0BB9E0062FB0F /* BuyCell.m */; };
 		D5F86BBE48D742F4E7D9FEF4 /* Pods_BubblyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335D8992D3546B1CB7049452 /* Pods_BubblyTests.framework */; };
 		D624D6578B2788BD780DD002 /* Pods_Bubbly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E1106D8528734F0FB06689E /* Pods_Bubbly.framework */; };
 /* End PBXBuildFile section */
@@ -119,6 +120,8 @@
 		8CA0DB9324BF59F300B93FEC /* Charts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Charts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA0DB9724BF918C00B93FEC /* CameraView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraView.h; sourceTree = "<group>"; };
 		8CA0DB9824BF918C00B93FEC /* CameraView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraView.m; sourceTree = "<group>"; };
+		8CBB59A424C0BB9E0062FB0F /* BuyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuyCell.h; sourceTree = "<group>"; };
+		8CBB59A524C0BB9E0062FB0F /* BuyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuyCell.m; sourceTree = "<group>"; };
 		9CC48BDB369BFC801730ABB6 /* Pods-Bubbly-BubblyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bubbly-BubblyUITests.release.xcconfig"; path = "Target Support Files/Pods-Bubbly-BubblyUITests/Pods-Bubbly-BubblyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F1FDC2BC347BEE9CA2E2E202 /* Pods-BubblyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BubblyTests.debug.xcconfig"; path = "Target Support Files/Pods-BubblyTests/Pods-BubblyTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -243,6 +246,8 @@
 				8CA0DB8224BE164B00B93FEC /* RecipeCell.m */,
 				8CA0DB8424BE24DC00B93FEC /* IngredientCell.h */,
 				8CA0DB8524BE24DC00B93FEC /* IngredientCell.m */,
+				8CBB59A424C0BB9E0062FB0F /* BuyCell.h */,
+				8CBB59A524C0BB9E0062FB0F /* BuyCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -534,6 +539,7 @@
 			files = (
 				8CA0DB8F24BF58A400B93FEC /* SavedViewController.m in Sources */,
 				8C9EBFDF24BCD2AC0031380E /* User.m in Sources */,
+				8CBB59A624C0BB9E0062FB0F /* BuyCell.m in Sources */,
 				8C9EC00324BCDF3E0031380E /* BrowseViewController.m in Sources */,
 				8CA0DB9224BF58B100B93FEC /* BuyViewController.m in Sources */,
 				8C9EBFFA24BCDF270031380E /* LoginViewController.m in Sources */,

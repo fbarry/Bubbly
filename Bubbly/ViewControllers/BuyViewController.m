@@ -9,10 +9,12 @@
 #import "BuyViewController.h"
 #import "Recipe.h"
 #import "Utilities.h"
+#import "BuyCell.h"
 
-@interface BuyViewController ()
+@interface BuyViewController () <UITableViewDelegate, UITableViewDataSource>
 
-@property (strong, nonatomic) NSMutableSet *ingredients;
+@property (strong, nonatomic) NSMutableArray *ingredients;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -20,12 +22,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
+    self.tableView.allowsMultipleSelection = true;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     
-    self.ingredients = [[NSMutableSet alloc] init];
+    self.ingredients = [[NSMutableArray alloc] init];
     [self loadRecipes];
 }
 
@@ -39,12 +46,25 @@
                                                         message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
         } else {
             for (Recipe *recipe in objects) {
-                [self.ingredients addObjectsFromArray:recipe.ingredients];
+                for (NSString *ingredient in recipe.ingredients) {
+                    if (![self.ingredients containsObject:ingredient]) {
+                        [self.ingredients addObject:ingredient];
+                    }
+                }
             }
-            NSLog(@"%@", self.ingredients);
-            // reload
+            [self.tableView reloadData];
         }
     }];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    BuyCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"BuyCell"];
+    cell.ingredientLabel.text = self.ingredients[indexPath.row];
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.ingredients.count;
 }
 
 /*
