@@ -98,7 +98,7 @@ Users can:
    * Settings Screen
 
 ## Wireframes
-https://imgur.com/Ny9LY74
+![Image of wireframe](https://github.com/fbarry/Bubbly/blob/master/Bubbly-Wireframe.jpg)
 
 ### [BONUS] Digital Wireframes & Mockups
 https://www.figma.com/file/7KhIRv2UjLg3eeKU3illfi/Bubbly?node-id=0%3A1
