@@ -9,7 +9,6 @@ target 'Bubbly' do
   pod 'Parse'
   pod 'AFNetworking'
   pod 'Charts'
-  pod 'GaugeKit'
 
   target 'BubblyTests' do
     inherit! :search_paths

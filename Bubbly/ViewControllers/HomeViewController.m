@@ -11,6 +11,7 @@
 #import "IntakeLog.h"
 #import "Utilities.h"
 #import "UIImageView+AFNetworking.h"
+#import <Charts-Swift.h>
 
 @interface HomeViewController ()
 
@@ -20,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *acheivedLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet UITextField *customValueField;
+@property (weak, nonatomic) IBOutlet PieChartView *pieChart;
 @property (strong, nonatomic) User *user;
 @property (strong, nonatomic) IntakeLog *dayLog;
 
@@ -31,15 +33,49 @@
     [super viewDidLoad];
         
     self.user = [User currentUser];
+    [Utilities roundImage:self.backgroundPicture];
+    [self.pieChart.legend setEnabled:NO];
+    self.pieChart.holeRadiusPercent = 0.9;
+    self.pieChart.holeColor = [UIColor clearColor];
     
     [self getDayLog];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:YES];
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:YES];
     
     self.welcomeLabel.text = [NSString stringWithFormat:@"Welcome Back, %@!", self.user.name];
+    
+    [self.backgroundPicture setImageWithURL:[NSURL URLWithString:self.user.backgroundPicture.url]];
+
+    [self.segmentedControl setTitle:[NSString stringWithFormat:@"%@ oz", self.user.logAmounts[0]] forSegmentAtIndex:0];
+    [self.segmentedControl setTitle:[NSString stringWithFormat:@"%@ oz", self.user.logAmounts[1]] forSegmentAtIndex:1];
+    [self.segmentedControl setTitle:[NSString stringWithFormat:@"%@ oz", self.user.logAmounts[2]] forSegmentAtIndex:2];
+    [self.segmentedControl setTitle:[NSString stringWithFormat:@"%@ oz", self.user.logAmounts[3]] forSegmentAtIndex:3];
+    
+    [self loadAnimation];
 }
+
+- (void)loadAnimation {
+    self.goalLabel.text = [NSString stringWithFormat:@"Goal: %d oz", [self.dayLog.goal intValue]];
+    self.acheivedLabel.text = [NSString stringWithFormat:@"Achieved: %d oz", [self.dayLog.achieved intValue]];
+    
+    double percent = [self.dayLog.achieved doubleValue]/[self.dayLog.goal doubleValue]*100;
+    PieChartDataSet *data = [[PieChartDataSet alloc] init];
+    [data setDrawValuesEnabled:NO];
+    data.colors = @[[UIColor systemTealColor], [UIColor systemGray6Color]];
+    
+    if ([data addEntry:[[PieChartDataEntry alloc] initWithValue:percent]] && [data addEntry:[[PieChartDataEntry alloc] initWithValue:100-percent]]) {
+        self.pieChart.data = [[PieChartData alloc] initWithDataSet:data];
+    } else {
+        [Utilities presentOkAlertControllerInViewController:self
+                                                  withTitle:@"Error loading home screen"
+                                                    message:nil];
+    }
+        
+    [self.pieChart animateWithXAxisDuration:2 easingOption:ChartEasingOptionEaseOutBack];
+}
+
 
 - (void)getDayLog {
     PFQuery *logQuery = [PFQuery queryWithClassName:@"IntakeLog"];
@@ -81,30 +117,9 @@
     
     IntakeLog *log = objects[0];
     
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"dd MMM yyyy"];
-    
-    if (![[dateFormat stringFromDate:log.createdAt] isEqualToString:[dateFormat stringFromDate:[NSDate date]]]) return false;
+    if (![NSCalendar.currentCalendar isDate:log.createdAt inSameDayAsDate:[NSDate date]]) return false;
     
     return true;
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:YES];
-    
-    [self.backgroundPicture setImageWithURL:[NSURL URLWithString:self.user.backgroundPicture.url]];
-
-    [self.segmentedControl setTitle:[NSString stringWithFormat:@"%@ oz", self.user.logAmounts[0]] forSegmentAtIndex:0];
-    [self.segmentedControl setTitle:[NSString stringWithFormat:@"%@ oz", self.user.logAmounts[1]] forSegmentAtIndex:1];
-    [self.segmentedControl setTitle:[NSString stringWithFormat:@"%@ oz", self.user.logAmounts[2]] forSegmentAtIndex:2];
-    [self.segmentedControl setTitle:[NSString stringWithFormat:@"%@ oz", self.user.logAmounts[3]] forSegmentAtIndex:3];
-    
-    [self loadAnimation];
-}
-
-- (void)loadAnimation {
-    self.goalLabel.text = [NSString stringWithFormat:@"Goal: %@ oz", self.dayLog.goal];
-    self.acheivedLabel.text = [NSString stringWithFormat:@"Achieved: %@ oz", self.dayLog.achieved];
 }
 
 - (IBAction)didTapLog:(id)sender {

@@ -107,6 +107,8 @@ NSDate *referenceDate;
     LineChartData *data = [[LineChartData alloc] initWithDataSet:dataSet];
     self.lineChart.data = data;
     [self.lineChart.data setDrawValues:NO];
+    
+    [self.lineChart animateWithXAxisDuration:1 yAxisDuration:1.5 easingOption:ChartEasingOptionLinear];
 }
 
 - (double)getXCoordFromDate:(NSDate *)date {
