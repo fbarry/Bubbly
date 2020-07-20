@@ -18,8 +18,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     ParseClientConfiguration *configuration = [ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
-      configuration.applicationId = @"bubbly";
-      configuration.server = @"https://bubbly-water-tracking.herokuapp.com/parse";
+        configuration.applicationId = @"bubbly";
+        configuration.server = @"https://bubbly-water-tracking.herokuapp.com/parse";
     }];
     [Parse initializeWithConfiguration:configuration];
     return YES;
