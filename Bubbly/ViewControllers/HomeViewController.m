@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *acheivedLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet UITextField *customValueField;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet PieChartView *pieChart;
 @property (strong, nonatomic) User *user;
 @property (strong, nonatomic) IntakeLog *dayLog;
@@ -65,19 +66,31 @@
     [data setDrawValuesEnabled:NO];
     data.colors = @[[UIColor systemTealColor], [UIColor systemGray6Color]];
     
-    if ([data addEntry:[[PieChartDataEntry alloc] initWithValue:percent]] && [data addEntry:[[PieChartDataEntry alloc] initWithValue:100-percent]]) {
-        self.pieChart.data = [[PieChartData alloc] initWithDataSet:data];
+    if (percent > 100) {
+        if ([data addEntry:[[PieChartDataEntry alloc] initWithValue:100]]) {
+            self.pieChart.data = [[PieChartData alloc] initWithDataSet:data];
+        } else {
+            [Utilities presentOkAlertControllerInViewController:self
+                                                      withTitle:@"Error loading home screen"
+                                                        message:nil];
+        }
     } else {
-        [Utilities presentOkAlertControllerInViewController:self
-                                                  withTitle:@"Error loading home screen"
-                                                    message:nil];
+        if ([data addEntry:[[PieChartDataEntry alloc] initWithValue:percent]] && [data addEntry:[[PieChartDataEntry alloc] initWithValue:100-percent]]) {
+            self.pieChart.data = [[PieChartData alloc] initWithDataSet:data];
+        } else {
+            [Utilities presentOkAlertControllerInViewController:self
+                                                      withTitle:@"Error loading home screen"
+                                                        message:nil];
+        }
     }
         
-    [self.pieChart animateWithXAxisDuration:2 easingOption:ChartEasingOptionEaseOutBack];
+    [self.pieChart animateWithXAxisDuration:2 easingOption:ChartEasingOptionEaseInOutElastic];
 }
 
 
 - (void)getDayLog {
+    [self.activityIndicator startAnimating];
+    
     PFQuery *logQuery = [PFQuery queryWithClassName:@"IntakeLog"];
     [logQuery whereKey:@"user" equalTo:self.user];
     [logQuery addDescendingOrder:@"createdAt"];
@@ -109,6 +122,7 @@
                 [self loadAnimation];
             }
         }
+        [self.activityIndicator stopAnimating];
     }];
 }
 
@@ -130,7 +144,7 @@
         addValue = [self.customValueField.text integerValue];
     }
     self.dayLog.achieved = [NSNumber numberWithInteger:[self.dayLog.achieved integerValue] + addValue];
-    
+        
     [self.dayLog saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (error) {
             [Utilities presentOkAlertControllerInViewController:self

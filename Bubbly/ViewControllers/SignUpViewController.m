@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *profilePicture;
 @property (weak, nonatomic) IBOutlet UITextField *weightField;
 @property (weak, nonatomic) IBOutlet UITextField *exerciseField;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -54,6 +55,8 @@
                                                   withTitle:@"Invalid Input"
                                                     message:@"Passwords do not match"];
     } else {
+        [self.activityIndicator startAnimating];
+
         User *user = [User new];
         
         user.username = self.usernameField.text;
@@ -77,6 +80,7 @@
             } else {
                 [self performSegueWithIdentifier:@"Home" sender:self];
             }
+            [self.activityIndicator stopAnimating];
         }];
     }
 }

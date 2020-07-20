@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) Recipe *recipe;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *recipePicture;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
 

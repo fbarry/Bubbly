@@ -27,6 +27,9 @@
                                 <rect key="frame" x="16" y="352" width="382" height="50.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50.5" id="nAT-Rr-Rbe"/>
+                                </constraints>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="30"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -60,6 +63,10 @@
                                     <action selector="didTapBack:" destination="UuX-XG-oT2" eventType="touchUpInside" id="zfC-ub-5gK"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="bgq-77-32o">
+                                <rect key="frame" x="197" y="443" width="20" height="20"/>
+                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -70,9 +77,11 @@
                             <constraint firstItem="fa2-mN-a9b" firstAttribute="trailing" secondItem="t2e-N1-zGV" secondAttribute="trailing" id="Jdc-iM-30l"/>
                             <constraint firstItem="t2e-N1-zGV" firstAttribute="leading" secondItem="fa2-mN-a9b" secondAttribute="leading" id="QpK-oc-sUY"/>
                             <constraint firstItem="Xrl-aL-kXo" firstAttribute="centerX" secondItem="fa2-mN-a9b" secondAttribute="centerX" id="SrG-xa-aDj"/>
+                            <constraint firstItem="bgq-77-32o" firstAttribute="centerY" secondItem="fa2-mN-a9b" secondAttribute="centerY" id="ZXa-ia-3hk"/>
                             <constraint firstItem="wKZ-ZX-qCJ" firstAttribute="trailing" secondItem="TqT-Ok-Aks" secondAttribute="trailing" id="bBo-fu-tMe"/>
                             <constraint firstItem="1oW-TO-6Cz" firstAttribute="centerX" secondItem="t2e-N1-zGV" secondAttribute="centerX" id="fsE-yp-fgs"/>
                             <constraint firstItem="fa2-mN-a9b" firstAttribute="bottom" secondItem="t2e-N1-zGV" secondAttribute="bottom" id="fwI-Yi-hLk"/>
+                            <constraint firstItem="bgq-77-32o" firstAttribute="centerX" secondItem="fa2-mN-a9b" secondAttribute="centerX" id="hBQ-ha-RJt"/>
                             <constraint firstItem="Xrl-aL-kXo" firstAttribute="top" secondItem="1oW-TO-6Cz" secondAttribute="bottom" constant="4" id="kx5-Jt-h43"/>
                             <constraint firstItem="Xrl-aL-kXo" firstAttribute="top" secondItem="fa2-mN-a9b" secondAttribute="top" constant="572.5" id="nug-rW-3vl"/>
                             <constraint firstItem="wKZ-ZX-qCJ" firstAttribute="top" secondItem="TqT-Ok-Aks" secondAttribute="bottom" constant="8" id="qWf-rH-UB0"/>
@@ -84,6 +93,7 @@
                         <viewLayoutGuide key="safeArea" id="fa2-mN-a9b"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="bgq-77-32o" id="S9Q-Iq-Zli"/>
                         <outlet property="passwordField" destination="wKZ-ZX-qCJ" id="Hhm-SF-0NI"/>
                         <outlet property="usernameField" destination="TqT-Ok-Aks" id="7Gz-D3-DoM"/>
                         <segue destination="PXP-y5-Z0X" kind="presentation" identifier="Home" modalPresentationStyle="fullScreen" id="mTN-9Q-NAn"/>
@@ -176,6 +186,10 @@
                                                     <constraint firstAttribute="width" secondItem="uj4-Ft-90J" secondAttribute="height" multiplier="1:1" id="u27-th-KTq"/>
                                                 </constraints>
                                             </view>
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="pyD-WW-oj3">
+                                                <rect key="frame" x="197" y="381" width="20" height="20"/>
+                                                <color key="color" red="0.45624184610000001" green="0.79364603759999997" blue="0.9176669717" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            </activityIndicatorView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <gestureRecognizers/>
@@ -191,6 +205,7 @@
                                             <constraint firstItem="Ety-D0-gvJ" firstAttribute="centerX" secondItem="uvd-MV-ISW" secondAttribute="centerX" id="PYZ-zy-sQo"/>
                                             <constraint firstItem="MBE-oQ-FdC" firstAttribute="centerX" secondItem="uvd-MV-ISW" secondAttribute="centerX" id="SD8-vg-mjL"/>
                                             <constraint firstItem="lxj-r3-lni" firstAttribute="centerX" secondItem="uj4-Ft-90J" secondAttribute="centerX" id="SQU-NZ-Ha9"/>
+                                            <constraint firstItem="pyD-WW-oj3" firstAttribute="centerX" secondItem="uvd-MV-ISW" secondAttribute="centerX" id="Sij-lM-KeU"/>
                                             <constraint firstItem="Ub8-Pm-rwB" firstAttribute="top" secondItem="scU-3v-OEX" secondAttribute="bottom" constant="40" id="UMM-RJ-gBH"/>
                                             <constraint firstItem="lxj-r3-lni" firstAttribute="trailing" secondItem="uj4-Ft-90J" secondAttribute="trailing" constant="-20" id="UQw-ib-V07"/>
                                             <constraint firstAttribute="trailing" secondItem="uj4-Ft-90J" secondAttribute="trailing" id="UuV-1J-0n5"/>
@@ -201,6 +216,7 @@
                                             <constraint firstItem="scU-3v-OEX" firstAttribute="centerX" secondItem="uvd-MV-ISW" secondAttribute="centerX" id="dCZ-zw-E8s"/>
                                             <constraint firstItem="uj4-Ft-90J" firstAttribute="leading" secondItem="uvd-MV-ISW" secondAttribute="leading" id="eDi-fY-XPB"/>
                                             <constraint firstItem="uj4-Ft-90J" firstAttribute="top" secondItem="FDl-Ih-rKm" secondAttribute="bottom" constant="16" id="q6A-P1-dLb"/>
+                                            <constraint firstItem="pyD-WW-oj3" firstAttribute="centerY" secondItem="uvd-MV-ISW" secondAttribute="centerY" id="qvr-IY-xpR"/>
                                             <constraint firstItem="FDl-Ih-rKm" firstAttribute="top" secondItem="uvd-MV-ISW" secondAttribute="top" constant="8" id="tlt-RM-Uzj"/>
                                             <constraint firstItem="Ub8-Pm-rwB" firstAttribute="leading" secondItem="uvd-MV-ISW" secondAttribute="leading" constant="16" id="vxM-25-Icu"/>
                                             <constraint firstItem="scU-3v-OEX" firstAttribute="top" secondItem="Ety-D0-gvJ" secondAttribute="bottom" constant="8" id="xbQ-h5-pFd"/>
@@ -240,6 +256,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="acheivedLabel" destination="scU-3v-OEX" id="ukU-zS-L5Z"/>
+                        <outlet property="activityIndicator" destination="pyD-WW-oj3" id="lxy-ym-7Tz"/>
                         <outlet property="backgroundPicture" destination="lxj-r3-lni" id="4Ht-69-n0u"/>
                         <outlet property="customValueField" destination="Y9K-FU-adN" id="699-Mt-pwY"/>
                         <outlet property="goalLabel" destination="Ety-D0-gvJ" id="FBh-Uf-BMg"/>
@@ -501,6 +518,11 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="BxY-bT-JaG">
+                                                    <rect key="frame" x="90" y="90" width="20" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="color" red="0.45624184610000001" green="0.79364603759999997" blue="0.9176669717" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="yY7-nQ-em6" firstAttribute="leading" secondItem="Aw7-VK-GQ6" secondAttribute="leading" id="0vf-Sc-2Oc"/>
@@ -514,6 +536,7 @@
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="200" height="200"/>
                                         <connections>
+                                            <outlet property="activityIndicator" destination="BxY-bT-JaG" id="8ff-Oa-jky"/>
                                             <outlet property="nameLabel" destination="crh-Sv-Iw4" id="6Ap-V5-Z2X"/>
                                             <outlet property="recipePicture" destination="yY7-nQ-em6" id="UVw-P8-7HG"/>
                                             <segue destination="alL-iF-aw0" kind="show" identifier="Details" id="4iT-3N-M4g"/>
@@ -716,6 +739,10 @@
                                                 <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                             </textField>
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Yg4-H1-k8T">
+                                                <rect key="frame" x="197" y="419" width="20" height="20"/>
+                                                <color key="color" red="0.45624184610000001" green="0.79364603759999997" blue="0.9176669717" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            </activityIndicatorView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <gestureRecognizers/>
@@ -756,6 +783,8 @@
                                             <constraint firstItem="xda-Cx-sY0" firstAttribute="top" secondItem="6N7-ts-eSf" secondAttribute="bottom" constant="8" id="qBB-cB-DgY"/>
                                             <constraint firstItem="FH2-SF-7PI" firstAttribute="trailing" secondItem="BTd-cp-rlH" secondAttribute="trailing" id="qNb-T9-pvw"/>
                                             <constraint firstItem="lAr-Iu-s2b" firstAttribute="leading" secondItem="BTd-cp-rlH" secondAttribute="leading" id="r6b-8V-jk4"/>
+                                            <constraint firstItem="Yg4-H1-k8T" firstAttribute="centerX" secondItem="SwR-nK-mBf" secondAttribute="centerX" id="uJF-JV-onT"/>
+                                            <constraint firstItem="Yg4-H1-k8T" firstAttribute="centerY" secondItem="SwR-nK-mBf" secondAttribute="centerY" id="uLa-nf-Cay"/>
                                             <constraint firstItem="lAr-Iu-s2b" firstAttribute="centerX" secondItem="SwR-nK-mBf" secondAttribute="centerX" id="vxq-LU-vIF"/>
                                             <constraint firstItem="exu-4D-M0n" firstAttribute="top" secondItem="BTd-cp-rlH" secondAttribute="bottom" constant="20" id="ydU-do-2xA"/>
                                             <constraint firstItem="L92-eT-vQR" firstAttribute="trailing" secondItem="BTd-cp-rlH" secondAttribute="trailing" id="yep-X5-sd1"/>
@@ -785,6 +814,7 @@
                         <viewLayoutGuide key="safeArea" id="nyf-qQ-KE6"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="Yg4-H1-k8T" id="sv7-X9-zFG"/>
                         <outlet property="confirmPasswordField" destination="FH2-SF-7PI" id="Xam-WD-FRP"/>
                         <outlet property="emailField" destination="exu-4D-M0n" id="1LG-X7-5Tu"/>
                         <outlet property="exerciseField" destination="L92-eT-vQR" id="odZ-bV-YMe"/>
@@ -1571,9 +1601,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="6RW-1X-xHa"/>
-        <segue reference="mTN-9Q-NAn"/>
-        <segue reference="RED-0b-DcB"/>
+        <segue reference="4iT-3N-M4g"/>
+        <segue reference="Fdh-RY-nhU"/>
+        <segue reference="71q-bb-PWo"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="book" catalog="system" width="128" height="101"/>

@@ -13,6 +13,7 @@
 @interface LoginViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 
 @end
@@ -20,11 +21,12 @@
 @implementation LoginViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [super viewDidLoad];    
 }
 
 - (IBAction)didTapLogin:(id)sender {
+    [self.activityIndicator startAnimating];
+    
     NSString *username = self.usernameField.text;
     NSString *password = self.passwordField.text;
     
@@ -36,6 +38,7 @@
         } else {
             [self performSegueWithIdentifier:@"Home" sender:self];
         }
+        [self.activityIndicator stopAnimating];
     }];
 }
 
