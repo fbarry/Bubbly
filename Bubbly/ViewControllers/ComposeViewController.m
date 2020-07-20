@@ -12,6 +12,7 @@
 #import "CameraView.h"
 #import "Recipe.h"
 #import "User.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface ComposeViewController () <UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, CameraViewDelegate, IngredientCellDelegate>
 
@@ -67,7 +68,7 @@
     [camera alertConfirmation];
 }
 
-- (void)setImage:(nonnull UIImage *)image {
+- (void)setImage:(nonnull UIImage *)image withName:(nonnull NSString *)name {
     [self.recipePicture setImage:image forState:UIControlStateNormal];
 }
 
@@ -89,6 +90,8 @@
                                                   withTitle:@"Invalid Input"
                                                     message:@"One or more required fields are empty"];
     } else {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        
         Recipe *recipe = [Recipe new];
         
         recipe.creator = [User currentUser];
@@ -111,6 +114,7 @@
                 [self.navigationController popViewControllerAnimated:YES];
                 [self.delegate didPost:recipe];
             }
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
         }];
     }
 }

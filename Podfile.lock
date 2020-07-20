@@ -18,6 +18,7 @@ PODS:
   - Charts (3.5.0):
     - Charts/Core (= 3.5.0)
   - Charts/Core (3.5.0)
+  - MBProgressHUD (1.2.0)
   - Parse (1.18.0):
     - Parse/Core (= 1.18.0)
   - Parse/Core (1.18.0):
@@ -26,6 +27,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking
   - Charts
+  - MBProgressHUD
   - Parse
 
 SPEC REPOS:
@@ -33,14 +35,16 @@ SPEC REPOS:
     - AFNetworking
     - Bolts
     - Charts
+    - MBProgressHUD
     - Parse
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
   Charts: 40a08591df1f8ad5c223ddedfb1a06da92f24f7c
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   Parse: 79bdda34fdb7eb2a707a43a951c8aae236cb3e34
 
-PODFILE CHECKSUM: 5b1b8ba152f9b3842f6cc480f8c0bb7b0fc9daa2
+PODFILE CHECKSUM: ee489252107bdb427c85decdc19847a573d0520c
 
 COCOAPODS: 1.9.3

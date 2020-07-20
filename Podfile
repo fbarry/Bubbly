@@ -9,6 +9,7 @@ target 'Bubbly' do
   pod 'Parse'
   pod 'AFNetworking'
   pod 'Charts'
+  pod 'MBProgressHUD'
 
   target 'BubblyTests' do
     inherit! :search_paths

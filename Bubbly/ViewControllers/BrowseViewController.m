@@ -49,6 +49,11 @@
     layout.itemSize = CGSizeMake(itemWidth, itemHeight);
     
     [self.closeKeyboard setEnabled:NO];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    
     [self loadRecipes];
 }
 
