@@ -278,6 +278,7 @@
                         <outlet property="customValueField" destination="Y9K-FU-adN" id="699-Mt-pwY"/>
                         <outlet property="goalLabel" destination="Ety-D0-gvJ" id="FBh-Uf-BMg"/>
                         <outlet property="pieChart" destination="uj4-Ft-90J" id="6CT-d6-Mgv"/>
+                        <outlet property="scrollView" destination="JUW-KI-XDy" id="Sgg-Dz-HvO"/>
                         <outlet property="segmentedControl" destination="Ub8-Pm-rwB" id="fxS-z7-jyX"/>
                         <outlet property="welcomeLabel" destination="FDl-Ih-rKm" id="yVK-fT-XM8"/>
                         <segue destination="a4u-T3-6sY" kind="show" identifier="Compose" id="jbN-Zm-E9i"/>
@@ -480,6 +481,7 @@
                         <outlet property="descriptionField" destination="iTE-m8-64q" id="MMR-5c-2iV"/>
                         <outlet property="nameField" destination="mRN-ac-iNn" id="Jhw-qA-3bX"/>
                         <outlet property="recipePicture" destination="g8H-yN-IOA" id="esT-uY-b0O"/>
+                        <outlet property="scrollView" destination="JH6-LH-pAu" id="Cv3-Ao-Xmh"/>
                         <outlet property="tableView" destination="RyW-bk-D7W" id="uf4-Ue-lfp"/>
                     </connections>
                 </viewController>
@@ -838,6 +840,7 @@
                         <outlet property="nameField" destination="BTd-cp-rlH" id="k1y-zt-bmB"/>
                         <outlet property="passwordField" destination="lAr-Iu-s2b" id="xUG-eb-gsP"/>
                         <outlet property="profilePicture" destination="6N7-ts-eSf" id="NcS-Mg-sdR"/>
+                        <outlet property="scrollView" destination="6w7-YS-SCy" id="1V5-S8-lh1"/>
                         <outlet property="usernameField" destination="LP3-aA-rOD" id="ybi-zh-MmS"/>
                         <outlet property="weightField" destination="EsQ-Ri-35H" id="hQM-9s-p4B"/>
                         <segue destination="PXP-y5-Z0X" kind="presentation" identifier="Home" modalPresentationStyle="fullScreen" id="Fdh-RY-nhU"/>
@@ -1399,6 +1402,7 @@
                         <outlet property="log3" destination="hh7-ks-SED" id="VF9-3s-FXd"/>
                         <outlet property="nameField" destination="ge0-Zw-8DI" id="yIs-4e-PS3"/>
                         <outlet property="profilePicture" destination="NdM-nw-4Hx" id="7CC-P2-m0p"/>
+                        <outlet property="scrollView" destination="TUn-dS-sNr" id="9Cf-ww-cHk"/>
                         <outlet property="usernameField" destination="cPa-pb-2xk" id="8Wq-Tx-NHr"/>
                         <outlet property="weightField" destination="koP-aP-iH0" id="kXw-Fd-Ty8"/>
                     </connections>

@@ -16,6 +16,7 @@
 
 @interface ComposeViewController () <UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, CameraViewDelegate, IngredientCellDelegate>
 
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIButton *recipePicture;
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -35,7 +36,23 @@
     self.descriptionField.delegate = self;
     
     self.ingredients = [[NSMutableArray alloc] init];
+  
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    CGRect keyboard = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    UIEdgeInsets contentInset = self.scrollView.contentInset;
+    contentInset.bottom = keyboard.size.height;
+    self.scrollView.contentInset = contentInset;
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    UIEdgeInsets contentInset = UIEdgeInsetsZero;
+    self.scrollView.contentInset = contentInset;
+}
+
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     IngredientCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"IngredientCell"];

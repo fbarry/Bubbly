@@ -14,6 +14,7 @@
 
 @interface SettingsViewController () <CameraViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIButton *profilePicture;
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
@@ -40,7 +41,23 @@
     
     [Utilities roundImage:(UIImageView *)self.profilePicture];
     [Utilities roundImage:(UIImageView *)self.backgroundPicture];
+        
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    CGRect keyboard = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    UIEdgeInsets contentInset = self.scrollView.contentInset;
+    contentInset.bottom = keyboard.size.height;
+    self.scrollView.contentInset = contentInset;
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    UIEdgeInsets contentInset = UIEdgeInsetsZero;
+    self.scrollView.contentInset = contentInset;
+}
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];

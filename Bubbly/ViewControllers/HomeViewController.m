@@ -15,6 +15,7 @@
 
 @interface HomeViewController ()
 
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UILabel *welcomeLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundPicture;
 @property (weak, nonatomic) IBOutlet UILabel *goalLabel;
@@ -40,6 +41,21 @@
     self.pieChart.holeColor = [UIColor clearColor];
     
     [self getDayLog];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    CGRect keyboard = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    UIEdgeInsets contentInset = self.scrollView.contentInset;
+    contentInset.bottom = keyboard.size.height;
+    self.scrollView.contentInset = contentInset;
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    UIEdgeInsets contentInset = UIEdgeInsetsZero;
+    self.scrollView.contentInset = contentInset;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -179,7 +195,6 @@
                                                         message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
         } else {
             [self loadAnimation];
-            NSLog(@"%@", self.dayLog.achieved);
         }
     }];
 }
