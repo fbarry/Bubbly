@@ -11,8 +11,7 @@
 
 @implementation IntakeLog
 
-@dynamic goal;
-@dynamic achieved;
+@dynamic logAmount;
 
 + (nonnull NSString *)parseClassName {
     return @"IntakeLog";

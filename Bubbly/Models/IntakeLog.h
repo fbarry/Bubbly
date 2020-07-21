@@ -13,9 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface IntakeLog : PFObject <PFSubclassing>
 
-@property (strong, nonatomic) NSNumber *goal;
-@property (strong, nonatomic) NSNumber *achieved;
-@property (strong, nonatomic) User *user;
+@property (strong, nonatomic) NSNumber *logAmount;
 
 @end
 

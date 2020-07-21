@@ -12,6 +12,7 @@
 #import "Utilities.h"
 #import "UIImageView+AFNetworking.h"
 #import <Charts-Swift.h>
+#import "IntakeDayLog.h"
 
 @interface HomeViewController ()
 
@@ -25,7 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet PieChartView *pieChart;
 @property (strong, nonatomic) User *user;
-@property (strong, nonatomic) IntakeLog *dayLog;
+@property (strong, nonatomic) IntakeDayLog *dayLog;
 
 @end
 
@@ -107,7 +108,7 @@
 - (void)getDayLog {
     [self.activityIndicator startAnimating];
     
-    PFQuery *logQuery = [PFQuery queryWithClassName:@"IntakeLog"];
+    PFQuery *logQuery = [PFQuery queryWithClassName:@"IntakeDayLog"];
     [logQuery whereKey:@"user" equalTo:self.user];
     [logQuery addDescendingOrder:@"createdAt"];
     logQuery.limit = 1;
@@ -119,7 +120,7 @@
                                                         message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
         } else {
             if (![self validLog:objects]) {
-                self.dayLog = [IntakeLog new];
+                self.dayLog = [IntakeDayLog new];
                 self.dayLog.goal = [NSNumber numberWithFloat:[self.user.weight floatValue] * 2.0 / 3.0 + 12.0 * [self.user.exercise floatValue] / 30.0];
                 self.dayLog.achieved = [NSNumber numberWithInt:0];
                 self.dayLog.user = self.user;
@@ -145,7 +146,7 @@
 - (BOOL)validLog:(NSArray *)objects {
     if (objects.count == 0) return false;
     
-    IntakeLog *log = objects[0];
+    IntakeDayLog *log = objects[0];
     
     if (![NSCalendar.currentCalendar isDate:log.createdAt inSameDayAsDate:[NSDate date]]) return false;
     
@@ -153,48 +154,74 @@
 }
 
 - (IBAction)didTapLog:(id)sender {
-    NSInteger addValue = 0;
+    IntakeLog *logChange = [IntakeLog new];
     if (self.segmentedControl.selectedSegmentIndex != 4) {
-        addValue = [[self.segmentedControl titleForSegmentAtIndex:self.segmentedControl.selectedSegmentIndex] integerValue];
+        logChange.logAmount = [NSNumber numberWithInteger:[[self.segmentedControl titleForSegmentAtIndex:self.segmentedControl.selectedSegmentIndex] integerValue]];
     } else {
-        addValue = [self.customValueField.text integerValue];
+        logChange.logAmount = [NSNumber numberWithInteger:[self.customValueField.text integerValue]];
     }
-    self.dayLog.achieved = [NSNumber numberWithInteger:[self.dayLog.achieved integerValue] + addValue];
+    
+    self.dayLog.achieved = [NSNumber numberWithInteger:[self.dayLog.achieved integerValue] + [logChange.logAmount integerValue]];
+    
+    PFRelation *relation = [self.dayLog relationForKey:@"logChanges"];
+    [relation addObject:logChange];
         
-    [self.dayLog saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+    [logChange saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (error) {
             [Utilities presentOkAlertControllerInViewController:self
                                                       withTitle:@"Could not update log"
                                                         message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
         } else {
-            [self loadAnimation];
-            if (self.dayLog.achieved >= self.dayLog.goal) {
-                // Announce yay
-            }
+            [self.dayLog saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if (error) {
+                    [Utilities presentOkAlertControllerInViewController:self
+                                                              withTitle:@"Could not update log"
+                                                                message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
+                } else {
+                    [self loadAnimation];
+                    if (self.dayLog.achieved >= self.dayLog.goal) {
+                        
+                    }
+                }
+            }];
         }
     }];
 }
 
 - (IBAction)didTapDelete:(id)sender {
-    NSInteger addValue = 0;
+    IntakeLog *logChange = [IntakeLog new];
     if (self.segmentedControl.selectedSegmentIndex != 4) {
-        addValue = [[self.segmentedControl titleForSegmentAtIndex:self.segmentedControl.selectedSegmentIndex] integerValue];
+        logChange.logAmount = [NSNumber numberWithInteger:[[self.segmentedControl titleForSegmentAtIndex:self.segmentedControl.selectedSegmentIndex] integerValue]];
     } else {
-        addValue = [self.customValueField.text integerValue];
+        logChange.logAmount = [NSNumber numberWithInteger:[self.customValueField.text integerValue]];
     }
     
-    self.dayLog.achieved = [NSNumber numberWithInteger:[self.dayLog.achieved integerValue] - addValue];
-    if ([self.dayLog.achieved compare:[NSNumber numberWithInt:0]] < 0) {
-        self.dayLog.achieved = [NSNumber numberWithInt:0];
+    if ([logChange.logAmount compare:self.dayLog.achieved] > 0) {
+        logChange.logAmount = self.dayLog.achieved;
     }
     
-    [self.dayLog saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+    logChange.logAmount = [NSNumber numberWithInteger:[logChange.logAmount integerValue] * -1];
+    
+    self.dayLog.achieved = [NSNumber numberWithInteger:[self.dayLog.achieved integerValue] + [logChange.logAmount integerValue]];
+    
+    PFRelation *relation = [self.dayLog relationForKey:@"logChanges"];
+    [relation addObject:logChange];
+    
+    [logChange saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (error) {
             [Utilities presentOkAlertControllerInViewController:self
                                                       withTitle:@"Could not update log"
                                                         message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
         } else {
-            [self loadAnimation];
+            [self.dayLog saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if (error) {
+                    [Utilities presentOkAlertControllerInViewController:self
+                                                              withTitle:@"Could not update log"
+                                                                message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
+                } else {
+                    [self loadAnimation];
+                }
+            }];
         }
     }];
 }

@@ -9,6 +9,7 @@
 #import "DataViewController.h"
 #import <Charts-Swift.h>
 #import "IntakeLog.h"
+#import "IntakeDayLog.h"
 #import "Utilities.h"
 
 @interface DataViewController () <IChartAxisValueFormatter>
@@ -55,7 +56,7 @@ NSDate *referenceDate;
 }
 
 - (void)updateChartData {
-    PFQuery *query = [PFQuery queryWithClassName:@"IntakeLog"];
+    PFQuery *query = [PFQuery queryWithClassName:@"IntakeDayLog"];
     [query whereKey:@"user" equalTo:[User currentUser]];
     [query whereKey:@"createdAt" greaterThan:referenceDate];
     
@@ -78,7 +79,7 @@ NSDate *referenceDate;
 - (void)reloadChart {
     LineChartDataSet *dataSet = [[LineChartDataSet alloc] init];
     NSDate *indexDate = referenceDate;
-    for (IntakeLog *log in self.chartData) {
+    for (IntakeDayLog *log in self.chartData) {
         BOOL err = NO;
         double x, y;
         NSDate *midnightDate = [self getDateAtMidnight:log.createdAt];
@@ -103,6 +104,8 @@ NSDate *referenceDate;
         }
         indexDate = [NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:indexDate options:0];
     }
+    
+    dataSet.circleRadius = 6.0;
     
     LineChartData *data = [[LineChartData alloc] initWithDataSet:dataSet];
     self.lineChart.data = data;

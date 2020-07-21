@@ -1447,20 +1447,20 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="441"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jPR-ti-u0T" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="0.0" y="44" width="414" height="441"/>
+                                <rect key="frame" x="4" y="44" width="406" height="441"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="nrl-8f-dLy" firstAttribute="bottom" secondItem="jPR-ti-u0T" secondAttribute="bottom" id="0Qe-0q-iut"/>
-                            <constraint firstItem="jPR-ti-u0T" firstAttribute="leading" secondItem="nrl-8f-dLy" secondAttribute="leading" id="1Rk-Op-Qfd"/>
+                            <constraint firstItem="jPR-ti-u0T" firstAttribute="leading" secondItem="nrl-8f-dLy" secondAttribute="leading" constant="4" id="1Rk-Op-Qfd"/>
                             <constraint firstItem="tOV-gd-rb6" firstAttribute="top" secondItem="nrl-8f-dLy" secondAttribute="top" id="9Ao-M1-VYf"/>
                             <constraint firstItem="nrl-8f-dLy" firstAttribute="bottom" secondItem="tOV-gd-rb6" secondAttribute="bottom" id="Rxt-tv-xEo"/>
                             <constraint firstItem="nrl-8f-dLy" firstAttribute="trailing" secondItem="tOV-gd-rb6" secondAttribute="trailing" id="Wwc-gR-L2F"/>
                             <constraint firstItem="jPR-ti-u0T" firstAttribute="top" secondItem="nrl-8f-dLy" secondAttribute="top" id="Zag-9R-LIk"/>
                             <constraint firstItem="tOV-gd-rb6" firstAttribute="leading" secondItem="nrl-8f-dLy" secondAttribute="leading" id="fcP-Kn-pb4"/>
-                            <constraint firstItem="nrl-8f-dLy" firstAttribute="trailing" secondItem="jPR-ti-u0T" secondAttribute="trailing" id="vjB-yl-rri"/>
+                            <constraint firstItem="nrl-8f-dLy" firstAttribute="trailing" secondItem="jPR-ti-u0T" secondAttribute="trailing" constant="4" id="vjB-yl-rri"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nrl-8f-dLy"/>
                     </view>
