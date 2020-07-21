@@ -159,6 +159,31 @@
     }];
 }
 
+- (IBAction)didTapDelete:(id)sender {
+    NSInteger addValue = 0;
+    if (self.segmentedControl.selectedSegmentIndex != 4) {
+        addValue = [[self.segmentedControl titleForSegmentAtIndex:self.segmentedControl.selectedSegmentIndex] integerValue];
+    } else {
+        addValue = [self.customValueField.text integerValue];
+    }
+    
+    self.dayLog.achieved = [NSNumber numberWithInteger:[self.dayLog.achieved integerValue] - addValue];
+    if ([self.dayLog.achieved compare:[NSNumber numberWithInt:0]] < 0) {
+        self.dayLog.achieved = [NSNumber numberWithInt:0];
+    }
+    
+    [self.dayLog saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error) {
+            [Utilities presentOkAlertControllerInViewController:self
+                                                      withTitle:@"Could not update log"
+                                                        message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
+        } else {
+            [self loadAnimation];
+            NSLog(@"%@", self.dayLog.achieved);
+        }
+    }];
+}
+
 - (IBAction)didTapCompose:(id)sender {
     [self performSegueWithIdentifier:@"Compose" sender:self];
 }

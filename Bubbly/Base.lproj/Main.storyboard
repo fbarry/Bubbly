@@ -121,7 +121,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uvd-MV-ISW" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="783"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="831"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome Back, User!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="25" translatesAutoresizingMaskIntoConstraints="NO" id="FDl-Ih-rKm">
                                                 <rect key="frame" x="16" y="8" width="382" height="69"/>
@@ -168,7 +168,7 @@
                                                     <action selector="didTapLog:" destination="mBS-3n-tB3" eventType="touchUpInside" id="350-AS-PcP"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="oz" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Y9K-FU-adN">
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="oz" textAlignment="center" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Y9K-FU-adN">
                                                 <rect key="frame" x="358" y="657" width="40" height="34"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="40" id="RwL-tc-9XC"/>
@@ -190,12 +190,28 @@
                                                 <rect key="frame" x="197" y="381" width="20" height="20"/>
                                                 <color key="color" red="0.45624184610000001" green="0.79364603759999997" blue="0.9176669717" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             </activityIndicatorView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aqT-iU-wNQ">
+                                                <rect key="frame" x="167" y="776" width="80" height="37.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="0tN-8k-XVk"/>
+                                                    <constraint firstAttribute="width" constant="80" id="iaM-Zu-yOU"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="20"/>
+                                                <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="Delete" backgroundImage="square" catalog="system">
+                                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="didTapDelete:" destination="mBS-3n-tB3" eventType="touchUpInside" id="VwW-5e-JHN"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="lxj-r3-lni" firstAttribute="centerY" secondItem="uj4-Ft-90J" secondAttribute="centerY" id="0jy-32-ZqY"/>
                                             <constraint firstItem="lxj-r3-lni" firstAttribute="bottom" secondItem="uj4-Ft-90J" secondAttribute="bottom" constant="-20" id="0yW-o5-O7X"/>
+                                            <constraint firstItem="aqT-iU-wNQ" firstAttribute="top" secondItem="MBE-oQ-FdC" secondAttribute="bottom" constant="8" id="5R5-Jj-JVE"/>
                                             <constraint firstItem="FDl-Ih-rKm" firstAttribute="leading" secondItem="uvd-MV-ISW" secondAttribute="leading" constant="16" id="DqB-dO-aZu"/>
                                             <constraint firstItem="lxj-r3-lni" firstAttribute="leading" secondItem="uj4-Ft-90J" secondAttribute="leading" constant="20" id="Dro-Ea-hPn"/>
                                             <constraint firstItem="Y9K-FU-adN" firstAttribute="centerY" secondItem="Ub8-Pm-rwB" secondAttribute="centerY" id="E2c-wF-oEa"/>
@@ -210,11 +226,12 @@
                                             <constraint firstItem="lxj-r3-lni" firstAttribute="trailing" secondItem="uj4-Ft-90J" secondAttribute="trailing" constant="-20" id="UQw-ib-V07"/>
                                             <constraint firstAttribute="trailing" secondItem="uj4-Ft-90J" secondAttribute="trailing" id="UuV-1J-0n5"/>
                                             <constraint firstItem="Y9K-FU-adN" firstAttribute="leading" secondItem="Ub8-Pm-rwB" secondAttribute="trailing" constant="8" id="VN1-Xz-S0m"/>
-                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="MBE-oQ-FdC" secondAttribute="bottom" constant="16" id="VoH-hu-PPc"/>
                                             <constraint firstItem="lxj-r3-lni" firstAttribute="top" secondItem="uj4-Ft-90J" secondAttribute="top" constant="20" id="aVh-uk-g9s"/>
                                             <constraint firstItem="Y9K-FU-adN" firstAttribute="height" secondItem="Ub8-Pm-rwB" secondAttribute="height" id="agA-qZ-CFr"/>
                                             <constraint firstItem="scU-3v-OEX" firstAttribute="centerX" secondItem="uvd-MV-ISW" secondAttribute="centerX" id="dCZ-zw-E8s"/>
                                             <constraint firstItem="uj4-Ft-90J" firstAttribute="leading" secondItem="uvd-MV-ISW" secondAttribute="leading" id="eDi-fY-XPB"/>
+                                            <constraint firstAttribute="bottom" secondItem="aqT-iU-wNQ" secondAttribute="bottom" constant="16" id="eGG-zY-WW0"/>
+                                            <constraint firstItem="aqT-iU-wNQ" firstAttribute="centerX" secondItem="uvd-MV-ISW" secondAttribute="centerX" id="kj4-d8-uQh"/>
                                             <constraint firstItem="uj4-Ft-90J" firstAttribute="top" secondItem="FDl-Ih-rKm" secondAttribute="bottom" constant="16" id="q6A-P1-dLb"/>
                                             <constraint firstItem="pyD-WW-oj3" firstAttribute="centerY" secondItem="uvd-MV-ISW" secondAttribute="centerY" id="qvr-IY-xpR"/>
                                             <constraint firstItem="FDl-Ih-rKm" firstAttribute="top" secondItem="uvd-MV-ISW" secondAttribute="top" constant="8" id="tlt-RM-Uzj"/>
