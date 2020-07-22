@@ -30,6 +30,15 @@ NSDate *referenceDate;
     [self.lineChart.rightAxis setEnabled:NO];
     [self.lineChart.legend setEnabled:NO];
     
+//    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage systemImageNamed:@"info.circle"]];
+//    imageView.tintColor = [UIColor darkGrayColor];
+    
+//    ChartMarkerView *marker = [ChartMarkerView new];
+//    marker.clipsToBounds = YES;
+//    marker.frame = CGRectMake(-100, -100, 25, 25);
+//    marker.layer.cornerRadius = marker.frame.size.height / 2;
+//    [marker addSubview:imageView];
+    
 //    self.lineChart.marker = marker;
 //    self.lineChart.drawMarkers = YES;
     

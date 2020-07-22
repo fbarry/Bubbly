@@ -15,7 +15,7 @@
 @interface SettingsViewController () <CameraViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UIButton *profilePicture;
+@property (strong, nonatomic) IBOutlet UIButton *profilePicture;
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
@@ -23,7 +23,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *confirmPasswordField;
 @property (weak, nonatomic) IBOutlet UITextField *weightField;
 @property (weak, nonatomic) IBOutlet UITextField *exerciseField;
-@property (weak, nonatomic) IBOutlet UIButton *backgroundPicture;
+@property (strong, nonatomic) IBOutlet UIButton *backgroundPicture;
 @property (weak, nonatomic) IBOutlet UITextField *log0;
 @property (weak, nonatomic) IBOutlet UITextField *log1;
 @property (weak, nonatomic) IBOutlet UITextField *log2;
@@ -42,6 +42,12 @@
     [Utilities roundImage:(UIImageView *)self.profilePicture];
     [Utilities roundImage:(UIImageView *)self.backgroundPicture];
         
+    UIImageView *imageView = [[UIImageView alloc] init];
+    [imageView setImageWithURL:[NSURL URLWithString:self.user.profilePicture.url]];
+    [self.profilePicture setImage:imageView.image forState:UIControlStateNormal];
+    [imageView setImageWithURL:[NSURL URLWithString:self.user.backgroundPicture.url]];
+    [self.backgroundPicture setImage:imageView.image forState:UIControlStateNormal];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
@@ -58,16 +64,9 @@
     self.scrollView.contentInset = contentInset;
 }
 
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
             
-    UIImageView *imageView = [[UIImageView alloc] init];
-    [imageView setImageWithURL:[NSURL URLWithString:self.user.profilePicture.url]];
-    [self.profilePicture setImage:imageView.image forState:UIControlStateNormal];
-    [imageView setImageWithURL:[NSURL URLWithString:self.user.backgroundPicture.url]];
-    [self.backgroundPicture setImage:imageView.image forState:UIControlStateNormal];
-    
     self.nameField.placeholder = self.user.name;
     self.emailField.placeholder = self.user.email;
     self.usernameField.placeholder = self.user.username;
@@ -97,7 +96,9 @@
 
 - (void)setImage:(nonnull UIImage *)image withName:(nonnull NSString *)name {
     if ([name isEqualToString:@"profile"]) {
+        NSLog(@"%@", image);
         [self.profilePicture setImage:image forState:UIControlStateNormal];
+        NSLog(@"%@", self.profilePicture.imageView.image);
     } else if ([name isEqualToString:@"background"]) {
         [self.backgroundPicture setImage:image forState:UIControlStateNormal];
     }

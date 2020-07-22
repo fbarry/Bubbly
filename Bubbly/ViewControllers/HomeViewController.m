@@ -13,8 +13,10 @@
 #import "UIImageView+AFNetworking.h"
 #import <Charts-Swift.h>
 #import "IntakeDayLog.h"
+#import <CoreLocation/CoreLocation.h>
+#import "OWMWeatherAPI.h"
 
-@interface HomeViewController ()
+@interface HomeViewController () <CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UILabel *welcomeLabel;
@@ -25,8 +27,12 @@
 @property (weak, nonatomic) IBOutlet UITextField *customValueField;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet PieChartView *pieChart;
+@property (weak, nonatomic) IBOutlet UIImageView *weatherIcon;
+@property (weak, nonatomic) IBOutlet UIView *textView;
+@property (weak, nonatomic) IBOutlet UIButton *infoButton;
 @property (strong, nonatomic) User *user;
 @property (strong, nonatomic) IntakeDayLog *dayLog;
+@property (strong, nonatomic) CLLocationManager *locationManager;
 
 @end
 
@@ -34,20 +40,67 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-        
+      
+    [self.weatherIcon setHidden:YES];
+    [self.infoButton setHidden:YES];
+    [self.infoButton setEnabled:NO];
+    
+    self.textView.layer.cornerRadius = 16;
+    
     self.user = [User currentUser];
     [Utilities roundImage:self.backgroundPicture];
+    [Utilities roundImage:self.weatherIcon];
+    self.weatherIcon.layer.borderWidth = 0;
+    
     [self.pieChart.legend setEnabled:NO];
     self.pieChart.holeRadiusPercent = 0.9;
     self.pieChart.holeColor = [UIColor clearColor];
+    [self.pieChart setUserInteractionEnabled:NO];
     
     [self getDayLog];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    [self.locationManager requestWhenInUseAuthorization];
+    [self.locationManager startMonitoringSignificantLocationChanges];
 }
 
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    [self updateWeather];
+}
 
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+    [self updateWeather];
+}
+
+- (void)updateWeather {    
+    OWMWeatherAPI *weatherAPI = [[OWMWeatherAPI alloc] initWithAPIKey:@"9d02fda4b8887c82b20395baeaa1154e"];
+    [weatherAPI setTemperatureFormat:kOWMTempFahrenheit];
+    
+    [weatherAPI currentWeatherByCoordinate:self.locationManager.location.coordinate withCallback:^(NSError *error, NSDictionary *result) {
+        if (error) {
+            [Utilities presentOkAlertControllerInViewController:self
+                                                      withTitle:@"Cannot load weather info"
+                                                        message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
+        } else {
+            NSArray *weather = result[@"weather"];
+            NSDictionary *dictionary = weather[0];
+            [self.weatherIcon setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://openweathermap.org/img/wn/%@@2x.png", dictionary[@"icon"]]]];
+            [self.weatherIcon setHidden:NO];
+            UITapGestureRecognizer *weatherTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapWeather:)];
+            [self.weatherIcon addGestureRecognizer:weatherTapGestureRecognizer];
+            [self.infoButton setHidden:NO];
+            [self.infoButton setEnabled:YES];
+        }
+    }];
+}
+
+- (void)didTapWeather {
+    
+}
 
 - (void)keyboardWillShow:(NSNotification *)notification {
     CGRect keyboard = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
@@ -76,6 +129,10 @@
 }
 
 - (void)loadAnimation {
+    if (!self.dayLog) {
+        return;
+    }
+    
     self.goalLabel.text = [NSString stringWithFormat:@"Goal: %d oz", [self.dayLog.goal intValue]];
     self.acheivedLabel.text = [NSString stringWithFormat:@"Achieved: %d oz", [self.dayLog.achieved intValue]];
     

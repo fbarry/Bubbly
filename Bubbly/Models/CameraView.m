@@ -33,7 +33,6 @@ UIImagePickerController *imagePickerVC;
 - (void)setPicture:(SelectionType) type {
     imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
-    imagePickerVC.allowsEditing = YES;
         
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] || type == PHOTOS) {
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
@@ -46,7 +45,7 @@ UIImagePickerController *imagePickerVC;
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     
-    UIImage *image = [Utilities resizeImage:info[UIImagePickerControllerOriginalImage] withSize:CGSizeMake(500, 500)];
+    UIImage *image = [Utilities resizeImage:info[UIImagePickerControllerOriginalImage] withSize:CGSizeMake(1000, 1000)];
     [self.delegate setImage:image withName:self.name];
     [imagePickerVC dismissViewControllerAnimated:YES completion:nil];
 }

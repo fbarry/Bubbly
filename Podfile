@@ -7,9 +7,10 @@ target 'Bubbly' do
 
   # Pods for Bubbly
   pod 'Parse'
-  pod 'AFNetworking'
+  pod 'AFNetworking', '~> 1.3.1'
   pod 'Charts'
   pod 'MBProgressHUD'
+  pod 'OpenWeatherMapAPI', '~> 0.0.5'
 
   target 'BubblyTests' do
     inherit! :search_paths
