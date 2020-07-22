@@ -19,4 +19,12 @@
 @dynamic logAmounts;
 @dynamic savedRecipes;
 
+- (NSURL *)profilePictureURL {
+    return [NSURL URLWithString:self.profilePicture.url];
+}
+
+- (NSString *)profileUsername {
+    return [NSString stringWithFormat:@"@%@", self.username];
+}
+
 @end

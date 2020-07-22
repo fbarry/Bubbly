@@ -17,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *websiteLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ingredientsLabel;
-@property (weak, nonatomic) IBOutlet UIButton *saveButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 @property (strong, nonatomic) User *user;
 @property (nonatomic) BOOL saved;
 
@@ -54,8 +54,11 @@
                                                         message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
         } else {
             if (objects.count > 0) {
-                    [self.saveButton setImage:[UIImage systemImageNamed:@"heart.fill"] forState:UIControlStateNormal];
-                    self.saved = YES;
+                [self.saveButton setImage:[UIImage systemImageNamed:@"heart.fill"]];
+                self.saved = YES;
+            } else {
+                [self.saveButton setImage:[UIImage systemImageNamed:@"heart"]];
+                self.saved = NO;
             }
         }
     }];
@@ -68,12 +71,12 @@
     if (self.saved) {
         [relation removeObject:self.user];
         [relation2 removeObject:self.recipe];
-        [self.saveButton setImage:[UIImage systemImageNamed:@"heart"] forState:UIControlStateNormal];
+        [self.saveButton setImage:[UIImage systemImageNamed:@"heart"]];
         self.saved = NO;
     } else {
         [relation addObject:self.user];
         [relation2 addObject:self.recipe];
-        [self.saveButton setImage:[UIImage systemImageNamed:@"heart.fill"] forState:UIControlStateNormal];
+        [self.saveButton setImage:[UIImage systemImageNamed:@"heart.fill"]];
         self.saved = YES;
     }
         
@@ -83,10 +86,10 @@
                                                       withTitle:@"Unable to Update Save"
                                                         message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
             self.saved = !self.saved;
-            if (self.saved) {
-                [self.saveButton setImage:[UIImage systemImageNamed:@"heart"] forState:UIControlStateNormal];
+            if (!self.saved) {
+                [self.saveButton setImage:[UIImage systemImageNamed:@"heart"]];
             } else {
-                [self.saveButton setImage:[UIImage systemImageNamed:@"heart.fill"] forState:UIControlStateNormal];
+                [self.saveButton setImage:[UIImage systemImageNamed:@"heart.fill"]];
             }
         } else {
             [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
@@ -95,10 +98,10 @@
                                                               withTitle:@"Unable to Update Save"
                                                                 message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
                     self.saved = !self.saved;
-                    if (self.saved) {
-                        [self.saveButton setImage:[UIImage systemImageNamed:@"heart"] forState:UIControlStateNormal];
+                    if (!self.saved) {
+                        [self.saveButton setImage:[UIImage systemImageNamed:@"heart"]];
                     } else {
-                        [self.saveButton setImage:[UIImage systemImageNamed:@"heart.fill"] forState:UIControlStateNormal];
+                        [self.saveButton setImage:[UIImage systemImageNamed:@"heart.fill"]];
                     }
                 } else {
                     NSLog(@"Saved");

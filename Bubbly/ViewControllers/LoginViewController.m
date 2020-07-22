@@ -24,7 +24,8 @@
     [super viewDidLoad];    
 }
 
-- (IBAction)didTapLogin:(id)sender {
+- (IBAction)didTapLogin:(UIButton *)sender {
+    sender.userInteractionEnabled = NO;
     [self.activityIndicator startAnimating];
     
     NSString *username = self.usernameField.text;
@@ -38,6 +39,7 @@
         } else {
             [self performSegueWithIdentifier:@"Home" sender:self];
         }
+        sender.userInteractionEnabled = YES;
         [self.activityIndicator stopAnimating];
     }];
 }

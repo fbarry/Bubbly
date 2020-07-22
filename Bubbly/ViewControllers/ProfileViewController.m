@@ -26,7 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIView *dataView;
 @property (weak, nonatomic) IBOutlet UIView *savedView;
 @property (weak, nonatomic) IBOutlet UIView *buyView;
-@property (strong, nonatomic) User *user;
+@property (strong, nonatomic) id<ProfileProtocol>profile;
 
 @end
 
@@ -39,7 +39,7 @@
     self.savedView.alpha = 0;
     self.buyView.alpha = 0;
     
-    self.user = [User currentUser];
+    self.profile = [User currentUser];
     
     [Utilities roundImage:self.profilePicture];
 }
@@ -47,10 +47,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
         
-    [self.profilePicture setImageWithURL:[NSURL URLWithString:self.user.profilePicture.url]];
-    self.nameLabel.text = self.user.name;
-    self.usernameLabel.text = [NSString stringWithFormat:@"@%@", self.user.username];
-    self.bioLabel.text = self.user.bio;
+    [self.profilePicture setImageWithURL:self.profile.profilePictureURL];
+    self.nameLabel.text = self.profile.name;
+    self.usernameLabel.text = self.profile.profileUsername;
+    self.bioLabel.text = self.profile.bio;
 }
 
 - (IBAction)didSelectIndex:(UISegmentedControl *)sender {

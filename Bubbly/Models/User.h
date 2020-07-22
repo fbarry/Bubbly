@@ -10,7 +10,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface User : PFUser
+@protocol ProfileProtocol <NSObject>
+
+@property (readonly) NSURL *profilePictureURL;
+@property (readonly) NSString *name;
+@property (readonly) NSString *profileUsername;
+@property (readonly) NSString *bio;
+
+@end
+
+@interface User : PFUser <ProfileProtocol>
 
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) PFFileObject *profilePicture;

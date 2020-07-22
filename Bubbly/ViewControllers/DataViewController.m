@@ -30,13 +30,16 @@ NSDate *referenceDate;
     [self.lineChart.rightAxis setEnabled:NO];
     [self.lineChart.legend setEnabled:NO];
     
+//    self.lineChart.marker = marker;
+//    self.lineChart.drawMarkers = YES;
+    
     referenceDate = [self getDateAtMidnight:[NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay value:-20 toDate:[NSDate date] options:0]];
         
     ChartXAxis *xAxis = self.lineChart.xAxis;
     xAxis.valueFormatter = self;
     xAxis.labelPosition = XAxisLabelPositionBottom;
-    xAxis.labelCount = 20;
     xAxis.granularity = 1.0;
+    xAxis.labelCount = 22;
     xAxis.labelRotationAngle = -45;
     
     ChartYAxis *yAxis = self.lineChart.leftAxis;
@@ -77,8 +80,14 @@ NSDate *referenceDate;
 }
 
 - (void)reloadChart {
+    if (self.chartData.count == 0) {
+        return;
+    }
+    
+    IntakeDayLog *firstLog = self.chartData[0];
+    NSDate *indexDate = referenceDate = [self getDateAtMidnight:[NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay value:-2 toDate:firstLog.createdAt options:0]];
+
     LineChartDataSet *dataSet = [[LineChartDataSet alloc] init];
-    NSDate *indexDate = referenceDate;
     for (IntakeDayLog *log in self.chartData) {
         BOOL err = NO;
         double x, y;
@@ -108,8 +117,9 @@ NSDate *referenceDate;
     dataSet.circleRadius = 6.0;
     
     LineChartData *data = [[LineChartData alloc] initWithDataSet:dataSet];
+    [data setDrawValues:NO];
     self.lineChart.data = data;
-    [self.lineChart.data setDrawValues:NO];
+    self.lineChart.data.highlightEnabled = YES;
     
     [self.lineChart animateWithXAxisDuration:1 yAxisDuration:1.5 easingOption:ChartEasingOptionLinear];
 }

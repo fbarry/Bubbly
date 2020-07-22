@@ -47,6 +47,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
+
+
 - (void)keyboardWillShow:(NSNotification *)notification {
     CGRect keyboard = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     UIEdgeInsets contentInset = self.scrollView.contentInset;
@@ -65,11 +67,10 @@
     self.welcomeLabel.text = [NSString stringWithFormat:@"Welcome Back, %@!", self.user.name];
     
     [self.backgroundPicture setImageWithURL:[NSURL URLWithString:self.user.backgroundPicture.url]];
-
-    [self.segmentedControl setTitle:[NSString stringWithFormat:@"%@ oz", self.user.logAmounts[0]] forSegmentAtIndex:0];
-    [self.segmentedControl setTitle:[NSString stringWithFormat:@"%@ oz", self.user.logAmounts[1]] forSegmentAtIndex:1];
-    [self.segmentedControl setTitle:[NSString stringWithFormat:@"%@ oz", self.user.logAmounts[2]] forSegmentAtIndex:2];
-    [self.segmentedControl setTitle:[NSString stringWithFormat:@"%@ oz", self.user.logAmounts[3]] forSegmentAtIndex:3];
+    
+    for (int i = 0; i < 4; i++) {
+        [self.segmentedControl setTitle:[NSString stringWithFormat:@"%@ oz", self.user.logAmounts[i]] forSegmentAtIndex:i];
+    }
     
     [self loadAnimation];
 }
@@ -101,7 +102,7 @@
         }
     }
         
-    [self.pieChart animateWithXAxisDuration:2 easingOption:ChartEasingOptionEaseInOutElastic];
+    [self.pieChart animateWithXAxisDuration:1.2 easingOption:ChartEasingOptionEaseOutCirc];
 }
 
 
@@ -153,12 +154,19 @@
     return true;
 }
 
-- (IBAction)didTapLog:(id)sender {
+- (IBAction)didTapLog:(UIButton *)sender {
     IntakeLog *logChange = [IntakeLog new];
     if (self.segmentedControl.selectedSegmentIndex != 4) {
         logChange.logAmount = [NSNumber numberWithInteger:[[self.segmentedControl titleForSegmentAtIndex:self.segmentedControl.selectedSegmentIndex] integerValue]];
     } else {
         logChange.logAmount = [NSNumber numberWithInteger:[self.customValueField.text integerValue]];
+    }
+    
+    if ([sender.currentTitle isEqualToString:@"Delete"]) {
+        if ([logChange.logAmount compare:self.dayLog.achieved] > 0) {
+            logChange.logAmount = self.dayLog.achieved;
+        }
+        logChange.logAmount = [NSNumber numberWithInteger:[logChange.logAmount integerValue] * -1];
     }
     
     self.dayLog.achieved = [NSNumber numberWithInteger:[self.dayLog.achieved integerValue] + [logChange.logAmount integerValue]];
@@ -182,44 +190,6 @@
                     if (self.dayLog.achieved >= self.dayLog.goal) {
                         
                     }
-                }
-            }];
-        }
-    }];
-}
-
-- (IBAction)didTapDelete:(id)sender {
-    IntakeLog *logChange = [IntakeLog new];
-    if (self.segmentedControl.selectedSegmentIndex != 4) {
-        logChange.logAmount = [NSNumber numberWithInteger:[[self.segmentedControl titleForSegmentAtIndex:self.segmentedControl.selectedSegmentIndex] integerValue]];
-    } else {
-        logChange.logAmount = [NSNumber numberWithInteger:[self.customValueField.text integerValue]];
-    }
-    
-    if ([logChange.logAmount compare:self.dayLog.achieved] > 0) {
-        logChange.logAmount = self.dayLog.achieved;
-    }
-    
-    logChange.logAmount = [NSNumber numberWithInteger:[logChange.logAmount integerValue] * -1];
-    
-    self.dayLog.achieved = [NSNumber numberWithInteger:[self.dayLog.achieved integerValue] + [logChange.logAmount integerValue]];
-    
-    PFRelation *relation = [self.dayLog relationForKey:@"logChanges"];
-    [relation addObject:logChange];
-    
-    [logChange saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        if (error) {
-            [Utilities presentOkAlertControllerInViewController:self
-                                                      withTitle:@"Could not update log"
-                                                        message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
-        } else {
-            [self.dayLog saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                if (error) {
-                    [Utilities presentOkAlertControllerInViewController:self
-                                                              withTitle:@"Could not update log"
-                                                                message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
-                } else {
-                    [self loadAnimation];
                 }
             }];
         }

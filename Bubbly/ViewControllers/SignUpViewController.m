@@ -61,7 +61,7 @@
     [self.profilePicture setImage:image forState:UIControlStateNormal];
 }
 
-- (IBAction)didTapSignUp:(id)sender {
+- (IBAction)didTapSignUp:(UIButton *)sender {
     if ([self invalidInput]) {
         [Utilities presentOkAlertControllerInViewController:self
                                                   withTitle:@"Invalid Input"
@@ -71,6 +71,7 @@
                                                   withTitle:@"Invalid Input"
                                                     message:@"Passwords do not match"];
     } else {
+        sender.userInteractionEnabled = NO;
         [self.activityIndicator startAnimating];
 
         User *user = [User new];
@@ -96,6 +97,7 @@
             } else {
                 [self performSegueWithIdentifier:@"Home" sender:self];
             }
+            sender.userInteractionEnabled = YES;
             [self.activityIndicator stopAnimating];
         }];
     }
