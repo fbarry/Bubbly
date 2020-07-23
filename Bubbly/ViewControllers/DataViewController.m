@@ -12,11 +12,13 @@
 #import "IntakeDayLog.h"
 #import "Utilities.h"
 #import "ProfileContainerViewController.h"
+#import <PopupDialog-Swift.h>
+#import <Bubbly-Swift.h>
 
 @interface DataViewController () <IChartAxisValueFormatter, ChartViewDelegate>
 
 @property (strong, nonatomic) IBOutlet LineChartView *lineChart;
-@property (strong, nonatomic) NSArray *chartData;
+@property (strong, nonatomic) NSMutableArray<IntakeDayLog *> *chartData;
 
 @end
 
@@ -39,7 +41,6 @@ NSDate *referenceDate;
     xAxis.valueFormatter = self;
     xAxis.labelPosition = XAxisLabelPositionBottom;
     xAxis.granularity = 1.0;
-    xAxis.labelCount = 22;
     xAxis.labelRotationAngle = -45;
     
     ChartYAxis *yAxis = self.lineChart.leftAxis;
@@ -63,7 +64,36 @@ NSDate *referenceDate;
                                                       withTitle:@"Unable to Load Chart Data"
                                                         message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
         } else {
-            self.chartData = objects;
+            self.chartData = (NSMutableArray *)objects;
+            
+            IntakeDayLog *firstLog = self.chartData[0];
+            NSDate *indexDate = referenceDate = [self getDateAtMidnight:[NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay value:-2 toDate:firstLog.createdAt options:0]];
+
+            for (int i = 0; i < self.chartData.count; i++) {
+                int indx;
+                IntakeDayLog *log = self.chartData[i];
+                NSDate *midnightDate = [self getDateAtMidnight:log.createdAt];
+                while (![midnightDate isEqualToDate:indexDate]) {
+                    i++;
+                    indx = [self getXCoordFromDate:indexDate];
+                    [self.chartData insertObject:[IntakeDayLog new] atIndex:0];
+                    indexDate = [NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:indexDate options:0];
+                }
+                indx = [self getXCoordFromDate:indexDate];
+                indexDate = [NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:indexDate options:0];
+            }
+                        
+            BalloonMarker *marker = [[BalloonMarker alloc] initWithColor:[UIColor systemGray6Color]
+                                                                     font:[UIFont fontWithName:@"Avenir Next Condensed" size:16]
+                                                                textColor:[UIColor blackColor]
+                                                                   insets:UIEdgeInsetsMake(4, 4, 4, 4)
+                                                               intakeLogs:self.chartData];
+            marker.minimumSize = CGSizeMake(75.0, 35.0);
+            self.lineChart.marker = marker;
+            
+            self.lineChart.xAxis.axisMaximum = self.chartData.count;
+            self.lineChart.xAxis.labelCount = self.chartData.count;
+                                     
             [self reloadChart];
         }
     }];
@@ -74,34 +104,18 @@ NSDate *referenceDate;
         return;
     }
     
-    IntakeDayLog *firstLog = self.chartData[0];
-    NSDate *indexDate = referenceDate = [self getDateAtMidnight:[NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay value:-2 toDate:firstLog.createdAt options:0]];
-
     LineChartDataSet *dataSet = [[LineChartDataSet alloc] init];
-    for (IntakeDayLog *log in self.chartData) {
-        BOOL err = NO;
-        double x, y;
-        NSDate *midnightDate = [self getDateAtMidnight:log.createdAt];
-        while (![midnightDate isEqualToDate:indexDate]) {
-            x = [self getXCoordFromDate:indexDate];
-            y = 0;
-            ChartDataEntry *dataEntry = [[ChartDataEntry alloc] initWithX:x y:y];
-            if (![dataSet addEntryOrdered:dataEntry]) {
-                err = YES;
-                break;
-            }
-            indexDate = [NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:indexDate options:0];
-        }
-        x = [self getXCoordFromDate:midnightDate];
-        y = [log.achieved doubleValue];
+    for (int i = 0; i < self.chartData.count; i++) {
+        IntakeDayLog *log = self.chartData[i];
+        double x = i;
+        double y = [log.achieved doubleValue];
         ChartDataEntry *dataEntry = [[ChartDataEntry alloc] initWithX:x y:y];
-        if (err || ![dataSet addEntryOrdered:dataEntry]) {
+        if (![dataSet addEntryOrdered:dataEntry]) {
             [Utilities presentOkAlertControllerInViewController:self
                                                       withTitle:@"Error Building Data"
                                                         message:@"Re-enter page to try again"];
             break;
         }
-        indexDate = [NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:indexDate options:0];
     }
     
     dataSet.circleRadius = 6.0;
@@ -131,6 +145,22 @@ NSDate *referenceDate;
 
 - (void)chartValueSelected:(ChartViewBase *)chartView entry:(ChartDataEntry *)entry highlight:(ChartHighlight *)highlight {
     
+}
+
+- (void)didTapInfo:(UITapGestureRecognizer *)sender {
+    NSString *title = @"";
+    NSString *message = @"";
+    PopupDialog *popup = [[PopupDialog alloc] initWithTitle:title
+                                                    message:message
+                                                      image:nil
+                                            buttonAlignment:UILayoutConstraintAxisHorizontal
+                                            transitionStyle:PopupDialogTransitionStyleZoomIn
+                                             preferredWidth:200
+                                        tapGestureDismissal:YES
+                                        panGestureDismissal:YES
+                                              hideStatusBar:YES
+                                                 completion:nil];
+    [self presentViewController:popup animated:YES completion:nil];
 }
 
 /*

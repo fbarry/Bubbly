@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *log1;
 @property (weak, nonatomic) IBOutlet UITextField *log2;
 @property (weak, nonatomic) IBOutlet UITextField *log3;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -67,8 +68,8 @@
     self.nameField.placeholder = self.user.name;
     self.emailField.placeholder = self.user.email;
     self.usernameField.placeholder = self.user.username;
-    self.weightField.placeholder = [NSString stringWithFormat:@"Weight: %@ oz", self.user.weight];
-    self.exerciseField.placeholder = [NSString stringWithFormat:@"Exercise: %@ min", self.user.exercise];
+    self.weightField.placeholder = [NSString stringWithFormat:@"Weight: %@ lbs", self.user.weight];
+    self.exerciseField.placeholder = [NSString stringWithFormat:@"Exercise: %@ mins", self.user.exercise];
     self.log0.text = [NSString stringWithFormat:@"%@", self.user.logAmounts[0]];
     self.log1.text = [NSString stringWithFormat:@"%@", self.user.logAmounts[1]];
     self.log2.text = [NSString stringWithFormat:@"%@", self.user.logAmounts[2]];
@@ -102,6 +103,7 @@
 }
 
 - (IBAction)didTapSave:(id)sender {
+    [self.activityIndicator startAnimating];
     if (![self.enterPasswordField.text isEqualToString:@""]) {
         if (![self.enterPasswordField.text isEqualToString:self.confirmPasswordField.text]) {
             [Utilities presentOkAlertControllerInViewController:self
@@ -145,6 +147,7 @@
                 [self.navigationController popViewControllerAnimated:YES];
             }];
         }
+        [self.activityIndicator stopAnimating];
     }];
 }
 

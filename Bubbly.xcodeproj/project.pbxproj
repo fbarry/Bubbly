@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		66B846089D380846B8E35F69 /* Pods_Bubbly_BubblyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D931F003FEC0C6FA81BF4B /* Pods_Bubbly_BubblyUITests.framework */; };
+		8C6FECE324CA2EC500B14E8F /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6FECE224CA2EC500B14E8F /* BalloonMarker.swift */; };
 		8C9B17DA24CA03FB00D84D18 /* ProfileContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9B17D924CA03FB00D84D18 /* ProfileContainerViewController.m */; };
 		8C9EBFA324BCC1330031380E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFA224BCC1330031380E /* AppDelegate.m */; };
 		8C9EBFA624BCC1330031380E /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFA524BCC1330031380E /* SceneDelegate.m */; };
@@ -68,6 +69,8 @@
 		60D931F003FEC0C6FA81BF4B /* Pods_Bubbly_BubblyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bubbly_BubblyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7799B998E7E42E555F16D53C /* Pods-Bubbly-BubblyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bubbly-BubblyUITests.debug.xcconfig"; path = "Target Support Files/Pods-Bubbly-BubblyUITests/Pods-Bubbly-BubblyUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		7E1106D8528734F0FB06689E /* Pods_Bubbly.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bubbly.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C6FECE224CA2EC500B14E8F /* BalloonMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
+		8C6FECE524CA321100B14E8F /* Bubbly-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bubbly-Bridging-Header.h"; sourceTree = "<group>"; };
 		8C9B17D824CA03FB00D84D18 /* ProfileContainerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileContainerViewController.h; sourceTree = "<group>"; };
 		8C9B17D924CA03FB00D84D18 /* ProfileContainerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileContainerViewController.m; sourceTree = "<group>"; };
 		8C9EBF9E24BCC1330031380E /* Bubbly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bubbly.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -226,6 +229,7 @@
 				8C9EBFB324BCC1340031380E /* main.m */,
 				8C9EBFDA24BCD27E0031380E /* Utilities.h */,
 				8C9EBFDB24BCD27E0031380E /* Utilities.m */,
+				8C6FECE524CA321100B14E8F /* Bubbly-Bridging-Header.h */,
 			);
 			path = Bubbly;
 			sourceTree = "<group>";
@@ -257,6 +261,7 @@
 				8CA0DB8524BE24DC00B93FEC /* IngredientCell.m */,
 				8CBB59A424C0BB9E0062FB0F /* BuyCell.h */,
 				8CBB59A524C0BB9E0062FB0F /* BuyCell.m */,
+				8C6FECE224CA2EC500B14E8F /* BalloonMarker.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -555,6 +560,7 @@
 				8CA0DB8F24BF58A400B93FEC /* SavedViewController.m in Sources */,
 				8C9EBFDF24BCD2AC0031380E /* User.m in Sources */,
 				8C9B17DA24CA03FB00D84D18 /* ProfileContainerViewController.m in Sources */,
+				8C6FECE324CA2EC500B14E8F /* BalloonMarker.swift in Sources */,
 				8CBB59A624C0BB9E0062FB0F /* BuyCell.m in Sources */,
 				8C9EC00324BCDF3E0031380E /* RecipesViewController.m in Sources */,
 				8CA0DB9224BF58B100B93FEC /* BuyViewController.m in Sources */,
@@ -749,6 +755,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = R7MZ4U6N4Y;
 				INFOPLIST_FILE = Bubbly/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -771,6 +778,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = R7MZ4U6N4Y;
 				INFOPLIST_FILE = Bubbly/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -789,6 +797,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F1FDC2BC347BEE9CA2E2E202 /* Pods-BubblyTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R7MZ4U6N4Y;
@@ -810,6 +819,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 29950D71DE36A76870AA69F9 /* Pods-BubblyTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R7MZ4U6N4Y;
@@ -831,6 +841,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7799B998E7E42E555F16D53C /* Pods-Bubbly-BubblyUITests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R7MZ4U6N4Y;
 				INFOPLIST_FILE = BubblyUITests/Info.plist;
@@ -850,6 +861,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9CC48BDB369BFC801730ABB6 /* Pods-Bubbly-BubblyUITests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R7MZ4U6N4Y;
 				INFOPLIST_FILE = BubblyUITests/Info.plist;

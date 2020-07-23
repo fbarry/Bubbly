@@ -1262,6 +1262,10 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="pAl-JP-Uhd">
+                                                <rect key="frame" x="197" y="442" width="20" height="20"/>
+                                                <color key="color" red="0.45624184610000001" green="0.79364603759999997" blue="0.9176669717" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            </activityIndicatorView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <gestureRecognizers/>
@@ -1273,6 +1277,7 @@
                                             <constraint firstItem="cPa-pb-2xk" firstAttribute="top" secondItem="Bff-2w-PPv" secondAttribute="bottom" constant="20" id="53E-pL-4Sk"/>
                                             <constraint firstItem="igq-xb-4P8" firstAttribute="top" secondItem="TzP-6z-8Cd" secondAttribute="bottom" constant="8" id="76Y-ax-v5m"/>
                                             <constraint firstItem="koP-aP-iH0" firstAttribute="top" secondItem="cfJ-Ze-9El" secondAttribute="bottom" constant="20" id="94V-94-1UX"/>
+                                            <constraint firstItem="pAl-JP-Uhd" firstAttribute="centerX" secondItem="aXp-Rt-5JD" secondAttribute="centerX" id="Bfc-rC-kqc"/>
                                             <constraint firstAttribute="bottom" secondItem="igq-xb-4P8" secondAttribute="bottom" constant="20" id="EPc-L0-vSb"/>
                                             <constraint firstItem="Bff-2w-PPv" firstAttribute="trailing" secondItem="ge0-Zw-8DI" secondAttribute="trailing" id="EpN-AG-Kbb"/>
                                             <constraint firstItem="TzP-6z-8Cd" firstAttribute="centerX" secondItem="aXp-Rt-5JD" secondAttribute="centerX" id="Euf-dA-tSF"/>
@@ -1286,6 +1291,7 @@
                                             <constraint firstItem="LO3-Vp-bFv" firstAttribute="top" secondItem="UE7-cl-o0Q" secondAttribute="bottom" constant="20" id="OGY-zo-8XA"/>
                                             <constraint firstItem="Wjw-wa-jzR" firstAttribute="centerX" secondItem="aXp-Rt-5JD" secondAttribute="centerX" id="Oi4-48-Kpr"/>
                                             <constraint firstItem="UE7-cl-o0Q" firstAttribute="trailing" secondItem="ge0-Zw-8DI" secondAttribute="trailing" id="Oy6-3l-Tps"/>
+                                            <constraint firstItem="pAl-JP-Uhd" firstAttribute="centerY" secondItem="aXp-Rt-5JD" secondAttribute="centerY" id="Rxp-Oa-Wxi"/>
                                             <constraint firstItem="ge0-Zw-8DI" firstAttribute="centerX" secondItem="aXp-Rt-5JD" secondAttribute="centerX" id="Upa-ZE-uVo"/>
                                             <constraint firstItem="v2C-jx-F7n" firstAttribute="centerX" secondItem="aXp-Rt-5JD" secondAttribute="centerX" id="W9m-4n-xkV"/>
                                             <constraint firstItem="v2C-jx-F7n" firstAttribute="trailing" secondItem="ge0-Zw-8DI" secondAttribute="trailing" id="XKe-fY-nRL"/>
@@ -1342,6 +1348,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="pAl-JP-Uhd" id="XdA-oK-7en"/>
                         <outlet property="backgroundPicture" destination="LO3-Vp-bFv" id="71d-Ur-BqT"/>
                         <outlet property="confirmPasswordField" destination="v2C-jx-F7n" id="hZK-Uf-8Sp"/>
                         <outlet property="emailField" destination="Bff-2w-PPv" id="1Ch-bZ-TWP"/>
