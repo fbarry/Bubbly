@@ -59,6 +59,7 @@ float temp, feelsLike, humidity;
     self.textView.layer.cornerRadius = 16;
     
     self.user = [User currentUser];
+    
     [Utilities roundImage:self.backgroundPicture];
     self.backgroundPicture.layer.borderWidth = 0;
     [Utilities roundImage:self.weatherIcon];
@@ -121,6 +122,9 @@ float temp, feelsLike, humidity;
             } else {
                 self.infoButton.tintColor = [UIColor darkGrayColor];
             }
+            
+            [Utilities roundImage:self.weatherIcon];
+            self.weatherIcon.layer.borderWidth = 0;
         }
     }];
 }
@@ -183,6 +187,9 @@ float temp, feelsLike, humidity;
                                                         message:nil];
         }
     }
+    
+    [Utilities roundImage:self.backgroundPicture];
+    self.backgroundPicture.layer.borderWidth = 0;
         
     [self.pieChart animateWithXAxisDuration:1.2 easingOption:ChartEasingOptionEaseOutCirc];
 }

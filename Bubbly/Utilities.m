@@ -84,13 +84,7 @@
 }
 
 + (void)roundImage:(UIImageView *)imageView {
-    [imageView addConstraint:[NSLayoutConstraint constraintWithItem:imageView
-                                                          attribute:NSLayoutAttributeHeight
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:imageView
-                                                          attribute:NSLayoutAttributeWidth
-                                                         multiplier:1.0f
-                                                           constant:0]];
+    imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.size.height, imageView.frame.size.height);
     imageView.layer.cornerRadius = imageView.frame.size.width / 2;
     imageView.layer.masksToBounds = NO;
     imageView.layer.borderWidth = 1.0f;
