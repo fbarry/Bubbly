@@ -17,14 +17,15 @@ NS_ASSUME_NONNULL_BEGIN
 + (void) presentOkAlertControllerInViewController:(UIViewController *)viewController
                                         withTitle:(NSString *)title
                                           message:(NSString * _Nullable)message;
++ (void)presentConfirmationInViewController:(UIViewController *)viewController
+                                  withTitle:(nonnull NSString *)title
+                                 yesHandler:(void(^)(void))yesHandler;
 
 + (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size;
 
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image;
 
 + (void)roundImage:(UIImageView *)imageView;
-
-+ (void)presentConfirmationInViewController:(UIViewController *)viewController withTitle:(nonnull NSString *)title yesHandler:(void(^)(UIAlertAction * _Nonnull action))yesHandler;
 
 @end
 

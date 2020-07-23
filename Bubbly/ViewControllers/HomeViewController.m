@@ -15,6 +15,7 @@
 #import "IntakeDayLog.h"
 #import <CoreLocation/CoreLocation.h>
 #import "OWMWeatherAPI.h"
+#import <PopupDialog-Swift.h>
 
 @interface HomeViewController () <CLLocationManagerDelegate>
 
@@ -33,6 +34,7 @@
 @property (strong, nonatomic) User *user;
 @property (strong, nonatomic) IntakeDayLog *dayLog;
 @property (strong, nonatomic) CLLocationManager *locationManager;
+@property (strong, nonatomic) NSDictionary *weather;
 
 @end
 
@@ -49,6 +51,7 @@
     
     self.user = [User currentUser];
     [Utilities roundImage:self.backgroundPicture];
+    self.backgroundPicture.layer.borderWidth = 0;
     [Utilities roundImage:self.weatherIcon];
     self.weatherIcon.layer.borderWidth = 0;
     
@@ -86,11 +89,12 @@
                                                       withTitle:@"Cannot load weather info"
                                                         message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
         } else {
+            self.weather = result;
             NSArray *weather = result[@"weather"];
             NSDictionary *dictionary = weather[0];
             [self.weatherIcon setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://openweathermap.org/img/wn/%@@2x.png", dictionary[@"icon"]]]];
             [self.weatherIcon setHidden:NO];
-            UITapGestureRecognizer *weatherTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapWeather:)];
+            UITapGestureRecognizer *weatherTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapWeather)];
             [self.weatherIcon addGestureRecognizer:weatherTapGestureRecognizer];
             [self.infoButton setHidden:NO];
             [self.infoButton setEnabled:YES];

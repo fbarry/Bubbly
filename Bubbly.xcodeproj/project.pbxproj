@@ -24,7 +24,7 @@
 		8C9EBFFA24BCDF270031380E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFF924BCDF270031380E /* LoginViewController.m */; };
 		8C9EBFFD24BCDF2E0031380E /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFFC24BCDF2E0031380E /* SignUpViewController.m */; };
 		8C9EC00024BCDF370031380E /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFFF24BCDF370031380E /* HomeViewController.m */; };
-		8C9EC00324BCDF3E0031380E /* BrowseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EC00224BCDF3E0031380E /* BrowseViewController.m */; };
+		8C9EC00324BCDF3E0031380E /* RecipesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EC00224BCDF3E0031380E /* RecipesViewController.m */; };
 		8C9EC00624BCDF440031380E /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EC00524BCDF440031380E /* DetailsViewController.m */; };
 		8C9EC00924BCDF4E0031380E /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EC00824BCDF4E0031380E /* ProfileViewController.m */; };
 		8C9EC00C24BCDF5B0031380E /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EC00B24BCDF5B0031380E /* SettingsViewController.m */; };
@@ -98,8 +98,8 @@
 		8C9EBFFC24BCDF2E0031380E /* SignUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		8C9EBFFE24BCDF370031380E /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		8C9EBFFF24BCDF370031380E /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
-		8C9EC00124BCDF3E0031380E /* BrowseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrowseViewController.h; sourceTree = "<group>"; };
-		8C9EC00224BCDF3E0031380E /* BrowseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrowseViewController.m; sourceTree = "<group>"; };
+		8C9EC00124BCDF3E0031380E /* RecipesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecipesViewController.h; sourceTree = "<group>"; };
+		8C9EC00224BCDF3E0031380E /* RecipesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecipesViewController.m; sourceTree = "<group>"; };
 		8C9EC00424BCDF440031380E /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
 		8C9EC00524BCDF440031380E /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
 		8C9EC00724BCDF4E0031380E /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
@@ -283,8 +283,8 @@
 				8C9EBFFC24BCDF2E0031380E /* SignUpViewController.m */,
 				8C9EBFFE24BCDF370031380E /* HomeViewController.h */,
 				8C9EBFFF24BCDF370031380E /* HomeViewController.m */,
-				8C9EC00124BCDF3E0031380E /* BrowseViewController.h */,
-				8C9EC00224BCDF3E0031380E /* BrowseViewController.m */,
+				8C9EC00124BCDF3E0031380E /* RecipesViewController.h */,
+				8C9EC00224BCDF3E0031380E /* RecipesViewController.m */,
 				8C9EC00424BCDF440031380E /* DetailsViewController.h */,
 				8C9EC00524BCDF440031380E /* DetailsViewController.m */,
 				8C9EC00724BCDF4E0031380E /* ProfileViewController.h */,
@@ -545,7 +545,7 @@
 				8CA0DB8F24BF58A400B93FEC /* SavedViewController.m in Sources */,
 				8C9EBFDF24BCD2AC0031380E /* User.m in Sources */,
 				8CBB59A624C0BB9E0062FB0F /* BuyCell.m in Sources */,
-				8C9EC00324BCDF3E0031380E /* BrowseViewController.m in Sources */,
+				8C9EC00324BCDF3E0031380E /* RecipesViewController.m in Sources */,
 				8CA0DB9224BF58B100B93FEC /* BuyViewController.m in Sources */,
 				8CF7B9A824C7858D00B0F8C3 /* IntakeDayLog.m in Sources */,
 				8C9EBFFA24BCDF270031380E /* LoginViewController.m in Sources */,

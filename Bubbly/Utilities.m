@@ -7,18 +7,56 @@
 //
 
 #import "Utilities.h"
+#import <PopupDialog-Swift.h>
 
 @implementation Utilities
 
 + (void) presentOkAlertControllerInViewController:(UIViewController *)viewController
                                       withTitle:(NSString *)title
                                         message:(NSString * _Nullable)message {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *button = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [alert dismissViewControllerAnimated:YES completion:nil];
+    PopupDialog *popup = [[PopupDialog alloc] initWithTitle:title
+                                                    message:message
+                                                      image:nil
+                                            buttonAlignment:UILayoutConstraintAxisHorizontal
+                                            transitionStyle:PopupDialogTransitionStyleFadeIn
+                                             preferredWidth:200
+                                        tapGestureDismissal:YES
+                                        panGestureDismissal:YES
+                                              hideStatusBar:YES
+                                                 completion:nil];
+    PopupDialogButton *ok = [[PopupDialogButton alloc] initWithTitle:@"Ok" height:50 dismissOnTap:YES action:^{
+        [popup dismiss:nil];
     }];
-    [alert addAction:button];
-    [viewController presentViewController:alert animated:YES completion:nil];
+    [popup addButton:ok];
+    [viewController presentViewController:popup animated:YES completion:nil];
+//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+//    UIAlertAction *button = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//        [alert dismissViewControllerAnimated:YES completion:nil];
+//    }];
+//    [alert addAction:button];
+//    [viewController presentViewController:alert animated:YES completion:nil];
+}
+
++ (void)presentConfirmationInViewController:(UIViewController *)viewController
+                                  withTitle:(nonnull NSString *)title
+                                 yesHandler:(void(^)(void))yesHandler {
+    PopupDialog *popup = [[PopupDialog alloc] initWithTitle:title
+                                                    message:nil
+                                                      image:nil
+                                            buttonAlignment:UILayoutConstraintAxisHorizontal
+                                            transitionStyle:PopupDialogTransitionStyleFadeIn
+                                             preferredWidth:200
+                                        tapGestureDismissal:YES
+                                        panGestureDismissal:YES
+                                              hideStatusBar:YES
+                                                 completion:nil];
+    PopupDialogButton *yes = [[PopupDialogButton alloc] initWithTitle:@"Yes" height:50 dismissOnTap:YES action:yesHandler];
+    PopupDialogButton *no = [[PopupDialogButton alloc] initWithTitle:@"No" height:50 dismissOnTap:YES action:^{
+        [popup dismiss:nil];
+    }];
+    [popup addButton:yes];
+    [popup addButton:no];
+    [viewController presentViewController:popup animated:YES completion:nil];
 }
 
 + (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
@@ -50,21 +88,17 @@
 }
 
 + (void)roundImage:(UIImageView *)imageView {
+    [imageView addConstraint:[NSLayoutConstraint constraintWithItem:imageView
+                                                          attribute:NSLayoutAttributeHeight
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:imageView
+                                                          attribute:NSLayoutAttributeWidth
+                                                         multiplier:1.0f
+                                                           constant:0]];
     imageView.layer.cornerRadius = imageView.frame.size.width / 2;
     imageView.layer.masksToBounds = NO;
     imageView.layer.borderWidth = 1.0f;
     imageView.clipsToBounds = YES;
-}
-
-+ (void)presentConfirmationInViewController:(UIViewController *)viewController withTitle:(nonnull NSString *)title yesHandler:(void(^)(UIAlertAction * _Nonnull action))yesHandler {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:@"Are you sure you want to continue?" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *yes = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:yesHandler];
-    UIAlertAction *no = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [alert dismissViewControllerAnimated:YES completion:nil];
-    }];
-    [alert addAction:yes];
-    [alert addAction:no];
-    [viewController presentViewController:alert animated:YES completion:nil];
 }
 
 @end

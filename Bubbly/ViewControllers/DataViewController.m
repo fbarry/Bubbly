@@ -12,7 +12,7 @@
 #import "IntakeDayLog.h"
 #import "Utilities.h"
 
-@interface DataViewController () <IChartAxisValueFormatter>
+@interface DataViewController () <IChartAxisValueFormatter, ChartViewDelegate>
 
 @property (strong, nonatomic) IBOutlet LineChartView *lineChart;
 @property (strong, nonatomic) NSArray *chartData;
@@ -26,24 +26,14 @@ NSDate *referenceDate;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.lineChart.delegate = self;
     [self.lineChart.chartDescription setEnabled:NO];
     [self.lineChart.rightAxis setEnabled:NO];
     [self.lineChart.legend setEnabled:NO];
-    
-//    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage systemImageNamed:@"info.circle"]];
-//    imageView.tintColor = [UIColor darkGrayColor];
-    
-//    ChartMarkerView *marker = [ChartMarkerView new];
-//    marker.clipsToBounds = YES;
-//    marker.frame = CGRectMake(-100, -100, 25, 25);
-//    marker.layer.cornerRadius = marker.frame.size.height / 2;
-//    [marker addSubview:imageView];
-    
-//    self.lineChart.marker = marker;
-//    self.lineChart.drawMarkers = YES;
+    [self.lineChart setDrawMarkers:YES];
     
     referenceDate = [self getDateAtMidnight:[NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay value:-20 toDate:[NSDate date] options:0]];
-        
+    
     ChartXAxis *xAxis = self.lineChart.xAxis;
     xAxis.valueFormatter = self;
     xAxis.labelPosition = XAxisLabelPositionBottom;
@@ -53,12 +43,6 @@ NSDate *referenceDate;
     
     ChartYAxis *yAxis = self.lineChart.leftAxis;
     yAxis.axisMinimum = 0;
-}
-
-- (NSString *)stringForValue:(double)value axis:(ChartAxisBase *)axis {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MMM dd"];
-    return [dateFormatter stringFromDate:[NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay value:value toDate:referenceDate options:0]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -82,10 +66,6 @@ NSDate *referenceDate;
             [self reloadChart];
         }
     }];
-}
-
-- (NSDate *)getDateAtMidnight:(NSDate *)date {
-    return [NSCalendar.currentCalendar startOfDayForDate:date];
 }
 
 - (void)reloadChart {
@@ -133,9 +113,23 @@ NSDate *referenceDate;
     [self.lineChart animateWithXAxisDuration:1 yAxisDuration:1.5 easingOption:ChartEasingOptionLinear];
 }
 
+- (NSDate *)getDateAtMidnight:(NSDate *)date {
+    return [NSCalendar.currentCalendar startOfDayForDate:date];
+}
+
 - (double)getXCoordFromDate:(NSDate *)date {
     NSDateComponents *diff = [NSCalendar.currentCalendar components:NSCalendarUnitDay fromDate:referenceDate toDate:date options:0];
     return diff.day;
+}
+
+- (NSString *)stringForValue:(double)value axis:(ChartAxisBase *)axis {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MMM dd"];
+    return [dateFormatter stringFromDate:[NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay value:value toDate:referenceDate options:0]];
+}
+
+- (void)chartValueSelected:(ChartViewBase *)chartView entry:(ChartDataEntry *)entry highlight:(ChartHighlight *)highlight {
+    
 }
 
 /*

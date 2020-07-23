@@ -6,7 +6,7 @@
 //  Copyright © 2020 fbarry. All rights reserved.
 //
 
-#import "BrowseViewController.h"
+#import "RecipesViewController.h"
 #import "DetailsViewController.h"
 #import "RecipeCell.h"
 #import "Recipe.h"
@@ -14,7 +14,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "ComposeViewController.h"
 
-@interface BrowseViewController () <UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
+@interface RecipesViewController () <UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -24,7 +24,7 @@
 
 @end
 
-@implementation BrowseViewController
+@implementation RecipesViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
