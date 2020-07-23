@@ -11,6 +11,7 @@
 #import "IntakeLog.h"
 #import "IntakeDayLog.h"
 #import "Utilities.h"
+#import "ProfileContainerViewController.h"
 
 @interface DataViewController () <IChartAxisValueFormatter, ChartViewDelegate>
 
@@ -53,7 +54,7 @@ NSDate *referenceDate;
 
 - (void)updateChartData {
     PFQuery *query = [PFQuery queryWithClassName:@"IntakeDayLog"];
-    [query whereKey:@"user" equalTo:[User currentUser]];
+    [query whereKey:@"user" equalTo:self.user];
     [query whereKey:@"createdAt" greaterThan:referenceDate];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {

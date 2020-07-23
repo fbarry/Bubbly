@@ -28,7 +28,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *log1;
 @property (weak, nonatomic) IBOutlet UITextField *log2;
 @property (weak, nonatomic) IBOutlet UITextField *log3;
-@property (strong, nonatomic) User *user;
 
 @end
 
@@ -36,9 +35,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.user = [User currentUser];
-    
+        
     [Utilities roundImage:(UIImageView *)self.profilePicture];
     [Utilities roundImage:(UIImageView *)self.backgroundPicture];
         

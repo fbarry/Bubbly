@@ -1,8 +1,8 @@
 //
-//  SettingsViewController.h
+//  ProfileContainerViewController.h
 //  Bubbly
 //
-//  Created by Fiona Barry on 7/13/20.
+//  Created by Fiona Barry on 7/23/20.
 //  Copyright © 2020 fbarry. All rights reserved.
 //
 
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SettingsViewController : UIViewController
+@interface ProfileContainerViewController : UIViewController
 
 @property (strong, nonatomic) User *user;
 

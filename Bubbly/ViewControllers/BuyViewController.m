@@ -37,7 +37,7 @@
 }
 
 - (void)loadRecipes {
-    PFQuery *query = [[User currentUser].savedRecipes query];
+    PFQuery *query = [self.user.savedRecipes query];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error) {

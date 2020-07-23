@@ -11,6 +11,8 @@
 #import "RecipeCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "Utilities.h"
+#import "ProfileContainerViewController.h"
+#import "DetailsViewController.h"
 
 @interface SavedViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -47,7 +49,16 @@
 }
 
 - (void)loadRecipes {
-    PFQuery *query = [[User currentUser].savedRecipes query];
+    PFQuery *query = [PFQuery new];
+    
+    if ([self.restorationIdentifier isEqualToString:@"Saved"]) {
+        query = [self.user.savedRecipes query];
+    } else {
+        query = [Recipe query];
+        [query whereKey:@"creator" equalTo:self.user];
+    }
+    
+    [query includeKey:@"creator"];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error) {
@@ -62,7 +73,11 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [self.parentViewController performSegueWithIdentifier:@"Details" sender:self.recipes[indexPath.row]];
+    if ([self.restorationIdentifier isEqualToString:@"Custom"]) {
+    [self.parentViewController.parentViewController performSegueWithIdentifier:@"Details" sender:self.recipes[indexPath.row]];
+    } else {
+        [self performSegueWithIdentifier:@"Details" sender:self.recipes[indexPath.row]];
+    }
 }
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
@@ -82,15 +97,11 @@
     return self.recipes.count;
 }
 
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"Details"]) {
+        DetailsViewController *detailsViewController = [segue destinationViewController];
+        detailsViewController.recipe = sender;
+    }
 }
-*/
 
 @end

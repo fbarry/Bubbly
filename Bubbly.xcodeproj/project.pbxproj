@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		66B846089D380846B8E35F69 /* Pods_Bubbly_BubblyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D931F003FEC0C6FA81BF4B /* Pods_Bubbly_BubblyUITests.framework */; };
+		8C9B17DA24CA03FB00D84D18 /* ProfileContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9B17D924CA03FB00D84D18 /* ProfileContainerViewController.m */; };
 		8C9EBFA324BCC1330031380E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFA224BCC1330031380E /* AppDelegate.m */; };
 		8C9EBFA624BCC1330031380E /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFA524BCC1330031380E /* SceneDelegate.m */; };
 		8C9EBFAC24BCC1330031380E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C9EBFAA24BCC1330031380E /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 		8CA0DB9224BF58B100B93FEC /* BuyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA0DB9124BF58B100B93FEC /* BuyViewController.m */; };
 		8CA0DB9924BF918C00B93FEC /* CameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA0DB9824BF918C00B93FEC /* CameraView.m */; };
 		8CBB59A624C0BB9E0062FB0F /* BuyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB59A524C0BB9E0062FB0F /* BuyCell.m */; };
+		8CD3628724CA0AA9007B02E8 /* SidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD3628624CA0AA9007B02E8 /* SidebarViewController.m */; };
 		8CF7B9A824C7858D00B0F8C3 /* IntakeDayLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF7B9A724C7858D00B0F8C3 /* IntakeDayLog.m */; };
 		D5F86BBE48D742F4E7D9FEF4 /* Pods_BubblyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335D8992D3546B1CB7049452 /* Pods_BubblyTests.framework */; };
 		D624D6578B2788BD780DD002 /* Pods_Bubbly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E1106D8528734F0FB06689E /* Pods_Bubbly.framework */; };
@@ -66,6 +68,8 @@
 		60D931F003FEC0C6FA81BF4B /* Pods_Bubbly_BubblyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bubbly_BubblyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7799B998E7E42E555F16D53C /* Pods-Bubbly-BubblyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bubbly-BubblyUITests.debug.xcconfig"; path = "Target Support Files/Pods-Bubbly-BubblyUITests/Pods-Bubbly-BubblyUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		7E1106D8528734F0FB06689E /* Pods_Bubbly.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bubbly.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C9B17D824CA03FB00D84D18 /* ProfileContainerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileContainerViewController.h; sourceTree = "<group>"; };
+		8C9B17D924CA03FB00D84D18 /* ProfileContainerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileContainerViewController.m; sourceTree = "<group>"; };
 		8C9EBF9E24BCC1330031380E /* Bubbly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bubbly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C9EBFA124BCC1330031380E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8C9EBFA224BCC1330031380E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -123,6 +127,8 @@
 		8CA0DB9824BF918C00B93FEC /* CameraView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraView.m; sourceTree = "<group>"; };
 		8CBB59A424C0BB9E0062FB0F /* BuyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuyCell.h; sourceTree = "<group>"; };
 		8CBB59A524C0BB9E0062FB0F /* BuyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuyCell.m; sourceTree = "<group>"; };
+		8CD3628524CA0AA9007B02E8 /* SidebarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SidebarViewController.h; sourceTree = "<group>"; };
+		8CD3628624CA0AA9007B02E8 /* SidebarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SidebarViewController.m; sourceTree = "<group>"; };
 		8CF7B9A624C7858D00B0F8C3 /* IntakeDayLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntakeDayLog.h; sourceTree = "<group>"; };
 		8CF7B9A724C7858D00B0F8C3 /* IntakeDayLog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntakeDayLog.m; sourceTree = "<group>"; };
 		9CC48BDB369BFC801730ABB6 /* Pods-Bubbly-BubblyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bubbly-BubblyUITests.release.xcconfig"; path = "Target Support Files/Pods-Bubbly-BubblyUITests/Pods-Bubbly-BubblyUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -299,6 +305,10 @@
 				8CA0DB8E24BF58A400B93FEC /* SavedViewController.m */,
 				8CA0DB9024BF58B100B93FEC /* BuyViewController.h */,
 				8CA0DB9124BF58B100B93FEC /* BuyViewController.m */,
+				8C9B17D824CA03FB00D84D18 /* ProfileContainerViewController.h */,
+				8C9B17D924CA03FB00D84D18 /* ProfileContainerViewController.m */,
+				8CD3628524CA0AA9007B02E8 /* SidebarViewController.h */,
+				8CD3628624CA0AA9007B02E8 /* SidebarViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -544,6 +554,7 @@
 			files = (
 				8CA0DB8F24BF58A400B93FEC /* SavedViewController.m in Sources */,
 				8C9EBFDF24BCD2AC0031380E /* User.m in Sources */,
+				8C9B17DA24CA03FB00D84D18 /* ProfileContainerViewController.m in Sources */,
 				8CBB59A624C0BB9E0062FB0F /* BuyCell.m in Sources */,
 				8C9EC00324BCDF3E0031380E /* RecipesViewController.m in Sources */,
 				8CA0DB9224BF58B100B93FEC /* BuyViewController.m in Sources */,
@@ -554,6 +565,7 @@
 				8CA0DB8324BE164B00B93FEC /* RecipeCell.m in Sources */,
 				8C9EBFF724BCDF1F0031380E /* WelcomeViewController.m in Sources */,
 				8C9EBFE224BCD2B40031380E /* Recipe.m in Sources */,
+				8CD3628724CA0AA9007B02E8 /* SidebarViewController.m in Sources */,
 				8C9EC00024BCDF370031380E /* HomeViewController.m in Sources */,
 				8CA0DB9924BF918C00B93FEC /* CameraView.m in Sources */,
 				8C9EC00924BCDF4E0031380E /* ProfileViewController.m in Sources */,

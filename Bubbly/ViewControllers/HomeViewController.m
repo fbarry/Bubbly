@@ -31,6 +31,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *weatherIcon;
 @property (weak, nonatomic) IBOutlet UIView *textView;
 @property (weak, nonatomic) IBOutlet UIButton *infoButton;
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *closeKeyboard;
 @property (strong, nonatomic) User *user;
 @property (strong, nonatomic) IntakeDayLog *dayLog;
 @property (strong, nonatomic) CLLocationManager *locationManager;
@@ -40,10 +41,18 @@
 
 @implementation HomeViewController
 
+float temp, feelsLike, humidity;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-      
+    
+    [self.closeKeyboard setEnabled:NO];
+    
     [self.weatherIcon setHidden:YES];
+    [self.weatherIcon setUserInteractionEnabled:NO];
+    UITapGestureRecognizer *weatherTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapWeather:)];
+    [self.weatherIcon addGestureRecognizer:weatherTapGestureRecognizer];
+    
     [self.infoButton setHidden:YES];
     [self.infoButton setEnabled:NO];
     
@@ -81,7 +90,7 @@
 
 - (void)updateWeather {    
     OWMWeatherAPI *weatherAPI = [[OWMWeatherAPI alloc] initWithAPIKey:@"9d02fda4b8887c82b20395baeaa1154e"];
-    [weatherAPI setTemperatureFormat:kOWMTempFahrenheit];
+    [weatherAPI setTemperatureFormat:kOWMTempKelvin];
     
     [weatherAPI currentWeatherByCoordinate:self.locationManager.location.coordinate withCallback:^(NSError *error, NSDictionary *result) {
         if (error) {
@@ -94,19 +103,30 @@
             NSDictionary *dictionary = weather[0];
             [self.weatherIcon setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://openweathermap.org/img/wn/%@@2x.png", dictionary[@"icon"]]]];
             [self.weatherIcon setHidden:NO];
-            UITapGestureRecognizer *weatherTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapWeather)];
-            [self.weatherIcon addGestureRecognizer:weatherTapGestureRecognizer];
+            [self.weatherIcon setUserInteractionEnabled:YES];
             [self.infoButton setHidden:NO];
             [self.infoButton setEnabled:YES];
+            
+            NSDictionary *main = result[@"main"];
+            
+            temp = [self kelvinToFarenheit:[main[@"temp"] floatValue]];
+            feelsLike = [self kelvinToFarenheit:[main[@"feels_like"] floatValue]];
+            humidity = [main[@"humidity"] floatValue];
+            
+            if (feelsLike >= 90) {
+                [Utilities presentOkAlertControllerInViewController:self
+                                                          withTitle:@"The weather outside is frightful..."
+                                                            message:[NSString stringWithFormat:@"A whopping %.0f°\nRemember to drink extra water!", feelsLike]];
+                self.infoButton.tintColor = [UIColor systemRedColor];
+            } else {
+                self.infoButton.tintColor = [UIColor darkGrayColor];
+            }
         }
     }];
 }
 
-- (void)didTapWeather {
-    
-}
-
 - (void)keyboardWillShow:(NSNotification *)notification {
+    [self.closeKeyboard setEnabled:YES];
     CGRect keyboard = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     UIEdgeInsets contentInset = self.scrollView.contentInset;
     contentInset.bottom = keyboard.size.height;
@@ -114,6 +134,7 @@
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
+    [self.closeKeyboard setEnabled:NO];
     UIEdgeInsets contentInset = UIEdgeInsetsZero;
     self.scrollView.contentInset = contentInset;
 }
@@ -213,6 +234,20 @@
     if (![NSCalendar.currentCalendar isDate:log.createdAt inSameDayAsDate:[NSDate date]]) return false;
     
     return true;
+}
+
+- (IBAction)didTapWeather:(id)sender {
+    NSString *message = [NSString stringWithFormat:@"Temparature: %.1f°\nFeels Like: %.1f°\nHumidity: %.0f", temp, feelsLike, humidity];
+    if (feelsLike >= 90) {
+        message = [message stringByAppendingString:@"\nRemember to drink extra water!"];
+    }
+    [Utilities presentOkAlertControllerInViewController:self
+                                              withTitle:@"Weather"
+                                                message:message];
+}
+
+- (float)kelvinToFarenheit:(float)kelvin {
+    return (kelvin - 273.15) * 9.0 / 5.0 + 32;
 }
 
 - (IBAction)didTapLog:(UIButton *)sender {

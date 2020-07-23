@@ -15,6 +15,9 @@
 #import "SavedViewController.h"
 #import "DetailsViewController.h"
 #import "Recipe.h"
+#import "ProfileContainerViewController.h"
+#import "DataViewController.h"
+#import "SavedViewController.h"
 
 @interface ProfileViewController ()
 
@@ -24,8 +27,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *bioLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet UIView *dataView;
-@property (weak, nonatomic) IBOutlet UIView *savedView;
-@property (weak, nonatomic) IBOutlet UIView *buyView;
+@property (weak, nonatomic) IBOutlet UIView *customView;
 @property (strong, nonatomic) id<ProfileProtocol>profile;
 
 @end
@@ -36,10 +38,7 @@
     [super viewDidLoad];
     
     self.dataView.alpha = 1;
-    self.savedView.alpha = 0;
-    self.buyView.alpha = 0;
-    
-    self.profile = [User currentUser];
+    self.customView.alpha = 0;
     
     [Utilities roundImage:self.profilePicture];
 }
@@ -47,6 +46,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
         
+    self.profile = self.user;
+    
     [self.profilePicture setImageWithURL:self.profile.profilePictureURL];
     self.nameLabel.text = self.profile.name;
     self.usernameLabel.text = self.profile.profileUsername;
@@ -57,46 +58,26 @@
     switch (sender.selectedSegmentIndex) {
         case 0:
             self.dataView.alpha = 1;
-            self.savedView.alpha = 0;
-            self.buyView.alpha = 0;
+            self.customView.alpha = 0;
             break;
         case 1:
             self.dataView.alpha = 0;
-            self.savedView.alpha = 1;
-            self.buyView.alpha = 0;
-            break;
-        case 2:
-            self.dataView.alpha = 0;
-            self.savedView.alpha = 0;
-            self.buyView.alpha = 1;
+            self.customView.alpha = 1;
             break;
         default:
             break;
     }
 }
 
-- (IBAction)didTapSettings:(id)sender {
-    [self performSegueWithIdentifier:@"Settings" sender:self];
-}
-
-- (IBAction)didTapLogout:(id)sender {
-    [Utilities presentConfirmationInViewController:self withTitle:@"Are you sure you want to logout?" yesHandler:^{
-        SceneDelegate *sceneDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
-
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        WelcomeViewController *welcomeViewController = [storyboard instantiateViewControllerWithIdentifier:@"WelcomeViewController"];
-        sceneDelegate.window.rootViewController = welcomeViewController;
-
-        [User logOut];
-    }];
-}
-
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"Details"]) {
-        DetailsViewController *detailsViewController = [segue destinationViewController];
-        detailsViewController.recipe = sender;
+    if ([segue.identifier isEqualToString:@"Data Embed"]) {
+        DataViewController *childViewController = [segue destinationViewController];
+        childViewController.user = self.user;
+    } else if ([segue.identifier isEqualToString:@"Custom Embed"]) {
+        SavedViewController *childViewController = [segue destinationViewController];
+        childViewController.user = self.user;
     }
 }
 

@@ -24,9 +24,7 @@
                                         panGestureDismissal:YES
                                               hideStatusBar:YES
                                                  completion:nil];
-    PopupDialogButton *ok = [[PopupDialogButton alloc] initWithTitle:@"Ok" height:50 dismissOnTap:YES action:^{
-        [popup dismiss:nil];
-    }];
+    PopupDialogButton *ok = [[PopupDialogButton alloc] initWithTitle:@"Ok" height:50 dismissOnTap:YES action:nil];
     [popup addButton:ok];
     [viewController presentViewController:popup animated:YES completion:nil];
 //    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
@@ -51,9 +49,7 @@
                                               hideStatusBar:YES
                                                  completion:nil];
     PopupDialogButton *yes = [[PopupDialogButton alloc] initWithTitle:@"Yes" height:50 dismissOnTap:YES action:yesHandler];
-    PopupDialogButton *no = [[PopupDialogButton alloc] initWithTitle:@"No" height:50 dismissOnTap:YES action:^{
-        [popup dismiss:nil];
-    }];
+    PopupDialogButton *no = [[PopupDialogButton alloc] initWithTitle:@"No" height:50 dismissOnTap:YES action:nil];
     [popup addButton:yes];
     [popup addButton:no];
     [viewController presentViewController:popup animated:YES completion:nil];
