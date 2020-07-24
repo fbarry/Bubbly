@@ -13,6 +13,7 @@
 #import "Recipe.h"
 #import "User.h"
 #import <MBProgressHUD/MBProgressHUD.h>
+#import <UIImageView+AFNetworking.h>
 
 @interface ComposeViewController () <UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, CameraViewDelegate, IngredientCellDelegate>
 
@@ -28,6 +29,8 @@
 
 @implementation ComposeViewController
 
+BOOL newRecipe = NO;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -36,7 +39,24 @@
     self.descriptionField.delegate = self;
     
     self.ingredients = [[NSMutableArray alloc] init];
-  
+    
+    if (!self.recipe) {
+        self.recipe = [Recipe new];
+        newRecipe = YES;
+    } else {
+        UIImageView *imageView = [[UIImageView alloc] init];
+        [imageView setImageWithURL:[NSURL URLWithString:self.recipe.picture.url]];
+        [self.recipePicture setImage:imageView.image forState:UIControlStateNormal];
+        self.nameField.text = self.recipe.name;
+        self.ingredients = (NSMutableArray *)self.recipe.ingredients;
+        if (self.recipe.url.length > 0) {
+            self.URLField.text = self.recipe.url;
+        }
+        if (self.recipe.descriptionText.length > 0) {
+            self.descriptionField.text = self.recipe.descriptionText;
+        }
+    }
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
@@ -108,28 +128,24 @@
                                                     message:@"One or more required fields are empty"];
     } else {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                
+        self.recipe.creator = [User currentUser];
+        self.recipe.name = self.nameField.text;
+        self.recipe.ingredients = self.ingredients;
+        self.recipe.descriptionText = [self.descriptionField.text isEqualToString:@"Description (Optional)"] ? @"" : self.descriptionField.text;
+        self.recipe.picture = [Utilities getPFFileFromImage:self.recipePicture.imageView.image];
+        self.recipe.url = self.URLField.text;
         
-        Recipe *recipe = [Recipe new];
-        
-        recipe.creator = [User currentUser];
-        recipe.name = self.nameField.text;
-        recipe.ingredients = self.ingredients;
-        
-        if (![self.descriptionField.text isEqualToString:@"Description (Optional)"]) {
-            recipe.descriptionText = self.descriptionField.text;
-        }
-        
-        recipe.picture = [Utilities getPFFileFromImage:self.recipePicture.imageView.image];
-        recipe.url = self.URLField.text;
-        
-        [recipe saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        [self.recipe saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (error) {
                 [Utilities presentOkAlertControllerInViewController:self
                                                           withTitle:@"Error posting recipe"
                                                             message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
             } else {
                 [self.navigationController popViewControllerAnimated:YES];
-                [self.delegate didPost:recipe];
+                if (newRecipe) {
+                    [self.delegate didPost:self.recipe];
+                }
             }
             [MBProgressHUD hideHUDForView:self.view animated:YES];
         }];

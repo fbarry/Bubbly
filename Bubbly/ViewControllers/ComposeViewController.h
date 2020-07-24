@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ComposeViewController : UIViewController
 
 @property (strong, nonatomic) id <ComposeViewControllerDelegate> delegate;
+@property (strong, nonatomic) Recipe *recipe;
 
 @end
 

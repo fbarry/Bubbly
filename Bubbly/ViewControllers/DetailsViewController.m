@@ -33,6 +33,8 @@
     [super viewDidLoad];
     
     self.nameLabel.text = self.recipe.name;
+    self.nameLabel.layer.cornerRadius = 16;
+    self.nameLabel.clipsToBounds = YES;
     [self.picture setImageWithURL:[NSURL URLWithString:self.recipe.picture.url]];
     
     [Utilities roundImage:self.profilePicture];
@@ -47,8 +49,8 @@
     [formatter setDateFormat:@"MMM dd, YYYY"];
     self.postedDate.text = [NSString stringWithFormat:@"Posted on: %@", [formatter stringFromDate:self.recipe.createdAt]];
     
-    self.websiteLabel.text = [NSString stringWithFormat:@"Website: %@", self.recipe.url];
-    self.descriptionLabel.text = [NSString stringWithFormat:@"Description: %@", self.recipe.descriptionText];
+    self.websiteLabel.text = [NSString stringWithFormat:@"Website: %@", self.recipe.url && self.recipe.url.length > 0 ? self.recipe.url : @"Not Available"];
+    self.descriptionLabel.text = [NSString stringWithFormat:@"Description: %@", self.recipe.descriptionText && self.recipe.descriptionText.length > 0 ? self.recipe.descriptionText : @"Not Available"];
     
     NSString *list = @"Ingredients: ";
     list = [list stringByAppendingString:self.recipe.ingredients[0]];
