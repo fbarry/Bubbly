@@ -10,8 +10,9 @@
 #import "UIImageView+AFNetworking.h"
 #import "Utilities.h"
 #import "ProfileContainerViewController.h"
+#import "ComposeViewController.h"
 
-@interface DetailsViewController ()
+@interface DetailsViewController () <ComposeViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *picture;
@@ -21,7 +22,8 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePicture;
 @property (weak, nonatomic) IBOutlet UIButton *creatorName;
-@property (weak, nonatomic) IBOutlet UILabel *postedDate;
+@property (weak, nonatomic) IBOutlet UILabel *updatedDate;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
 @property (strong, nonatomic) User *user;
 @property (nonatomic) BOOL saved;
 
@@ -32,10 +34,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.nameLabel.text = self.recipe.name;
+    self.user = [User currentUser];
+    
+    if (![self.recipe.creator.objectId isEqual:self.user.objectId]) {
+        self.navigationItem.rightBarButtonItems = @[self.saveButton];
+    }
+    
     self.nameLabel.layer.cornerRadius = 16;
     self.nameLabel.clipsToBounds = YES;
-    [self.picture setImageWithURL:[NSURL URLWithString:self.recipe.picture.url]];
     
     [Utilities roundImage:self.profilePicture];
     
@@ -44,25 +50,7 @@
     [self.profilePicture addGestureRecognizer:profileTapGesture];
     
     [self.creatorName setTitle:self.recipe.creator.name forState:UIControlStateNormal];
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"MMM dd, YYYY"];
-    self.postedDate.text = [NSString stringWithFormat:@"Posted on: %@", [formatter stringFromDate:self.recipe.createdAt]];
-    
-    self.websiteLabel.text = [NSString stringWithFormat:@"Website: %@", self.recipe.url && self.recipe.url.length > 0 ? self.recipe.url : @"Not Available"];
-    self.descriptionLabel.text = [NSString stringWithFormat:@"Description: %@", self.recipe.descriptionText && self.recipe.descriptionText.length > 0 ? self.recipe.descriptionText : @"Not Available"];
-    
-    NSString *list = @"Ingredients: ";
-    list = [list stringByAppendingString:self.recipe.ingredients[0]];
-    for (int i = 1; i < self.recipe.ingredients.count; i++) {
-        list = [list stringByAppendingString:@", "];
-        list = [list stringByAppendingString:self.recipe.ingredients[i]];
-    }
-    
-    self.ingredientsLabel.text = list;
-    
-    self.user = [User currentUser];
-    
+            
     PFQuery *query = [self.user.savedRecipes query];
     [query whereKey:@"objectId" equalTo:self.recipe.objectId];
     
@@ -81,6 +69,28 @@
             }
         }
     }];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    
+    self.nameLabel.text = self.recipe.name;
+    [self.picture setImageWithURL:[NSURL URLWithString:self.recipe.picture.url]];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"dd MMM, YYYY 'at' h:mm a zzz"];
+    self.updatedDate.text = [NSString stringWithFormat:@"Last Updated: %@", [formatter stringFromDate:self.recipe.updatedAt]];
+    
+    self.websiteLabel.text = [NSString stringWithFormat:@"Website: %@", self.recipe.url && self.recipe.url.length > 0 ? self.recipe.url : @"Not Available"];
+    self.descriptionLabel.text = [NSString stringWithFormat:@"Description: %@", self.recipe.descriptionText && self.recipe.descriptionText.length > 0 ? self.recipe.descriptionText : @"Not Available"];
+    
+    NSString *list = @"Ingredients: ";
+    list = [list stringByAppendingString:self.recipe.ingredients[0]];
+    for (int i = 1; i < self.recipe.ingredients.count; i++) {
+        list = [list stringByAppendingString:[NSString stringWithFormat:@", %@", self.recipe.ingredients[i]]];
+    }
+    
+    self.ingredientsLabel.text = list;
 }
 
 - (IBAction)didTapSave:(id)sender {
@@ -130,6 +140,14 @@
     }];
 }
 
+- (IBAction)didTapEdit:(id)sender {
+    [self performSegueWithIdentifier:@"Edit" sender:self];
+}
+
+- (void)didDelete {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (IBAction)didTapCreator:(id)sender {
     [self performSegueWithIdentifier:@"Profile" sender:self];
 }
@@ -138,6 +156,10 @@
     if ([segue.identifier isEqualToString:@"Profile"]) {
         ProfileContainerViewController *profileContainerViewController = [segue destinationViewController];
         profileContainerViewController.user = self.recipe.creator;
+    } else if ([segue.identifier isEqualToString:@"Edit"]) {
+        ComposeViewController *composeViewController = [segue destinationViewController];
+        composeViewController.recipe = self.recipe;
+        composeViewController.delegate = self;
     }
 }
 

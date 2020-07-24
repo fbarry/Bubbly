@@ -70,15 +70,18 @@
         } else {
             self.recipes = (NSMutableArray *)objects;
             self.filteredRecipes = self.recipes;
+            [self searchBar:self.searchBar textDidChange:self.searchBar.text];
             [self.collectionView reloadData];
         }
         [self.collectionView.refreshControl endRefreshing];
     }];
 }
 
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     [self.closeKeyboard setEnabled:YES];
-    
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     NSArray *words = [searchText componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     words = [words filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF != ''"]];
         

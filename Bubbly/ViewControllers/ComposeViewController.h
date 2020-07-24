@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol ComposeViewControllerDelegate <NSObject>
 
-- (void)didPost:(Recipe *)recipe;
+- (void)didDelete;
 
 @end
 

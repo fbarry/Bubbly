@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *URLField;
 @property (weak, nonatomic) IBOutlet UITextView *descriptionField;
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 @property (strong, nonatomic) NSMutableArray *ingredients;
 
 @end
@@ -38,10 +39,13 @@ BOOL newRecipe = NO;
     self.tableView.dataSource = self;
     self.descriptionField.delegate = self;
     
+    self.deleteButton.layer.cornerRadius = 16;
+    
     self.ingredients = [[NSMutableArray alloc] init];
     
     if (!self.recipe) {
         self.recipe = [Recipe new];
+        [self.deleteButton removeFromSuperview];
         newRecipe = YES;
     } else {
         UIImageView *imageView = [[UIImageView alloc] init];
@@ -143,13 +147,29 @@ BOOL newRecipe = NO;
                                                             message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
             } else {
                 [self.navigationController popViewControllerAnimated:YES];
-                if (newRecipe) {
-                    [self.delegate didPost:self.recipe];
-                }
             }
             [MBProgressHUD hideHUDForView:self.view animated:YES];
         }];
     }
+}
+
+- (IBAction)didTapDelete:(id)sender {
+    [Utilities presentConfirmationInViewController:self
+                                         withTitle:@"Are you sure you want to delete this recipe?"
+                                        yesHandler:^{
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [self.recipe deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if (error) {
+                [Utilities presentOkAlertControllerInViewController:self
+                                                          withTitle:@"Could not delete recipe"
+                                                            message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
+            } else {
+                [self.delegate didDelete];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        }];
+    }];
 }
 
 - (BOOL)invalidInput {    
