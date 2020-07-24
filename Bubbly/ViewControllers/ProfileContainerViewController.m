@@ -28,10 +28,12 @@
     self.profile.alpha = 1;
     self.sidebar.alpha = 0;
     
-    self.sidebar.layer.borderWidth = 1.0f;
-    self.sidebar.layer.borderColor = [[UIColor systemGray6Color] CGColor];
     self.sidebar.layer.cornerRadius = 16;
-    self.sidebar.layer.masksToBounds = YES;
+    self.sidebar.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+    self.sidebar.layer.shadowOffset = CGSizeMake(-8.0f, 0);
+    self.sidebar.layer.shadowRadius = 8.0f;
+    self.sidebar.layer.shadowOpacity = 0.5f;
+    self.sidebar.layer.masksToBounds = NO;
     
     if (!self.user) {
         self.user = [User currentUser];

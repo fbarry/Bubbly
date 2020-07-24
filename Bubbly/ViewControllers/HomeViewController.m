@@ -36,6 +36,8 @@
 @property (strong, nonatomic) IntakeDayLog *dayLog;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSDictionary *weather;
+@property (weak, nonatomic) IBOutlet UIButton *log;
+@property (weak, nonatomic) IBOutlet UIButton *delete;
 
 @end
 
@@ -45,6 +47,14 @@ float temp, feelsLike, humidity;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.log.layer.cornerRadius = self.delete.layer.cornerRadius = 16;
+    
+    self.pieChart.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+    self.pieChart.layer.shadowOffset = CGSizeMake(0, 8.0f);
+    self.pieChart.layer.shadowRadius = 8.0f;
+    self.pieChart.layer.shadowOpacity = 0.5f;
+    self.pieChart.layer.masksToBounds = NO;
     
     [self.closeKeyboard setEnabled:NO];
     
@@ -244,7 +254,7 @@ float temp, feelsLike, humidity;
 }
 
 - (IBAction)didTapWeather:(id)sender {
-    NSString *message = [NSString stringWithFormat:@"Temparature: %.1f°\nFeels Like: %.1f°\nHumidity: %.0f", temp, feelsLike, humidity];
+    NSString *message = [NSString stringWithFormat:@"Temparature: %.1f°\nFeels Like: %.1f°\nHumidity: %.0f%%", temp, feelsLike, humidity];
     if (feelsLike >= 90) {
         message = [message stringByAppendingString:@"\nRemember to drink extra water!"];
     }

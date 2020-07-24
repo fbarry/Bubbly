@@ -10,13 +10,18 @@
 
 @interface WelcomeViewController ()
 
+@property (weak, nonatomic) IBOutlet UIButton *login;
+@property (weak, nonatomic) IBOutlet UIButton *signup;
+
 @end
 
 @implementation WelcomeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.login.layer.cornerRadius = 16;
+    self.signup.layer.cornerRadius = 16;
 }
 
 - (IBAction)didTapLogin:(id)sender {

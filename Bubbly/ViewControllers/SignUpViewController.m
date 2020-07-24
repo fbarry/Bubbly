@@ -23,6 +23,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *weightField;
 @property (weak, nonatomic) IBOutlet UITextField *exerciseField;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UIButton *signup;
+@property (weak, nonatomic) IBOutlet UIButton *back;
 
 @end
 
@@ -30,6 +32,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.signup.layer.cornerRadius = 16;
+    self.back.layer.cornerRadius = 12;
     
     [Utilities roundImage:(UIImageView *)self.profilePicture];
     

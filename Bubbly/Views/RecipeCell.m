@@ -10,4 +10,8 @@
 
 @implementation RecipeCell
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+}
+
 @end

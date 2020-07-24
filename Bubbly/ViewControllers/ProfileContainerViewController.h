@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) User *user;
 
+- (IBAction)didTapSidebar:(id)sender;
+
 @end
 
 NS_ASSUME_NONNULL_END

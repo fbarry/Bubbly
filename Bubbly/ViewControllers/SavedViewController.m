@@ -30,14 +30,15 @@
     self.collectionView.dataSource = self;
     
     self.collectionView.frame = self.view.frame;
+    self.collectionView.contentInset = UIEdgeInsetsMake(4, 4, 4, 4);
     
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *) self.collectionView.collectionViewLayout;
     
-    layout.minimumInteritemSpacing = 5;
-    layout.minimumLineSpacing = 5;
+    layout.minimumInteritemSpacing = 8;
+    layout.minimumLineSpacing = 8;
     
     CGFloat postersPerRow = 2;
-    CGFloat itemWidth = (self.collectionView.frame.size.width - layout.minimumInteritemSpacing * (postersPerRow - 1)) / postersPerRow;
+    CGFloat itemWidth = (self.collectionView.frame.size.width - self.collectionView.contentInset.left - self.collectionView.contentInset.right - layout.minimumInteritemSpacing * (postersPerRow - 1)) / postersPerRow;
     CGFloat itemHeight = itemWidth;
     layout.itemSize = CGSizeMake(itemWidth, itemHeight);
 }
@@ -82,6 +83,16 @@
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     RecipeCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"RecipeCell" forIndexPath:indexPath];
+    cell.contentView.layer.cornerRadius = cell.contentView.frame.size.height / 16;
+    cell.contentView.layer.masksToBounds = YES;
+    
+    cell.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+    cell.layer.shadowOffset = CGSizeMake(0, 4.0f);
+    cell.layer.shadowRadius = 4.0f;
+    cell.layer.shadowOpacity = 0.5f;
+    cell.layer.masksToBounds = NO;
+    cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
+    
     cell.recipe = self.recipes[indexPath.item];
     cell.nameLabel.text = cell.recipe.name;
     [cell.recipePicture setImage:[UIImage systemImageNamed:@"book"]];

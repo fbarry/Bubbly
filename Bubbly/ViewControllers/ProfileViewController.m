@@ -36,11 +36,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+        
     self.dataView.alpha = 1;
     self.customView.alpha = 0;
     
-    [Utilities roundImage:self.profilePicture];
+    [Utilities roundImage:self.profilePicture];    
 }
 
 - (void)viewWillAppear:(BOOL)animated {

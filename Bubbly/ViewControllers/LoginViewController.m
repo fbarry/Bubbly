@@ -15,13 +15,18 @@
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet UIButton *login;
+@property (weak, nonatomic) IBOutlet UIButton *back;
 
 @end
 
 @implementation LoginViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];    
+    [super viewDidLoad];
+    
+    self.login.layer.cornerRadius = 16;
+    self.back.layer.cornerRadius = 12;
 }
 
 - (IBAction)didTapLogin:(UIButton *)sender {
