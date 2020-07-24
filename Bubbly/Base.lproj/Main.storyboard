@@ -128,7 +128,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uvd-MV-ISW" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="720.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="724.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome Back, User!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="25" translatesAutoresizingMaskIntoConstraints="NO" id="FDl-Ih-rKm">
                                                 <rect key="frame" x="16" y="8" width="382" height="68.5"/>
@@ -225,7 +225,7 @@
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aqT-iU-wNQ">
-                                                <rect key="frame" x="147" y="644.5" width="120" height="60"/>
+                                                <rect key="frame" x="147" y="648.5" width="120" height="60"/>
                                                 <color key="backgroundColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="0.25" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="0tN-8k-XVk"/>
@@ -284,7 +284,7 @@
                                             <constraint firstItem="FDl-Ih-rKm" firstAttribute="top" secondItem="uvd-MV-ISW" secondAttribute="top" constant="8" id="tlt-RM-Uzj"/>
                                             <constraint firstItem="Ub8-Pm-rwB" firstAttribute="leading" secondItem="uvd-MV-ISW" secondAttribute="leading" constant="16" id="vxM-25-Icu"/>
                                             <constraint firstItem="FDl-Ih-rKm" firstAttribute="centerX" secondItem="uvd-MV-ISW" secondAttribute="centerX" id="y4O-AI-FEB"/>
-                                            <constraint firstItem="aqT-iU-wNQ" firstAttribute="top" secondItem="MBE-oQ-FdC" secondAttribute="bottom" constant="4" id="ysj-k7-ZET"/>
+                                            <constraint firstItem="aqT-iU-wNQ" firstAttribute="top" secondItem="MBE-oQ-FdC" secondAttribute="bottom" constant="8" id="ysj-k7-ZET"/>
                                             <constraint firstItem="P5N-ro-oI3" firstAttribute="leading" secondItem="uvd-MV-ISW" secondAttribute="leading" constant="16" id="zVG-Pz-lVL"/>
                                             <constraint firstItem="MBE-oQ-FdC" firstAttribute="top" secondItem="Ub8-Pm-rwB" secondAttribute="bottom" constant="16" id="zfF-JA-ySC"/>
                                         </constraints>
@@ -564,7 +564,7 @@
                                 <rect key="frame" x="0.0" y="144" width="414" height="669"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Q1Q-dF-E0l">
-                                    <size key="itemSize" width="143" height="200"/>
+                                    <size key="itemSize" width="200" height="200"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -610,7 +610,6 @@
                                         <size key="customSize" width="200" height="200"/>
                                         <connections>
                                             <outlet property="activityIndicator" destination="BxY-bT-JaG" id="8ff-Oa-jky"/>
-                                            <outlet property="contentView" destination="Aw7-VK-GQ6" id="qlP-bN-ec4"/>
                                             <outlet property="nameLabel" destination="crh-Sv-Iw4" id="6Ap-V5-Z2X"/>
                                             <outlet property="recipePicture" destination="yY7-nQ-em6" id="UVw-P8-7HG"/>
                                             <segue destination="alL-iF-aw0" kind="show" identifier="Details" id="4iT-3N-M4g"/>

@@ -27,7 +27,7 @@
     
     self.profile.alpha = 1;
     self.sidebar.alpha = 0;
-    
+            
     self.sidebar.layer.cornerRadius = 16;
     self.sidebar.layer.shadowColor = [UIColor lightGrayColor].CGColor;
     self.sidebar.layer.shadowOffset = CGSizeMake(-8.0f, 0);
@@ -44,13 +44,17 @@
 
 - (IBAction)didTapSidebar:(id)sender {
     if (self.sidebar.alpha == 0) {
-        self.profile.frame = CGRectMake(self.profile.frame.origin.x-self.sidebar.frame.size.width, self.profile.frame.origin.y, self.profile.frame.size.width, self.profile.frame.size.height);
-        self.profile.alpha = 0.5;
-        self.sidebar.alpha = 1;
+        [UIView animateWithDuration:0.5f animations:^{
+            self.profile.frame = CGRectMake(self.profile.frame.origin.x-self.sidebar.frame.size.width, self.profile.frame.origin.y, self.profile.frame.size.width, self.profile.frame.size.height);
+            self.profile.alpha = 0.5;
+            self.sidebar.alpha = 1;
+        }];
     } else {
-        self.profile.frame = CGRectMake(self.profile.frame.origin.x+self.sidebar.frame.size.width, self.profile.frame.origin.y, self.profile.frame.size.width, self.profile.frame.size.height);
-        self.profile.alpha = 1;
-        self.sidebar.alpha = 0;
+        [UIView animateWithDuration:0.5f animations:^{
+            self.profile.frame = CGRectMake(self.profile.frame.origin.x+self.sidebar.frame.size.width, self.profile.frame.origin.y, self.profile.frame.size.width, self.profile.frame.size.height);
+            self.profile.alpha = 1;
+            self.sidebar.alpha = 0;
+        }];
     }
 }
 
