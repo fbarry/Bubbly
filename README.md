@@ -29,7 +29,7 @@ Bubbly Water Tracker is a water intake tracking assistant that not only allows t
 **Required Must-have Stories**
 
 Users can:
-* Login to a profile
+* View a welcome, sign up, and login screen to access an account
 * Enter and edit information about their health to receive a water recommendation
 * View their profile using tab bar navigation
 * Browse recipes
@@ -38,16 +38,19 @@ Users can:
 * Set customized profile and background pictures using their phone camera
 * Access a home screen where they can view a graphic alongside information about recommended and current water intake
 * Search for recipes based on ingredients
-* A compiled recipe list for saved recipes
+* View a compiled recipe list for saved recipes
 * Access to water consumption over time in a graphic
 * Create and publish recipes
-* Share when a water intake goal is met
 
 **Optional Nice-to-have Stories**
 
-* A schedule for water intake
+Users can 
+* Share when a water intake goal is met
+* Share recipes
+* Control their app appearance through UIAppearance themes
+* View a schedule for water intake
 * Opt-in/out notifications/reminders for water intake at time intervals
-* A tab bar option to view weather for their location and recommend more water intake when necessary
+* View weather for their location and recommend more water intake when necessary
 * View profile through side bar navigation to accommodate for all of the tab bar navigation
 * HealthKit Integration
 
