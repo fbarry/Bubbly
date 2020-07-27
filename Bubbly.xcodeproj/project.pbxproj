@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		66B846089D380846B8E35F69 /* Pods_Bubbly_BubblyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D931F003FEC0C6FA81BF4B /* Pods_Bubbly_BubblyUITests.framework */; };
+		8C21338024CF36CB00C796BA /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C21337E24CF36CB00C796BA /* TPKeyboardAvoidingScrollView.m */; };
+		8C66984C24CF3A3F00BB2579 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C66984A24CF3A3E00BB2579 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
 		8C6FECE324CA2EC500B14E8F /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6FECE224CA2EC500B14E8F /* BalloonMarker.swift */; };
 		8C9B17DA24CA03FB00D84D18 /* ProfileContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9B17D924CA03FB00D84D18 /* ProfileContainerViewController.m */; };
 		8C9EBFA324BCC1330031380E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFA224BCC1330031380E /* AppDelegate.m */; };
@@ -69,6 +71,10 @@
 		60D931F003FEC0C6FA81BF4B /* Pods_Bubbly_BubblyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bubbly_BubblyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7799B998E7E42E555F16D53C /* Pods-Bubbly-BubblyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bubbly-BubblyUITests.debug.xcconfig"; path = "Target Support Files/Pods-Bubbly-BubblyUITests/Pods-Bubbly-BubblyUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		7E1106D8528734F0FB06689E /* Pods_Bubbly.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bubbly.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C21337E24CF36CB00C796BA /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPKeyboardAvoidingScrollView.m; path = "../../../../../Downloads/TPKeyboardAvoiding-master/TPKeyboardAvoiding/TPKeyboardAvoidingScrollView.m"; sourceTree = "<group>"; };
+		8C21337F24CF36CB00C796BA /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPKeyboardAvoidingScrollView.h; path = "../../../../../Downloads/TPKeyboardAvoiding-master/TPKeyboardAvoiding/TPKeyboardAvoidingScrollView.h"; sourceTree = "<group>"; };
+		8C66984A24CF3A3E00BB2579 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+TPKeyboardAvoidingAdditions.m"; path = "../../../../../Downloads/TPKeyboardAvoiding-master/TPKeyboardAvoiding/UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
+		8C66984B24CF3A3E00BB2579 /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+TPKeyboardAvoidingAdditions.h"; path = "../../../../../Downloads/TPKeyboardAvoiding-master/TPKeyboardAvoiding/UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
 		8C6FECE224CA2EC500B14E8F /* BalloonMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
 		8C6FECE524CA321100B14E8F /* Bubbly-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bubbly-Bridging-Header.h"; sourceTree = "<group>"; };
 		8C9B17D824CA03FB00D84D18 /* ProfileContainerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileContainerViewController.h; sourceTree = "<group>"; };
@@ -190,6 +196,21 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		8C21337D24CF36B300C796BA /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				8C66984B24CF3A3E00BB2579 /* UIScrollView+TPKeyboardAvoidingAdditions.h */,
+				8C66984A24CF3A3E00BB2579 /* UIScrollView+TPKeyboardAvoidingAdditions.m */,
+				8C21337F24CF36CB00C796BA /* TPKeyboardAvoidingScrollView.h */,
+				8C21337E24CF36CB00C796BA /* TPKeyboardAvoidingScrollView.m */,
+				8CA0DB9724BF918C00B93FEC /* CameraView.h */,
+				8CA0DB9824BF918C00B93FEC /* CameraView.m */,
+				8C9EBFDA24BCD27E0031380E /* Utilities.h */,
+				8C9EBFDB24BCD27E0031380E /* Utilities.m */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		8C9EBF9524BCC1330031380E = {
 			isa = PBXGroup;
 			children = (
@@ -215,6 +236,7 @@
 		8C9EBFA024BCC1330031380E /* Bubbly */ = {
 			isa = PBXGroup;
 			children = (
+				8C21337D24CF36B300C796BA /* Utilities */,
 				8C9EBFD824BCD1FD0031380E /* ViewControllers */,
 				8C9EBFD724BCD1F80031380E /* Models */,
 				8C9EBFD624BCD1E00031380E /* Views */,
@@ -227,8 +249,6 @@
 				8C9EBFAF24BCC1340031380E /* LaunchScreen.storyboard */,
 				8C9EBFB224BCC1340031380E /* Info.plist */,
 				8C9EBFB324BCC1340031380E /* main.m */,
-				8C9EBFDA24BCD27E0031380E /* Utilities.h */,
-				8C9EBFDB24BCD27E0031380E /* Utilities.m */,
 				8C6FECE524CA321100B14E8F /* Bubbly-Bridging-Header.h */,
 			);
 			path = Bubbly;
@@ -275,8 +295,6 @@
 				8C9EBFE124BCD2B40031380E /* Recipe.m */,
 				8C9EBFE324BCD2BC0031380E /* IntakeLog.h */,
 				8C9EBFE424BCD2BC0031380E /* IntakeLog.m */,
-				8CA0DB9724BF918C00B93FEC /* CameraView.h */,
-				8CA0DB9824BF918C00B93FEC /* CameraView.m */,
 				8CF7B9A624C7858D00B0F8C3 /* IntakeDayLog.h */,
 				8CF7B9A724C7858D00B0F8C3 /* IntakeDayLog.m */,
 			);
@@ -562,6 +580,7 @@
 				8C9B17DA24CA03FB00D84D18 /* ProfileContainerViewController.m in Sources */,
 				8C6FECE324CA2EC500B14E8F /* BalloonMarker.swift in Sources */,
 				8CBB59A624C0BB9E0062FB0F /* BuyCell.m in Sources */,
+				8C66984C24CF3A3F00BB2579 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				8C9EC00324BCDF3E0031380E /* RecipesViewController.m in Sources */,
 				8CA0DB9224BF58B100B93FEC /* BuyViewController.m in Sources */,
 				8CF7B9A824C7858D00B0F8C3 /* IntakeDayLog.m in Sources */,
@@ -578,6 +597,7 @@
 				8C9EC00C24BCDF5B0031380E /* SettingsViewController.m in Sources */,
 				8C9EC00624BCDF440031380E /* DetailsViewController.m in Sources */,
 				8C9EBFA324BCC1330031380E /* AppDelegate.m in Sources */,
+				8C21338024CF36CB00C796BA /* TPKeyboardAvoidingScrollView.m in Sources */,
 				8C9EBFB424BCC1340031380E /* main.m in Sources */,
 				8CA0DB8624BE24DC00B93FEC /* IngredientCell.m in Sources */,
 				8C9EBFDC24BCD27E0031380E /* Utilities.m in Sources */,

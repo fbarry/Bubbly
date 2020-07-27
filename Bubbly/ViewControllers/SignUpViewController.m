@@ -7,13 +7,14 @@
 //
 
 #import "SignUpViewController.h"
+#import "TPKeyboardAvoidingScrollView.h"
 #import "User.h"
 #import "CameraView.h"
 #import "Utilities.h"
 
 @interface SignUpViewController () <CameraViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
@@ -35,23 +36,8 @@
     
     self.signup.layer.cornerRadius = 16;
     self.back.layer.cornerRadius = 12;
-    
+        
     [Utilities roundImage:(UIImageView *)self.profilePicture];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-}
-
-- (void)keyboardWillShow:(NSNotification *)notification {
-    CGRect keyboard = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    UIEdgeInsets contentInset = self.scrollView.contentInset;
-    contentInset.bottom = keyboard.size.height;
-    self.scrollView.contentInset = contentInset;
-}
-
-- (void)keyboardWillHide:(NSNotification *)notification {
-    UIEdgeInsets contentInset = UIEdgeInsetsZero;
-    self.scrollView.contentInset = contentInset;
 }
 
 - (IBAction)didTapProfile:(id)sender {

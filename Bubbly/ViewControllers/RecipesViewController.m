@@ -120,11 +120,9 @@
     cell.nameLabel.text = cell.recipe.name;
     [cell.recipePicture setImage:[UIImage systemImageNamed:@"book"]];
     
-    [cell.activityIndicator startAnimating];
     if (cell.recipe.picture) {
         [cell.recipePicture setImageWithURL:[NSURL URLWithString:cell.recipe.picture.url]];
     }
-    [cell.activityIndicator stopAnimating];
     
     return cell;
 }

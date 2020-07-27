@@ -11,10 +11,12 @@
 #import "CameraView.h"
 #import "User.h"
 #import "UIImageView+AFNetworking.h"
+#import "TPKeyboardAvoidingScrollView.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface SettingsViewController () <CameraViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIButton *profilePicture;
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
@@ -24,11 +26,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *weightField;
 @property (weak, nonatomic) IBOutlet UITextField *exerciseField;
 @property (strong, nonatomic) IBOutlet UIButton *backgroundPicture;
-@property (weak, nonatomic) IBOutlet UITextField *log0;
-@property (weak, nonatomic) IBOutlet UITextField *log1;
-@property (weak, nonatomic) IBOutlet UITextField *log2;
-@property (weak, nonatomic) IBOutlet UITextField *log3;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (strong, nonatomic) IBOutletCollection(UITextField) NSArray<UITextField *> *logFields;
 
 @end
 
@@ -45,21 +43,6 @@
     [self.profilePicture setImage:imageView.image forState:UIControlStateNormal];
     [imageView setImageWithURL:[NSURL URLWithString:self.user.backgroundPicture.url]];
     [self.backgroundPicture setImage:imageView.image forState:UIControlStateNormal];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-}
-
-- (void)keyboardWillShow:(NSNotification *)notification {
-    CGRect keyboard = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    UIEdgeInsets contentInset = self.scrollView.contentInset;
-    contentInset.bottom = keyboard.size.height;
-    self.scrollView.contentInset = contentInset;
-}
-
-- (void)keyboardWillHide:(NSNotification *)notification {
-    UIEdgeInsets contentInset = UIEdgeInsetsZero;
-    self.scrollView.contentInset = contentInset;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -70,40 +53,29 @@
     self.usernameField.placeholder = self.user.username;
     self.weightField.placeholder = [NSString stringWithFormat:@"Weight: %@ lbs", self.user.weight];
     self.exerciseField.placeholder = [NSString stringWithFormat:@"Exercise: %@ mins", self.user.exercise];
-    self.log0.text = [NSString stringWithFormat:@"%@", self.user.logAmounts[0]];
-    self.log1.text = [NSString stringWithFormat:@"%@", self.user.logAmounts[1]];
-    self.log2.text = [NSString stringWithFormat:@"%@", self.user.logAmounts[2]];
-    self.log3.text = [NSString stringWithFormat:@"%@", self.user.logAmounts[3]];
+    for (int i = 0; i < 4; i++) {
+        self.logFields[i].text = [NSString stringWithFormat:@"%@", self.user.logAmounts[i]];
+    }
 }
 
-- (IBAction)didTapProfile:(id)sender {
+- (IBAction)didTapImage:(UIButton *)sender {
     CameraView *camera = [[CameraView alloc] init];
     camera.delegate = self;
     camera.viewController = self;
-    camera.name = @"profile";
-    [camera alertConfirmation];
-}
-
-- (IBAction)didTapBackground:(id)sender {
-    CameraView *camera = [[CameraView alloc] init];
-    camera.delegate = self;
-    camera.viewController = self;
-    camera.name = @"background";
+    camera.name = sender.accessibilityIdentifier;
     [camera alertConfirmation];
 }
 
 - (void)setImage:(nonnull UIImage *)image withName:(nonnull NSString *)name {
     if ([name isEqualToString:@"profile"]) {
-        NSLog(@"%@", image);
         [self.profilePicture setImage:image forState:UIControlStateNormal];
-        NSLog(@"%@", self.profilePicture.imageView.image);
     } else if ([name isEqualToString:@"background"]) {
         [self.backgroundPicture setImage:image forState:UIControlStateNormal];
     }
 }
 
 - (IBAction)didTapSave:(id)sender {
-    [self.activityIndicator startAnimating];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     if (![self.enterPasswordField.text isEqualToString:@""]) {
         if (![self.enterPasswordField.text isEqualToString:self.confirmPasswordField.text]) {
             [Utilities presentOkAlertControllerInViewController:self
@@ -131,7 +103,7 @@
     }
     self.user.profilePicture = [Utilities getPFFileFromImage:self.profilePicture.imageView.image];
     self.user.backgroundPicture = [Utilities getPFFileFromImage:self.backgroundPicture.imageView.image];
-    self.user.logAmounts = @[self.log0.text, self.log1.text, self.log2.text, self.log3.text];
+    self.user.logAmounts = @[self.logFields[0].text, self.logFields[1].text, self.logFields[2].text, self.logFields[3].text];
     
     [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (error) {
@@ -147,7 +119,7 @@
                 [self.navigationController popViewControllerAnimated:YES];
             }];
         }
-        [self.activityIndicator stopAnimating];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 }
 

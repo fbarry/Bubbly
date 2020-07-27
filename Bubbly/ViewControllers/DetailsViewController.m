@@ -84,13 +84,8 @@
     self.websiteLabel.text = [NSString stringWithFormat:@"Website: %@", self.recipe.url && self.recipe.url.length > 0 ? self.recipe.url : @"Not Available"];
     self.descriptionLabel.text = [NSString stringWithFormat:@"Description: %@", self.recipe.descriptionText && self.recipe.descriptionText.length > 0 ? self.recipe.descriptionText : @"Not Available"];
     
-    NSString *list = @"Ingredients: ";
-    list = [list stringByAppendingString:self.recipe.ingredients[0]];
-    for (int i = 1; i < self.recipe.ingredients.count; i++) {
-        list = [list stringByAppendingString:[NSString stringWithFormat:@", %@", self.recipe.ingredients[i]]];
-    }
-    
-    self.ingredientsLabel.text = list;
+    NSString *joinedString = [self.recipe.ingredients componentsJoinedByString:@", "];
+    self.ingredientsLabel.text = [@"Ingredient(s): " stringByAppendingString:joinedString];
 }
 
 - (IBAction)didTapSave:(id)sender {

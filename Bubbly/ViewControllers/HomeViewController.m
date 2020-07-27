@@ -16,10 +16,11 @@
 #import <CoreLocation/CoreLocation.h>
 #import "OWMWeatherAPI.h"
 #import <PopupDialog-Swift.h>
+#import "TPKeyboardAvoidingScrollView.h"
 
 @interface HomeViewController () <CLLocationManagerDelegate>
 
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UILabel *welcomeLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundPicture;
 @property (weak, nonatomic) IBOutlet UILabel *goalLabel;
@@ -82,9 +83,6 @@ float temp, feelsLike, humidity;
     
     [self getDayLog];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     [self.locationManager requestWhenInUseAuthorization];
@@ -137,20 +135,6 @@ float temp, feelsLike, humidity;
             self.weatherIcon.layer.borderWidth = 0;
         }
     }];
-}
-
-- (void)keyboardWillShow:(NSNotification *)notification {
-    [self.closeKeyboard setEnabled:YES];
-    CGRect keyboard = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    UIEdgeInsets contentInset = self.scrollView.contentInset;
-    contentInset.bottom = keyboard.size.height;
-    self.scrollView.contentInset = contentInset;
-}
-
-- (void)keyboardWillHide:(NSNotification *)notification {
-    [self.closeKeyboard setEnabled:NO];
-    UIEdgeInsets contentInset = UIEdgeInsetsZero;
-    self.scrollView.contentInset = contentInset;
 }
 
 - (void)viewDidAppear:(BOOL)animated {

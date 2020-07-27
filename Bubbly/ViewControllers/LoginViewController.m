@@ -29,6 +29,16 @@
     self.back.layer.cornerRadius = 12;
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if ([textField isEqual:self.usernameField]) {
+        [self.passwordField becomeFirstResponder];
+    } else {
+        [self.passwordField resignFirstResponder];
+        [self didTapLogin:self.login];
+    }
+    return YES;
+}
+
 - (IBAction)didTapLogin:(UIButton *)sender {
     sender.userInteractionEnabled = NO;
     [self.activityIndicator startAnimating];
