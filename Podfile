@@ -7,7 +7,7 @@ target 'Bubbly' do
 
   # Pods for Bubbly
   pod 'Parse'
-  pod 'AFNetworking', '~> 1.3.1'
+  pod 'AFNetworking'
   pod 'Charts'
   pod 'MBProgressHUD'
   pod 'OpenWeatherMapAPI', '~> 0.0.5'
