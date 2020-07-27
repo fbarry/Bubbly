@@ -1,5 +1,5 @@
 //
-//  LoginViewController.h
+//  WelcomeViewController.h
 //  Bubbly
 //
 //  Created by Fiona Barry on 7/13/20.

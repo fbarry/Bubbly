@@ -9,7 +9,7 @@
 #import "SidebarViewController.h"
 #import "Utilities.h"
 #import "SceneDelegate.h"
-#import "WelcomeViewController.h"
+#import "LoginViewController.h"
 #import "User.h"
 
 @interface SidebarViewController ()
@@ -45,7 +45,7 @@
         SceneDelegate *sceneDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
 
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        WelcomeViewController *welcomeViewController = [storyboard instantiateViewControllerWithIdentifier:@"WelcomeViewController"];
+        LoginViewController *welcomeViewController = [storyboard instantiateViewControllerWithIdentifier:@"WelcomeViewController"];
         sceneDelegate.window.rootViewController = welcomeViewController;
 
         [User logOut];

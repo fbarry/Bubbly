@@ -117,12 +117,7 @@
     cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
     
     cell.recipe = self.filteredRecipes[indexPath.item];
-    cell.nameLabel.text = cell.recipe.name;
-    [cell.recipePicture setImage:[UIImage systemImageNamed:@"book"]];
-    
-    if (cell.recipe.picture) {
-        [cell.recipePicture setImageWithURL:[NSURL URLWithString:cell.recipe.picture.url]];
-    }
+    [cell setProperties];
     
     return cell;
 }

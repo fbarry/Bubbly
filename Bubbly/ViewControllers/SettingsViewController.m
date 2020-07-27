@@ -14,6 +14,8 @@
 #import "TPKeyboardAvoidingScrollView.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 
+static const int numLogs = 4;
+
 @interface SettingsViewController () <CameraViewDelegate>
 
 @property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
@@ -53,7 +55,7 @@
     self.usernameField.placeholder = self.user.username;
     self.weightField.placeholder = [NSString stringWithFormat:@"Weight: %@ lbs", self.user.weight];
     self.exerciseField.placeholder = [NSString stringWithFormat:@"Exercise: %@ mins", self.user.exercise];
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < numLogs; i++) {
         self.logFields[i].text = [NSString stringWithFormat:@"%@", self.user.logAmounts[i]];
     }
 }

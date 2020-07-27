@@ -25,7 +25,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *exerciseField;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UIButton *signup;
-@property (weak, nonatomic) IBOutlet UIButton *back;
 
 @end
 
@@ -35,7 +34,6 @@
     [super viewDidLoad];
     
     self.signup.layer.cornerRadius = 16;
-    self.back.layer.cornerRadius = 12;
         
     [Utilities roundImage:(UIImageView *)self.profilePicture];
 }
@@ -98,8 +96,8 @@
     return [self.nameField.text isEqual:@""] || [self.emailField.text isEqual:@""] || [self.usernameField.text isEqual:@""] || [self.passwordField.text isEqual:@""];
 }
 
-- (IBAction)didTapBack:(id)sender {
-    [self performSegueWithIdentifier:@"Welcome" sender:self];
+- (IBAction)didTapLogin:(id)sender {
+    [self performSegueWithIdentifier:@"Login" sender:self];
 }
 
 - (IBAction)didTapBackground:(id)sender {

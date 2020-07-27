@@ -75,7 +75,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.restorationIdentifier isEqualToString:@"Custom"]) {
-    [self.parentViewController.parentViewController performSegueWithIdentifier:@"Details" sender:self.recipes[indexPath.row]];
+        [self.parentViewController.parentViewController performSegueWithIdentifier:@"Details" sender:self.recipes[indexPath.row]];
     } else {
         [self performSegueWithIdentifier:@"Details" sender:self.recipes[indexPath.row]];
     }
@@ -94,12 +94,7 @@
     cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
     
     cell.recipe = self.recipes[indexPath.item];
-    cell.nameLabel.text = cell.recipe.name;
-    [cell.recipePicture setImage:[UIImage systemImageNamed:@"book"]];
-    
-    if (cell.recipe.picture) {
-        [cell.recipePicture setImageWithURL:[NSURL URLWithString:cell.recipe.picture.url]];
-    }
+    [cell setProperties];
     
     return cell;
 }

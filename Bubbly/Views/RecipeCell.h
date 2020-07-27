@@ -14,8 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RecipeCell : UICollectionViewCell
 
 @property (strong, nonatomic) Recipe *recipe;
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *recipePicture;
+
+- (void)setProperties;
 
 @end
 

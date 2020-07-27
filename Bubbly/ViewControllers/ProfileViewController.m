@@ -9,7 +9,7 @@
 #import "ProfileViewController.h"
 #import "Utilities.h"
 #import "SceneDelegate.h"
-#import "WelcomeViewController.h"
+#import "LoginViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import "User.h"
 #import "SavedViewController.h"
