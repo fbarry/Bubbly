@@ -29,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) PFFileObject *backgroundPicture;
 @property (strong, nonatomic) NSArray *logAmounts;
 @property (strong, nonatomic) PFRelation *savedRecipes;
+@property (nonatomic) Boolean FBConnected;
+@property (nonatomic) Boolean weatherEnabled;
 
 @end
 

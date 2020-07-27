@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import <FBSDKCoreKitImport.h>
 
 @interface AppDelegate ()
 
@@ -22,6 +23,9 @@
         configuration.server = @"https://bubbly-water-tracking.herokuapp.com/parse";
     }];
     [Parse initializeWithConfiguration:configuration];
+    
+    [FBSDKApplicationDelegate.sharedInstance application:application didFinishLaunchingWithOptions:launchOptions];
+    
     return YES;
 }
 

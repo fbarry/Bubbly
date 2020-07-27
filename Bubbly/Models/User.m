@@ -18,6 +18,8 @@
 @dynamic backgroundPicture;
 @dynamic logAmounts;
 @dynamic savedRecipes;
+@dynamic FBConnected;
+@dynamic weatherEnabled;
 
 - (NSURL *)profilePictureURL {
     return [NSURL URLWithString:self.profilePicture.url];

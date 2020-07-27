@@ -29,6 +29,8 @@ static const int numLogs = 4;
 @property (weak, nonatomic) IBOutlet UITextField *exerciseField;
 @property (strong, nonatomic) IBOutlet UIButton *backgroundPicture;
 @property (strong, nonatomic) IBOutletCollection(UITextField) NSArray<UITextField *> *logFields;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *FBSegment;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *weatherSegment;
 
 @end
 
@@ -45,6 +47,9 @@ static const int numLogs = 4;
     [self.profilePicture setImage:imageView.image forState:UIControlStateNormal];
     [imageView setImageWithURL:[NSURL URLWithString:self.user.backgroundPicture.url]];
     [self.backgroundPicture setImage:imageView.image forState:UIControlStateNormal];
+    
+    self.FBSegment.selectedSegmentIndex = self.user.FBConnected;
+    self.weatherSegment.selectedSegmentIndex = self.user.weatherEnabled;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -106,6 +111,8 @@ static const int numLogs = 4;
     self.user.profilePicture = [Utilities getPFFileFromImage:self.profilePicture.imageView.image];
     self.user.backgroundPicture = [Utilities getPFFileFromImage:self.backgroundPicture.imageView.image];
     self.user.logAmounts = @[self.logFields[0].text, self.logFields[1].text, self.logFields[2].text, self.logFields[3].text];
+    self.user.FBConnected = self.FBSegment.selectedSegmentIndex;
+    self.user.weatherEnabled = self.weatherSegment.selectedSegmentIndex;
     
     [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (error) {

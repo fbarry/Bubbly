@@ -7,6 +7,7 @@
 //
 
 #import "SignUpViewController.h"
+#import "HomeViewController.h"
 #import "TPKeyboardAvoidingScrollView.h"
 #import "User.h"
 #import "CameraView.h"
@@ -51,6 +52,7 @@
 }
 
 - (IBAction)didTapSignUp:(UIButton *)sender {
+    [self didTapBackground:self];
     if ([self invalidInput]) {
         [Utilities presentOkAlertControllerInViewController:self
                                                   withTitle:@"Invalid Input"
@@ -84,7 +86,7 @@
                                                           withTitle:@"Could not register user"
                                                             message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
             } else {
-                [self performSegueWithIdentifier:@"Home" sender:self];
+                [self performSegueWithIdentifier:@"Home" sender:user];
             }
             sender.userInteractionEnabled = YES;
             [self.activityIndicator stopAnimating];
@@ -104,14 +106,13 @@
     [self.view endEditing:YES];
 }
 
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"Home"]) {
+        HomeViewController *homeViewController = [segue destinationViewController];
+        homeViewController.user = sender;
+    }
 }
-*/
 
 @end

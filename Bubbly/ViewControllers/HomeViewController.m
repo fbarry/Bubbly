@@ -7,7 +7,6 @@
 //
 
 #import "HomeViewController.h"
-#import "User.h"
 #import "IntakeLog.h"
 #import "Utilities.h"
 #import "UIImageView+AFNetworking.h"
@@ -17,8 +16,10 @@
 #import "OWMWeatherAPI.h"
 #import <PopupDialog-Swift.h>
 #import "TPKeyboardAvoidingScrollView.h"
+#import "FacebookShareView.h"
+#import "FBLoginViewController.h"
 
-@interface HomeViewController () <CLLocationManagerDelegate>
+@interface HomeViewController () <CLLocationManagerDelegate, FBLoginViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UILabel *welcomeLabel;
@@ -33,7 +34,6 @@
 @property (weak, nonatomic) IBOutlet UIView *textView;
 @property (weak, nonatomic) IBOutlet UIButton *infoButton;
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *closeKeyboard;
-@property (strong, nonatomic) User *user;
 @property (strong, nonatomic) IntakeDayLog *dayLog;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSDictionary *weather;
@@ -49,6 +49,10 @@ float temp, feelsLike, humidity;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if (!self.user) {
+        self.user = [User currentUser];
+    }
+    
     self.log.layer.cornerRadius = self.delete.layer.cornerRadius = 16;
     
     self.pieChart.layer.shadowColor = [UIColor lightGrayColor].CGColor;
@@ -59,18 +63,11 @@ float temp, feelsLike, humidity;
     
     [self.closeKeyboard setEnabled:NO];
     
-    [self.weatherIcon setHidden:YES];
-    [self.weatherIcon setUserInteractionEnabled:NO];
     UITapGestureRecognizer *weatherTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapWeather:)];
     [self.weatherIcon addGestureRecognizer:weatherTapGestureRecognizer];
     
-    [self.infoButton setHidden:YES];
-    [self.infoButton setEnabled:NO];
-    
     self.textView.layer.cornerRadius = 16;
-    
-    self.user = [User currentUser];
-    
+        
     [Utilities roundImage:self.backgroundPicture];
     self.backgroundPicture.layer.borderWidth = 0;
     [Utilities roundImage:self.weatherIcon];
@@ -83,13 +80,61 @@ float temp, feelsLike, humidity;
     
     [self getDayLog];
     
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    [self.locationManager requestWhenInUseAuthorization];
-    [self.locationManager startMonitoringSignificantLocationChanges];
+    if (self.user.weatherEnabled == 1) {
+        self.locationManager = [[CLLocationManager alloc] init];
+        self.locationManager.delegate = self;
+        [self.locationManager requestWhenInUseAuthorization];
+        [self.locationManager startMonitoringSignificantLocationChanges];
+    } else if (self.user.weatherEnabled != 0) {
+        self.user.weatherEnabled = 0;
+        [Utilities presentConfirmationInViewController:self
+                                             withTitle:@"Would you like to view the weather in your area for increased water intake recommendations?"
+                                            yesHandler:^{
+            self.user.weatherEnabled = 1;
+            self.locationManager = [[CLLocationManager alloc] init];
+            self.locationManager.delegate = self;
+            [self.locationManager requestWhenInUseAuthorization];
+            [self.locationManager startMonitoringSignificantLocationChanges];
+        }];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:YES];
+        
+    if (!self.user.weatherEnabled) {
+        [self.weatherIcon setHidden:YES];
+        [self.weatherIcon setUserInteractionEnabled:NO];
+        [self.infoButton setHidden:YES];
+        [self.infoButton setEnabled:NO];
+    } else {
+        [self.weatherIcon setHidden:NO];
+        [self.weatherIcon setUserInteractionEnabled:YES];
+        [self.infoButton setHidden:NO];
+        [self.infoButton setEnabled:YES];
+    }
+    
+    self.welcomeLabel.text = [NSString stringWithFormat:@"Welcome Back, %@!", self.user.name];
+    
+    [self.backgroundPicture setImageWithURL:[NSURL URLWithString:self.user.backgroundPicture.url]];
+    
+    for (int i = 0; i < 4; i++) {
+        [self.segmentedControl setTitle:[NSString stringWithFormat:@"%@ oz", self.user.logAmounts[i]] forSegmentAtIndex:i];
+    }
+    
+    [self loadAnimation];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:YES];
+    
+    [self.user saveInBackground];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    if (status == SKCloudServiceAuthorizationStatusDenied) {
+        self.user.weatherEnabled = 0;
+    }
     [self updateWeather];
 }
 
@@ -135,20 +180,6 @@ float temp, feelsLike, humidity;
             self.weatherIcon.layer.borderWidth = 0;
         }
     }];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:YES];
-    
-    self.welcomeLabel.text = [NSString stringWithFormat:@"Welcome Back, %@!", self.user.name];
-    
-    [self.backgroundPicture setImageWithURL:[NSURL URLWithString:self.user.backgroundPicture.url]];
-    
-    for (int i = 0; i < 4; i++) {
-        [self.segmentedControl setTitle:[NSString stringWithFormat:@"%@ oz", self.user.logAmounts[i]] forSegmentAtIndex:i];
-    }
-    
-    [self loadAnimation];
 }
 
 - (void)loadAnimation {
@@ -266,6 +297,8 @@ float temp, feelsLike, humidity;
         logChange.logAmount = [NSNumber numberWithInteger:[logChange.logAmount integerValue] * -1];
     }
     
+    BOOL belowGoal = [self.dayLog.achieved intValue] < [self.dayLog.goal intValue];
+    
     self.dayLog.achieved = [NSNumber numberWithInteger:[self.dayLog.achieved integerValue] + [logChange.logAmount integerValue]];
     
     PFRelation *relation = [self.dayLog relationForKey:@"logChanges"];
@@ -284,13 +317,30 @@ float temp, feelsLike, humidity;
                                                                 message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
                 } else {
                     [self loadAnimation];
-                    if (self.dayLog.achieved >= self.dayLog.goal) {
-                        
+                    if (belowGoal && [self.dayLog.achieved intValue] >= [self.dayLog.goal intValue]) {
+                        if (self.user.FBConnected == 1) {
+                            [self sharePost];
+                        } else if (self.user.FBConnected != 0) {
+                            self.user.FBConnected = false;
+                            [Utilities presentConfirmationInViewController:self
+                                                                 withTitle:@"Would you like to enable share to Facebook?"
+                                                                yesHandler:^{
+                                self.user.FBConnected = true;
+                                [self sharePost];
+                            }];
+                        }
                     }
                 }
             }];
         }
     }];
+}
+
+- (void)sharePost {
+    FacebookShareView *share = [[FacebookShareView alloc] initWithTitle:@"Congratulations on meeting your goal! Woud like you like to share to Facebook?"
+                                                                 photos:@[[UIImage systemImageNamed:@"book"]]
+                                                       inViewController:self];
+    [share presentShareView];
 }
 
 - (IBAction)didTapCompose:(id)sender {
@@ -301,14 +351,24 @@ float temp, feelsLike, humidity;
     [self.view endEditing:YES];
 }
 
-/*
+- (void)completedWithResult:(nullable FBSDKLoginManagerLoginResult *)result error:(nullable NSError *)error inShareView:(FacebookShareView *)share {
+    if (error) {
+        [Utilities presentOkAlertControllerInViewController:self
+                                                  withTitle:@"Could not login to Facebook"
+                                                    message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
+    } else {
+        [share createPost];
+    }
+}
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"FBLogin"]) {
+        FBLoginViewController *fbLoginViewController = [segue destinationViewController];
+        fbLoginViewController.delegate = self;
+        fbLoginViewController.shareView = sender;
+    }
 }
-*/
 
 @end

@@ -8,6 +8,7 @@
 
 #import "SceneDelegate.h"
 #import "User.h"
+#import <FBSDKCoreKitImport.h>
 
 @interface SceneDelegate ()
 
@@ -23,6 +24,17 @@
         UIViewController *tabBarViewController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarViewController"];
         self.window.rootViewController = tabBarViewController;
     }
+}
+
+- (void)scene:(UIScene *)scene openURLContexts:(NSSet<UIOpenURLContext *> *)URLContexts {
+    if (URLContexts.count == 0) {
+        return;
+    }
+    NSURL *url = [URLContexts anyObject].URL;
+    [FBSDKApplicationDelegate.sharedInstance application:UIApplication.sharedApplication
+                                                 openURL:url
+                                       sourceApplication:nil
+                                              annotation:UIApplicationLaunchOptionsAnnotationKey];
 }
 
 
