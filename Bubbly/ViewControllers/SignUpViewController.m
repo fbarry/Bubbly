@@ -7,7 +7,6 @@
 //
 
 #import "SignUpViewController.h"
-#import "HomeViewController.h"
 #import "TPKeyboardAvoidingScrollView.h"
 #import "User.h"
 #import "CameraView.h"
@@ -80,13 +79,16 @@
         user.backgroundPicture = [Utilities getPFFileFromImage:[UIImage imageNamed:@"bottle"]];
         user.logAmounts = @[@1, @2, @4, @8];
         
+        user.FBConnected = [NSNumber numberWithInt:3];
+        user.weatherEnabled = [NSNumber numberWithInt:3];
+        
         [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (error) {
                 [Utilities presentOkAlertControllerInViewController:self
                                                           withTitle:@"Could not register user"
                                                             message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
             } else {
-                [self performSegueWithIdentifier:@"Home" sender:user];
+                [self performSegueWithIdentifier:@"Home" sender:self];
             }
             sender.userInteractionEnabled = YES;
             [self.activityIndicator stopAnimating];
@@ -109,10 +111,7 @@
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"Home"]) {
-        HomeViewController *homeViewController = [segue destinationViewController];
-        homeViewController.user = sender;
-    }
+
 }
 
 @end

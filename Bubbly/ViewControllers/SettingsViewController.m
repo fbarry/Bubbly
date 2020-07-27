@@ -48,8 +48,12 @@ static const int numLogs = 4;
     [imageView setImageWithURL:[NSURL URLWithString:self.user.backgroundPicture.url]];
     [self.backgroundPicture setImage:imageView.image forState:UIControlStateNormal];
     
-    self.FBSegment.selectedSegmentIndex = self.user.FBConnected;
-    self.weatherSegment.selectedSegmentIndex = self.user.weatherEnabled;
+    if ([self.user.FBConnected isEqualToNumber:[NSNumber numberWithInt:1]]) {
+        self.FBSegment.selectedSegmentIndex = 1;
+    }
+    if ([self.user.weatherEnabled isEqualToNumber:[NSNumber numberWithInt:1]]) {
+        self.weatherSegment.selectedSegmentIndex = 1;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -111,8 +115,8 @@ static const int numLogs = 4;
     self.user.profilePicture = [Utilities getPFFileFromImage:self.profilePicture.imageView.image];
     self.user.backgroundPicture = [Utilities getPFFileFromImage:self.backgroundPicture.imageView.image];
     self.user.logAmounts = @[self.logFields[0].text, self.logFields[1].text, self.logFields[2].text, self.logFields[3].text];
-    self.user.FBConnected = self.FBSegment.selectedSegmentIndex;
-    self.user.weatherEnabled = self.weatherSegment.selectedSegmentIndex;
+    self.user.FBConnected = [NSNumber numberWithInteger:self.FBSegment.selectedSegmentIndex];
+    self.user.weatherEnabled = [NSNumber numberWithInteger:self.weatherSegment.selectedSegmentIndex];
     
     [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (error) {

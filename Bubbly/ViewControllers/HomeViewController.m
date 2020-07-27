@@ -39,6 +39,7 @@
 @property (strong, nonatomic) NSDictionary *weather;
 @property (weak, nonatomic) IBOutlet UIButton *log;
 @property (weak, nonatomic) IBOutlet UIButton *delete;
+@property (strong, nonatomic) User *user;
 
 @end
 
@@ -49,9 +50,7 @@ float temp, feelsLike, humidity;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if (!self.user) {
-        self.user = [User currentUser];
-    }
+    self.user = [User currentUser];
     
     self.log.layer.cornerRadius = self.delete.layer.cornerRadius = 16;
     
@@ -80,38 +79,40 @@ float temp, feelsLike, humidity;
     
     [self getDayLog];
     
-    if (self.user.weatherEnabled == 1) {
-        self.locationManager = [[CLLocationManager alloc] init];
-        self.locationManager.delegate = self;
-        [self.locationManager requestWhenInUseAuthorization];
-        [self.locationManager startMonitoringSignificantLocationChanges];
-    } else if (self.user.weatherEnabled != 0) {
-        self.user.weatherEnabled = 0;
+    NSLog(@"%@", self.user);
+    
+    if ([self.user.weatherEnabled isEqualToNumber:[NSNumber numberWithInt:3]]){
+        self.user.weatherEnabled = [NSNumber numberWithInt:0];
         [Utilities presentConfirmationInViewController:self
                                              withTitle:@"Would you like to view the weather in your area for increased water intake recommendations?"
                                             yesHandler:^{
-            self.user.weatherEnabled = 1;
-            self.locationManager = [[CLLocationManager alloc] init];
-            self.locationManager.delegate = self;
-            [self.locationManager requestWhenInUseAuthorization];
-            [self.locationManager startMonitoringSignificantLocationChanges];
+            self.user.weatherEnabled = [NSNumber numberWithInt:1];
+            [self setUpLocationManager];
         }];
     }
+}
+
+- (void)setUpLocationManager {
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    [self.locationManager requestWhenInUseAuthorization];
+    [self.locationManager startMonitoringSignificantLocationChanges];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:YES];
         
-    if (!self.user.weatherEnabled) {
-        [self.weatherIcon setHidden:YES];
-        [self.weatherIcon setUserInteractionEnabled:NO];
-        [self.infoButton setHidden:YES];
-        [self.infoButton setEnabled:NO];
-    } else {
+    if ([self.user.weatherEnabled isEqualToNumber:[NSNumber numberWithInt:1]]) {
         [self.weatherIcon setHidden:NO];
         [self.weatherIcon setUserInteractionEnabled:YES];
         [self.infoButton setHidden:NO];
         [self.infoButton setEnabled:YES];
+        [self setUpLocationManager];
+    } else {
+        [self.weatherIcon setHidden:YES];
+        [self.weatherIcon setUserInteractionEnabled:NO];
+        [self.infoButton setHidden:YES];
+        [self.infoButton setEnabled:NO];
     }
     
     self.welcomeLabel.text = [NSString stringWithFormat:@"Welcome Back, %@!", self.user.name];
@@ -133,7 +134,7 @@ float temp, feelsLike, humidity;
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     if (status == SKCloudServiceAuthorizationStatusDenied) {
-        self.user.weatherEnabled = 0;
+        [self.user.weatherEnabled isEqualToNumber:[NSNumber numberWithInt:0]];
     }
     [self updateWeather];
 }
@@ -156,10 +157,6 @@ float temp, feelsLike, humidity;
             NSArray *weather = result[@"weather"];
             NSDictionary *dictionary = weather[0];
             [self.weatherIcon setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://openweathermap.org/img/wn/%@@2x.png", dictionary[@"icon"]]]];
-            [self.weatherIcon setHidden:NO];
-            [self.weatherIcon setUserInteractionEnabled:YES];
-            [self.infoButton setHidden:NO];
-            [self.infoButton setEnabled:YES];
             
             NSDictionary *main = result[@"main"];
             
@@ -318,14 +315,14 @@ float temp, feelsLike, humidity;
                 } else {
                     [self loadAnimation];
                     if (belowGoal && [self.dayLog.achieved intValue] >= [self.dayLog.goal intValue]) {
-                        if (self.user.FBConnected == 1) {
+                        if ([self.user.FBConnected isEqualToNumber:[NSNumber numberWithInt:1]]) {
                             [self sharePost];
-                        } else if (self.user.FBConnected != 0) {
-                            self.user.FBConnected = false;
+                        } else if ([self.user.FBConnected isEqualToNumber:[NSNumber numberWithInt:3]]) {
+                            [self.user.FBConnected isEqualToNumber:[NSNumber numberWithInt:0]];
                             [Utilities presentConfirmationInViewController:self
                                                                  withTitle:@"Would you like to enable share to Facebook?"
                                                                 yesHandler:^{
-                                self.user.FBConnected = true;
+                                [self.user.FBConnected isEqualToNumber:[NSNumber numberWithInt:1]];
                                 [self sharePost];
                             }];
                         }

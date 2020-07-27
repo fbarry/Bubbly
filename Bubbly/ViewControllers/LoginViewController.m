@@ -7,7 +7,6 @@
 //
 
 #import "LoginViewController.h"
-#import "HomeViewController.h"
 #import "Utilities.h"
 #import "User.h"
 
@@ -44,7 +43,7 @@
                                                       withTitle:@"Error Logging In"
                                                         message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
         } else {
-            [self performSegueWithIdentifier:@"Home" sender:user];
+            [self performSegueWithIdentifier:@"Home" sender:self];
         }
         sender.userInteractionEnabled = YES;
         [self.activityIndicator stopAnimating];
@@ -62,10 +61,6 @@
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"Home"]) {
-        HomeViewController *homeViewController = [segue destinationViewController];
-        homeViewController.user = sender;
-    }
 }
 
 @end
