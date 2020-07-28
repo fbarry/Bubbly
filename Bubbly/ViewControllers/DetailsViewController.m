@@ -11,6 +11,7 @@
 #import "Utilities.h"
 #import "ProfileContainerViewController.h"
 #import "ComposeViewController.h"
+#import "FacebookShareView.h"
 
 @interface DetailsViewController () <ComposeViewControllerDelegate>
 
@@ -87,7 +88,7 @@
     self.descriptionLabel.text = [NSString stringWithFormat:@"Description: %@", self.recipe.descriptionText && self.recipe.descriptionText.length > 0 ? self.recipe.descriptionText : @"Not Available"];
     
     NSString *joinedString = [self.recipe.ingredients componentsJoinedByString:@", "];
-    self.ingredientsLabel.text = [@"Ingredient(s): " stringByAppendingString:joinedString];
+    self.ingredientsLabel.text = [@"Ingredients: " stringByAppendingString:joinedString];
 }
 
 #pragma mark - Action Handlers
@@ -137,6 +138,13 @@
             }];
         }
     }];
+}
+
+- (IBAction)didTapShare:(id)sender {
+    FacebookShareView *share = [[FacebookShareView alloc] initWithTitle:@"Would you like to share this recipe to Facebook?"
+                                                                 photos:@[self.picture.image]
+                                                       inViewController:self];
+    [share presentShareView];
 }
 
 - (IBAction)didTapEdit:(id)sender {
