@@ -15,7 +15,7 @@
 #import <PopupDialog-Swift.h>
 #import <Bubbly-Swift.h>
 
-@interface DataViewController () <IChartAxisValueFormatter, ChartViewDelegate>
+@interface DataViewController () <IChartAxisValueFormatter>
 
 @property (strong, nonatomic) IBOutlet LineChartView *lineChart;
 @property (strong, nonatomic) NSMutableArray<IntakeDayLog *> *chartData;
@@ -26,10 +26,11 @@
 
 NSDate *referenceDate;
 
+#pragma mark - View
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.lineChart.delegate = self;
     [self.lineChart.chartDescription setEnabled:NO];
     [self.lineChart.rightAxis setEnabled:NO];
     [self.lineChart.legend setEnabled:NO];
@@ -52,6 +53,8 @@ NSDate *referenceDate;
     
     [self updateChartData];
 }
+
+#pragma mark - Line Chart Functions
 
 - (void)updateChartData {
     PFQuery *query = [PFQuery queryWithClassName:@"IntakeDayLog"];
@@ -128,6 +131,16 @@ NSDate *referenceDate;
     [self.lineChart animateWithXAxisDuration:1 yAxisDuration:1.5 easingOption:ChartEasingOptionLinear];
 }
 
+#pragma mark - ChartAxisValueFormatter
+
+- (NSString *)stringForValue:(double)value axis:(ChartAxisBase *)axis {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MMM dd"];
+    return [dateFormatter stringFromDate:[NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay value:value toDate:referenceDate options:0]];
+}
+
+#pragma mark - Helper Functions
+
 - (NSDate *)getDateAtMidnight:(NSDate *)date {
     return [NSCalendar.currentCalendar startOfDayForDate:date];
 }
@@ -137,16 +150,9 @@ NSDate *referenceDate;
     return diff.day;
 }
 
-- (NSString *)stringForValue:(double)value axis:(ChartAxisBase *)axis {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MMM dd"];
-    return [dateFormatter stringFromDate:[NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay value:value toDate:referenceDate options:0]];
-}
-
-- (void)chartValueSelected:(ChartViewBase *)chartView entry:(ChartDataEntry *)entry highlight:(ChartHighlight *)highlight {
-    
-}
-
+/*
+#pragma mark - ChartViewDelegate
+ 
 - (void)didTapInfo:(UITapGestureRecognizer *)sender {
     NSString *title = @"";
     NSString *message = @"";
@@ -162,6 +168,7 @@ NSDate *referenceDate;
                                                  completion:nil];
     [self presentViewController:popup animated:YES completion:nil];
 }
+*/
 
 /*
 #pragma mark - Navigation

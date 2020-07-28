@@ -30,6 +30,8 @@
 
 @implementation SignUpViewController
 
+#pragma mark - View
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -37,6 +39,8 @@
         
     [Utilities roundImage:(UIImageView *)self.profilePicture];
 }
+
+#pragma mark - Action Handling
 
 - (IBAction)didTapProfile:(id)sender {
     CameraView *camera = [[CameraView alloc] init];
@@ -46,9 +50,6 @@
     [camera alertConfirmation];
 }
 
-- (void)setImage:(UIImage *)image withName:(NSString *)name {
-    [self.profilePicture setImage:image forState:UIControlStateNormal];
-}
 
 - (IBAction)didTapSignUp:(UIButton *)sender {
     [self didTapBackground:self];
@@ -96,9 +97,6 @@
     }
 }
 
-- (BOOL)invalidInput {
-    return [self.nameField.text isEqual:@""] || [self.emailField.text isEqual:@""] || [self.usernameField.text isEqual:@""] || [self.passwordField.text isEqual:@""];
-}
 
 - (IBAction)didTapLogin:(id)sender {
     [self performSegueWithIdentifier:@"Login" sender:self];
@@ -106,6 +104,17 @@
 
 - (IBAction)didTapBackground:(id)sender {
     [self.view endEditing:YES];
+}
+
+
+#pragma mark - Helper Functions
+
+- (void)setImage:(UIImage *)image withName:(NSString *)name {
+    [self.profilePicture setImage:image forState:UIControlStateNormal];
+}
+
+- (BOOL)invalidInput {
+    return [self.nameField.text isEqual:@""] || [self.emailField.text isEqual:@""] || [self.usernameField.text isEqual:@""] || [self.passwordField.text isEqual:@""];
 }
 
 #pragma mark - Navigation

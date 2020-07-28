@@ -22,6 +22,8 @@
 
 @implementation ProfileContainerViewController
 
+#pragma mark - View
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -41,6 +43,8 @@
         self.navigationItem.rightBarButtonItem = nil;
     }
 }
+
+#pragma mark - Action Handlers
 
 - (IBAction)didTapSidebar:(id)sender {
     if (self.sidebar.alpha == 0) {

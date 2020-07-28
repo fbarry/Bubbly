@@ -23,6 +23,8 @@
 
 @implementation SavedViewController
 
+#pragma mark - View
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -49,6 +51,8 @@
     [self loadRecipes];
 }
 
+#pragma mark - API Calls
+
 - (void)loadRecipes {
     PFQuery *query = [PFQuery new];
     
@@ -72,6 +76,8 @@
         }
     }];
 }
+
+#pragma mark - CollectionViewDelegate & DataSource
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.restorationIdentifier isEqualToString:@"Custom"]) {
@@ -102,6 +108,8 @@
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.recipes.count;
 }
+
+#pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"Details"]) {

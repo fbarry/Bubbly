@@ -44,7 +44,6 @@ UIImagePickerController *imagePickerVC;
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    
     UIImage *image = [Utilities resizeImage:info[UIImagePickerControllerOriginalImage] withSize:CGSizeMake(1000, 1000)];
     [self.delegate setImage:image withName:self.name];
     [imagePickerVC dismissViewControllerAnimated:YES completion:nil];

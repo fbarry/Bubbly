@@ -27,12 +27,6 @@
     PopupDialogButton *ok = [[PopupDialogButton alloc] initWithTitle:@"Ok" height:50 dismissOnTap:YES action:nil];
     [popup addButton:ok];
     [viewController presentViewController:popup animated:YES completion:nil];
-//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-//    UIAlertAction *button = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//        [alert dismissViewControllerAnimated:YES completion:nil];
-//    }];
-//    [alert addAction:button];
-//    [viewController presentViewController:alert animated:YES completion:nil];
 }
 
 + (void)presentConfirmationInViewController:(UIViewController *)viewController

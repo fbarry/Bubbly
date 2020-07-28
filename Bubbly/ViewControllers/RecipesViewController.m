@@ -26,6 +26,8 @@
 
 @implementation RecipesViewController
 
+#pragma mark - View
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -58,6 +60,8 @@
     [self loadRecipes];
 }
 
+#pragma mark - API Calls
+
 - (void)loadRecipes {
     PFQuery *query = [PFQuery queryWithClassName:@"Recipe"];
     [query includeKey:@"creator"];
@@ -76,6 +80,8 @@
         [self.collectionView.refreshControl endRefreshing];
     }];
 }
+
+#pragma mark - Search Bar Delegate
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     [self.closeKeyboard setEnabled:YES];
@@ -104,6 +110,8 @@
     [self.collectionView reloadData];
 }
 
+#pragma mark - CollectionViewDataSource
+
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     RecipeCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"RecipeCell" forIndexPath:indexPath];
     cell.contentView.layer.cornerRadius = cell.contentView.frame.size.height / 16;
@@ -126,10 +134,14 @@
     return self.filteredRecipes.count;
 }
 
+#pragma mark - Action Handlers
+
 - (IBAction)didTapBackground:(id)sender {
     [self.view endEditing:YES];
     [self.closeKeyboard setEnabled:NO];
 }
+
+#pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"Details"]) {

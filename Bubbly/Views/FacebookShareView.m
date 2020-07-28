@@ -46,6 +46,8 @@
                                     delegate:self];
 }
 
+#pragma mark - FBSDKSharingDelegate
+
 - (void)sharer:(nonnull id<FBSDKSharing>)sharer didCompleteWithResults:(nonnull NSDictionary<NSString *,id> *)results {
     NSLog(@"success");
 }

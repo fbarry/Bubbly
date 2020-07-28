@@ -19,6 +19,8 @@
 #import "FacebookShareView.h"
 #import "FBLoginViewController.h"
 
+static const int numLogs = 4;
+
 @interface HomeViewController () <CLLocationManagerDelegate, FBLoginViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
@@ -46,6 +48,8 @@
 @implementation HomeViewController
 
 float temp, feelsLike, humidity;
+
+#pragma mark - View
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -92,13 +96,6 @@ float temp, feelsLike, humidity;
     }
 }
 
-- (void)setUpLocationManager {
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    [self.locationManager requestWhenInUseAuthorization];
-    [self.locationManager startMonitoringSignificantLocationChanges];
-}
-
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:YES];
         
@@ -119,7 +116,7 @@ float temp, feelsLike, humidity;
     
     [self.backgroundPicture setImageWithURL:[NSURL URLWithString:self.user.backgroundPicture.url]];
     
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < numLogs; i++) {
         [self.segmentedControl setTitle:[NSString stringWithFormat:@"%@ oz", self.user.logAmounts[i]] forSegmentAtIndex:i];
     }
     
@@ -130,53 +127,6 @@ float temp, feelsLike, humidity;
     [super viewDidDisappear:YES];
     
     [self.user saveInBackground];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-    if (status == SKCloudServiceAuthorizationStatusDenied) {
-        [self.user.weatherEnabled isEqualToNumber:[NSNumber numberWithInt:0]];
-    }
-    [self updateWeather];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
-    [self updateWeather];
-}
-
-- (void)updateWeather {    
-    OWMWeatherAPI *weatherAPI = [[OWMWeatherAPI alloc] initWithAPIKey:@"9d02fda4b8887c82b20395baeaa1154e"];
-    [weatherAPI setTemperatureFormat:kOWMTempKelvin];
-    
-    [weatherAPI currentWeatherByCoordinate:self.locationManager.location.coordinate withCallback:^(NSError *error, NSDictionary *result) {
-        if (error) {
-            [Utilities presentOkAlertControllerInViewController:self
-                                                      withTitle:@"Cannot load weather info"
-                                                        message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
-        } else {
-            self.weather = result;
-            NSArray *weather = result[@"weather"];
-            NSDictionary *dictionary = weather[0];
-            [self.weatherIcon setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://openweathermap.org/img/wn/%@@2x.png", dictionary[@"icon"]]]];
-            
-            NSDictionary *main = result[@"main"];
-            
-            temp = [self kelvinToFarenheit:[main[@"temp"] floatValue]];
-            feelsLike = [self kelvinToFarenheit:[main[@"feels_like"] floatValue]];
-            humidity = [main[@"humidity"] floatValue];
-            
-            if (feelsLike >= 90) {
-                [Utilities presentOkAlertControllerInViewController:self
-                                                          withTitle:@"The weather outside is frightful..."
-                                                            message:[NSString stringWithFormat:@"A whopping %.0f°\nRemember to drink extra water!", feelsLike]];
-                self.infoButton.tintColor = [UIColor systemRedColor];
-            } else {
-                self.infoButton.tintColor = [UIColor darkGrayColor];
-            }
-            
-            [Utilities roundImage:self.weatherIcon];
-            self.weatherIcon.layer.borderWidth = 0;
-        }
-    }];
 }
 
 - (void)loadAnimation {
@@ -216,6 +166,84 @@ float temp, feelsLike, humidity;
     [self.pieChart animateWithXAxisDuration:1.2 easingOption:ChartEasingOptionEaseOutCirc];
 }
 
+#pragma mark - Location Manager
+
+- (void)setUpLocationManager {
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    [self.locationManager requestWhenInUseAuthorization];
+    [self.locationManager startMonitoringSignificantLocationChanges];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    if (status == SKCloudServiceAuthorizationStatusDenied) {
+        [self.user.weatherEnabled isEqualToNumber:[NSNumber numberWithInt:0]];
+    }
+    [self updateWeather];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+    [self updateWeather];
+}
+
+#pragma mark - Facebook Sharing
+
+- (void)sharePost {
+    FacebookShareView *share = [[FacebookShareView alloc] initWithTitle:@"Congratulations on meeting your goal! Woud like you like to share to Facebook?"
+                                                                 photos:@[[UIImage systemImageNamed:@"book"]]
+                                                       inViewController:self];
+    [share presentShareView];
+}
+
+#pragma mark - FBLoginViewControllerDelegate
+
+- (void)completedWithResult:(nullable FBSDKLoginManagerLoginResult *)result error:(nullable NSError *)error inShareView:(FacebookShareView *)share {
+    if (error) {
+        [Utilities presentOkAlertControllerInViewController:self
+                                                  withTitle:@"Could not login to Facebook"
+                                                    message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
+    } else {
+        [share createPost];
+    }
+}
+
+#pragma mark - API Calls
+
+- (void)updateWeather {    
+    OWMWeatherAPI *weatherAPI = [[OWMWeatherAPI alloc] initWithAPIKey:@"9d02fda4b8887c82b20395baeaa1154e"];
+    [weatherAPI setTemperatureFormat:kOWMTempKelvin];
+    
+    [weatherAPI currentWeatherByCoordinate:self.locationManager.location.coordinate withCallback:^(NSError *error, NSDictionary *result) {
+        if (error) {
+            [Utilities presentOkAlertControllerInViewController:self
+                                                      withTitle:@"Cannot load weather info"
+                                                        message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
+        } else {
+            self.weather = result;
+            NSArray *weather = result[@"weather"];
+            NSDictionary *dictionary = weather[0];
+            [self.weatherIcon setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://openweathermap.org/img/wn/%@@2x.png", dictionary[@"icon"]]]];
+            
+            NSDictionary *main = result[@"main"];
+            
+            temp = [self kelvinToFarenheit:[main[@"temp"] floatValue]];
+            feelsLike = [self kelvinToFarenheit:[main[@"feels_like"] floatValue]];
+            humidity = [main[@"humidity"] floatValue];
+            
+            if (feelsLike >= 90) {
+                [Utilities presentOkAlertControllerInViewController:self
+                                                          withTitle:@"The weather outside is frightful..."
+                                                            message:[NSString stringWithFormat:@"A whopping %.0f°\nRemember to drink extra water!", feelsLike]];
+                self.infoButton.tintColor = [UIColor systemRedColor];
+            } else {
+                self.infoButton.tintColor = [UIColor darkGrayColor];
+            }
+            
+            [Utilities roundImage:self.weatherIcon];
+            self.weatherIcon.layer.borderWidth = 0;
+        }
+    }];
+}
 
 - (void)getDayLog {
     [self.activityIndicator startAnimating];
@@ -255,15 +283,7 @@ float temp, feelsLike, humidity;
     }];
 }
 
-- (BOOL)validLog:(NSArray *)objects {
-    if (objects.count == 0) return false;
-    
-    IntakeDayLog *log = objects[0];
-    
-    if (![NSCalendar.currentCalendar isDate:log.createdAt inSameDayAsDate:[NSDate date]]) return false;
-    
-    return true;
-}
+#pragma mark - Action Handlers
 
 - (IBAction)didTapWeather:(id)sender {
     NSString *message = [NSString stringWithFormat:@"Temparature: %.1f°\nFeels Like: %.1f°\nHumidity: %.0f%%", temp, feelsLike, humidity];
@@ -273,10 +293,6 @@ float temp, feelsLike, humidity;
     [Utilities presentOkAlertControllerInViewController:self
                                               withTitle:@"Weather"
                                                 message:message];
-}
-
-- (float)kelvinToFarenheit:(float)kelvin {
-    return (kelvin - 273.15) * 9.0 / 5.0 + 32;
 }
 
 - (IBAction)didTapLog:(UIButton *)sender {
@@ -333,13 +349,6 @@ float temp, feelsLike, humidity;
     }];
 }
 
-- (void)sharePost {
-    FacebookShareView *share = [[FacebookShareView alloc] initWithTitle:@"Congratulations on meeting your goal! Woud like you like to share to Facebook?"
-                                                                 photos:@[[UIImage systemImageNamed:@"book"]]
-                                                       inViewController:self];
-    [share presentShareView];
-}
-
 - (IBAction)didTapCompose:(id)sender {
     [self performSegueWithIdentifier:@"Compose" sender:self];
 }
@@ -348,14 +357,21 @@ float temp, feelsLike, humidity;
     [self.view endEditing:YES];
 }
 
-- (void)completedWithResult:(nullable FBSDKLoginManagerLoginResult *)result error:(nullable NSError *)error inShareView:(FacebookShareView *)share {
-    if (error) {
-        [Utilities presentOkAlertControllerInViewController:self
-                                                  withTitle:@"Could not login to Facebook"
-                                                    message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
-    } else {
-        [share createPost];
-    }
+
+#pragma mark - Helper Functions
+
+- (float)kelvinToFarenheit:(float)kelvin {
+    return (kelvin - 273.15) * 9.0 / 5.0 + 32;
+}
+
+- (BOOL)validLog:(NSArray *)objects {
+    if (objects.count == 0) return false;
+    
+    IntakeDayLog *log = objects[0];
+    
+    if (![NSCalendar.currentCalendar isDate:log.createdAt inSameDayAsDate:[NSDate date]]) return false;
+    
+    return true;
 }
 
 #pragma mark - Navigation

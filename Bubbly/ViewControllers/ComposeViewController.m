@@ -33,6 +33,8 @@
 
 BOOL newRecipe = NO;
 
+#pragma mark - View
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -63,6 +65,8 @@ BOOL newRecipe = NO;
     }
 }
 
+#pragma mark - TableViewDataSource
+
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     IngredientCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"IngredientCell"];
     cell.delegate = self;
@@ -77,26 +81,14 @@ BOOL newRecipe = NO;
     return self.ingredients.count;
 }
 
-- (IBAction)didTapAdd:(id)sender {
-    [self.ingredients insertObject:@"" atIndex:self.ingredients.count];
-    [self.tableView reloadData];
-}
+#pragma mark - IngredientCellDelegate
 
 - (void)didEndEditingCell:(id)sender withText:(NSString *)ingredient {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
     self.ingredients[indexPath.row] = ingredient;
 }
 
-- (IBAction)didTapPicture:(id)sender {
-    CameraView *camera = [[CameraView alloc] init];
-    camera.viewController = self;
-    camera.delegate = self;
-    [camera alertConfirmation];
-}
-
-- (void)setImage:(nonnull UIImage *)image withName:(nonnull NSString *)name {
-    [self.recipePicture setImage:image forState:UIControlStateNormal];
-}
+#pragma mark - TextViewDelegate
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     if ([self.descriptionField.text isEqualToString:@"Description (Optional)"]) {
@@ -108,6 +100,24 @@ BOOL newRecipe = NO;
     if ([self.descriptionField.text isEqual:@""]) {
         self.descriptionField.text = @"Description (Optional)";
     }
+}
+
+#pragma mark - Action Handlers
+
+- (IBAction)didTapAdd:(id)sender {
+    [self.ingredients insertObject:@"" atIndex:self.ingredients.count];
+    [self.tableView reloadData];
+}
+
+- (IBAction)didTapPicture:(id)sender {
+    CameraView *camera = [[CameraView alloc] init];
+    camera.viewController = self;
+    camera.delegate = self;
+    [camera alertConfirmation];
+}
+
+- (IBAction)didTapBackground:(id)sender {
+    [self.view endEditing:YES];
 }
 
 - (IBAction)didTapPost:(id)sender {
@@ -157,14 +167,16 @@ BOOL newRecipe = NO;
     }];
 }
 
+#pragma mark - Helper Functions
+
 - (BOOL)invalidInput {    
     [self.ingredients removeObjectIdenticalTo:@""];
     [self.tableView reloadData];
     return [self.nameField.text isEqual:@""] || self.ingredients.count == 0;
 }
 
-- (IBAction)didTapBackground:(id)sender {
-    [self.view endEditing:YES];
+- (void)setImage:(nonnull UIImage *)image withName:(nonnull NSString *)name {
+    [self.recipePicture setImage:image forState:UIControlStateNormal];
 }
 
 /*

@@ -14,11 +14,15 @@
 
 @implementation FBLoginViewController
 
+#pragma mark - View
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.loginButton.delegate = self;
 }
+
+#pragma mark - FBSDKLoginButtonDelegate
 
 - (void)loginButton:(nonnull FBSDKLoginButton *)loginButton didCompleteWithResult:(nullable FBSDKLoginManagerLoginResult *)result error:(nullable NSError *)error {
     [self dismissViewControllerAnimated:YES completion:^{

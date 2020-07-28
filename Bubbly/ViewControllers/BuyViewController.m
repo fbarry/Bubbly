@@ -20,6 +20,8 @@
 
 @implementation BuyViewController
 
+#pragma mark - View
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -35,6 +37,8 @@
     self.ingredients = [[NSMutableArray alloc] init];
     [self loadRecipes];
 }
+
+#pragma mark - API Calls
 
 - (void)loadRecipes {
     PFQuery *query = [self.user.savedRecipes query];
@@ -56,6 +60,8 @@
         }
     }];
 }
+
+#pragma mark - TableViewDataSource
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     BuyCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"BuyCell"];

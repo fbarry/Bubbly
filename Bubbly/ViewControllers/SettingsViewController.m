@@ -36,6 +36,8 @@ static const int numLogs = 4;
 
 @implementation SettingsViewController
 
+#pragma mark - View
+
 - (void)viewDidLoad {
     [super viewDidLoad];
         
@@ -69,20 +71,14 @@ static const int numLogs = 4;
     }
 }
 
+#pragma mark - Action Handlers
+
 - (IBAction)didTapImage:(UIButton *)sender {
     CameraView *camera = [[CameraView alloc] init];
     camera.delegate = self;
     camera.viewController = self;
     camera.name = sender.accessibilityIdentifier;
     [camera alertConfirmation];
-}
-
-- (void)setImage:(nonnull UIImage *)image withName:(nonnull NSString *)name {
-    if ([name isEqualToString:@"profile"]) {
-        [self.profilePicture setImage:image forState:UIControlStateNormal];
-    } else if ([name isEqualToString:@"background"]) {
-        [self.backgroundPicture setImage:image forState:UIControlStateNormal];
-    }
 }
 
 - (IBAction)didTapSave:(id)sender {
@@ -138,6 +134,16 @@ static const int numLogs = 4;
 
 - (IBAction)closeKeyboard:(id)sender {
     [self.view endEditing:YES];
+}
+
+#pragma mark - CameraViewDelegate
+
+- (void)setImage:(nonnull UIImage *)image withName:(nonnull NSString *)name {
+    if ([name isEqualToString:@"profile"]) {
+        [self.profilePicture setImage:image forState:UIControlStateNormal];
+    } else if ([name isEqualToString:@"background"]) {
+        [self.backgroundPicture setImage:image forState:UIControlStateNormal];
+    }
 }
 
 /*

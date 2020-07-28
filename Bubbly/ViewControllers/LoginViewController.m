@@ -22,12 +22,16 @@
 
 @implementation LoginViewController
 
+#pragma mark - View
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.login.layer.cornerRadius = 16;
     self.signup.layer.cornerRadius = 16;
 }
+
+#pragma mark - Action Handling
 
 - (IBAction)didTapLogin:(UIButton *)sender {
     [self didTapBackground:self];

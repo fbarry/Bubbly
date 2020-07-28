@@ -23,10 +23,14 @@
 
 @implementation SidebarViewController
 
+#pragma mark - View
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
 }
+
+#pragma mark - Action Handlers
 
 - (IBAction)didTapSettings:(id)sender {
     [self.parentViewController performSegueWithIdentifier:@"Settings" sender:self];
@@ -51,6 +55,8 @@
         [User logOut];
     }];
 }
+
+#pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 

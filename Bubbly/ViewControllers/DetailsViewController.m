@@ -31,6 +31,8 @@
 
 @implementation DetailsViewController
 
+#pragma mark - View
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -88,6 +90,8 @@
     self.ingredientsLabel.text = [@"Ingredient(s): " stringByAppendingString:joinedString];
 }
 
+#pragma mark - Action Handlers
+
 - (IBAction)didTapSave:(id)sender {
     PFRelation *relation = [self.recipe relationForKey:@"savedBy"];
     PFRelation *relation2 = [self.user relationForKey:@"savedRecipes"];
@@ -139,13 +143,17 @@
     [self performSegueWithIdentifier:@"Edit" sender:self];
 }
 
+- (IBAction)didTapCreator:(id)sender {
+    [self performSegueWithIdentifier:@"Profile" sender:self];
+}
+
+#pragma mark - ComposeViewControllerDelegate
+
 - (void)didDelete {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)didTapCreator:(id)sender {
-    [self performSegueWithIdentifier:@"Profile" sender:self];
-}
+#pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"Profile"]) {

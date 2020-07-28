@@ -34,6 +34,8 @@
 
 @implementation ProfileViewController
 
+#pragma mark - View
+
 - (void)viewDidLoad {
     [super viewDidLoad];
         
@@ -53,6 +55,8 @@
     self.usernameLabel.text = self.profile.profileUsername;
     self.bioLabel.text = self.profile.bio;
 }
+
+#pragma mark - Action Handlers
 
 - (IBAction)didSelectIndex:(UISegmentedControl *)sender {
     switch (sender.selectedSegmentIndex) {
