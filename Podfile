@@ -10,7 +10,7 @@ target 'Bubbly' do
   pod 'AFNetworking'
   pod 'Charts'
   pod 'MBProgressHUD'
-  pod 'OpenWeatherMapAPI', '~> 0.0.5'
+  pod 'OpenWeatherMapAPI'
   pod 'PopupDialog'
 
   target 'BubblyTests' do
