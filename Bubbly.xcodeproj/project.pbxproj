@@ -9,12 +9,10 @@
 /* Begin PBXBuildFile section */
 		3288EA0B5D7CFE6F57A1CD14 /* Pods_BubblyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5A990E042C0C32D4EF3188D /* Pods_BubblyTests.framework */; };
 		50ECE9C070625C7DA438EE04 /* Pods_Bubbly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82B807CAA0C917B1F091368C /* Pods_Bubbly.framework */; };
-		8C21338024CF36CB00C796BA /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C21337E24CF36CB00C796BA /* TPKeyboardAvoidingScrollView.m */; };
 		8C4D455A24CF8C8E00BCF93F /* FBLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4D455924CF8C8E00BCF93F /* FBLoginViewController.m */; };
-		8C66984C24CF3A3F00BB2579 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C66984A24CF3A3E00BB2579 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
-		8C66984F24CF4C6100BB2579 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 8C66984E24CF4C6100BB2579 /* SwiftPackageProductDependency */; };
-		8C66985124CF4C6100BB2579 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 8C66985024CF4C6100BB2579 /* SwiftPackageProductDependency */; };
-		8C66985324CF4C6100BB2579 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 8C66985224CF4C6100BB2579 /* SwiftPackageProductDependency */; };
+		8C66984F24CF4C6100BB2579 /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 8C66984E24CF4C6100BB2579 /* FacebookShare */; };
+		8C66985124CF4C6100BB2579 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 8C66985024CF4C6100BB2579 /* FacebookCore */; };
+		8C66985324CF4C6100BB2579 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 8C66985224CF4C6100BB2579 /* FacebookLogin */; };
 		8C66985F24CF7C2500BB2579 /* FacebookShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C66985E24CF7C2400BB2579 /* FacebookShareView.m */; };
 		8C6FECE324CA2EC500B14E8F /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6FECE224CA2EC500B14E8F /* BalloonMarker.swift */; };
 		8C9B17DA24CA03FB00D84D18 /* ProfileContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9B17D924CA03FB00D84D18 /* ProfileContainerViewController.m */; };
@@ -71,12 +69,8 @@
 		35721D81EB89891511B44E78 /* Pods-Bubbly-BubblyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bubbly-BubblyUITests.release.xcconfig"; path = "Target Support Files/Pods-Bubbly-BubblyUITests/Pods-Bubbly-BubblyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		697DCC4848E080A14A05DE47 /* Pods-BubblyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BubblyTests.debug.xcconfig"; path = "Target Support Files/Pods-BubblyTests/Pods-BubblyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		82B807CAA0C917B1F091368C /* Pods_Bubbly.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bubbly.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8C21337E24CF36CB00C796BA /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPKeyboardAvoidingScrollView.m; path = "../../../../../Downloads/TPKeyboardAvoiding-master/TPKeyboardAvoiding/TPKeyboardAvoidingScrollView.m"; sourceTree = "<group>"; };
-		8C21337F24CF36CB00C796BA /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPKeyboardAvoidingScrollView.h; path = "../../../../../Downloads/TPKeyboardAvoiding-master/TPKeyboardAvoiding/TPKeyboardAvoidingScrollView.h"; sourceTree = "<group>"; };
 		8C4D455824CF8C8E00BCF93F /* FBLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBLoginViewController.h; sourceTree = "<group>"; };
 		8C4D455924CF8C8E00BCF93F /* FBLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBLoginViewController.m; sourceTree = "<group>"; };
-		8C66984A24CF3A3E00BB2579 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+TPKeyboardAvoidingAdditions.m"; path = "../../../../../Downloads/TPKeyboardAvoiding-master/TPKeyboardAvoiding/UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
-		8C66984B24CF3A3E00BB2579 /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+TPKeyboardAvoidingAdditions.h"; path = "../../../../../Downloads/TPKeyboardAvoiding-master/TPKeyboardAvoiding/UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
 		8C66985D24CF7C2400BB2579 /* FacebookShareView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FacebookShareView.h; sourceTree = "<group>"; };
 		8C66985E24CF7C2400BB2579 /* FacebookShareView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FacebookShareView.m; sourceTree = "<group>"; };
 		8C6FECE224CA2EC500B14E8F /* BalloonMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
@@ -155,9 +149,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C66985324CF4C6100BB2579 /* BuildFile in Frameworks */,
-				8C66984F24CF4C6100BB2579 /* BuildFile in Frameworks */,
-				8C66985124CF4C6100BB2579 /* BuildFile in Frameworks */,
+				8C66985324CF4C6100BB2579 /* FacebookLogin in Frameworks */,
+				8C66984F24CF4C6100BB2579 /* FacebookShare in Frameworks */,
+				8C66985124CF4C6100BB2579 /* FacebookCore in Frameworks */,
 				50ECE9C070625C7DA438EE04 /* Pods_Bubbly.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -208,10 +202,6 @@
 		8C21337D24CF36B300C796BA /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				8C66984B24CF3A3E00BB2579 /* UIScrollView+TPKeyboardAvoidingAdditions.h */,
-				8C66984A24CF3A3E00BB2579 /* UIScrollView+TPKeyboardAvoidingAdditions.m */,
-				8C21337F24CF36CB00C796BA /* TPKeyboardAvoidingScrollView.h */,
-				8C21337E24CF36CB00C796BA /* TPKeyboardAvoidingScrollView.m */,
 				8C9EBFDA24BCD27E0031380E /* Utilities.h */,
 				8C9EBFDB24BCD27E0031380E /* Utilities.m */,
 			);
@@ -366,9 +356,9 @@
 			);
 			name = Bubbly;
 			packageProductDependencies = (
-				8C66984E24CF4C6100BB2579 /* SwiftPackageProductDependency */,
-				8C66985024CF4C6100BB2579 /* SwiftPackageProductDependency */,
-				8C66985224CF4C6100BB2579 /* SwiftPackageProductDependency */,
+				8C66984E24CF4C6100BB2579 /* FacebookShare */,
+				8C66985024CF4C6100BB2579 /* FacebookCore */,
+				8C66985224CF4C6100BB2579 /* FacebookLogin */,
 			);
 			productName = Bubbly;
 			productReference = 8C9EBF9E24BCC1330031380E /* Bubbly.app */;
@@ -446,7 +436,7 @@
 			);
 			mainGroup = 8C9EBF9524BCC1330031380E;
 			packageReferences = (
-				8C66984D24CF4C6100BB2579 /* RemoteSwiftPackageReference */,
+				8C66984D24CF4C6100BB2579 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 			);
 			productRefGroup = 8C9EBF9F24BCC1330031380E /* Products */;
 			projectDirPath = "";
@@ -600,7 +590,6 @@
 				8C6FECE324CA2EC500B14E8F /* BalloonMarker.swift in Sources */,
 				8CBB59A624C0BB9E0062FB0F /* BuyCell.m in Sources */,
 				8C66985F24CF7C2500BB2579 /* FacebookShareView.m in Sources */,
-				8C66984C24CF3A3F00BB2579 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				8C9EC00324BCDF3E0031380E /* RecipesViewController.m in Sources */,
 				8CA0DB9224BF58B100B93FEC /* BuyViewController.m in Sources */,
 				8CF7B9A824C7858D00B0F8C3 /* IntakeDayLog.m in Sources */,
@@ -616,7 +605,6 @@
 				8C9EC00C24BCDF5B0031380E /* SettingsViewController.m in Sources */,
 				8C9EC00624BCDF440031380E /* DetailsViewController.m in Sources */,
 				8C9EBFA324BCC1330031380E /* AppDelegate.m in Sources */,
-				8C21338024CF36CB00C796BA /* TPKeyboardAvoidingScrollView.m in Sources */,
 				8C9EBFB424BCC1340031380E /* main.m in Sources */,
 				8C4D455A24CF8C8E00BCF93F /* FBLoginViewController.m in Sources */,
 				8CA0DB8624BE24DC00B93FEC /* IngredientCell.m in Sources */,
@@ -959,7 +947,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8C66984D24CF4C6100BB2579 /* RemoteSwiftPackageReference */ = {
+		8C66984D24CF4C6100BB2579 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
 			requirement = {
@@ -970,19 +958,19 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8C66984E24CF4C6100BB2579 /* SwiftPackageProductDependency */ = {
+		8C66984E24CF4C6100BB2579 /* FacebookShare */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8C66984D24CF4C6100BB2579 /* RemoteSwiftPackageReference */;
+			package = 8C66984D24CF4C6100BB2579 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookShare;
 		};
-		8C66985024CF4C6100BB2579 /* SwiftPackageProductDependency */ = {
+		8C66985024CF4C6100BB2579 /* FacebookCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8C66984D24CF4C6100BB2579 /* RemoteSwiftPackageReference */;
+			package = 8C66984D24CF4C6100BB2579 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookCore;
 		};
-		8C66985224CF4C6100BB2579 /* SwiftPackageProductDependency */ = {
+		8C66985224CF4C6100BB2579 /* FacebookLogin */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8C66984D24CF4C6100BB2579 /* RemoteSwiftPackageReference */;
+			package = 8C66984D24CF4C6100BB2579 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookLogin;
 		};
 /* End XCSwiftPackageProductDependency section */
