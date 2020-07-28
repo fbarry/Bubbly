@@ -7,13 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		66B846089D380846B8E35F69 /* Pods_Bubbly_BubblyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D931F003FEC0C6FA81BF4B /* Pods_Bubbly_BubblyUITests.framework */; };
 		8C21338024CF36CB00C796BA /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C21337E24CF36CB00C796BA /* TPKeyboardAvoidingScrollView.m */; };
 		8C4D455A24CF8C8E00BCF93F /* FBLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4D455924CF8C8E00BCF93F /* FBLoginViewController.m */; };
 		8C66984C24CF3A3F00BB2579 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C66984A24CF3A3E00BB2579 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
-		8C66984F24CF4C6100BB2579 /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 8C66984E24CF4C6100BB2579 /* FacebookShare */; };
-		8C66985124CF4C6100BB2579 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 8C66985024CF4C6100BB2579 /* FacebookCore */; };
-		8C66985324CF4C6100BB2579 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 8C66985224CF4C6100BB2579 /* FacebookLogin */; };
+		8C66984F24CF4C6100BB2579 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 8C66984E24CF4C6100BB2579 /* SwiftPackageProductDependency */; };
+		8C66985124CF4C6100BB2579 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 8C66985024CF4C6100BB2579 /* SwiftPackageProductDependency */; };
+		8C66985324CF4C6100BB2579 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 8C66985224CF4C6100BB2579 /* SwiftPackageProductDependency */; };
 		8C66985F24CF7C2500BB2579 /* FacebookShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C66985E24CF7C2400BB2579 /* FacebookShareView.m */; };
 		8C6FECE324CA2EC500B14E8F /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6FECE224CA2EC500B14E8F /* BalloonMarker.swift */; };
 		8C9B17DA24CA03FB00D84D18 /* ProfileContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9B17D924CA03FB00D84D18 /* ProfileContainerViewController.m */; };
@@ -46,8 +45,6 @@
 		8CBB59A624C0BB9E0062FB0F /* BuyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB59A524C0BB9E0062FB0F /* BuyCell.m */; };
 		8CD3628724CA0AA9007B02E8 /* SidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD3628624CA0AA9007B02E8 /* SidebarViewController.m */; };
 		8CF7B9A824C7858D00B0F8C3 /* IntakeDayLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF7B9A724C7858D00B0F8C3 /* IntakeDayLog.m */; };
-		D5F86BBE48D742F4E7D9FEF4 /* Pods_BubblyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335D8992D3546B1CB7049452 /* Pods_BubblyTests.framework */; };
-		D624D6578B2788BD780DD002 /* Pods_Bubbly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E1106D8528734F0FB06689E /* Pods_Bubbly.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,13 +65,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0BED09934E35DD8A11C0E2A0 /* Pods-Bubbly.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bubbly.release.xcconfig"; path = "Target Support Files/Pods-Bubbly/Pods-Bubbly.release.xcconfig"; sourceTree = "<group>"; };
-		157198BD8D56DBCE942A075F /* Pods-Bubbly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bubbly.debug.xcconfig"; path = "Target Support Files/Pods-Bubbly/Pods-Bubbly.debug.xcconfig"; sourceTree = "<group>"; };
-		29950D71DE36A76870AA69F9 /* Pods-BubblyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BubblyTests.release.xcconfig"; path = "Target Support Files/Pods-BubblyTests/Pods-BubblyTests.release.xcconfig"; sourceTree = "<group>"; };
-		335D8992D3546B1CB7049452 /* Pods_BubblyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BubblyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		60D931F003FEC0C6FA81BF4B /* Pods_Bubbly_BubblyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bubbly_BubblyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7799B998E7E42E555F16D53C /* Pods-Bubbly-BubblyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bubbly-BubblyUITests.debug.xcconfig"; path = "Target Support Files/Pods-Bubbly-BubblyUITests/Pods-Bubbly-BubblyUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		7E1106D8528734F0FB06689E /* Pods_Bubbly.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bubbly.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C21337E24CF36CB00C796BA /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPKeyboardAvoidingScrollView.m; path = "../../../../../Downloads/TPKeyboardAvoiding-master/TPKeyboardAvoiding/TPKeyboardAvoidingScrollView.m"; sourceTree = "<group>"; };
 		8C21337F24CF36CB00C796BA /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPKeyboardAvoidingScrollView.h; path = "../../../../../Downloads/TPKeyboardAvoiding-master/TPKeyboardAvoiding/TPKeyboardAvoidingScrollView.h"; sourceTree = "<group>"; };
 		8C4D455824CF8C8E00BCF93F /* FBLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBLoginViewController.h; sourceTree = "<group>"; };
@@ -146,8 +136,6 @@
 		8CD3628624CA0AA9007B02E8 /* SidebarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SidebarViewController.m; sourceTree = "<group>"; };
 		8CF7B9A624C7858D00B0F8C3 /* IntakeDayLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntakeDayLog.h; sourceTree = "<group>"; };
 		8CF7B9A724C7858D00B0F8C3 /* IntakeDayLog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntakeDayLog.m; sourceTree = "<group>"; };
-		9CC48BDB369BFC801730ABB6 /* Pods-Bubbly-BubblyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bubbly-BubblyUITests.release.xcconfig"; path = "Target Support Files/Pods-Bubbly-BubblyUITests/Pods-Bubbly-BubblyUITests.release.xcconfig"; sourceTree = "<group>"; };
-		F1FDC2BC347BEE9CA2E2E202 /* Pods-BubblyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BubblyTests.debug.xcconfig"; path = "Target Support Files/Pods-BubblyTests/Pods-BubblyTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,10 +143,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C66985324CF4C6100BB2579 /* FacebookLogin in Frameworks */,
-				8C66984F24CF4C6100BB2579 /* FacebookShare in Frameworks */,
-				8C66985124CF4C6100BB2579 /* FacebookCore in Frameworks */,
-				D624D6578B2788BD780DD002 /* Pods_Bubbly.framework in Frameworks */,
+				8C66985324CF4C6100BB2579 /* BuildFile in Frameworks */,
+				8C66984F24CF4C6100BB2579 /* BuildFile in Frameworks */,
+				8C66985124CF4C6100BB2579 /* BuildFile in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,7 +153,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5F86BBE48D742F4E7D9FEF4 /* Pods_BubblyTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,7 +160,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66B846089D380846B8E35F69 /* Pods_Bubbly_BubblyUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,9 +170,6 @@
 			isa = PBXGroup;
 			children = (
 				8CA0DB9324BF59F300B93FEC /* Charts.framework */,
-				7E1106D8528734F0FB06689E /* Pods_Bubbly.framework */,
-				60D931F003FEC0C6FA81BF4B /* Pods_Bubbly_BubblyUITests.framework */,
-				335D8992D3546B1CB7049452 /* Pods_BubblyTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -195,12 +177,6 @@
 		692462E530897C1019893B3D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				157198BD8D56DBCE942A075F /* Pods-Bubbly.debug.xcconfig */,
-				0BED09934E35DD8A11C0E2A0 /* Pods-Bubbly.release.xcconfig */,
-				7799B998E7E42E555F16D53C /* Pods-Bubbly-BubblyUITests.debug.xcconfig */,
-				9CC48BDB369BFC801730ABB6 /* Pods-Bubbly-BubblyUITests.release.xcconfig */,
-				F1FDC2BC347BEE9CA2E2E202 /* Pods-BubblyTests.debug.xcconfig */,
-				29950D71DE36A76870AA69F9 /* Pods-BubblyTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -354,11 +330,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C9EBFCD24BCC1340031380E /* Build configuration list for PBXNativeTarget "Bubbly" */;
 			buildPhases = (
-				D1F5B5397DBD2BBFBCF677F1 /* [CP] Check Pods Manifest.lock */,
 				8C9EBF9A24BCC1330031380E /* Sources */,
 				8C9EBF9B24BCC1330031380E /* Frameworks */,
 				8C9EBF9C24BCC1330031380E /* Resources */,
-				61AC8DA2AF38D35F74EFB832 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -366,9 +340,9 @@
 			);
 			name = Bubbly;
 			packageProductDependencies = (
-				8C66984E24CF4C6100BB2579 /* FacebookShare */,
-				8C66985024CF4C6100BB2579 /* FacebookCore */,
-				8C66985224CF4C6100BB2579 /* FacebookLogin */,
+				8C66984E24CF4C6100BB2579 /* SwiftPackageProductDependency */,
+				8C66985024CF4C6100BB2579 /* SwiftPackageProductDependency */,
+				8C66985224CF4C6100BB2579 /* SwiftPackageProductDependency */,
 			);
 			productName = Bubbly;
 			productReference = 8C9EBF9E24BCC1330031380E /* Bubbly.app */;
@@ -378,7 +352,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C9EBFD024BCC1340031380E /* Build configuration list for PBXNativeTarget "BubblyTests" */;
 			buildPhases = (
-				E7679D8CEF9B0D081F8C78CC /* [CP] Check Pods Manifest.lock */,
 				8C9EBFB524BCC1340031380E /* Sources */,
 				8C9EBFB624BCC1340031380E /* Frameworks */,
 				8C9EBFB724BCC1340031380E /* Resources */,
@@ -397,11 +370,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C9EBFD324BCC1340031380E /* Build configuration list for PBXNativeTarget "BubblyUITests" */;
 			buildPhases = (
-				82A44B268D60AF6DFE5DE354 /* [CP] Check Pods Manifest.lock */,
 				8C9EBFC024BCC1340031380E /* Sources */,
 				8C9EBFC124BCC1340031380E /* Frameworks */,
 				8C9EBFC224BCC1340031380E /* Resources */,
-				182D17CE38EB5CA08C5AF4D6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -446,7 +417,7 @@
 			);
 			mainGroup = 8C9EBF9524BCC1330031380E;
 			packageReferences = (
-				8C66984D24CF4C6100BB2579 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+				8C66984D24CF4C6100BB2579 /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = 8C9EBF9F24BCC1330031380E /* Products */;
 			projectDirPath = "";
@@ -485,109 +456,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		182D17CE38EB5CA08C5AF4D6 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Bubbly-BubblyUITests/Pods-Bubbly-BubblyUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Bubbly-BubblyUITests/Pods-Bubbly-BubblyUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Bubbly-BubblyUITests/Pods-Bubbly-BubblyUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		61AC8DA2AF38D35F74EFB832 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Bubbly/Pods-Bubbly-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Bubbly/Pods-Bubbly-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Bubbly/Pods-Bubbly-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		82A44B268D60AF6DFE5DE354 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Bubbly-BubblyUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D1F5B5397DBD2BBFBCF677F1 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Bubbly-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E7679D8CEF9B0D081F8C78CC /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-BubblyTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8C9EBF9A24BCC1330031380E /* Sources */ = {
@@ -790,7 +658,6 @@
 		};
 		8C9EBFCE24BCC1340031380E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 157198BD8D56DBCE942A075F /* Pods-Bubbly.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -813,7 +680,6 @@
 		};
 		8C9EBFCF24BCC1340031380E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0BED09934E35DD8A11C0E2A0 /* Pods-Bubbly.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -835,7 +701,6 @@
 		};
 		8C9EBFD124BCC1340031380E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F1FDC2BC347BEE9CA2E2E202 /* Pods-BubblyTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -857,7 +722,6 @@
 		};
 		8C9EBFD224BCC1340031380E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 29950D71DE36A76870AA69F9 /* Pods-BubblyTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -879,7 +743,6 @@
 		};
 		8C9EBFD424BCC1340031380E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7799B998E7E42E555F16D53C /* Pods-Bubbly-BubblyUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -899,7 +762,6 @@
 		};
 		8C9EBFD524BCC1340031380E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9CC48BDB369BFC801730ABB6 /* Pods-Bubbly-BubblyUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -959,7 +821,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8C66984D24CF4C6100BB2579 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+		8C66984D24CF4C6100BB2579 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
 			requirement = {
@@ -970,19 +832,19 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8C66984E24CF4C6100BB2579 /* FacebookShare */ = {
+		8C66984E24CF4C6100BB2579 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8C66984D24CF4C6100BB2579 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			package = 8C66984D24CF4C6100BB2579 /* RemoteSwiftPackageReference */;
 			productName = FacebookShare;
 		};
-		8C66985024CF4C6100BB2579 /* FacebookCore */ = {
+		8C66985024CF4C6100BB2579 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8C66984D24CF4C6100BB2579 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			package = 8C66984D24CF4C6100BB2579 /* RemoteSwiftPackageReference */;
 			productName = FacebookCore;
 		};
-		8C66985224CF4C6100BB2579 /* FacebookLogin */ = {
+		8C66985224CF4C6100BB2579 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8C66984D24CF4C6100BB2579 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			package = 8C66984D24CF4C6100BB2579 /* RemoteSwiftPackageReference */;
 			productName = FacebookLogin;
 		};
 /* End XCSwiftPackageProductDependency section */
