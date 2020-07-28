@@ -30,7 +30,7 @@ NSDate *referenceDate;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+        
     [self.lineChart.chartDescription setEnabled:NO];
     [self.lineChart.rightAxis setEnabled:NO];
     [self.lineChart.legend setEnabled:NO];

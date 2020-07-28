@@ -1790,9 +1790,13 @@
                             <constraint firstItem="1gr-w6-mLE" firstAttribute="leading" secondItem="3oz-hY-uzb" secondAttribute="leading" constant="16" id="zml-z3-h3l"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zgu-cB-5fb"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="0Pi-Xh-yYC" appends="YES" id="X6x-om-CD6"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="bioLabel" destination="1gr-w6-mLE" id="EDM-Do-uC2"/>
+                        <outlet property="closeSidebar" destination="0Pi-Xh-yYC" id="Bnc-Gb-9eS"/>
                         <outlet property="customView" destination="Ofm-HT-mfG" id="de1-pP-xfe"/>
                         <outlet property="dataView" destination="cwO-v7-6Kc" id="eRW-Ei-KYa"/>
                         <outlet property="nameLabel" destination="r6x-jW-3YT" id="Da7-T4-4vz"/>
@@ -1802,6 +1806,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cXr-OX-Cr9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="0Pi-Xh-yYC">
+                    <connections>
+                        <action selector="didTapBackground:" destination="kly-ZT-Hm6" id="Pi6-JT-6HJ"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1872" y="3779"/>
         </scene>
@@ -1813,87 +1822,59 @@
                         <rect key="frame" x="0.0" y="0.0" width="207" height="676"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xsB-52-Q0m">
-                                <rect key="frame" x="8" y="0.0" width="199" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="6M6-Wt-Vxv"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="30"/>
-                                <state key="normal" title="Saved">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="didTapSaved:" destination="Qy0-fm-dfy" eventType="touchUpInside" id="Ehk-4n-rW0"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PEK-Ck-d5I">
-                                <rect key="frame" x="8" y="60" width="199" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="oss-Ju-a1I"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="30"/>
-                                <state key="normal" title="Ingredients">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="didTapBuy:" destination="Qy0-fm-dfy" eventType="touchUpInside" id="BID-QL-3G4"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9fj-zE-pjE">
-                                <rect key="frame" x="8" y="120" width="199" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="KqC-Hg-JlZ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="30"/>
-                                <state key="normal" title="Settings">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="didTapSettings:" destination="Qy0-fm-dfy" eventType="touchUpInside" id="ghx-oS-iFB"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zwo-1a-0Lu">
-                                <rect key="frame" x="8" y="180" width="199" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="tRt-nH-fvL"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="30"/>
-                                <state key="normal" title="Logout">
-                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="didTapLogout:" destination="Qy0-fm-dfy" eventType="touchUpInside" id="g1U-0R-pkq"/>
-                                </connections>
-                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dIu-2G-fVR">
+                                <rect key="frame" x="0.0" y="44" width="207" height="632"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SidebarCell" id="eAg-ZJ-s86" customClass="SidebarCell">
+                                        <rect key="frame" x="0.0" y="28" width="207" height="48.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eAg-ZJ-s86" id="Nsw-rn-dYA">
+                                            <rect key="frame" x="0.0" y="0.0" width="207" height="48.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Hb-Xc-fQN">
+                                                    <rect key="frame" x="4" y="4" width="199" height="40.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="tyL-bW-7iu"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="20"/>
+                                                    <state key="normal" title="Button">
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="7Hb-Xc-fQN" firstAttribute="leading" secondItem="Nsw-rn-dYA" secondAttribute="leading" constant="4" id="6Ak-Mn-dr0"/>
+                                                <constraint firstItem="7Hb-Xc-fQN" firstAttribute="top" secondItem="Nsw-rn-dYA" secondAttribute="top" constant="4" id="9N8-4G-snj"/>
+                                                <constraint firstAttribute="trailing" secondItem="7Hb-Xc-fQN" secondAttribute="trailing" constant="4" id="lLy-4V-WqW"/>
+                                                <constraint firstAttribute="bottom" secondItem="7Hb-Xc-fQN" secondAttribute="bottom" constant="4" id="tPF-sz-6el"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="button" destination="7Hb-Xc-fQN" id="i9i-ER-D5d"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="9fj-zE-pjE" firstAttribute="top" secondItem="PEK-Ck-d5I" secondAttribute="bottom" id="OqF-IF-cZW"/>
-                            <constraint firstAttribute="trailing" secondItem="xsB-52-Q0m" secondAttribute="trailing" id="a6W-tX-LcU"/>
-                            <constraint firstItem="PEK-Ck-d5I" firstAttribute="leading" secondItem="4MR-aj-pOj" secondAttribute="leading" constant="8" id="bzI-pi-wLy"/>
-                            <constraint firstItem="9fj-zE-pjE" firstAttribute="leading" secondItem="4MR-aj-pOj" secondAttribute="leading" constant="8" id="hSx-dq-xDI"/>
-                            <constraint firstItem="PEK-Ck-d5I" firstAttribute="top" secondItem="xsB-52-Q0m" secondAttribute="bottom" id="iSg-eo-iSs"/>
-                            <constraint firstItem="xsB-52-Q0m" firstAttribute="leading" secondItem="4MR-aj-pOj" secondAttribute="leading" constant="8" id="mm9-OI-dqX"/>
-                            <constraint firstItem="zwo-1a-0Lu" firstAttribute="top" secondItem="9fj-zE-pjE" secondAttribute="bottom" id="rQf-eZ-jbg"/>
-                            <constraint firstAttribute="trailing" secondItem="PEK-Ck-d5I" secondAttribute="trailing" id="t3o-8Y-27a"/>
-                            <constraint firstAttribute="trailing" secondItem="9fj-zE-pjE" secondAttribute="trailing" id="tEb-FN-AJ1"/>
-                            <constraint firstItem="xsB-52-Q0m" firstAttribute="top" secondItem="4MR-aj-pOj" secondAttribute="top" id="tW3-oE-uU5"/>
-                            <constraint firstAttribute="trailing" secondItem="zwo-1a-0Lu" secondAttribute="trailing" id="y2V-BC-mLC"/>
-                            <constraint firstItem="zwo-1a-0Lu" firstAttribute="leading" secondItem="4MR-aj-pOj" secondAttribute="leading" constant="8" id="yJp-W4-lhv"/>
+                            <constraint firstItem="dIu-2G-fVR" firstAttribute="top" secondItem="OPS-mO-8rw" secondAttribute="top" id="YSe-Or-rKD"/>
+                            <constraint firstItem="OPS-mO-8rw" firstAttribute="bottom" secondItem="dIu-2G-fVR" secondAttribute="bottom" id="gFt-hX-hE6"/>
+                            <constraint firstItem="OPS-mO-8rw" firstAttribute="trailing" secondItem="dIu-2G-fVR" secondAttribute="trailing" id="jXM-ll-Qkz"/>
+                            <constraint firstItem="dIu-2G-fVR" firstAttribute="leading" secondItem="OPS-mO-8rw" secondAttribute="leading" id="zPp-WR-RTG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="OPS-mO-8rw"/>
                     </view>
                     <connections>
-                        <outlet property="ingredients" destination="PEK-Ck-d5I" id="DpW-Cb-7Xb"/>
-                        <outlet property="logout" destination="zwo-1a-0Lu" id="x7x-Hd-YQk"/>
-                        <outlet property="saved" destination="xsB-52-Q0m" id="Mo6-40-wEc"/>
-                        <outlet property="settings" destination="9fj-zE-pjE" id="Dno-6C-Wlr"/>
+                        <outlet property="tableView" destination="dIu-2G-fVR" id="TCm-ra-byM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qyH-ha-SxW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2646" y="3076"/>
+            <point key="canvasLocation" x="2645.6521739130435" y="3075.6696428571427"/>
         </scene>
         <!--Saved View Controller-->
         <scene sceneID="phM-fa-9vl">

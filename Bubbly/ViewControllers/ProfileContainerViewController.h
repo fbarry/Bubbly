@@ -11,8 +11,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol SidebarStatusDelegate <NSObject>
+
+- (void)didOpenSidebar:(BOOL)status;
+
+@end
+
 @interface ProfileContainerViewController : UIViewController
 
+@property (strong, nonatomic) id<SidebarStatusDelegate>delegate;
 @property (strong, nonatomic) User *user;
 
 - (IBAction)didTapSidebar:(id)sender;

@@ -11,13 +11,13 @@
 #import "SceneDelegate.h"
 #import "LoginViewController.h"
 #import "User.h"
+#import "SidebarCell.h"
 
-@interface SidebarViewController ()
+static const int numOptions = 4;
 
-@property (weak, nonatomic) IBOutlet UIButton *saved;
-@property (weak, nonatomic) IBOutlet UIButton *ingredients;
-@property (weak, nonatomic) IBOutlet UIButton *settings;
-@property (weak, nonatomic) IBOutlet UIButton *logout;
+@interface SidebarViewController () <UITableViewDelegate, UITableViewDataSource>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -27,39 +27,75 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
-#pragma mark - Action Handlers
+#pragma mark - TableViewDataSource
 
-- (IBAction)didTapSettings:(id)sender {
-    [self.parentViewController performSegueWithIdentifier:@"Settings" sender:self];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    SidebarCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SidebarCell"];
+    
+    switch (indexPath.row) {
+        case 0:
+            [cell.button setTitle:@"Saved" forState:UIControlStateNormal];
+            break;
+        case 1:
+            [cell.button setTitle:@"Ingredients" forState:UIControlStateNormal];
+            break;
+        case 2:
+            [cell.button setTitle:@"Settings" forState:UIControlStateNormal];
+            break;
+        case 3:
+            [cell.button setTitleColor:[UIColor systemRedColor] forState:UIControlStateNormal];
+            [cell.button setTitle:@"Logout" forState:UIControlStateNormal];
+            break;
+        default:
+            cell = nil;
+            break;
+    }
+    
+    return cell;
 }
 
-- (IBAction)didTapSaved:(id)sender {
-    [self.parentViewController performSegueWithIdentifier:@"Saved" sender:self];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    switch (indexPath.row) {
+        case 0:
+            [self.parentViewController performSegueWithIdentifier:@"Saved" sender:self];
+            break;
+        case 1:
+            [self.parentViewController performSegueWithIdentifier:@"Buy" sender:self];
+            break;
+        case 2:
+            [self.parentViewController performSegueWithIdentifier:@"Settings" sender:self];
+            break;
+        case 3:
+            [Utilities presentConfirmationInViewController:self withTitle:@"Are you sure you want to logout?" yesHandler:^{
+                SceneDelegate *sceneDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
+
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                LoginViewController *welcomeViewController = [storyboard instantiateViewControllerWithIdentifier:@"WelcomeViewController"];
+                sceneDelegate.window.rootViewController = welcomeViewController;
+
+                [User logOut];
+            }];
+            break;
+    }
 }
 
-- (IBAction)didTapBuy:(id)sender {
-    [self.parentViewController performSegueWithIdentifier:@"Buy" sender:self];
-}
-
-- (IBAction)didTapLogout:(id)sender {
-    [Utilities presentConfirmationInViewController:self withTitle:@"Are you sure you want to logout?" yesHandler:^{
-        SceneDelegate *sceneDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
-
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        LoginViewController *welcomeViewController = [storyboard instantiateViewControllerWithIdentifier:@"WelcomeViewController"];
-        sceneDelegate.window.rootViewController = welcomeViewController;
-
-        [User logOut];
-    }];
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return numOptions;
 }
 
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-
+    
 }
 
 @end

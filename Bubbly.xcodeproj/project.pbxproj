@@ -11,6 +11,7 @@
 		50ECE9C070625C7DA438EE04 /* Pods_Bubbly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82B807CAA0C917B1F091368C /* Pods_Bubbly.framework */; };
 		8C28EAA924D084D500AE876E /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C28EAA824D084D500AE876E /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
 		8C28EAAC24D084E700AE876E /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C28EAAB24D084E700AE876E /* TPKeyboardAvoidingScrollView.m */; };
+		8C3C015A24D0DA9F0016BEFB /* SidebarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C015924D0DA9F0016BEFB /* SidebarCell.m */; };
 		8C66984F24CF4C6100BB2579 /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 8C66984E24CF4C6100BB2579 /* FacebookShare */; };
 		8C66985124CF4C6100BB2579 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 8C66985024CF4C6100BB2579 /* FacebookCore */; };
 		8C66985324CF4C6100BB2579 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 8C66985224CF4C6100BB2579 /* FacebookLogin */; };
@@ -74,6 +75,8 @@
 		8C28EAA824D084D500AE876E /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
 		8C28EAAA24D084E700AE876E /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
 		8C28EAAB24D084E700AE876E /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
+		8C3C015824D0DA9F0016BEFB /* SidebarCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SidebarCell.h; sourceTree = "<group>"; };
+		8C3C015924D0DA9F0016BEFB /* SidebarCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SidebarCell.m; sourceTree = "<group>"; };
 		8C66985D24CF7C2400BB2579 /* FacebookShareView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FacebookShareView.h; sourceTree = "<group>"; };
 		8C66985E24CF7C2400BB2579 /* FacebookShareView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FacebookShareView.m; sourceTree = "<group>"; };
 		8C6FECE224CA2EC500B14E8F /* BalloonMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
@@ -290,6 +293,8 @@
 				8C6FECE224CA2EC500B14E8F /* BalloonMarker.swift */,
 				8C66985D24CF7C2400BB2579 /* FacebookShareView.h */,
 				8C66985E24CF7C2400BB2579 /* FacebookShareView.m */,
+				8C3C015824D0DA9F0016BEFB /* SidebarCell.h */,
+				8C3C015924D0DA9F0016BEFB /* SidebarCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -617,6 +622,7 @@
 				8C9EBFDC24BCD27E0031380E /* Utilities.m in Sources */,
 				8C9EBFA624BCC1330031380E /* SceneDelegate.m in Sources */,
 				8CA0DB8924BE266700B93FEC /* ComposeViewController.m in Sources */,
+				8C3C015A24D0DA9F0016BEFB /* SidebarCell.m in Sources */,
 				8C9EBFFD24BCDF2E0031380E /* SignUpViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

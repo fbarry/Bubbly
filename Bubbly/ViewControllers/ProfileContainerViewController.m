@@ -13,7 +13,7 @@
 #import "SettingsViewController.h"
 #import "BuyViewController.h"
 
-@interface ProfileContainerViewController ()
+@interface ProfileContainerViewController () <ProfileTapGestureDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *profile;
 @property (weak, nonatomic) IBOutlet UIView *sidebar;
@@ -26,10 +26,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+     
     self.profile.alpha = 1;
     self.sidebar.alpha = 0;
-            
+    
     self.sidebar.layer.cornerRadius = 16;
     self.sidebar.layer.shadowColor = [UIColor lightGrayColor].CGColor;
     self.sidebar.layer.shadowOffset = CGSizeMake(-8.0f, 0);
@@ -44,6 +44,14 @@
     }
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:YES];
+    
+    if (self.sidebar.alpha == 1) {
+        [self didTapSidebar:self];
+    }
+}
+
 #pragma mark - Action Handlers
 
 - (IBAction)didTapSidebar:(id)sender {
@@ -53,13 +61,21 @@
             self.profile.alpha = 0.5;
             self.sidebar.alpha = 1;
         }];
+        [self.delegate didOpenSidebar:YES];
     } else {
         [UIView animateWithDuration:0.5f animations:^{
             self.profile.frame = CGRectMake(self.profile.frame.origin.x+self.sidebar.frame.size.width, self.profile.frame.origin.y, self.profile.frame.size.width, self.profile.frame.size.height);
             self.profile.alpha = 1;
             self.sidebar.alpha = 0;
         }];
+        [self.delegate didOpenSidebar:NO];
     }
+}
+
+#pragma mark - ProfileTapGestureDelegate
+
+- (void)didTapCloseSidebar {
+    [self didTapSidebar:self];
 }
 
 #pragma mark - Navigation
@@ -83,6 +99,8 @@
             self.user = [User currentUser];
         }
         childViewController.user = self.user;
+        childViewController.delegate = self;
+        childViewController.profileContainerViewController = self;
     }
 }
 

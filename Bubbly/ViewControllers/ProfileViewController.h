@@ -8,12 +8,21 @@
 
 #import <UIKit/UIKit.h>
 #import "User.h"
+#import "ProfileContainerViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol ProfileTapGestureDelegate <NSObject>
+
+- (void)didTapCloseSidebar;
+
+@end
+
 @interface ProfileViewController : UIViewController
 
+@property (strong, nonatomic) id<ProfileTapGestureDelegate>delegate;
 @property (strong, nonatomic) User *user;
+@property (strong, nonatomic) ProfileContainerViewController *profileContainerViewController;
 
 @end
 

@@ -14,7 +14,7 @@
 #import "ProfileContainerViewController.h"
 #import "DetailsViewController.h"
 
-@interface SavedViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface SavedViewController () <UICollectionViewDelegate, UICollectionViewDataSource, SidebarStatusDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) NSArray *recipes;
@@ -27,7 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+        
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     

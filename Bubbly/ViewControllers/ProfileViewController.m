@@ -15,11 +15,10 @@
 #import "SavedViewController.h"
 #import "DetailsViewController.h"
 #import "Recipe.h"
-#import "ProfileContainerViewController.h"
 #import "DataViewController.h"
 #import "SavedViewController.h"
 
-@interface ProfileViewController ()
+@interface ProfileViewController () <SidebarStatusDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *profilePicture;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
@@ -28,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet UIView *dataView;
 @property (weak, nonatomic) IBOutlet UIView *customView;
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *closeSidebar;
 @property (strong, nonatomic) id<ProfileProtocol>profile;
 
 @end
@@ -38,9 +38,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-        
+    
+    self.profileContainerViewController.delegate = self;
+    
     self.dataView.alpha = 1;
     self.customView.alpha = 0;
+    
+    [self.closeSidebar setEnabled:NO];
     
     [Utilities roundImage:self.profilePicture];    
 }
@@ -70,6 +74,22 @@
             break;
         default:
             break;
+    }
+}
+
+- (IBAction)didTapBackground:(id)sender {
+    [self.delegate didTapCloseSidebar];
+}
+
+#pragma mark - SidebarStatusDelegate
+
+- (void)didOpenSidebar:(BOOL)status {
+    if (status) {
+        [self.segmentedControl setEnabled:NO];
+        [self.closeSidebar setEnabled:YES];
+    } else {
+        [self.segmentedControl setEnabled:YES];
+        [self.closeSidebar setEnabled:NO];
     }
 }
 
