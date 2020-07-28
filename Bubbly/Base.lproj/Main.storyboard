@@ -227,7 +227,6 @@
                         <outlet property="weatherIcon" destination="P5N-ro-oI3" id="rG2-C8-iky"/>
                         <outlet property="welcomeLabel" destination="FDl-Ih-rKm" id="yVK-fT-XM8"/>
                         <segue destination="a4u-T3-6sY" kind="show" identifier="Compose" id="jbN-Zm-E9i"/>
-                        <segue destination="ekq-RU-UKA" kind="presentation" identifier="FBLogin" id="Dc4-Xi-l7K"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hvd-hw-cWM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -238,34 +237,6 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-1643.4782608695652" y="3075.6696428571427"/>
-        </scene>
-        <!--Login View Controller-->
-        <scene sceneID="m8m-wP-DZv">
-            <objects>
-                <viewController id="ekq-RU-UKA" customClass="FBLoginViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="vvb-2h-lHe">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MT2-EV-tFb" customClass="FBSDKLoginButton">
-                                <rect key="frame" x="144" y="389" width="126" height="30"/>
-                                <state key="normal" title="Login to Facebook"/>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="MT2-EV-tFb" firstAttribute="centerX" secondItem="pYd-kd-EwQ" secondAttribute="centerX" id="CL2-8O-NW1"/>
-                            <constraint firstItem="MT2-EV-tFb" firstAttribute="centerY" secondItem="pYd-kd-EwQ" secondAttribute="centerY" id="mpm-LB-PGh"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="pYd-kd-EwQ"/>
-                    </view>
-                    <connections>
-                        <outlet property="loginButton" destination="MT2-EV-tFb" id="aZO-hV-cqc"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sL3-3f-7X0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-245" y="3806"/>
         </scene>
         <!--Compose Recipe-->
         <scene sceneID="eyJ-oJ-f4S">
@@ -1645,7 +1616,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="O1O-qH-44E">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="759"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="kZi-eO-DJO">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>

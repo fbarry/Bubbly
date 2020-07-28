@@ -8,7 +8,7 @@
 
 #import "SceneDelegate.h"
 #import "User.h"
-#import <FBSDKCoreKitImport.h>
+#import <FBSDKCoreKit.h>
 
 @interface SceneDelegate ()
 
@@ -30,6 +30,7 @@
     if (URLContexts.count == 0) {
         return;
     }
+        
     NSURL *url = [URLContexts anyObject].URL;
     [FBSDKApplicationDelegate.sharedInstance application:UIApplication.sharedApplication
                                                  openURL:url

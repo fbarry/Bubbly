@@ -26,7 +26,16 @@
                                          withTitle:self.title
                                         yesHandler:^{
         if (![FBSDKAccessToken currentAccessToken]) {
-            [self.viewController performSegueWithIdentifier:@"FBLogin" sender:self];
+            FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
+            [loginManager logInWithPermissions:@[@"public_profile"] fromViewController:self.viewController handler:^(FBSDKLoginManagerLoginResult * _Nullable result, NSError * _Nullable error) {
+                if (error) {
+                    [Utilities presentOkAlertControllerInViewController:self.viewController
+                                                              withTitle:error.userInfo[FBSDKErrorLocalizedTitleKey]
+                                                                message:[NSString stringWithFormat:@"%@", error.userInfo[FBSDKErrorLocalizedDescriptionKey]]];
+                } else {
+                    [self createPost];
+                }
+            }];
         } else {
             [self createPost];
         }

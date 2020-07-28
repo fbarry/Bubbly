@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <FBSDKCoreKit.h>
 #import <FBSDKLoginKit.h>
-#import <FBSDKSharing.h>
+#import <FBSDKShareKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

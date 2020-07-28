@@ -17,11 +17,10 @@
 #import <PopupDialog-Swift.h>
 #import "TPKeyboardAvoidingScrollView.h"
 #import "FacebookShareView.h"
-#import "FBLoginViewController.h"
 
 static const int numLogs = 4;
 
-@interface HomeViewController () <CLLocationManagerDelegate, FBLoginViewControllerDelegate>
+@interface HomeViewController () <CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UILabel *welcomeLabel;
@@ -82,9 +81,7 @@ float temp, feelsLike, humidity;
     [self.pieChart setUserInteractionEnabled:NO];
     
     [self getDayLog];
-    
-    NSLog(@"%@", self.user);
-    
+        
     if ([self.user.weatherEnabled isEqualToNumber:[NSNumber numberWithInt:3]]){
         self.user.weatherEnabled = [NSNumber numberWithInt:0];
         [Utilities presentConfirmationInViewController:self
@@ -104,7 +101,9 @@ float temp, feelsLike, humidity;
         [self.weatherIcon setUserInteractionEnabled:YES];
         [self.infoButton setHidden:NO];
         [self.infoButton setEnabled:YES];
-        [self setUpLocationManager];
+        if (!self.locationManager) {
+            [self setUpLocationManager];
+        }
     } else {
         [self.weatherIcon setHidden:YES];
         [self.weatherIcon setUserInteractionEnabled:NO];
@@ -193,18 +192,6 @@ float temp, feelsLike, humidity;
                                                                  photos:@[[UIImage systemImageNamed:@"book"]]
                                                        inViewController:self];
     [share presentShareView];
-}
-
-#pragma mark - FBLoginViewControllerDelegate
-
-- (void)completedWithResult:(nullable FBSDKLoginManagerLoginResult *)result error:(nullable NSError *)error inShareView:(FacebookShareView *)share {
-    if (error) {
-        [Utilities presentOkAlertControllerInViewController:self
-                                                  withTitle:@"Could not login to Facebook"
-                                                    message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
-    } else {
-        [share createPost];
-    }
 }
 
 #pragma mark - API Calls
@@ -377,11 +364,6 @@ float temp, feelsLike, humidity;
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"FBLogin"]) {
-        FBLoginViewController *fbLoginViewController = [segue destinationViewController];
-        fbLoginViewController.delegate = self;
-        fbLoginViewController.shareView = sender;
-    }
 }
 
 @end

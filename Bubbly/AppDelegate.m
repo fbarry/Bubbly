@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
-#import <FBSDKCoreKitImport.h>
+#import <FBSDKCoreKit.h>
 
 @interface AppDelegate ()
 
