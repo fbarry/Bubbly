@@ -160,7 +160,7 @@ static const int kStateKey;
     self.contentInset = state.priorInset;
     self.scrollIndicatorInsets = state.priorScrollIndicatorInsets;
     self.pagingEnabled = state.priorPagingEnabled;
-	[self layoutIfNeeded];
+    [self layoutIfNeeded];
     [UIView commitAnimations];
 }
 
@@ -174,7 +174,7 @@ static const int kStateKey;
 - (void)TPKeyboardAvoiding_updateFromContentSizeChange {
     TPKeyboardAvoidingState *state = self.keyboardAvoidingState;
     if ( state.keyboardVisible ) {
-		state.priorContentSize = self.contentSize;
+        state.priorContentSize = self.contentSize;
         self.contentInset = [self TPKeyboardAvoiding_contentInsetForKeyboard];
     }
 }
