@@ -34,7 +34,7 @@ NSDate *referenceDate;
     [self.lineChart.chartDescription setEnabled:NO];
     [self.lineChart.rightAxis setEnabled:NO];
     [self.lineChart.legend setEnabled:NO];
-    [self.lineChart setDrawMarkers:YES];
+//    [self.lineChart setDrawMarkers:YES];
     
     referenceDate = [self getDateAtMidnight:[NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay value:-20 toDate:[NSDate date] options:0]];
     
@@ -70,7 +70,7 @@ NSDate *referenceDate;
             self.chartData = (NSMutableArray *)objects;
             
             IntakeDayLog *firstLog = self.chartData[0];
-            NSDate *indexDate = referenceDate = [self getDateAtMidnight:[NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay value:-2 toDate:firstLog.createdAt options:0]];
+            NSDate *indexDate = referenceDate = [self getDateAtMidnight:firstLog.createdAt];
 
             for (int i = 0; i < self.chartData.count; i++) {
                 int indx;
@@ -79,21 +79,22 @@ NSDate *referenceDate;
                 while (![midnightDate isEqualToDate:indexDate]) {
                     i++;
                     indx = [self getXCoordFromDate:indexDate];
-                    [self.chartData insertObject:[IntakeDayLog new] atIndex:0];
+                    [self.chartData insertObject:[IntakeDayLog new] atIndex:i];
                     indexDate = [NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:indexDate options:0];
                 }
                 indx = [self getXCoordFromDate:indexDate];
                 indexDate = [NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:indexDate options:0];
             }
                         
-            BalloonMarker *marker = [[BalloonMarker alloc] initWithColor:[UIColor systemGray6Color]
-                                                                     font:[UIFont fontWithName:@"Avenir Next Condensed" size:16]
-                                                                textColor:[UIColor blackColor]
-                                                                   insets:UIEdgeInsetsMake(4, 4, 4, 4)
-                                                               intakeLogs:self.chartData];
-            marker.minimumSize = CGSizeMake(75.0, 35.0);
-            self.lineChart.marker = marker;
+//            BalloonMarker *marker = [[BalloonMarker alloc] initWithColor:[UIColor systemGray6Color]
+//                                                                     font:[UIFont fontWithName:@"Avenir Next Condensed" size:16]
+//                                                                textColor:[UIColor blackColor]
+//                                                                   insets:UIEdgeInsetsMake(4, 4, 4, 4)
+//                                                               intakeLogs:self.chartData];
+//            marker.minimumSize = CGSizeMake(75.0, 35.0);
+//            self.lineChart.marker = marker;
             
+            self.lineChart.xAxis.axisMinimum = 0;
             self.lineChart.xAxis.axisMaximum = self.chartData.count;
             self.lineChart.xAxis.labelCount = self.chartData.count;
                                      
@@ -107,23 +108,33 @@ NSDate *referenceDate;
         return;
     }
     
-    LineChartDataSet *dataSet = [[LineChartDataSet alloc] init];
+    double lastValidLogGoal = 0;
+    NSMutableArray<ChartDataEntry *> *goalDataEntries = [[NSMutableArray alloc] init];
+    NSMutableArray<ChartDataEntry *> *achievedDataEntries = [[NSMutableArray alloc] init];
+    NSMutableArray<UIColor *> *achievedColors = [[NSMutableArray alloc] init];
+    
     for (int i = 0; i < self.chartData.count; i++) {
         IntakeDayLog *log = self.chartData[i];
-        double x = i;
-        double y = [log.achieved doubleValue];
-        ChartDataEntry *dataEntry = [[ChartDataEntry alloc] initWithX:x y:y];
-        if (![dataSet addEntryOrdered:dataEntry]) {
-            [Utilities presentOkAlertControllerInViewController:self
-                                                      withTitle:@"Error Building Data"
-                                                        message:@"Re-enter page to try again"];
-            break;
+        if (log.goal.doubleValue > 0) {
+            lastValidLogGoal = log.goal.doubleValue;
         }
+        double x = i;
+        [goalDataEntries addObject:[[ChartDataEntry alloc] initWithX:x y:lastValidLogGoal]];
+        [achievedDataEntries addObject:[[ChartDataEntry alloc] initWithX:x y:log.achieved.doubleValue icon:log.achieved.doubleValue >= lastValidLogGoal ? [[UIImage systemImageNamed:@"star.fill"] imageWithTintColor:[UIColor systemYellowColor]]: nil]];
+        [achievedColors addObject:log.achieved.doubleValue >= lastValidLogGoal ? self.lineChart.backgroundColor : [UIColor systemGrayColor]];
     }
     
-    dataSet.circleRadius = 6.0;
+    LineChartDataSet *goalDataSet = [[LineChartDataSet alloc] initWithEntries:goalDataEntries];
+    LineChartDataSet *achievedDataSet = [[LineChartDataSet alloc] initWithEntries:achievedDataEntries];
+
+    goalDataSet.circleRadius = achievedDataSet.circleRadius = 6.0;
+    goalDataSet.lineDashLengths = @[[NSNumber numberWithFloat:3.0f]];
+    goalDataSet.colors = @[[UIColor systemGray4Color]];
+    goalDataSet.circleColors = @[[UIColor systemGray4Color]];
+    achievedDataSet.colors = @[[UIColor systemGrayColor]];
+    achievedDataSet.circleColors = (NSArray *)achievedColors;
     
-    LineChartData *data = [[LineChartData alloc] initWithDataSet:dataSet];
+    LineChartData *data = [[LineChartData alloc] initWithDataSets:@[achievedDataSet, goalDataSet]];
     [data setDrawValues:NO];
     self.lineChart.data = data;
     self.lineChart.data.highlightEnabled = YES;

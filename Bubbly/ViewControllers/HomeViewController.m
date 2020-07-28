@@ -139,10 +139,11 @@ float temp, feelsLike, humidity;
     double percent = [self.dayLog.achieved doubleValue]/[self.dayLog.goal doubleValue]*100;
     PieChartDataSet *data = [[PieChartDataSet alloc] init];
     [data setDrawValuesEnabled:NO];
-    data.colors = @[[UIColor systemTealColor], [UIColor systemGray6Color]];
+    data.colors = @[[UIColor colorWithRed:116.0/255.0 green:202.0/255.0 blue:234.0/255.0 alpha:1], [UIColor systemGray6Color]];
     
-    if (percent > 100) {
+    if (percent >= 100) {
         if ([data addEntry:[[PieChartDataEntry alloc] initWithValue:100]]) {
+            data.colors = @[[UIColor systemGreenColor]];
             self.pieChart.data = [[PieChartData alloc] initWithDataSet:data];
         } else {
             [Utilities presentOkAlertControllerInViewController:self
@@ -227,7 +228,8 @@ float temp, feelsLike, humidity;
             }
             
             [Utilities roundImage:self.weatherIcon];
-            self.weatherIcon.layer.borderWidth = 0;
+            self.weatherIcon.layer.borderWidth = 0.5f;
+            self.weatherIcon.layer.borderColor = [UIColor whiteColor].CGColor;
         }
     }];
 }
@@ -270,19 +272,7 @@ float temp, feelsLike, humidity;
     }];
 }
 
-#pragma mark - Action Handlers
-
-- (IBAction)didTapWeather:(id)sender {
-    NSString *message = [NSString stringWithFormat:@"Temparature: %.1f°\nFeels Like: %.1f°\nHumidity: %.0f%%", temp, feelsLike, humidity];
-    if (feelsLike >= 90) {
-        message = [message stringByAppendingString:@"\nRemember to drink extra water!"];
-    }
-    [Utilities presentOkAlertControllerInViewController:self
-                                              withTitle:@"Weather"
-                                                message:message];
-}
-
-- (IBAction)didTapLog:(UIButton *)sender {
+- (void)saveLogChangeWithSender:(UIButton *)sender {
     IntakeLog *logChange = [IntakeLog new];
     if (self.segmentedControl.selectedSegmentIndex != 4) {
         logChange.logAmount = [NSNumber numberWithInteger:[[self.segmentedControl titleForSegmentAtIndex:self.segmentedControl.selectedSegmentIndex] integerValue]];
@@ -334,6 +324,30 @@ float temp, feelsLike, humidity;
             }];
         }
     }];
+}
+
+#pragma mark - Action Handlers
+
+- (IBAction)didTapWeather:(id)sender {
+    NSString *message = [NSString stringWithFormat:@"Temparature: %.1f°\nFeels Like: %.1f°\nHumidity: %.0f%%", temp, feelsLike, humidity];
+    if (feelsLike >= 90) {
+        message = [message stringByAppendingString:@"\nRemember to drink extra water!"];
+    }
+    [Utilities presentOkAlertControllerInViewController:self
+                                              withTitle:@"Weather"
+                                                message:message];
+}
+
+- (IBAction)didTapLog:(UIButton *)sender {
+    if ([sender.currentTitle isEqualToString:@"Delete"]) {
+        [Utilities presentConfirmationInViewController:self
+                                             withTitle:@"Are you sure you want to delete this log amount?"
+                                            yesHandler:^{
+            [self saveLogChangeWithSender:sender];
+        }];
+    } else {
+        [self saveLogChangeWithSender:sender];
+    }
 }
 
 - (IBAction)didTapCompose:(id)sender {
