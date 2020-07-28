@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		3288EA0B5D7CFE6F57A1CD14 /* Pods_BubblyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5A990E042C0C32D4EF3188D /* Pods_BubblyTests.framework */; };
 		50ECE9C070625C7DA438EE04 /* Pods_Bubbly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82B807CAA0C917B1F091368C /* Pods_Bubbly.framework */; };
-		8C28EAA324D0816500AE876E /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C28EAA224D0816500AE876E /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
-		8C28EAA624D0833000AE876E /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C28EAA524D0833000AE876E /* TPKeyboardAvoidingScrollView.m */; };
+		8C28EAA924D084D500AE876E /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C28EAA824D084D500AE876E /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
+		8C28EAAC24D084E700AE876E /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C28EAAB24D084E700AE876E /* TPKeyboardAvoidingScrollView.m */; };
 		8C4D455A24CF8C8E00BCF93F /* FBLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4D455924CF8C8E00BCF93F /* FBLoginViewController.m */; };
 		8C66984F24CF4C6100BB2579 /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 8C66984E24CF4C6100BB2579 /* FacebookShare */; };
 		8C66985124CF4C6100BB2579 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 8C66985024CF4C6100BB2579 /* FacebookCore */; };
@@ -71,10 +71,10 @@
 		35721D81EB89891511B44E78 /* Pods-Bubbly-BubblyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bubbly-BubblyUITests.release.xcconfig"; path = "Target Support Files/Pods-Bubbly-BubblyUITests/Pods-Bubbly-BubblyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		697DCC4848E080A14A05DE47 /* Pods-BubblyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BubblyTests.debug.xcconfig"; path = "Target Support Files/Pods-BubblyTests/Pods-BubblyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		82B807CAA0C917B1F091368C /* Pods_Bubbly.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bubbly.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8C28EAA124D0816500AE876E /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
-		8C28EAA224D0816500AE876E /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
-		8C28EAA424D0833000AE876E /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
-		8C28EAA524D0833000AE876E /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
+		8C28EAA724D084D500AE876E /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
+		8C28EAA824D084D500AE876E /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
+		8C28EAAA24D084E700AE876E /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
+		8C28EAAB24D084E700AE876E /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
 		8C4D455824CF8C8E00BCF93F /* FBLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBLoginViewController.h; sourceTree = "<group>"; };
 		8C4D455924CF8C8E00BCF93F /* FBLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBLoginViewController.m; sourceTree = "<group>"; };
 		8C66985D24CF7C2400BB2579 /* FacebookShareView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FacebookShareView.h; sourceTree = "<group>"; };
@@ -208,12 +208,12 @@
 		8C21337D24CF36B300C796BA /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				8C28EAA424D0833000AE876E /* TPKeyboardAvoidingScrollView.h */,
-				8C28EAA524D0833000AE876E /* TPKeyboardAvoidingScrollView.m */,
-				8C28EAA124D0816500AE876E /* UIScrollView+TPKeyboardAvoidingAdditions.h */,
-				8C28EAA224D0816500AE876E /* UIScrollView+TPKeyboardAvoidingAdditions.m */,
 				8C9EBFDA24BCD27E0031380E /* Utilities.h */,
 				8C9EBFDB24BCD27E0031380E /* Utilities.m */,
+				8C28EAA724D084D500AE876E /* UIScrollView+TPKeyboardAvoidingAdditions.h */,
+				8C28EAA824D084D500AE876E /* UIScrollView+TPKeyboardAvoidingAdditions.m */,
+				8C28EAAA24D084E700AE876E /* TPKeyboardAvoidingScrollView.h */,
+				8C28EAAB24D084E700AE876E /* TPKeyboardAvoidingScrollView.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -599,6 +599,7 @@
 				8C9B17DA24CA03FB00D84D18 /* ProfileContainerViewController.m in Sources */,
 				8C6FECE324CA2EC500B14E8F /* BalloonMarker.swift in Sources */,
 				8CBB59A624C0BB9E0062FB0F /* BuyCell.m in Sources */,
+				8C28EAA924D084D500AE876E /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				8C66985F24CF7C2500BB2579 /* FacebookShareView.m in Sources */,
 				8C9EC00324BCDF3E0031380E /* RecipesViewController.m in Sources */,
 				8CA0DB9224BF58B100B93FEC /* BuyViewController.m in Sources */,
@@ -614,13 +615,12 @@
 				8C9EC00924BCDF4E0031380E /* ProfileViewController.m in Sources */,
 				8C9EC00C24BCDF5B0031380E /* SettingsViewController.m in Sources */,
 				8C9EC00624BCDF440031380E /* DetailsViewController.m in Sources */,
+				8C28EAAC24D084E700AE876E /* TPKeyboardAvoidingScrollView.m in Sources */,
 				8C9EBFA324BCC1330031380E /* AppDelegate.m in Sources */,
-				8C28EAA624D0833000AE876E /* TPKeyboardAvoidingScrollView.m in Sources */,
 				8C9EBFB424BCC1340031380E /* main.m in Sources */,
 				8C4D455A24CF8C8E00BCF93F /* FBLoginViewController.m in Sources */,
 				8CA0DB8624BE24DC00B93FEC /* IngredientCell.m in Sources */,
 				8C9EBFDC24BCD27E0031380E /* Utilities.m in Sources */,
-				8C28EAA324D0816500AE876E /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				8C9EBFA624BCC1330031380E /* SceneDelegate.m in Sources */,
 				8CA0DB8924BE266700B93FEC /* ComposeViewController.m in Sources */,
 				8C9EBFFD24BCDF2E0031380E /* SignUpViewController.m in Sources */,
