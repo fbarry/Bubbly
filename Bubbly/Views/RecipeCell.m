@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *recipePicture;
+@property (weak, nonatomic) IBOutlet UILabel *creator;
 
 @end
 
@@ -25,6 +26,7 @@
 - (void)setProperties {
     self.nameLabel.text = self.recipe.name;
     [self.recipePicture setImageWithURL:[NSURL URLWithString:self.recipe.picture.url] placeholderImage:[UIImage systemImageNamed:@"book"]];
+    self.creator.text = [@"@ " stringByAppendingString:self.recipe.creator.username];
 }
 
 @end

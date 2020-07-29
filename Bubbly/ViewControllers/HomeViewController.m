@@ -17,10 +17,11 @@
 #import <PopupDialog-Swift.h>
 #import "TPKeyboardAvoidingScrollView.h"
 #import "FacebookShareView.h"
+#import <UserNotifications/UserNotifications.h>
 
 static const int numLogs = 4;
 
-@interface HomeViewController () <CLLocationManagerDelegate>
+@interface HomeViewController () <CLLocationManagerDelegate, UNUserNotificationCenterDelegate>
 
 @property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UILabel *welcomeLabel;
@@ -81,15 +82,11 @@ float temp, feelsLike, humidity;
     [self.pieChart setUserInteractionEnabled:NO];
     
     [self getDayLog];
-        
-    if ([self.user.weatherEnabled isEqualToNumber:[NSNumber numberWithInt:3]]){
-        self.user.weatherEnabled = [NSNumber numberWithInt:0];
-        [Utilities presentConfirmationInViewController:self
-                                             withTitle:@"Would you like to view the weather in your area for increased water intake recommendations?"
-                                            yesHandler:^{
-            self.user.weatherEnabled = [NSNumber numberWithInt:1];
-            [self setUpLocationManager];
-        }];
+    
+    NSLog(@"%@", self.user);
+    
+    if ([self.user.notificationsEnabled isEqualToNumber:[NSNumber numberWithInt:2]]) {
+        [self defineNotificationsEnabled];
     }
 }
 
@@ -97,13 +94,13 @@ float temp, feelsLike, humidity;
     [super viewDidAppear:YES];
         
     if ([self.user.weatherEnabled isEqualToNumber:[NSNumber numberWithInt:1]]) {
-        [self.weatherIcon setHidden:NO];
-        [self.weatherIcon setUserInteractionEnabled:YES];
-        [self.infoButton setHidden:NO];
-        [self.infoButton setEnabled:YES];
         if (!self.locationManager) {
             [self setUpLocationManager];
         }
+    } else if ([self.user.weatherEnabled isEqualToNumber:[NSNumber numberWithInt:2]]) {
+        [self.weatherIcon setImage:[UIImage systemImageNamed:@"questionmark.circle"]];
+        [Utilities roundImage:self.weatherIcon];
+        self.weatherIcon.layer.borderWidth = 0;
     } else {
         [self.weatherIcon setHidden:YES];
         [self.weatherIcon setUserInteractionEnabled:NO];
@@ -120,12 +117,6 @@ float temp, feelsLike, humidity;
     }
     
     [self loadAnimation];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:YES];
-    
-    [self.user saveInBackground];
 }
 
 - (void)loadAnimation {
@@ -166,6 +157,38 @@ float temp, feelsLike, humidity;
     [self.pieChart animateWithXAxisDuration:1.2 easingOption:ChartEasingOptionEaseOutCirc];
 }
 
+#pragma mark - Define User Settings
+
+- (void)defineNotificationsEnabled {
+    self.user.notificationsEnabled = [NSNumber numberWithInt:0];
+    [Utilities presentConfirmationInViewController:self
+                                         withTitle:@"Would you like to enable water consumption reminders?"
+                                           message:@"You can change this option in app settings"
+                                        yesHandler:^{ [self setUpNotificationManager]; }
+                                         noHandler:^{
+        [self.user saveInBackground];
+    }];
+}
+
+- (void)defineWeatherEnabled {
+    self.user.weatherEnabled = [NSNumber numberWithInt:0];
+    [Utilities presentConfirmationInViewController:self
+                                         withTitle:@"Would you like to view the weather in your area for increased water intake recommendations?"
+                                           message:@"You can change this option in app settings"
+                                        yesHandler:^{
+        self.user.weatherEnabled = [NSNumber numberWithInt:1];
+        [self setUpLocationManager];
+        [self.user saveInBackground];
+    }
+                                         noHandler:^{
+        [self.weatherIcon setHidden:YES];
+        [self.weatherIcon setUserInteractionEnabled:NO];
+        [self.infoButton setHidden:YES];
+        [self.infoButton setEnabled:NO];
+        [self.user saveInBackground];
+    }];
+}
+
 #pragma mark - Location Manager
 
 - (void)setUpLocationManager {
@@ -184,6 +207,93 @@ float temp, feelsLike, humidity;
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
     [self updateWeather];
+}
+
+#pragma mark - Notification Center
+
+- (void)setUpNotificationManager {
+    PopupDialog *options = [self setUpNotificationPrompt];
+    
+    UNUserNotificationCenter *center = UNUserNotificationCenter.currentNotificationCenter;
+    center.delegate = self;
+    [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert | UNAuthorizationOptionSound | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        if (error) {
+            [Utilities presentOkAlertControllerInViewController:self
+                                                      withTitle:@"Could not set up notifications"
+                                                        message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
+        } else {
+            if (granted) {
+                self.user.notificationsEnabled = [NSNumber numberWithInt:1];
+                [self.user saveInBackground];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self presentViewController:options animated:YES completion:nil];
+                });
+            }
+        }
+    }];
+}
+
+- (PopupDialog *)setUpNotificationPrompt {
+    PopupDialog *success = [[PopupDialog alloc] initWithTitle:@"Time interval set"
+                                                      message:nil
+                                                        image:nil
+                                              buttonAlignment:UILayoutConstraintAxisHorizontal
+                                              transitionStyle:PopupDialogTransitionStyleFadeIn
+                                               preferredWidth:200
+                                          tapGestureDismissal:YES
+                                          panGestureDismissal:YES
+                                                hideStatusBar:YES
+                                                   completion:nil];
+    
+    PopupDialog *options = [[PopupDialog alloc] initWithTitle:@"Choose a time interval"
+                                                      message:nil image:nil
+                                              buttonAlignment:UILayoutConstraintAxisHorizontal
+                                              transitionStyle:PopupDialogTransitionStyleFadeIn
+                                               preferredWidth:200
+                                          tapGestureDismissal:NO
+                                          panGestureDismissal:NO
+                                                hideStatusBar:YES
+                                                   completion:^{
+        [UNUserNotificationCenter.currentNotificationCenter removeAllPendingNotificationRequests];
+
+        UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
+        content.title = @"Reminder to drink water!";
+                
+        UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:self.user.notifictionTimeInterval.doubleValue repeats:YES];
+        
+        UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:@"WaterReminder" content:content trigger:trigger];
+        
+        [UNUserNotificationCenter.currentNotificationCenter addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+            if (error) {
+                [Utilities presentOkAlertControllerInViewController:self
+                                                          withTitle:@"Could not set up notifications"
+                                                            message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
+            }
+        }];
+    }];
+    
+    PopupDialogButton *oneMinute = [[PopupDialogButton alloc] initWithTitle:@"1 min" height:50 dismissOnTap:YES action:^{
+        self.user.notifictionTimeInterval = [NSNumber numberWithInt:(1*60)];
+        [self presentViewController:success animated:YES completion:nil];
+        [success dismiss:nil];
+    }];
+    PopupDialogButton *oneHour = [[PopupDialogButton alloc] initWithTitle:@"1 hour" height:50 dismissOnTap:YES action:^{
+        self.user.notifictionTimeInterval = [NSNumber numberWithInt:(60*60)];
+        [self presentViewController:success animated:YES completion:nil];
+        [success dismiss:nil];
+    }];
+    PopupDialogButton *twoHours = [[PopupDialogButton alloc] initWithTitle:@"2 hours" height:50 dismissOnTap:YES action:^{
+        self.user.notifictionTimeInterval = [NSNumber numberWithInt:(120*60)];
+        [self presentViewController:success animated:YES completion:nil];
+        [success dismiss:nil];
+    }];
+    PopupDialogButton *cancel = [[PopupDialogButton alloc] initWithTitle:@"Cancel" height:50 dismissOnTap:YES action:^{
+        self.user.notificationsEnabled = [NSNumber numberWithInt:0];
+    }];
+    
+    [options addButtons:@[oneMinute, oneHour, twoHours, cancel]];
+    
+    return options;
 }
 
 #pragma mark - Facebook Sharing
@@ -310,14 +420,16 @@ float temp, feelsLike, humidity;
                     if (belowGoal && [self.dayLog.achieved intValue] >= [self.dayLog.goal intValue]) {
                         if ([self.user.FBConnected isEqualToNumber:[NSNumber numberWithInt:1]]) {
                             [self sharePost];
-                        } else if ([self.user.FBConnected isEqualToNumber:[NSNumber numberWithInt:3]]) {
+                        } else if ([self.user.FBConnected isEqualToNumber:[NSNumber numberWithInt:2]]) {
                             [self.user.FBConnected isEqualToNumber:[NSNumber numberWithInt:0]];
                             [Utilities presentConfirmationInViewController:self
                                                                  withTitle:@"Would you like to enable share to Facebook?"
+                                                                   message:@"You can change this option in app settings"
                                                                 yesHandler:^{
                                 [self.user.FBConnected isEqualToNumber:[NSNumber numberWithInt:1]];
                                 [self sharePost];
-                            }];
+                            }
+                                                                 noHandler:nil];
                         }
                     }
                 }
@@ -329,22 +441,28 @@ float temp, feelsLike, humidity;
 #pragma mark - Action Handlers
 
 - (IBAction)didTapWeather:(id)sender {
-    NSString *message = [NSString stringWithFormat:@"Temparature: %.1f°\nFeels Like: %.1f°\nHumidity: %.0f%%", temp, feelsLike, humidity];
-    if (feelsLike >= 90) {
-        message = [message stringByAppendingString:@"\nRemember to drink extra water!"];
+    if ([self.user.weatherEnabled isEqualToNumber:[NSNumber numberWithInt:2]]) {
+        [self defineWeatherEnabled];
+    } else {
+        NSString *message = [NSString stringWithFormat:@"Temparature: %.1f°\nFeels Like: %.1f°\nHumidity: %.0f%%", temp, feelsLike, humidity];
+        if (feelsLike >= 90) {
+            message = [message stringByAppendingString:@"\nRemember to drink extra water!"];
+        }
+        [Utilities presentOkAlertControllerInViewController:self
+                                                  withTitle:@"Weather"
+                                                    message:message];
     }
-    [Utilities presentOkAlertControllerInViewController:self
-                                              withTitle:@"Weather"
-                                                message:message];
 }
 
 - (IBAction)didTapLog:(UIButton *)sender {
     if ([sender.currentTitle isEqualToString:@"Delete"]) {
         [Utilities presentConfirmationInViewController:self
                                              withTitle:@"Are you sure you want to delete this log amount?"
+                                               message:nil
                                             yesHandler:^{
             [self saveLogChangeWithSender:sender];
-        }];
+        }
+                                             noHandler:nil];
     } else {
         [self saveLogChangeWithSender:sender];
     }

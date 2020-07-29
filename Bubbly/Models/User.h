@@ -31,6 +31,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) PFRelation *savedRecipes;
 @property (strong, nonatomic) NSNumber *FBConnected;
 @property (strong, nonatomic) NSNumber *weatherEnabled;
+@property (strong, nonatomic) NSNumber *notificationsEnabled;
+@property (strong, nonatomic) NSNumber *notifictionTimeInterval;
+@property (strong, nonatomic) NSDate *notificationBegin;
+@property (strong, nonatomic) NSDate *notificatonEnd;
 
 @end
 

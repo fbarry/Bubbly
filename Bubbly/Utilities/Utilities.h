@@ -17,9 +17,12 @@ NS_ASSUME_NONNULL_BEGIN
 + (void) presentOkAlertControllerInViewController:(UIViewController *)viewController
                                         withTitle:(NSString *)title
                                           message:(NSString * _Nullable)message;
+
 + (void)presentConfirmationInViewController:(UIViewController *)viewController
                                   withTitle:(nonnull NSString *)title
-                                 yesHandler:(void(^)(void))yesHandler;
+                                    message:(NSString * _Nullable)message
+                                 yesHandler:(void(^)(void))yesHandler
+                                  noHandler:(void(^ _Nullable)(void))noHandler;
 
 + (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size;
 

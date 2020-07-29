@@ -20,6 +20,10 @@
 @dynamic savedRecipes;
 @dynamic FBConnected;
 @dynamic weatherEnabled;
+@dynamic notificationsEnabled;
+@dynamic notifictionTimeInterval;
+@dynamic notificationBegin;
+@dynamic notificatonEnd;
 
 - (NSURL *)profilePictureURL {
     return [NSURL URLWithString:self.profilePicture.url];

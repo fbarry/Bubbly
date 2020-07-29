@@ -13,6 +13,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "TPKeyboardAvoidingScrollView.h"
 #import <MBProgressHUD/MBProgressHUD.h>
+#import <UserNotifications/UserNotifications.h>
 
 static const int numLogs = 4;
 
@@ -31,6 +32,9 @@ static const int numLogs = 4;
 @property (strong, nonatomic) IBOutletCollection(UITextField) NSArray<UITextField *> *logFields;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *FBSegment;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *weatherSegment;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *notificationsSegment;
+@property (weak, nonatomic) IBOutlet UILabel *timeIntervalLabel;
+@property (weak, nonatomic) IBOutlet UITextField *timeIntervalField;
 
 @end
 
@@ -50,11 +54,19 @@ static const int numLogs = 4;
     [imageView setImageWithURL:[NSURL URLWithString:self.user.backgroundPicture.url]];
     [self.backgroundPicture setImage:imageView.image forState:UIControlStateNormal];
     
+    self.timeIntervalField.placeholder = [NSString stringWithFormat:@"%d", (self.user.notifictionTimeInterval.intValue / 60)];
+    
     if ([self.user.FBConnected isEqualToNumber:[NSNumber numberWithInt:1]]) {
         self.FBSegment.selectedSegmentIndex = 1;
     }
     if ([self.user.weatherEnabled isEqualToNumber:[NSNumber numberWithInt:1]]) {
         self.weatherSegment.selectedSegmentIndex = 1;
+    }
+    if ([self.user.notificationsEnabled isEqualToNumber:[NSNumber numberWithInt:1]]) {
+        self.notificationsSegment.selectedSegmentIndex = 1;
+    } else {
+        self.timeIntervalLabel.hidden = YES;
+        self.timeIntervalField.hidden = YES;
     }
 }
 
@@ -72,6 +84,22 @@ static const int numLogs = 4;
 }
 
 #pragma mark - Action Handlers
+
+- (IBAction)didToggleNotifications:(UISegmentedControl *)sender {
+    if (sender.selectedSegmentIndex == 0) {
+        self.timeIntervalField.userInteractionEnabled = NO;
+        [UIView animateWithDuration:0.3 animations:^{
+            self.timeIntervalLabel.alpha = 0.3;
+            self.timeIntervalField.alpha = 0.3;
+        }];
+    } else {
+        self.timeIntervalField.userInteractionEnabled = YES;
+        [UIView animateWithDuration:0.3 animations:^{
+            self.timeIntervalLabel.alpha = 1;
+            self.timeIntervalField.alpha = 1;
+        }];
+    }
+}
 
 - (IBAction)didTapImage:(UIButton *)sender {
     CameraView *camera = [[CameraView alloc] init];
@@ -113,6 +141,30 @@ static const int numLogs = 4;
     self.user.logAmounts = @[self.logFields[0].text, self.logFields[1].text, self.logFields[2].text, self.logFields[3].text];
     self.user.FBConnected = [NSNumber numberWithInteger:self.FBSegment.selectedSegmentIndex];
     self.user.weatherEnabled = [NSNumber numberWithInteger:self.weatherSegment.selectedSegmentIndex];
+    self.user.notificationsEnabled = [NSNumber numberWithInteger:self.notificationsSegment.selectedSegmentIndex];
+    
+    if ([self.user.notificationsEnabled isEqualToNumber:[NSNumber numberWithInt:1]] && self.timeIntervalField.text.intValue > 0) {
+        self.user.notifictionTimeInterval = [NSNumber numberWithInt:(self.timeIntervalField.text.intValue*60)];
+        
+        NSLog(@"%@", self.user.notifictionTimeInterval);
+        
+        [UNUserNotificationCenter.currentNotificationCenter removeAllPendingNotificationRequests];
+
+        UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
+        content.title = @"Reminder to drink water!";
+                
+        UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:self.user.notifictionTimeInterval.doubleValue repeats:YES];
+        
+        UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:@"WaterReminder" content:content trigger:trigger];
+        
+        [UNUserNotificationCenter.currentNotificationCenter addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+            if (error) {
+                [Utilities presentOkAlertControllerInViewController:self
+                                                          withTitle:@"Could not set up notifications"
+                                                            message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
+            }
+        }];
+    }
     
     [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (error) {

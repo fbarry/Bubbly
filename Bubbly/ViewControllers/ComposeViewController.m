@@ -151,6 +151,7 @@ BOOL newRecipe = NO;
 - (IBAction)didTapDelete:(id)sender {
     [Utilities presentConfirmationInViewController:self
                                          withTitle:@"Are you sure you want to delete this recipe?"
+                                           message:@"This action cannot be undone"
                                         yesHandler:^{
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [self.recipe deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
@@ -164,7 +165,8 @@ BOOL newRecipe = NO;
             }
             [MBProgressHUD hideHUDForView:self.view animated:YES];
         }];
-    }];
+    }
+                                         noHandler:nil];
 }
 
 #pragma mark - Helper Functions

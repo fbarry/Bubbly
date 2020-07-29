@@ -75,7 +75,10 @@ static const int numOptions = 4;
             [self.parentViewController performSegueWithIdentifier:@"Settings" sender:self];
             break;
         case 3:
-            [Utilities presentConfirmationInViewController:self withTitle:@"Are you sure you want to logout?" yesHandler:^{
+            [Utilities presentConfirmationInViewController:self
+                                                 withTitle:@"Are you sure you want to logout?"
+                                                   message:nil
+                                                yesHandler:^{
                 SceneDelegate *sceneDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
 
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -83,7 +86,8 @@ static const int numOptions = 4;
                 sceneDelegate.window.rootViewController = welcomeViewController;
 
                 [User logOut];
-            }];
+            }
+                                                 noHandler:nil];
             break;
     }
 }

@@ -43,9 +43,11 @@ NSDate *referenceDate;
     xAxis.labelPosition = XAxisLabelPositionBottom;
     xAxis.granularity = 1.0;
     xAxis.labelRotationAngle = -45;
+    xAxis.gridColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
     
     ChartYAxis *yAxis = self.lineChart.leftAxis;
     yAxis.axisMinimum = 0;
+    yAxis.gridColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

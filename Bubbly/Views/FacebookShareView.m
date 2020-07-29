@@ -24,6 +24,7 @@
 - (void)presentShareView {
     [Utilities presentConfirmationInViewController:self.viewController
                                          withTitle:self.title
+                                           message:nil
                                         yesHandler:^{
         if (![FBSDKAccessToken currentAccessToken]) {
             FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
@@ -39,7 +40,8 @@
         } else {
             [self createPost];
         }
-    }];
+    }
+                                         noHandler:nil];
 }
 
 - (void)createPost {

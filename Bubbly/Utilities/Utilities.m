@@ -31,9 +31,11 @@
 
 + (void)presentConfirmationInViewController:(UIViewController *)viewController
                                   withTitle:(nonnull NSString *)title
-                                 yesHandler:(void(^)(void))yesHandler {
+                                    message:(NSString * _Nullable)message
+                                 yesHandler:(void(^)(void))yesHandler
+                                  noHandler:(void(^ _Nullable)(void))noHandler {
     PopupDialog *popup = [[PopupDialog alloc] initWithTitle:title
-                                                    message:nil
+                                                    message:message
                                                       image:nil
                                             buttonAlignment:UILayoutConstraintAxisHorizontal
                                             transitionStyle:PopupDialogTransitionStyleFadeIn
@@ -43,7 +45,7 @@
                                               hideStatusBar:YES
                                                  completion:nil];
     PopupDialogButton *yes = [[PopupDialogButton alloc] initWithTitle:@"Yes" height:50 dismissOnTap:YES action:yesHandler];
-    PopupDialogButton *no = [[PopupDialogButton alloc] initWithTitle:@"No" height:50 dismissOnTap:YES action:nil];
+    PopupDialogButton *no = [[PopupDialogButton alloc] initWithTitle:@"No" height:50 dismissOnTap:YES action:noHandler];
     [popup addButton:yes];
     [popup addButton:no];
     [viewController presentViewController:popup animated:YES completion:nil];

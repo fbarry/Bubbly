@@ -80,8 +80,12 @@
         user.backgroundPicture = [Utilities getPFFileFromImage:[UIImage imageNamed:@"bottle"]];
         user.logAmounts = @[@1, @2, @4, @8];
         
-        user.FBConnected = [NSNumber numberWithInt:3];
-        user.weatherEnabled = [NSNumber numberWithInt:3];
+        user.FBConnected = [NSNumber numberWithInt:2];
+        user.weatherEnabled = [NSNumber numberWithInt:2];
+        user.notificationsEnabled = [NSNumber numberWithInt:2];
+        user.notifictionTimeInterval = [NSNumber numberWithInt:(60*60)];
+        user.notificationBegin = [NSCalendar.currentCalendar dateBySettingHour:8 minute:0 second:0 ofDate:[NSDate date] options:0];
+        user.notificatonEnd = [NSCalendar.currentCalendar dateBySettingHour:20 minute:0 second:0 ofDate:[NSDate date] options:0];
         
         [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (error) {
@@ -106,12 +110,13 @@
     [self.view endEditing:YES];
 }
 
-
-#pragma mark - Helper Functions
+#pragma mark - CameraViewDelegate
 
 - (void)setImage:(UIImage *)image withName:(NSString *)name {
     [self.profilePicture setImage:image forState:UIControlStateNormal];
 }
+
+#pragma mark - Helper Functions
 
 - (BOOL)invalidInput {
     return [self.nameField.text isEqual:@""] || [self.emailField.text isEqual:@""] || [self.usernameField.text isEqual:@""] || [self.passwordField.text isEqual:@""];
