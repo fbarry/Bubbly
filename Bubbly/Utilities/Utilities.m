@@ -87,4 +87,24 @@
     imageView.clipsToBounds = YES;
 }
 
++ (void)changeNotificationsWithTimeInterval:(double)timeInterval inViewController:(UIViewController *)viewController {
+    [UNUserNotificationCenter.currentNotificationCenter removeAllPendingNotificationRequests];
+
+    UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
+    content.title = @"Reminder to drink water!";
+    content.sound = [UNNotificationSound defaultSound];
+            
+    UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:timeInterval repeats:YES];
+    
+    UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:@"WaterReminder" content:content trigger:trigger];
+    
+    [UNUserNotificationCenter.currentNotificationCenter addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+        if (error) {
+            [Utilities presentOkAlertControllerInViewController:viewController
+                                                      withTitle:@"Could not set up notifications"
+                                                        message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
+        }
+    }];
+}
+
 @end

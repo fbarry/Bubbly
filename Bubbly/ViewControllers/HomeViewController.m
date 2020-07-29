@@ -254,22 +254,7 @@ float temp, feelsLike, humidity;
                                           panGestureDismissal:NO
                                                 hideStatusBar:YES
                                                    completion:^{
-        [UNUserNotificationCenter.currentNotificationCenter removeAllPendingNotificationRequests];
-
-        UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
-        content.title = @"Reminder to drink water!";
-                
-        UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:self.user.notifictionTimeInterval.doubleValue repeats:YES];
-        
-        UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:@"WaterReminder" content:content trigger:trigger];
-        
-        [UNUserNotificationCenter.currentNotificationCenter addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
-            if (error) {
-                [Utilities presentOkAlertControllerInViewController:self
-                                                          withTitle:@"Could not set up notifications"
-                                                            message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
-            }
-        }];
+        [Utilities changeNotificationsWithTimeInterval:self.user.notifictionTimeInterval.doubleValue inViewController:self];
     }];
     
     PopupDialogButton *oneMinute = [[PopupDialogButton alloc] initWithTitle:@"1 min" height:50 dismissOnTap:YES action:^{

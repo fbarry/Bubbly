@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import <UserNotifications/UserNotifications.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,6 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image;
 
 + (void)roundImage:(UIImageView *)imageView;
+
++ (void)changeNotificationsWithTimeInterval:(double)timeInterval inViewController:(UIViewController *)viewController;
 
 @end
 

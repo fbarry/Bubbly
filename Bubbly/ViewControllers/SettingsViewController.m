@@ -65,8 +65,8 @@ static const int numLogs = 4;
     if ([self.user.notificationsEnabled isEqualToNumber:[NSNumber numberWithInt:1]]) {
         self.notificationsSegment.selectedSegmentIndex = 1;
     } else {
-        self.timeIntervalLabel.hidden = YES;
-        self.timeIntervalField.hidden = YES;
+        self.timeIntervalLabel.alpha = 0.3;
+        self.timeIntervalField.alpha = 0.3;
     }
 }
 
@@ -145,25 +145,9 @@ static const int numLogs = 4;
     
     if ([self.user.notificationsEnabled isEqualToNumber:[NSNumber numberWithInt:1]] && self.timeIntervalField.text.intValue > 0) {
         self.user.notifictionTimeInterval = [NSNumber numberWithInt:(self.timeIntervalField.text.intValue*60)];
-        
-        NSLog(@"%@", self.user.notifictionTimeInterval);
-        
+        [Utilities changeNotificationsWithTimeInterval:self.user.notifictionTimeInterval.doubleValue inViewController:self];
+    } else if ([self.user.notificationsEnabled isEqualToNumber:[NSNumber numberWithInt:0]]) {
         [UNUserNotificationCenter.currentNotificationCenter removeAllPendingNotificationRequests];
-
-        UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
-        content.title = @"Reminder to drink water!";
-                
-        UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:self.user.notifictionTimeInterval.doubleValue repeats:YES];
-        
-        UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:@"WaterReminder" content:content trigger:trigger];
-        
-        [UNUserNotificationCenter.currentNotificationCenter addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
-            if (error) {
-                [Utilities presentOkAlertControllerInViewController:self
-                                                          withTitle:@"Could not set up notifications"
-                                                            message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
-            }
-        }];
     }
     
     [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
