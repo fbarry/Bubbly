@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIColor (ColorExtensions)
 
 + (UIColor *)customBlue;
++ (UIColor *)lightCustomBlue;
 + (UIColor *)extraLightGray;
 
 @end

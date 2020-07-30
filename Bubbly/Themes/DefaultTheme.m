@@ -47,7 +47,7 @@
 }
 
 - (UIColor *)barColor {
-    return [UIColor extraLightGray];
+    return [UIColor lightCustomBlue];
 }
 
 - (UIColor *)viewColor {

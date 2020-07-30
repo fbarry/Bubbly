@@ -35,7 +35,7 @@
         [center addObserver:self selector:@selector(didChangeTheme:) name:@"ThemeChangedEvent" object:nil];
         
         // Change to user selected theme
-        NSNotification *newTheme = [[NSNotification alloc] initWithName:@"ThemeChangedEvent" object:nil userInfo:@{@"ThemeName" : [NSNumber numberWithInt:1]}];
+        NSNotification *newTheme = [[NSNotification alloc] initWithName:@"ThemeChangedEvent" object:nil userInfo:@{@"ThemeName" : [NSNumber numberWithInt:0]}];
         [NSNotificationCenter.defaultCenter postNotification:newTheme];
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -97,6 +97,7 @@
     UINavigationBar.appearance.barTintColor = theme.barColor;
     
     UITabBar.appearance.barTintColor = theme.barColor;
+    UITabBar.appearance.tintColor = theme.buttonTint;
     
     BackgroundView.appearance.backgroundColor = theme.viewColor;
     
