@@ -79,6 +79,9 @@ static const int numOptions = 4;
                                                  withTitle:@"Are you sure you want to logout?"
                                                    message:nil
                                                 yesHandler:^{
+                NSNotification *newTheme = [[NSNotification alloc] initWithName:@"ThemeChangedEvent" object:nil userInfo:@{@"ThemeName" : [NSNumber numberWithInt:0]}];
+                [NSNotificationCenter.defaultCenter postNotification:newTheme];
+                
                 SceneDelegate *sceneDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
 
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

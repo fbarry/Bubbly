@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIColor *)customBlue;
 + (UIColor *)lightCustomBlue;
 + (UIColor *)extraLightGray;
++ (UIColor *)mediumLightGray;
 
 @end
 

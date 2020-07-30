@@ -31,6 +31,7 @@
     self.sidebar.alpha = 0;
     
     self.sidebar.layer.cornerRadius = 16;
+    self.sidebar.layer.shadowColor = UIView.appearance.tintColor.CGColor;
     self.sidebar.layer.shadowOffset = CGSizeMake(-8.0f, 0);
     self.sidebar.layer.shadowRadius = 8.0f;
     self.sidebar.layer.shadowOpacity = 0.5f;

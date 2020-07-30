@@ -32,7 +32,6 @@ static const int numLogs = 4;
 @property (weak, nonatomic) IBOutlet UILabel *goalLabel;
 @property (weak, nonatomic) IBOutlet UILabel *acheivedLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
-@property (weak, nonatomic) IBOutlet UITextField *customValueField;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet PieChartView *pieChart;
 @property (weak, nonatomic) IBOutlet WeatherIcon *weatherIcon;
@@ -63,6 +62,7 @@ float temp, feelsLike, humidity;
     self.log.backgroundColor = [UIButton.appearance.tintColor colorWithAlphaComponent:0.3];
     self.delete.backgroundColor = [UIColor extraLightGray];
     
+    self.pieChart.layer.shadowColor = UIView.appearance.tintColor.CGColor;
     self.pieChart.layer.shadowOffset = CGSizeMake(0, 8.0f);
     self.pieChart.layer.shadowRadius = 8.0f;
     self.pieChart.layer.shadowOpacity = 0.5f;
@@ -355,21 +355,57 @@ float temp, feelsLike, humidity;
     }];
 }
 
-- (void)saveLogChangeWithSender:(UIButton *)sender {
+- (void)recordLogChangeWithSender:(UIButton *)sender {
     IntakeLog *logChange = [IntakeLog new];
     if (self.segmentedControl.selectedSegmentIndex != 4) {
         logChange.logAmount = [NSNumber numberWithInteger:[[self.segmentedControl titleForSegmentAtIndex:self.segmentedControl.selectedSegmentIndex] integerValue]];
+        [self confirmationWithLog:logChange sender:sender andCompletion:^{
+            if ([sender.titleLabel.text isEqualToString:@"Delete"]) {
+                if ([logChange.logAmount compare:self.dayLog.achieved] > 0) {
+                    logChange.logAmount = self.dayLog.achieved;
+                }
+                logChange.logAmount = [NSNumber numberWithInteger:[logChange.logAmount integerValue] * -1];
+            }
+            [self saveLogChange:logChange withSender:sender];
+        }];
     } else {
-        logChange.logAmount = [NSNumber numberWithInteger:[self.customValueField.text integerValue]];
+        UIAlertController *custom = [UIAlertController alertControllerWithTitle:@"Enter log amount"
+                                                                        message:nil
+                                                                 preferredStyle:UIAlertControllerStyleAlert];
+        [custom addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+            textField.placeholder = @"in ounces";
+            textField.keyboardType = UIKeyboardTypeDecimalPad;
+        }];
+        [custom addAction:[UIAlertAction actionWithTitle:sender.titleLabel.text style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            logChange.logAmount = [NSNumber numberWithInteger:[custom.textFields[0].text integerValue]];
+            [self confirmationWithLog:logChange sender:sender andCompletion:^{
+                if ([sender.titleLabel.text isEqualToString:@"Delete"]) {
+                    if ([logChange.logAmount compare:self.dayLog.achieved] > 0) {
+                        logChange.logAmount = self.dayLog.achieved;
+                    }
+                    logChange.logAmount = [NSNumber numberWithInteger:[logChange.logAmount integerValue] * -1];
+                }
+                [self saveLogChange:logChange withSender:sender];
+            }];
+        }]];
+        [custom addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:custom animated:YES completion:nil];
     }
-    
-    if ([sender.currentTitle isEqualToString:@"Delete"]) {
-        if ([logChange.logAmount compare:self.dayLog.achieved] > 0) {
-            logChange.logAmount = self.dayLog.achieved;
-        }
-        logChange.logAmount = [NSNumber numberWithInteger:[logChange.logAmount integerValue] * -1];
+}
+
+- (void)confirmationWithLog:(IntakeLog *)logChange sender:(UIButton *)sender andCompletion:(void (^)(void))completion {
+    if ([sender.titleLabel.text isEqualToString:@"Delete"]) {
+        [Utilities presentConfirmationInViewController:self
+                                            withTitle:[NSString stringWithFormat:@"Are you sure you want to delete %@ ounces?", logChange.logAmount]
+                                                message:nil
+                                            yesHandler:completion
+                                             noHandler:nil];
+    } else {
+        completion();
     }
-    
+}
+
+- (void)saveLogChange:(IntakeLog *)logChange withSender:(UIButton *)sender {
     BOOL belowGoal = [self.dayLog.achieved intValue] < [self.dayLog.goal intValue];
     
     self.dayLog.achieved = [NSNumber numberWithInteger:[self.dayLog.achieved integerValue] + [logChange.logAmount integerValue]];
@@ -428,17 +464,7 @@ float temp, feelsLike, humidity;
 }
 
 - (IBAction)didTapLog:(UIButton *)sender {
-    if ([sender.currentTitle isEqualToString:@"Delete"]) {
-        [Utilities presentConfirmationInViewController:self
-                                             withTitle:@"Are you sure you want to delete this log amount?"
-                                               message:nil
-                                            yesHandler:^{
-            [self saveLogChangeWithSender:sender];
-        }
-                                             noHandler:nil];
-    } else {
-        [self saveLogChangeWithSender:sender];
-    }
+    [self recordLogChangeWithSender:sender];
 }
 
 - (IBAction)didTapCompose:(id)sender {

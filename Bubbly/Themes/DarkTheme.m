@@ -1,14 +1,14 @@
 //
-//  LightTheme.m
+//  DarkTheme.m
 //  Bubbly
 //
 //  Created by Fiona Barry on 7/30/20.
 //  Copyright © 2020 fbarry. All rights reserved.
 //
 
-#import "LightTheme.h"
+#import "DarkTheme.h"
 
-@implementation LightTheme
+@implementation DarkTheme
 
 - (UIColor *)buttonTint {
     return [UIColor customBlue];
@@ -23,7 +23,7 @@
 }
 
 - (UIColor *)labelText {
-    return [UIColor blackColor];
+    return [UIColor whiteColor];
 }
 
 - (UIColor *)titleLabelBackground {
@@ -31,11 +31,11 @@
 }
 
 - (UIColor *)selectedSegment {
-    return [UIColor whiteColor];
+    return [UIColor lightGrayColor];
 }
 
 - (UIColor *)fieldBackground {
-    return [UIColor extraLightGray];
+    return [UIColor lightGrayColor];
 }
 
 - (NSDictionary *)barButtonAttributes {
@@ -43,24 +43,19 @@
 }
 
 - (NSDictionary *)navigationBarAttributes {
-    return @{NSFontAttributeName : [UIFont fontWithName:@"Avenir Next Condensed" size:20], NSForegroundColorAttributeName: [UIColor blackColor]};
+    return @{NSFontAttributeName : [UIFont fontWithName:@"Avenir Next Condensed" size:20], NSForegroundColorAttributeName: [UIColor whiteColor]};
 }
 
 - (UIColor *)barColor {
-    return [UIColor extraLightGray];
+    return [UIColor darkGrayColor];
 }
 
 - (UIColor *)viewColor {
-    return [UIColor whiteColor];
+    return [UIColor blackColor];
 }
 
 - (UIColor *)shadow {
-    return [UIColor lightGrayColor];
+    return [UIColor extraLightGray];
 }
-
-//- (UIColor *)selectedCell {
-//    return [UIColor extraLightGray];
-//}
-
 
 @end

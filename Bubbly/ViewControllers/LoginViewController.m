@@ -47,6 +47,11 @@
                                                       withTitle:@"Error Logging In"
                                                         message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
         } else {
+            User *currUser = (User *)user;
+            
+            NSNotification *newTheme = [[NSNotification alloc] initWithName:@"ThemeChangedEvent" object:nil userInfo:@{@"ThemeName" : currUser.theme}];
+            [NSNotificationCenter.defaultCenter postNotification:newTheme];
+            
             [self performSegueWithIdentifier:@"Home" sender:self];
         }
         sender.userInteractionEnabled = YES;

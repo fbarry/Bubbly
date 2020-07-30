@@ -20,6 +20,8 @@
 #import <PopupDialog-Swift.h>
 #import "LightTheme.h"
 #import <Charts-Swift.h>
+#import "DarkTheme.h"
+#import "CollectionViewLabel.h"
 
 @interface SceneDelegate ()
 
@@ -59,25 +61,31 @@
         case LIGHT:
             return [[LightTheme alloc] init];
         case DARK:
-            break;
+            return [[DarkTheme alloc] init];
     }
     return [[DefaultTheme alloc] init];
 }
 
 - (void)applyTheme:(id<Theme>)theme {
     UIButton.appearance.tintColor = theme.buttonTint;
-   
-    PopupDialogButton.appearance.titleColor = theme.buttonTint;
-    PopupDialogButton.appearance.titleFont = theme.barButtonAttributes[NSFontAttributeName];
+    
     PopupDialogDefaultView.appearance.titleFont = theme.barButtonAttributes[NSFontAttributeName];
     PopupDialogDefaultView.appearance.messageFont = theme.barButtonAttributes[NSFontAttributeName];
+    
+    PopupDialogButton.appearance.titleColor = theme.buttonTint;
+    PopupDialogButton.appearance.titleFont = theme.barButtonAttributes[NSFontAttributeName];
+    
+    [UIView appearanceWhenContainedInInstancesOfClasses:@[[UIAlertController class]]].backgroundColor = PopupDialogDefaultView.appearance.backgroundColor;
     
     UIImageView.appearance.tintColor = theme.imageViewTint;
     [UIImageView appearanceWhenContainedInInstancesOfClasses:@[[FBSDKLoginButton class]]].tintColor = [UIColor clearColor];
     
     WeatherIcon.appearance.backgroundColor = theme.weatherIconBackground;
+    WeatherIcon.appearance.tintColor = [UIColor whiteColor];
     
     UILabel.appearance.textColor = theme.labelText;
+    
+    CollectionViewLabel.appearance.textColor = [UIColor blackColor];
     
     TitleLabel.appearance.backgroundColor = theme.titleLabelBackground;
     
@@ -102,15 +110,27 @@
     BackgroundView.appearance.backgroundColor = theme.viewColor;
     
     UICollectionView.appearance.backgroundColor = theme.viewColor;
-    UICollectionViewCell.appearance.backgroundColor = theme.viewColor;
+    UICollectionViewCell.appearance.backgroundColor = [UIColor clearColor];
     
     UITableView.appearance.backgroundColor = theme.viewColor;
-    UITableViewCell.appearance.backgroundColor = theme.viewColor;
+    UITableViewCell.appearance.backgroundColor = [UIColor clearColor];
     
+    [UISearchTextField.appearance setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:@"Search" attributes:@{NSForegroundColorAttributeName: theme.labelText}]];
+    UISearchBar.appearance.backgroundColor = theme.fieldBackground;
     UISearchBar.appearance.tintColor = theme.labelText;
     UISearchBar.appearance.barTintColor = theme.viewColor;
     
-    UIView.appearance.layer.shadowColor = theme.shadow.CGColor;    
+    UIView.appearance.tintColor = theme.shadow;
+    
+    NSArray *windows = [UIApplication sharedApplication].windows;
+    for (UIWindow *window in windows) {
+        if (![window isKindOfClass:[NSClassFromString(@"UITextEffectsWindow") class]]) {
+            for (UIView *view in window.subviews) {
+                [view removeFromSuperview];
+                [window addSubview:view];
+            }
+        }
+    }
 }
 
 - (void)scene:(UIScene *)scene openURLContexts:(NSSet<UIOpenURLContext *> *)URLContexts {

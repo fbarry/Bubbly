@@ -34,6 +34,8 @@
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     self.searchBar.delegate = self;
+    
+    self.searchBar.searchTextField.leftView.tintColor = UILabel.appearance.textColor;
      
     self.collectionView.refreshControl = [[UIRefreshControl alloc] init];
     [self.collectionView.refreshControl addTarget:self action:@selector(loadRecipes) forControlEvents:UIControlEventValueChanged];
@@ -117,6 +119,7 @@
     cell.contentView.layer.cornerRadius = cell.contentView.frame.size.height / 16;
     cell.contentView.layer.masksToBounds = YES;
     
+    cell.layer.shadowColor = UIView.appearance.tintColor.CGColor;
     cell.layer.shadowOffset = CGSizeMake(0, 4.0f);
     cell.layer.shadowRadius = 4.0f;
     cell.layer.shadowOpacity = 0.5f;

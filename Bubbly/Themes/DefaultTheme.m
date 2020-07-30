@@ -55,7 +55,7 @@
 }
 
 - (UIColor *)shadow {
-    return [UIColor extraLightGray];
+    return [UIColor customBlue];
 }
 
 //- (UIColor *)selectedCell {

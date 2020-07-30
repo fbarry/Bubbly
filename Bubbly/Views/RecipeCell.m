@@ -8,12 +8,13 @@
 
 #import "RecipeCell.h"
 #import <UIImageView+AFNetworking.h>
+#import "CollectionViewLabel.h"
 
 @interface RecipeCell ()
 
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet CollectionViewLabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *recipePicture;
-@property (weak, nonatomic) IBOutlet UILabel *creator;
+@property (weak, nonatomic) IBOutlet CollectionViewLabel *creator;
 
 @end
 

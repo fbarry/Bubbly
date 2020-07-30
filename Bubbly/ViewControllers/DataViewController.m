@@ -15,6 +15,7 @@
 #import <PopupDialog-Swift.h>
 #import <Bubbly-Swift.h>
 #import "BackgroundView.h"
+#import "UIColor+ColorExtensions.h"
 
 @interface DataViewController () <IChartAxisValueFormatter>
 
@@ -40,7 +41,6 @@ NSDate *referenceDate;
     referenceDate = [self getDateAtMidnight:[NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay value:-20 toDate:[NSDate date] options:0]];
     
     ChartXAxis *xAxis = self.lineChart.xAxis;
-    xAxis.labelTextColor = UILabel.appearance.textColor;
     xAxis.valueFormatter = self;
     xAxis.labelPosition = XAxisLabelPositionBottom;
     xAxis.granularity = 1.0;
@@ -48,13 +48,15 @@ NSDate *referenceDate;
     xAxis.gridColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
     
     ChartYAxis *yAxis = self.lineChart.leftAxis;
-    yAxis.labelTextColor = UILabel.appearance.textColor;
     yAxis.axisMinimum = 0;
     yAxis.gridColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
+    
+    self.lineChart.xAxis.labelTextColor = UILabel.appearance.textColor;
+    self.lineChart.leftAxis.labelTextColor = UILabel.appearance.textColor;
     
     [self updateChartData];
 }
@@ -126,7 +128,7 @@ NSDate *referenceDate;
         double x = i;
         [goalDataEntries addObject:[[ChartDataEntry alloc] initWithX:x y:lastValidLogGoal]];
         [achievedDataEntries addObject:[[ChartDataEntry alloc] initWithX:x y:log.achieved.doubleValue icon:log.achieved.doubleValue >= lastValidLogGoal ? [[UIImage systemImageNamed:@"star.fill"] imageWithTintColor:[UIColor systemYellowColor]]: nil]];
-        [achievedColors addObject:log.achieved.doubleValue >= lastValidLogGoal ? self.lineChart.backgroundColor : [UIColor systemGrayColor]];
+        [achievedColors addObject:log.achieved.doubleValue >= lastValidLogGoal ? self.lineChart.backgroundColor : [UIColor lightGrayColor]];
     }
     
     LineChartDataSet *goalDataSet = [[LineChartDataSet alloc] initWithEntries:goalDataEntries];
@@ -134,9 +136,9 @@ NSDate *referenceDate;
 
     goalDataSet.circleRadius = achievedDataSet.circleRadius = 6.0;
     goalDataSet.lineDashLengths = @[[NSNumber numberWithFloat:3.0f]];
-    goalDataSet.colors = @[[UIColor systemGray4Color]];
-    goalDataSet.circleColors = @[[UIColor systemGray4Color]];
-    achievedDataSet.colors = @[[UIColor systemGrayColor]];
+    goalDataSet.colors = @[[UIColor mediumLightGray]];
+    goalDataSet.circleColors = @[[UIColor mediumLightGray]];
+    achievedDataSet.colors = @[[UIColor lightGrayColor]];
     achievedDataSet.circleColors = (NSArray *)achievedColors;
     
     LineChartData *data = [[LineChartData alloc] initWithDataSets:@[achievedDataSet, goalDataSet]];
