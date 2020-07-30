@@ -19,6 +19,7 @@
 #import "TPKeyboardAvoidingScrollView.h"
 #import <PopupDialog-Swift.h>
 #import "LightTheme.h"
+#import <Charts-Swift.h>
 
 @interface SceneDelegate ()
 
@@ -33,9 +34,8 @@
     if (user) {
         NSNotificationCenter *center = NSNotificationCenter.defaultCenter;
         [center addObserver:self selector:@selector(didChangeTheme:) name:@"ThemeChangedEvent" object:nil];
-        
-        // Change to user selected theme
-        NSNotification *newTheme = [[NSNotification alloc] initWithName:@"ThemeChangedEvent" object:nil userInfo:@{@"ThemeName" : [NSNumber numberWithInt:0]}];
+                
+        NSNotification *newTheme = [[NSNotification alloc] initWithName:@"ThemeChangedEvent" object:nil userInfo:@{@"ThemeName" : user.theme}];
         [NSNotificationCenter.defaultCenter postNotification:newTheme];
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -66,7 +66,7 @@
 
 - (void)applyTheme:(id<Theme>)theme {
     UIButton.appearance.tintColor = theme.buttonTint;
-        
+   
     PopupDialogButton.appearance.titleColor = theme.buttonTint;
     PopupDialogButton.appearance.titleFont = theme.barButtonAttributes[NSFontAttributeName];
     PopupDialogDefaultView.appearance.titleFont = theme.barButtonAttributes[NSFontAttributeName];
@@ -110,7 +110,7 @@
     UISearchBar.appearance.tintColor = theme.labelText;
     UISearchBar.appearance.barTintColor = theme.viewColor;
     
-    UIView.appearance.layer.shadowColor = theme.shadow.CGColor;
+    UIView.appearance.layer.shadowColor = theme.shadow.CGColor;    
 }
 
 - (void)scene:(UIScene *)scene openURLContexts:(NSSet<UIOpenURLContext *> *)URLContexts {

@@ -33,6 +33,7 @@ static const int numLogs = 4;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *FBSegment;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *weatherSegment;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *notificationsSegment;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *appearanceSegment;
 @property (weak, nonatomic) IBOutlet UILabel *timeIntervalLabel;
 @property (weak, nonatomic) IBOutlet UITextField *timeIntervalField;
 
@@ -55,6 +56,8 @@ static const int numLogs = 4;
     [self.backgroundPicture setImage:imageView.image forState:UIControlStateNormal];
     
     self.timeIntervalField.placeholder = [NSString stringWithFormat:@"%d", (self.user.notifictionTimeInterval.intValue / 60)];
+    
+    self.appearanceSegment.selectedSegmentIndex = self.user.theme.intValue;
     
     if ([self.user.FBConnected isEqualToNumber:[NSNumber numberWithInt:1]]) {
         self.FBSegment.selectedSegmentIndex = 1;
@@ -143,6 +146,11 @@ static const int numLogs = 4;
     self.user.weatherEnabled = [NSNumber numberWithInteger:self.weatherSegment.selectedSegmentIndex];
     self.user.notificationsEnabled = [NSNumber numberWithInteger:self.notificationsSegment.selectedSegmentIndex];
     
+    BOOL themeChanged = NO;
+    if (self.appearanceSegment.selectedSegmentIndex != self.user.theme.intValue) {
+        self.user.theme = [NSNumber numberWithInteger:self.appearanceSegment.selectedSegmentIndex];
+        themeChanged = YES;
+    }
     if ([self.user.notificationsEnabled isEqualToNumber:[NSNumber numberWithInt:1]] && self.timeIntervalField.text.intValue > 0) {
         self.user.notifictionTimeInterval = [NSNumber numberWithInt:(self.timeIntervalField.text.intValue*60)];
         [Utilities changeNotificationsWithTimeInterval:self.user.notifictionTimeInterval.doubleValue inViewController:self];
@@ -156,6 +164,11 @@ static const int numLogs = 4;
                                                       withTitle:@"Could not save profile"
                                                         message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
         } else {
+            if (themeChanged) {
+                NSNotification *newTheme = [[NSNotification alloc] initWithName:@"ThemeChangedEvent" object:nil userInfo:@{@"ThemeName" : self.user.theme}];
+                [NSNotificationCenter.defaultCenter postNotification:newTheme];
+            }
+            
             UIAlertController *success = [UIAlertController alertControllerWithTitle:@"Changes saved successfully"
                                                                              message:nil
                                                                       preferredStyle:UIAlertControllerStyleAlert];

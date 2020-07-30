@@ -76,10 +76,13 @@ float temp, feelsLike, humidity;
     self.textView.layer.cornerRadius = 16;
         
     [Utilities roundImage:self.backgroundPicture];
-    self.backgroundPicture.layer.borderWidth = 0;
     [Utilities roundImage:self.weatherIcon];
-    self.weatherIcon.layer.borderWidth = 0;
-        
+    self.weatherIcon.layer.borderWidth = 0.5f;
+    self.weatherIcon.layer.borderColor = [UIColor whiteColor].CGColor;
+    [Utilities roundImage:(UIImageView *)self.infoButton];
+    self.infoButton.layer.borderWidth = 0.5f;
+    self.infoButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    
     [self.pieChart.legend setEnabled:NO];
     self.pieChart.holeRadiusPercent = 0.9;
     self.pieChart.holeColor = [UIColor clearColor];
@@ -102,7 +105,8 @@ float temp, feelsLike, humidity;
     } else if ([self.user.weatherEnabled isEqualToNumber:[NSNumber numberWithInt:2]]) {
         [self.weatherIcon setImage:[UIImage systemImageNamed:@"questionmark.circle"]];
         [Utilities roundImage:self.weatherIcon];
-        self.weatherIcon.layer.borderWidth = 0;
+        self.weatherIcon.layer.borderWidth = 0.5f;
+        self.weatherIcon.layer.borderColor = [UIColor whiteColor].CGColor;
     } else {
         [self.weatherIcon setHidden:YES];
         [self.weatherIcon setUserInteractionEnabled:NO];
@@ -154,7 +158,6 @@ float temp, feelsLike, humidity;
     }
     
     [Utilities roundImage:self.backgroundPicture];
-    self.backgroundPicture.layer.borderWidth = 0;
         
     [self.pieChart animateWithXAxisDuration:1.2 easingOption:ChartEasingOptionEaseOutCirc];
 }

@@ -37,7 +37,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-        
+    
     self.user = [User currentUser];
     
     if (![self.recipe.creator.objectId isEqual:self.user.objectId]) {
