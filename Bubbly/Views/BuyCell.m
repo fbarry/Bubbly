@@ -7,6 +7,7 @@
 //
 
 #import "BuyCell.h"
+#import "BackgroundView.h"
 
 @implementation BuyCell
 

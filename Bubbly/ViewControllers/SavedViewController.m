@@ -92,7 +92,6 @@
     cell.contentView.layer.cornerRadius = cell.contentView.frame.size.height / 16;
     cell.contentView.layer.masksToBounds = YES;
     
-    cell.layer.shadowColor = [UIColor lightGrayColor].CGColor;
     cell.layer.shadowOffset = CGSizeMake(0, 4.0f);
     cell.layer.shadowRadius = 4.0f;
     cell.layer.shadowOpacity = 0.5f;

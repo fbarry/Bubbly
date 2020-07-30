@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) NSMutableArray *ingredients;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *headerView;
 
 @end
 
@@ -29,6 +30,8 @@
     self.tableView.dataSource = self;
     
     self.tableView.allowsMultipleSelection = true;
+    
+    self.headerView.backgroundColor = UIButton.appearance.backgroundColor;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

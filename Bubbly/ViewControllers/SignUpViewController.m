@@ -36,6 +36,7 @@
     [super viewDidLoad];
     
     self.signup.layer.cornerRadius = 16;
+    self.signup.backgroundColor = [UIButton.appearance.tintColor colorWithAlphaComponent:0.5];
         
     [Utilities roundImage:(UIImageView *)self.profilePicture];
 }

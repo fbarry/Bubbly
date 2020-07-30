@@ -12,6 +12,7 @@
 #import "ProfileContainerViewController.h"
 #import "ComposeViewController.h"
 #import "FacebookShareView.h"
+#import "SaveButton.h"
 
 @interface DetailsViewController () <ComposeViewControllerDelegate>
 
@@ -20,7 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *websiteLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ingredientsLabel;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
+@property (weak, nonatomic) IBOutlet SaveButton *saveButton;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePicture;
 @property (weak, nonatomic) IBOutlet UIButton *creatorName;
 @property (weak, nonatomic) IBOutlet UILabel *updatedDate;
@@ -36,7 +37,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+        
     self.user = [User currentUser];
     
     if (![self.recipe.creator.objectId isEqual:self.user.objectId]) {

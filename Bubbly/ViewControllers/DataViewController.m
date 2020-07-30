@@ -14,6 +14,7 @@
 #import "ProfileContainerViewController.h"
 #import <PopupDialog-Swift.h>
 #import <Bubbly-Swift.h>
+#import "BackgroundView.h"
 
 @interface DataViewController () <IChartAxisValueFormatter>
 
@@ -30,7 +31,7 @@ NSDate *referenceDate;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-        
+    
     [self.lineChart.chartDescription setEnabled:NO];
     [self.lineChart.rightAxis setEnabled:NO];
     [self.lineChart.legend setEnabled:NO];
@@ -39,6 +40,7 @@ NSDate *referenceDate;
     referenceDate = [self getDateAtMidnight:[NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay value:-20 toDate:[NSDate date] options:0]];
     
     ChartXAxis *xAxis = self.lineChart.xAxis;
+    xAxis.labelTextColor = UILabel.appearance.textColor;
     xAxis.valueFormatter = self;
     xAxis.labelPosition = XAxisLabelPositionBottom;
     xAxis.granularity = 1.0;
@@ -46,6 +48,7 @@ NSDate *referenceDate;
     xAxis.gridColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
     
     ChartYAxis *yAxis = self.lineChart.leftAxis;
+    yAxis.labelTextColor = UILabel.appearance.textColor;
     yAxis.axisMinimum = 0;
     yAxis.gridColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
 }

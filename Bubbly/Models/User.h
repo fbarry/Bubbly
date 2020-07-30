@@ -35,6 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSNumber *notifictionTimeInterval;
 @property (strong, nonatomic) NSDate *notificationBegin;
 @property (strong, nonatomic) NSDate *notificatonEnd;
+@property (strong, nonatomic) NSNumber *theme;
 
 @end
 

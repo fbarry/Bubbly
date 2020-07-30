@@ -18,6 +18,9 @@
 #import "TPKeyboardAvoidingScrollView.h"
 #import "FacebookShareView.h"
 #import <UserNotifications/UserNotifications.h>
+#import "UIColor+ColorExtensions.h"
+#import "WeatherIcon.h"
+#import "BackgroundView.h"
 
 static const int numLogs = 4;
 
@@ -32,7 +35,7 @@ static const int numLogs = 4;
 @property (weak, nonatomic) IBOutlet UITextField *customValueField;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet PieChartView *pieChart;
-@property (weak, nonatomic) IBOutlet UIImageView *weatherIcon;
+@property (weak, nonatomic) IBOutlet WeatherIcon *weatherIcon;
 @property (weak, nonatomic) IBOutlet UIView *textView;
 @property (weak, nonatomic) IBOutlet UIButton *infoButton;
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *closeKeyboard;
@@ -57,8 +60,9 @@ float temp, feelsLike, humidity;
     self.user = [User currentUser];
     
     self.log.layer.cornerRadius = self.delete.layer.cornerRadius = 16;
+    self.log.backgroundColor = [UIButton.appearance.tintColor colorWithAlphaComponent:0.3];
+    self.delete.backgroundColor = [UIColor extraLightGray];
     
-    self.pieChart.layer.shadowColor = [UIColor lightGrayColor].CGColor;
     self.pieChart.layer.shadowOffset = CGSizeMake(0, 8.0f);
     self.pieChart.layer.shadowRadius = 8.0f;
     self.pieChart.layer.shadowOpacity = 0.5f;
@@ -75,16 +79,14 @@ float temp, feelsLike, humidity;
     self.backgroundPicture.layer.borderWidth = 0;
     [Utilities roundImage:self.weatherIcon];
     self.weatherIcon.layer.borderWidth = 0;
-    
+        
     [self.pieChart.legend setEnabled:NO];
     self.pieChart.holeRadiusPercent = 0.9;
     self.pieChart.holeColor = [UIColor clearColor];
     [self.pieChart setUserInteractionEnabled:NO];
     
     [self getDayLog];
-    
-    NSLog(@"%@", self.user);
-    
+        
     if ([self.user.notificationsEnabled isEqualToNumber:[NSNumber numberWithInt:2]]) {
         [self defineNotificationsEnabled];
     }
@@ -130,7 +132,7 @@ float temp, feelsLike, humidity;
     double percent = [self.dayLog.achieved doubleValue]/[self.dayLog.goal doubleValue]*100;
     PieChartDataSet *data = [[PieChartDataSet alloc] init];
     [data setDrawValuesEnabled:NO];
-    data.colors = @[[UIColor colorWithRed:116.0/255.0 green:202.0/255.0 blue:234.0/255.0 alpha:1], [UIColor systemGray6Color]];
+    data.colors = @[WeatherIcon.appearance.backgroundColor, [UIColor extraLightGray]];
     
     if (percent >= 100) {
         if ([data addEntry:[[PieChartDataEntry alloc] initWithValue:100]]) {
@@ -234,17 +236,6 @@ float temp, feelsLike, humidity;
 }
 
 - (PopupDialog *)setUpNotificationPrompt {
-    PopupDialog *success = [[PopupDialog alloc] initWithTitle:@"Time interval set"
-                                                      message:nil
-                                                        image:nil
-                                              buttonAlignment:UILayoutConstraintAxisHorizontal
-                                              transitionStyle:PopupDialogTransitionStyleFadeIn
-                                               preferredWidth:200
-                                          tapGestureDismissal:YES
-                                          panGestureDismissal:YES
-                                                hideStatusBar:YES
-                                                   completion:nil];
-    
     PopupDialog *options = [[PopupDialog alloc] initWithTitle:@"Choose a time interval"
                                                       message:nil image:nil
                                               buttonAlignment:UILayoutConstraintAxisHorizontal
@@ -259,18 +250,12 @@ float temp, feelsLike, humidity;
     
     PopupDialogButton *oneMinute = [[PopupDialogButton alloc] initWithTitle:@"1 min" height:50 dismissOnTap:YES action:^{
         self.user.notifictionTimeInterval = [NSNumber numberWithInt:(1*60)];
-        [self presentViewController:success animated:YES completion:nil];
-        [success dismiss:nil];
     }];
     PopupDialogButton *oneHour = [[PopupDialogButton alloc] initWithTitle:@"1 hour" height:50 dismissOnTap:YES action:^{
         self.user.notifictionTimeInterval = [NSNumber numberWithInt:(60*60)];
-        [self presentViewController:success animated:YES completion:nil];
-        [success dismiss:nil];
     }];
     PopupDialogButton *twoHours = [[PopupDialogButton alloc] initWithTitle:@"2 hours" height:50 dismissOnTap:YES action:^{
         self.user.notifictionTimeInterval = [NSNumber numberWithInt:(120*60)];
-        [self presentViewController:success animated:YES completion:nil];
-        [success dismiss:nil];
     }];
     PopupDialogButton *cancel = [[PopupDialogButton alloc] initWithTitle:@"Cancel" height:50 dismissOnTap:YES action:^{
         self.user.notificationsEnabled = [NSNumber numberWithInt:0];
