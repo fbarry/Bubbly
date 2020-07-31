@@ -18,7 +18,6 @@
 		8C3A356E24D29D6300124B52 /* BackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3A356D24D29D6300124B52 /* BackgroundView.m */; };
 		8C3A357124D2B0AF00124B52 /* TitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3A357024D2B0AF00124B52 /* TitleLabel.m */; };
 		8C3A357424D2B25500124B52 /* LightTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3A357324D2B25500124B52 /* LightTheme.m */; };
-		8C3A357724D2B51A00124B52 /* SaveButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3A357624D2B51A00124B52 /* SaveButton.m */; };
 		8C3C015A24D0DA9F0016BEFB /* SidebarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C015924D0DA9F0016BEFB /* SidebarCell.m */; };
 		8C49B40B24D21A31001D3F9C /* UIColor+ColorExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C49B40A24D21A31001D3F9C /* UIColor+ColorExtensions.m */; };
 		8C66984F24CF4C6100BB2579 /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 8C66984E24CF4C6100BB2579 /* FacebookShare */; };
@@ -99,8 +98,6 @@
 		8C3A357024D2B0AF00124B52 /* TitleLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TitleLabel.m; sourceTree = "<group>"; };
 		8C3A357224D2B25500124B52 /* LightTheme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LightTheme.h; sourceTree = "<group>"; };
 		8C3A357324D2B25500124B52 /* LightTheme.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LightTheme.m; sourceTree = "<group>"; };
-		8C3A357524D2B51A00124B52 /* SaveButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaveButton.h; sourceTree = "<group>"; };
-		8C3A357624D2B51A00124B52 /* SaveButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaveButton.m; sourceTree = "<group>"; };
 		8C3C015824D0DA9F0016BEFB /* SidebarCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SidebarCell.h; sourceTree = "<group>"; };
 		8C3C015924D0DA9F0016BEFB /* SidebarCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SidebarCell.m; sourceTree = "<group>"; };
 		8C49B40924D21A31001D3F9C /* UIColor+ColorExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+ColorExtensions.h"; sourceTree = "<group>"; };
@@ -346,8 +343,6 @@
 				8C66985E24CF7C2400BB2579 /* FacebookShareView.m */,
 				8C3C015824D0DA9F0016BEFB /* SidebarCell.h */,
 				8C3C015924D0DA9F0016BEFB /* SidebarCell.m */,
-				8C3A357524D2B51A00124B52 /* SaveButton.h */,
-				8C3A357624D2B51A00124B52 /* SaveButton.m */,
 				8C0A5AE624D33BC7008D1137 /* CollectionViewLabel.h */,
 				8C0A5AE724D33BC7008D1137 /* CollectionViewLabel.m */,
 			);
@@ -656,7 +651,6 @@
 				8C6FECE324CA2EC500B14E8F /* BalloonMarker.swift in Sources */,
 				8CBB59A624C0BB9E0062FB0F /* BuyCell.m in Sources */,
 				8C66985F24CF7C2500BB2579 /* FacebookShareView.m in Sources */,
-				8C3A357724D2B51A00124B52 /* SaveButton.m in Sources */,
 				8C9EC00324BCDF3E0031380E /* RecipesViewController.m in Sources */,
 				8CA0DB9224BF58B100B93FEC /* BuyViewController.m in Sources */,
 				8CF7B9A824C7858D00B0F8C3 /* IntakeDayLog.m in Sources */,

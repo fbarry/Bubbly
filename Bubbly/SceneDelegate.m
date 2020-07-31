@@ -15,7 +15,6 @@
 #import "WeatherIcon.h"
 #import "BackgroundView.h"
 #import "TitleLabel.h"
-#import "SaveButton.h"
 #import "TPKeyboardAvoidingScrollView.h"
 #import <PopupDialog-Swift.h>
 #import "LightTheme.h"
@@ -98,9 +97,7 @@
     UISegmentedControl.appearance.selectedSegmentTintColor = theme.selectedSegment;
     
     [UIBarButtonItem.appearance setTitleTextAttributes:theme.barButtonAttributes forState:UIControlStateNormal];
-    
-    SaveButton.appearance.tintColor = [UIColor redColor];
-    
+        
     [UINavigationBar.appearance setTitleTextAttributes:theme.navigationBarAttributes];
     UINavigationBar.appearance.barTintColor = theme.barColor;
     
