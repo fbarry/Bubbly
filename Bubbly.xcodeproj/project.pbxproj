@@ -11,8 +11,8 @@
 		50ECE9C070625C7DA438EE04 /* Pods_Bubbly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82B807CAA0C917B1F091368C /* Pods_Bubbly.framework */; };
 		8C0A5AE524D338AC008D1137 /* DarkTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C0A5AE424D338AC008D1137 /* DarkTheme.m */; };
 		8C0A5AE824D33BC7008D1137 /* CollectionViewLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C0A5AE724D33BC7008D1137 /* CollectionViewLabel.m */; };
-		8C28EAA924D084D500AE876E /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C28EAA824D084D500AE876E /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
-		8C28EAAC24D084E700AE876E /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C28EAAB24D084E700AE876E /* TPKeyboardAvoidingScrollView.m */; };
+		8C0A5AED24D46A60008D1137 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C0A5AE924D46A60008D1137 /* TPKeyboardAvoidingScrollView.m */; };
+		8C0A5AEE24D46A60008D1137 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C0A5AEB24D46A60008D1137 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
 		8C3A356024D2235000124B52 /* DefaultTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3A355F24D2235000124B52 /* DefaultTheme.m */; };
 		8C3A356B24D28D7C00124B52 /* WeatherIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3A356A24D28D7C00124B52 /* WeatherIcon.m */; };
 		8C3A356E24D29D6300124B52 /* BackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3A356D24D29D6300124B52 /* BackgroundView.m */; };
@@ -84,10 +84,10 @@
 		8C0A5AE424D338AC008D1137 /* DarkTheme.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DarkTheme.m; sourceTree = "<group>"; };
 		8C0A5AE624D33BC7008D1137 /* CollectionViewLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionViewLabel.h; sourceTree = "<group>"; };
 		8C0A5AE724D33BC7008D1137 /* CollectionViewLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionViewLabel.m; sourceTree = "<group>"; };
-		8C28EAA724D084D500AE876E /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
-		8C28EAA824D084D500AE876E /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
-		8C28EAAA24D084E700AE876E /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
-		8C28EAAB24D084E700AE876E /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
+		8C0A5AE924D46A60008D1137 /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
+		8C0A5AEA24D46A60008D1137 /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
+		8C0A5AEB24D46A60008D1137 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
+		8C0A5AEC24D46A60008D1137 /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
 		8C3A355C24D222DB00124B52 /* Theme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Theme.h; sourceTree = "<group>"; };
 		8C3A355E24D2235000124B52 /* DefaultTheme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultTheme.h; sourceTree = "<group>"; };
 		8C3A355F24D2235000124B52 /* DefaultTheme.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefaultTheme.m; sourceTree = "<group>"; };
@@ -236,12 +236,12 @@
 		8C21337D24CF36B300C796BA /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				8C0A5AEC24D46A60008D1137 /* TPKeyboardAvoidingScrollView.h */,
+				8C0A5AE924D46A60008D1137 /* TPKeyboardAvoidingScrollView.m */,
+				8C0A5AEA24D46A60008D1137 /* UIScrollView+TPKeyboardAvoidingAdditions.h */,
+				8C0A5AEB24D46A60008D1137 /* UIScrollView+TPKeyboardAvoidingAdditions.m */,
 				8C9EBFDA24BCD27E0031380E /* Utilities.h */,
 				8C9EBFDB24BCD27E0031380E /* Utilities.m */,
-				8C28EAA724D084D500AE876E /* UIScrollView+TPKeyboardAvoidingAdditions.h */,
-				8C28EAA824D084D500AE876E /* UIScrollView+TPKeyboardAvoidingAdditions.m */,
-				8C28EAAA24D084E700AE876E /* TPKeyboardAvoidingScrollView.h */,
-				8C28EAAB24D084E700AE876E /* TPKeyboardAvoidingScrollView.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -655,7 +655,6 @@
 				8C9B17DA24CA03FB00D84D18 /* ProfileContainerViewController.m in Sources */,
 				8C6FECE324CA2EC500B14E8F /* BalloonMarker.swift in Sources */,
 				8CBB59A624C0BB9E0062FB0F /* BuyCell.m in Sources */,
-				8C28EAA924D084D500AE876E /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				8C66985F24CF7C2500BB2579 /* FacebookShareView.m in Sources */,
 				8C3A357724D2B51A00124B52 /* SaveButton.m in Sources */,
 				8C9EC00324BCDF3E0031380E /* RecipesViewController.m in Sources */,
@@ -665,6 +664,8 @@
 				8C49B40B24D21A31001D3F9C /* UIColor+ColorExtensions.m in Sources */,
 				8C3A356B24D28D7C00124B52 /* WeatherIcon.m in Sources */,
 				8CA0DB8C24BF589C00B93FEC /* DataViewController.m in Sources */,
+				8C0A5AED24D46A60008D1137 /* TPKeyboardAvoidingScrollView.m in Sources */,
+				8C0A5AEE24D46A60008D1137 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				8CA0DB8324BE164B00B93FEC /* RecipeCell.m in Sources */,
 				8C9EBFF724BCDF1F0031380E /* LoginViewController.m in Sources */,
 				8C9EBFE224BCD2B40031380E /* Recipe.m in Sources */,
@@ -679,7 +680,6 @@
 				8C0A5AE824D33BC7008D1137 /* CollectionViewLabel.m in Sources */,
 				8C3A356E24D29D6300124B52 /* BackgroundView.m in Sources */,
 				8C3A357424D2B25500124B52 /* LightTheme.m in Sources */,
-				8C28EAAC24D084E700AE876E /* TPKeyboardAvoidingScrollView.m in Sources */,
 				8C9EBFA324BCC1330031380E /* AppDelegate.m in Sources */,
 				8C9EBFB424BCC1340031380E /* main.m in Sources */,
 				8CA0DB8624BE24DC00B93FEC /* IngredientCell.m in Sources */,
