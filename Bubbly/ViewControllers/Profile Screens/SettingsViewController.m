@@ -17,7 +17,7 @@
 
 static const int numLogs = 4;
 
-@interface SettingsViewController () <CameraViewDelegate>
+@interface SettingsViewController () <CameraViewDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIButton *profilePicture;
@@ -36,6 +36,8 @@ static const int numLogs = 4;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *appearanceSegment;
 @property (weak, nonatomic) IBOutlet UILabel *timeIntervalLabel;
 @property (weak, nonatomic) IBOutlet UITextField *timeIntervalField;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
+@property (strong, nonatomic) User *userCopy;
 
 @end
 
@@ -43,9 +45,18 @@ static const int numLogs = 4;
 
 #pragma mark - View
 
+BOOL themeChanged = NO;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
         
+    self.enterPasswordField.delegate = self;
+    self.confirmPasswordField.delegate = self;
+    
+    self.userCopy = [self.user copyUser];
+    self.saveButton.enabled = NO;
+    self.saveButton.tintColor = [UIColor lightGrayColor];
+    
     [Utilities roundImage:(UIImageView *)self.profilePicture];
     [Utilities roundImage:(UIImageView *)self.backgroundPicture];
         
@@ -82,7 +93,7 @@ static const int numLogs = 4;
     self.weightField.placeholder = [NSString stringWithFormat:@"Weight: %@ lbs", self.user.weight];
     self.exerciseField.placeholder = [NSString stringWithFormat:@"Exercise: %@ mins", self.user.exercise];
     for (int i = 0; i < numLogs; i++) {
-        self.logFields[i].text = [NSString stringWithFormat:@"%@", self.user.logAmounts[i]];
+        self.logFields[i].placeholder = [NSString stringWithFormat:@"%@", self.user.logAmounts[i]];
     }
 }
 
@@ -114,6 +125,7 @@ static const int numLogs = 4;
 
 - (IBAction)didTapSave:(id)sender {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     if (![self.enterPasswordField.text isEqualToString:@""]) {
         if (![self.enterPasswordField.text isEqualToString:self.confirmPasswordField.text]) {
             [Utilities presentOkAlertControllerInViewController:self
@@ -123,39 +135,6 @@ static const int numLogs = 4;
         } else {
             self.user.password = self.enterPasswordField.text;
         }
-    }
-    if (![self.nameField.text isEqualToString:@""]) {
-        self.user.name = self.nameField.text;
-    }
-    if (![self.emailField.text isEqualToString:@""]) {
-        self.user.email = self.emailField.text;
-    }
-    if (![self.usernameField.text isEqualToString:@""]) {
-        self.user.username = self.usernameField.text;
-    }
-    if (![self.weightField.text isEqualToString:@""]) {
-        self.user.weight = [NSNumber numberWithFloat:[self.weightField.text floatValue]];
-    }
-    if (![self.usernameField.text isEqualToString:@""]) {
-        self.user.exercise = [NSNumber numberWithFloat:[self.exerciseField.text floatValue]];
-    }
-    self.user.profilePicture = [Utilities getPFFileFromImage:self.profilePicture.imageView.image];
-    self.user.backgroundPicture = [Utilities getPFFileFromImage:self.backgroundPicture.imageView.image];
-    self.user.logAmounts = @[self.logFields[0].text, self.logFields[1].text, self.logFields[2].text, self.logFields[3].text];
-    self.user.FBConnected = [NSNumber numberWithInteger:self.FBSegment.selectedSegmentIndex];
-    self.user.weatherEnabled = [NSNumber numberWithInteger:self.weatherSegment.selectedSegmentIndex];
-    self.user.notificationsEnabled = [NSNumber numberWithInteger:self.notificationsSegment.selectedSegmentIndex];
-    
-    BOOL themeChanged = NO;
-    if (self.appearanceSegment.selectedSegmentIndex != self.user.theme.intValue) {
-        self.user.theme = [NSNumber numberWithInteger:self.appearanceSegment.selectedSegmentIndex];
-        themeChanged = YES;
-    }
-    if ([self.user.notificationsEnabled isEqualToNumber:[NSNumber numberWithInt:1]] && self.timeIntervalField.text.intValue > 0) {
-        self.user.notifictionTimeInterval = [NSNumber numberWithInt:(self.timeIntervalField.text.intValue*60)];
-        [Utilities changeNotificationsWithTimeInterval:self.user.notifictionTimeInterval.doubleValue inViewController:self];
-    } else if ([self.user.notificationsEnabled isEqualToNumber:[NSNumber numberWithInt:0]]) {
-        [UNUserNotificationCenter.currentNotificationCenter removeAllPendingNotificationRequests];
     }
     
     [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
@@ -167,6 +146,12 @@ static const int numLogs = 4;
             if (themeChanged) {
                 NSNotification *newTheme = [[NSNotification alloc] initWithName:@"ThemeChangedEvent" object:nil userInfo:@{@"ThemeName" : self.user.theme}];
                 [NSNotificationCenter.defaultCenter postNotification:newTheme];
+            }
+            
+            if ([self.user.notificationsEnabled isEqualToNumber:[NSNumber numberWithInt:1]] && self.timeIntervalField.text.intValue > 0) {
+                [Utilities changeNotificationsWithTimeInterval:self.user.notifictionTimeInterval.doubleValue inViewController:self];
+            } else if ([self.user.notificationsEnabled isEqualToNumber:[NSNumber numberWithInt:0]]) {
+                [UNUserNotificationCenter.currentNotificationCenter removeAllPendingNotificationRequests];
             }
             
             UIAlertController *success = [UIAlertController alertControllerWithTitle:@"Changes saved successfully"
@@ -182,6 +167,16 @@ static const int numLogs = 4;
 }
 
 - (IBAction)closeKeyboard:(id)sender {
+    [self updateUser];
+    
+    if (![self.userCopy compareTo:self.user]) {
+        self.saveButton.enabled = YES;
+        self.saveButton.tintColor = UIButton.appearance.tintColor;
+    } else {
+        self.saveButton.enabled = NO;
+        self.saveButton.tintColor = [UIColor lightGrayColor];
+    }
+    
     [self.view endEditing:YES];
 }
 
@@ -192,6 +187,71 @@ static const int numLogs = 4;
         [self.profilePicture setImage:image forState:UIControlStateNormal];
     } else if ([name isEqualToString:@"background"]) {
         [self.backgroundPicture setImage:image forState:UIControlStateNormal];
+    }
+}
+
+#pragma mark - TextFieldDelgate
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if (textField.text.length > 0) {
+        self.saveButton.enabled = YES;
+        self.saveButton.tintColor = UIButton.appearance.tintColor;
+    } else {
+        self.saveButton.enabled = NO;
+        self.saveButton.tintColor = [UIColor lightGrayColor];
+    }
+}
+
+#pragma mark - Helper Functions
+
+- (void)updateUser {
+    if (![self.nameField.text isEqualToString:@""]) {
+        self.user.name = self.nameField.text;
+    } else {
+        self.user.name = self.userCopy.name;
+    }
+    if (![self.emailField.text isEqualToString:@""]) {
+        self.user.email = self.emailField.text;
+    } else {
+        self.user.email = self.userCopy.email;
+    }
+    if (![self.usernameField.text isEqualToString:@""]) {
+        self.user.username = self.usernameField.text;
+    } else {
+        self.user.username = self.userCopy.username;
+    }
+    if (![self.weightField.text isEqualToString:@""]) {
+        self.user.weight = [NSNumber numberWithFloat:[self.weightField.text floatValue]];
+    } else {
+        self.user.weight = self.userCopy.weight;
+    }
+    if (![self.usernameField.text isEqualToString:@""]) {
+        self.user.exercise = [NSNumber numberWithFloat:[self.exerciseField.text floatValue]];
+    } else {
+        self.user.exercise = self.userCopy.exercise;
+    }
+    self.user.profilePicture = [Utilities getPFFileFromImage:self.profilePicture.imageView.image];
+    self.user.backgroundPicture = [Utilities getPFFileFromImage:self.backgroundPicture.imageView.image];
+    
+    self.user.FBConnected = [NSNumber numberWithInteger:self.FBSegment.selectedSegmentIndex];
+    self.user.weatherEnabled = [NSNumber numberWithInteger:self.weatherSegment.selectedSegmentIndex];
+    self.user.notificationsEnabled = [NSNumber numberWithInteger:self.notificationsSegment.selectedSegmentIndex];
+    
+    NSMutableArray *newLogAmounts = [[NSMutableArray alloc] init];
+    for (int i = 0; i < 4; i++) {
+        [newLogAmounts addObject:[self.logFields[i].text isEqual:@""] ? self.userCopy.logAmounts[i] : self.logFields[i].text];
+    }
+    self.user.logAmounts = (NSArray *)newLogAmounts;
+    
+    if (self.appearanceSegment.selectedSegmentIndex != self.userCopy.theme.intValue) {
+        self.user.theme = [NSNumber numberWithInteger:self.appearanceSegment.selectedSegmentIndex];
+        themeChanged = YES;
+    } else {
+        themeChanged = NO;
+    }
+    
+    if ([self.user.notificationsEnabled isEqualToNumber:[NSNumber numberWithInt:1]] && self.timeIntervalField.text.intValue > 0) {
+        self.user.notifictionTimeInterval = [NSNumber numberWithInt:(self.timeIntervalField.text.intValue*60)];
     }
 }
 

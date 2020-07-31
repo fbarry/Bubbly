@@ -33,10 +33,10 @@ NSDate *referenceDate;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.lineChart.userInteractionEnabled = NO;
     [self.lineChart.chartDescription setEnabled:NO];
     [self.lineChart.rightAxis setEnabled:NO];
     [self.lineChart.legend setEnabled:NO];
-//    [self.lineChart setDrawMarkers:YES];
     
     referenceDate = [self getDateAtMidnight:[NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay value:-20 toDate:[NSDate date] options:0]];
     
@@ -92,14 +92,6 @@ NSDate *referenceDate;
                 indx = [self getXCoordFromDate:indexDate];
                 indexDate = [NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:indexDate options:0];
             }
-                        
-//            BalloonMarker *marker = [[BalloonMarker alloc] initWithColor:[UIColor systemGray6Color]
-//                                                                     font:[UIFont fontWithName:@"Avenir Next Condensed" size:16]
-//                                                                textColor:[UIColor blackColor]
-//                                                                   insets:UIEdgeInsetsMake(4, 4, 4, 4)
-//                                                               intakeLogs:self.chartData];
-//            marker.minimumSize = CGSizeMake(75.0, 35.0);
-//            self.lineChart.marker = marker;
             
             self.lineChart.xAxis.axisMinimum = 0;
             self.lineChart.xAxis.axisMaximum = self.chartData.count;

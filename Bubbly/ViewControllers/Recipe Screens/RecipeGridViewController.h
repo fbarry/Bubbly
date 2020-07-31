@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RecipeContainerViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RecipesViewController : UIViewController
+@interface RecipeGridViewController : UIViewController <RecipeInformationDelegate>
 
 @end
 

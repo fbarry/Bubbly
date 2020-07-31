@@ -12,6 +12,7 @@ target 'Bubbly' do
   pod 'MBProgressHUD'
   pod 'OpenWeatherMapAPI'
   pod 'PopupDialog'
+  pod 'TTTAttributedLabel'
 
   target 'BubblyTests' do
     inherit! :search_paths

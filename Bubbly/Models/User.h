@@ -15,7 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) NSURL *profilePictureURL;
 @property (readonly) NSString *name;
 @property (readonly) NSString *profileUsername;
-@property (readonly) NSString *bio;
 
 @end
 
@@ -23,7 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) PFFileObject *profilePicture;
-@property (strong, nonatomic) NSString *bio;
 @property (strong, nonatomic) NSNumber *weight;
 @property (strong, nonatomic) NSNumber *exercise;
 @property (strong, nonatomic) PFFileObject *backgroundPicture;
@@ -33,9 +31,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSNumber *weatherEnabled;
 @property (strong, nonatomic) NSNumber *notificationsEnabled;
 @property (strong, nonatomic) NSNumber *notifictionTimeInterval;
-@property (strong, nonatomic) NSDate *notificationBegin;
-@property (strong, nonatomic) NSDate *notificatonEnd;
 @property (strong, nonatomic) NSNumber *theme;
+
+- (User *)copyUser;
+- (BOOL)compareTo:(User *)user;
 
 @end
 

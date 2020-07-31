@@ -12,16 +12,17 @@
 #import "ProfileContainerViewController.h"
 #import "ComposeViewController.h"
 #import "FacebookShareView.h"
-#import "SaveButton.h"
+#import <TTTAttributedLabel.h>
+#import "WebKitViewController.h"
 
-@interface DetailsViewController () <ComposeViewControllerDelegate>
+@interface DetailsViewController () <ComposeViewControllerDelegate, TTTAttributedLabelDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *picture;
-@property (weak, nonatomic) IBOutlet UILabel *websiteLabel;
+@property (weak, nonatomic) IBOutlet TTTAttributedLabel *websiteLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ingredientsLabel;
-@property (weak, nonatomic) IBOutlet SaveButton *saveButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePicture;
 @property (weak, nonatomic) IBOutlet UIButton *creatorName;
 @property (weak, nonatomic) IBOutlet UILabel *updatedDate;
@@ -85,11 +86,20 @@
     [formatter setDateFormat:@"dd MMM, YYYY 'at' h:mm a zzz"];
     self.updatedDate.text = [NSString stringWithFormat:@"Last Updated: %@", [formatter stringFromDate:self.recipe.updatedAt]];
     
-    self.websiteLabel.text = [NSString stringWithFormat:@"Website: %@", self.recipe.url && self.recipe.url.length > 0 ? self.recipe.url : @"Not Available"];
+    self.websiteLabel.delegate = self;
+    self.websiteLabel.enabledTextCheckingTypes = NSTextCheckingTypeLink;
+    [self.websiteLabel setText:[NSString stringWithFormat:@"Website: %@", self.recipe.url && self.recipe.url.length > 0 ? self.recipe.url : @"Not Available"]];
+    
     self.descriptionLabel.text = [NSString stringWithFormat:@"Description: %@", self.recipe.descriptionText && self.recipe.descriptionText.length > 0 ? self.recipe.descriptionText : @"Not Available"];
     
     NSString *joinedString = [self.recipe.ingredients componentsJoinedByString:@", "];
     self.ingredientsLabel.text = [@"Ingredients: " stringByAppendingString:joinedString];
+}
+
+#pragma mark - TTTAttributedLabel Delegate
+
+- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url {
+    [self performSegueWithIdentifier:@"Link" sender:url];
 }
 
 #pragma mark - Action Handlers
@@ -172,6 +182,9 @@
         ComposeViewController *composeViewController = [segue destinationViewController];
         composeViewController.recipe = self.recipe;
         composeViewController.delegate = self;
+    } else if ([segue.identifier isEqualToString:@"Link"]) {
+        WebKitViewController *webKitViewController = [segue destinationViewController];
+        webKitViewController.url = sender;
     }
 }
 

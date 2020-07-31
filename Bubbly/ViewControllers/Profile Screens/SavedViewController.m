@@ -8,7 +8,7 @@
 
 #import "SavedViewController.h"
 #import "Recipe.h"
-#import "RecipeCell.h"
+#import "RecipeGridCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "Utilities.h"
 #import "ProfileContainerViewController.h"
@@ -81,14 +81,14 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.restorationIdentifier isEqualToString:@"Custom"]) {
-        [self.parentViewController.parentViewController performSegueWithIdentifier:@"Details" sender:self.recipes[indexPath.row]];
+        [self.parentViewController.parentViewController performSegueWithIdentifier:@"Details" sender:self.recipes[indexPath.item]];
     } else {
-        [self performSegueWithIdentifier:@"Details" sender:self.recipes[indexPath.row]];
+        [self performSegueWithIdentifier:@"Details" sender:self.recipes[indexPath.item]];
     }
 }
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    RecipeCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"RecipeCell" forIndexPath:indexPath];
+    RecipeGridCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"RecipeGridCell" forIndexPath:indexPath];
     cell.contentView.layer.cornerRadius = cell.contentView.frame.size.height / 16;
     cell.contentView.layer.masksToBounds = YES;
     

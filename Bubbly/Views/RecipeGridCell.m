@@ -6,11 +6,11 @@
 //  Copyright © 2020 fbarry. All rights reserved.
 //
 
-#import "RecipeCell.h"
+#import "RecipeGridCell.h"
 #import <UIImageView+AFNetworking.h>
 #import "CollectionViewLabel.h"
 
-@interface RecipeCell ()
+@interface RecipeGridCell ()
 
 @property (weak, nonatomic) IBOutlet CollectionViewLabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *recipePicture;
@@ -18,7 +18,7 @@
 
 @end
 
-@implementation RecipeCell
+@implementation RecipeGridCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

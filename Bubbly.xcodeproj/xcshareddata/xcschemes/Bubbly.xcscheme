@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1150"
+   LastUpgradeVersion = "1160"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -45,6 +45,16 @@
                BlueprintIdentifier = "8C9EBFC324BCC1340031380E"
                BuildableName = "BubblyUITests.xctest"
                BlueprintName = "BubblyUITests"
+               ReferencedContainer = "container:Bubbly.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8C0A5AF724D48977008D1137"
+               BuildableName = "ThemeTests.xctest"
+               BlueprintName = "ThemeTests"
                ReferencedContainer = "container:Bubbly.xcodeproj">
             </BuildableReference>
          </TestableReference>

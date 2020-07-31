@@ -14,6 +14,7 @@ PODS:
     - Bolts/Tasks (= 1.9.1)
   - PopupDialog (1.1.1):
     - DynamicBlurView (~> 4.0)
+  - TTTAttributedLabel (2.0.0)
 
 DEPENDENCIES:
   - AFNetworking
@@ -22,6 +23,7 @@ DEPENDENCIES:
   - OpenWeatherMapAPI
   - Parse
   - PopupDialog
+  - TTTAttributedLabel
 
 SPEC REPOS:
   trunk:
@@ -33,6 +35,7 @@ SPEC REPOS:
     - OpenWeatherMapAPI
     - Parse
     - PopupDialog
+    - TTTAttributedLabel
 
 SPEC CHECKSUMS:
   AFNetworking: cf8e418e16f0c9c7e5c3150d019a3c679d015018
@@ -43,7 +46,8 @@ SPEC CHECKSUMS:
   OpenWeatherMapAPI: 53613bba3dffc948f852a66a25f512f7a16643e7
   Parse: 79bdda34fdb7eb2a707a43a951c8aae236cb3e34
   PopupDialog: 720c92befd8bc23c13442254945213db5612f149
+  TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
-PODFILE CHECKSUM: 0328136ccd4bf0022dd6dfb28862191843f6813a
+PODFILE CHECKSUM: 671e2752a9f0657c3e5e127af34fd7caba515b60
 
 COCOAPODS: 1.9.3

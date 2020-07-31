@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UIView *dataView;
 @property (weak, nonatomic) IBOutlet UIView *customView;
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *closeSidebar;
+@property (strong, nonatomic) IBOutlet UISwipeGestureRecognizer *swipeGesture;
 @property (strong, nonatomic) id<ProfileProtocol>profile;
 
 @end
@@ -57,7 +58,6 @@
     [self.profilePicture setImageWithURL:self.profile.profilePictureURL];
     self.nameLabel.text = self.profile.name;
     self.usernameLabel.text = self.profile.profileUsername;
-    self.bioLabel.text = self.profile.bio;
 }
 
 #pragma mark - Action Handlers
@@ -65,10 +65,12 @@
 - (IBAction)didSelectIndex:(UISegmentedControl *)sender {
     switch (sender.selectedSegmentIndex) {
         case 0:
+            self.swipeGesture.direction = NSLayoutAttributeRight;
             self.dataView.alpha = 1;
             self.customView.alpha = 0;
             break;
         case 1:
+            self.swipeGesture.direction = NSLayoutAttributeLeft;
             self.dataView.alpha = 0;
             self.customView.alpha = 1;
             break;
@@ -79,6 +81,11 @@
 
 - (IBAction)didTapBackground:(id)sender {
     [self.delegate didTapCloseSidebar];
+}
+
+- (IBAction) didSwipe:(id)sender {
+    self.segmentedControl.selectedSegmentIndex = (self.segmentedControl.selectedSegmentIndex + 1) % 2;
+    [self didSelectIndex:self.segmentedControl];
 }
 
 #pragma mark - SidebarStatusDelegate

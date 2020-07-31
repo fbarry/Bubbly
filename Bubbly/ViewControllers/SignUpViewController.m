@@ -85,8 +85,6 @@
         user.weatherEnabled = [NSNumber numberWithInt:2];
         user.notificationsEnabled = [NSNumber numberWithInt:2];
         user.notifictionTimeInterval = [NSNumber numberWithInt:(60*60)];
-        user.notificationBegin = [NSCalendar.currentCalendar dateBySettingHour:8 minute:0 second:0 ofDate:[NSDate date] options:0];
-        user.notificatonEnd = [NSCalendar.currentCalendar dateBySettingHour:20 minute:0 second:0 ofDate:[NSDate date] options:0];
         
         [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (error) {

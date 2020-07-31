@@ -1,8 +1,8 @@
 //
-//  RecipeCell.h
+//  RecipeListCell.h
 //  Bubbly
 //
-//  Created by Fiona Barry on 7/14/20.
+//  Created by Fiona Barry on 7/31/20.
 //  Copyright © 2020 fbarry. All rights reserved.
 //
 
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RecipeCell : UICollectionViewCell
+@interface RecipeListCell : UITableViewCell
 
 @property (strong, nonatomic) Recipe *recipe;
 
