@@ -1240,6 +1240,9 @@
                                                     <segment title="Off"/>
                                                     <segment title="On"/>
                                                 </segments>
+                                                <connections>
+                                                    <action selector="didToggle:" destination="5ti-cd-NXH" eventType="valueChanged" id="Vaz-3k-XNU"/>
+                                                </connections>
                                             </segmentedControl>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connect to Weather" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gph-Pk-mfN">
                                                 <rect key="frame" x="16" y="1094.5" width="138" height="28"/>
@@ -1256,6 +1259,9 @@
                                                     <segment title="Off"/>
                                                     <segment title="On"/>
                                                 </segments>
+                                                <connections>
+                                                    <action selector="didToggle:" destination="5ti-cd-NXH" eventType="valueChanged" id="c6f-7f-P9w"/>
+                                                </connections>
                                             </segmentedControl>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eoW-uJ-IiL" customClass="FBSDKLoginButton">
                                                 <rect key="frame" x="16" y="1225.5" width="382" height="30"/>
@@ -1277,6 +1283,7 @@
                                                     <segment title="On"/>
                                                 </segments>
                                                 <connections>
+                                                    <action selector="didToggle:" destination="5ti-cd-NXH" eventType="valueChanged" id="jMX-8x-GSC"/>
                                                     <action selector="didToggleNotifications:" destination="5ti-cd-NXH" eventType="valueChanged" id="SJz-uU-VPH"/>
                                                 </connections>
                                             </segmentedControl>
@@ -1307,6 +1314,9 @@
                                                     <segment title="Light"/>
                                                     <segment title="Dark"/>
                                                 </segments>
+                                                <connections>
+                                                    <action selector="didToggle:" destination="5ti-cd-NXH" eventType="valueChanged" id="DcT-1K-wiy"/>
+                                                </connections>
                                             </segmentedControl>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

@@ -94,6 +94,7 @@
     UITextView.appearance.textColor = theme.labelText;
     UITextView.appearance.backgroundColor = theme.fieldBackground;
     
+    UISegmentedControl.appearance.backgroundColor = theme.barColor;
     UISegmentedControl.appearance.selectedSegmentTintColor = theme.selectedSegment;
     
     [UIBarButtonItem.appearance setTitleTextAttributes:theme.barButtonAttributes forState:UIControlStateNormal];

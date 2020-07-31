@@ -49,9 +49,7 @@
     return user;
 }
 
-- (BOOL)compareTo:(User *)user {
-    NSLog(@"%@\n%@", user, self);
-    
+- (BOOL)compareTo:(User *)user {    
     if (![user.name isEqualToString:self.name]) {
         return NO;
     } else if (![user.username isEqualToString:self.username]) {

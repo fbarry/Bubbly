@@ -79,7 +79,7 @@
         user.exercise = [NSNumber numberWithFloat:[self.exerciseField.text floatValue]];
         
         user.backgroundPicture = [Utilities getPFFileFromImage:[UIImage imageNamed:@"bottle"]];
-        user.logAmounts = @[@1, @2, @4, @8];
+        user.logAmounts = @[@"1", @"2", @"4", @"8"];
         
         user.FBConnected = [NSNumber numberWithInt:2];
         user.weatherEnabled = [NSNumber numberWithInt:2];

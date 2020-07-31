@@ -180,6 +180,10 @@ BOOL themeChanged = NO;
     [self.view endEditing:YES];
 }
 
+- (IBAction)didToggle:(id)sender {
+    [self closeKeyboard:self];
+}
+
 #pragma mark - CameraViewDelegate
 
 - (void)setImage:(nonnull UIImage *)image withName:(nonnull NSString *)name {
@@ -243,8 +247,8 @@ BOOL themeChanged = NO;
     }
     self.user.logAmounts = (NSArray *)newLogAmounts;
     
+    self.user.theme = [NSNumber numberWithInteger:self.appearanceSegment.selectedSegmentIndex];
     if (self.appearanceSegment.selectedSegmentIndex != self.userCopy.theme.intValue) {
-        self.user.theme = [NSNumber numberWithInteger:self.appearanceSegment.selectedSegmentIndex];
         themeChanged = YES;
     } else {
         themeChanged = NO;
