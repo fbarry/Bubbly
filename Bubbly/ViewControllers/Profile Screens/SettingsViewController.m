@@ -137,6 +137,8 @@ BOOL themeChanged = NO;
         }
     }
     
+    [self updateUser];
+    
     [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (error) {
             [Utilities presentOkAlertControllerInViewController:self
@@ -187,6 +189,7 @@ BOOL themeChanged = NO;
 #pragma mark - CameraViewDelegate
 
 - (void)setImage:(nonnull UIImage *)image withName:(nonnull NSString *)name {
+    [self closeKeyboard:self];
     if ([name isEqualToString:@"profile"]) {
         [self.profilePicture setImage:image forState:UIControlStateNormal];
     } else if ([name isEqualToString:@"background"]) {

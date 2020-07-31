@@ -76,6 +76,7 @@ float temp, feelsLike, humidity;
     self.textView.layer.cornerRadius = 16;
         
     [Utilities roundImage:self.backgroundPicture];
+    self.backgroundPicture.layer.borderColor = BackgroundView.appearance.backgroundColor.CGColor;
     [Utilities roundImage:self.weatherIcon];
     self.weatherIcon.layer.borderWidth = 0.5f;
     self.weatherIcon.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -114,7 +115,8 @@ float temp, feelsLike, humidity;
         [self.infoButton setEnabled:NO];
     }
     
-    self.welcomeLabel.text = [NSString stringWithFormat:@"Welcome Back, %@!", self.user.name];
+    NSArray *name = [self.user.name componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    self.welcomeLabel.text = [NSString stringWithFormat:@"Welcome back, %@!", name[0]];
     
     [self.backgroundPicture setImageWithURL:[NSURL URLWithString:self.user.backgroundPicture.url]];
     
@@ -158,6 +160,7 @@ float temp, feelsLike, humidity;
     }
     
     [Utilities roundImage:self.backgroundPicture];
+    self.backgroundPicture.layer.borderColor = BackgroundView.appearance.backgroundColor.CGColor;
         
     [self.pieChart animateWithXAxisDuration:1.2 easingOption:ChartEasingOptionEaseOutCirc];
 }
