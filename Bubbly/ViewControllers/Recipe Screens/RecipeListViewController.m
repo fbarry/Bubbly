@@ -24,9 +24,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    self.tableView.frame = self.view.frame;
-    
-    self.tableView.contentInset = UIEdgeInsetsMake(4, 4, 4, 4);
+    self.tableView.frame = self.view.frame;    
 }
 
 #pragma mark - RecipeInformationDelegate

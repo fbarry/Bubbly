@@ -53,11 +53,15 @@
             self.swipeGesture.direction = NSLayoutAttributeRight;
             self.gridView.alpha = 1;
             self.listView.alpha = 0;
+            self.gridView.userInteractionEnabled = YES;
+            self.listView.userInteractionEnabled = NO;
             break;
         case 1:
-            self.swipeGesture.direction = NSTextAlignmentLeft;
+            self.swipeGesture.direction = NSLayoutAttributeLeft;
             self.gridView.alpha = 0;
             self.listView.alpha = 1;
+            self.gridView.userInteractionEnabled = NO;
+            self.listView.userInteractionEnabled = YES;
             break;
     }
 }
