@@ -39,6 +39,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSLog(@"%@", self.recipe);
+    
     self.user = [User currentUser];
     
     if (![self.recipe.creator.objectId isEqual:self.user.objectId]) {

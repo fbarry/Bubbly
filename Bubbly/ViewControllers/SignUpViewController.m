@@ -118,6 +118,9 @@
 #pragma mark - Helper Functions
 
 - (BOOL)invalidInput {
+    if (self.weightField.text.intValue < 0 || self.weightField.text.intValue > 1000 || self.exerciseField.text.intValue < 0 || self.exerciseField.text.intValue > (24*60)) {
+        return false;
+    }
     return [self.nameField.text isEqual:@""] || [self.emailField.text isEqual:@""] || [self.usernameField.text isEqual:@""] || [self.passwordField.text isEqual:@""];
 }
 

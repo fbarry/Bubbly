@@ -63,10 +63,12 @@ BOOL themeChanged = NO;
     UIImageView *imageView = [[UIImageView alloc] init];
     [imageView setImageWithURL:[NSURL URLWithString:self.user.profilePicture.url]];
     [self.profilePicture setImage:imageView.image forState:UIControlStateNormal];
+    
+    imageView = [[UIImageView alloc] init];
     [imageView setImageWithURL:[NSURL URLWithString:self.user.backgroundPicture.url]];
     [self.backgroundPicture setImage:imageView.image forState:UIControlStateNormal];
     
-    self.timeIntervalField.placeholder = [NSString stringWithFormat:@"%d", (self.user.notifictionTimeInterval.intValue / 60)];
+    self.timeIntervalField.text = [NSString stringWithFormat:@"%d", (self.user.notifictionTimeInterval.intValue / 60)];
     
     self.appearanceSegment.selectedSegmentIndex = self.user.theme.intValue;
     
@@ -135,6 +137,13 @@ BOOL themeChanged = NO;
         } else {
             self.user.password = self.enterPasswordField.text;
         }
+    }
+    
+    if (self.weightField.text.intValue < 0 || self.weightField.text.intValue > 1000 || self.exerciseField.text.intValue < 0 || self.exerciseField.text.intValue > (24*60)) {
+        [Utilities presentOkAlertControllerInViewController:self
+                                                  withTitle:@"Invalid weight/exercise info"
+                                                    message:@"Re-enter to try again"];
+        return;
     }
     
     [self updateUser];

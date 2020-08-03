@@ -100,6 +100,10 @@ float temp, feelsLike, humidity;
     [super viewDidAppear:YES];
         
     if ([self.user.weatherEnabled isEqualToNumber:[NSNumber numberWithInt:1]]) {
+        [self.weatherIcon setHidden:NO];
+        [self.weatherIcon setUserInteractionEnabled:YES];
+        [self.infoButton setHidden:NO];
+        [self.infoButton setEnabled:YES];
         if (!self.locationManager) {
             [self setUpLocationManager];
         }
@@ -209,8 +213,9 @@ float temp, feelsLike, humidity;
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     if (status == SKCloudServiceAuthorizationStatusDenied) {
         [self.user.weatherEnabled isEqualToNumber:[NSNumber numberWithInt:0]];
+    } else {
+        [self updateWeather];
     }
-    [self updateWeather];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
