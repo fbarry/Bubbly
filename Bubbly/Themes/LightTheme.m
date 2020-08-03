@@ -27,7 +27,7 @@
 }
 
 - (UIColor *)titleLabelBackground {
-    return [[UIColor customBlue] colorWithAlphaComponent:0.5];
+    return [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
 }
 
 - (UIColor *)selectedSegment {

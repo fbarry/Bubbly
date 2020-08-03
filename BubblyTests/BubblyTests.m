@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "DetailsViewController.h"
 
 @interface BubblyTests : XCTestCase
 

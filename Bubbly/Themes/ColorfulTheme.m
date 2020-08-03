@@ -1,17 +1,30 @@
 //
-//  DefaultTheme.m
+//  ColorfulTheme.m
 //  Bubbly
 //
-//  Created by Fiona Barry on 7/29/20.
+//  Created by Fiona Barry on 8/3/20.
 //  Copyright © 2020 fbarry. All rights reserved.
 //
 
-#import "DefaultTheme.h"
+#import "ColorfulTheme.h"
+#import "Utilities.h"
 
-@implementation DefaultTheme
+@interface ColorfulTheme ()
+
+@property (strong, nonatomic) UIColor *accent;
+
+@end
+
+@implementation ColorfulTheme
+
+- (instancetype)initWithColor:(UIColor *)color {
+    self = [super init];
+    self.accent = color;
+    return self;
+}
 
 - (UIColor *)buttonTint {
-    return [UIColor customBlue];
+    return self.accent;
 }
 
 - (UIColor *)imageViewTint {
@@ -19,7 +32,7 @@
 }
 
 - (UIColor *)weatherIconBackground {
-    return [UIColor customBlue];
+    return self.accent;
 }
 
 - (UIColor *)labelText {
@@ -31,7 +44,7 @@
 }
 
 - (UIColor *)selectedSegment {
-    return [UIColor customBlue];
+    return self.accent;
 }
 
 - (UIColor *)fieldBackground {
@@ -39,7 +52,7 @@
 }
 
 - (NSDictionary *)barButtonAttributes {
-    return @{NSFontAttributeName : [UIFont fontWithName:@"Avenir Next Condensed" size:20], NSForegroundColorAttributeName: [UIColor customBlue]};
+    return @{NSFontAttributeName : [UIFont fontWithName:@"Avenir Next Condensed" size:20], NSForegroundColorAttributeName: self.accent};
 }
 
 - (NSDictionary *)navigationBarAttributes {
@@ -47,7 +60,7 @@
 }
 
 - (UIColor *)barColor {
-    return [UIColor lightCustomBlue];
+    return [UIColor extraLightGray];
 }
 
 - (UIColor *)viewColor {
@@ -55,11 +68,8 @@
 }
 
 - (UIColor *)shadow {
-    return [UIColor customBlue];
+    return self.accent;
 }
 
-//- (UIColor *)selectedCell {
-//    return [UIColor extraLightGray];
-//}
 
 @end

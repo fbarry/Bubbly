@@ -46,6 +46,7 @@
     user.notificationsEnabled = self.notificationsEnabled;
     user.notifictionTimeInterval = self.notifictionTimeInterval;
     user.theme = self.theme;
+    user.color = self.color;
     return user;
 }
 
@@ -75,6 +76,8 @@
     } else if (![user.notifictionTimeInterval isEqualToNumber:self.notifictionTimeInterval]) {
         return NO;
     } else if (![user.theme isEqualToNumber:self.theme]) {
+        return NO;
+    } else if (user.color.intValue != self.color.intValue) {
         return NO;
     } else {
         return YES;

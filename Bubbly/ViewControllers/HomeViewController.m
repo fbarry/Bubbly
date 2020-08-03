@@ -59,10 +59,8 @@ float temp, feelsLike, humidity;
     self.user = [User currentUser];
     
     self.log.layer.cornerRadius = self.delete.layer.cornerRadius = 16;
-    self.log.backgroundColor = [UIButton.appearance.tintColor colorWithAlphaComponent:0.3];
     self.delete.backgroundColor = [UIColor extraLightGray];
     
-    self.pieChart.layer.shadowColor = UIView.appearance.tintColor.CGColor;
     self.pieChart.layer.shadowOffset = CGSizeMake(0, 8.0f);
     self.pieChart.layer.shadowRadius = 8.0f;
     self.pieChart.layer.shadowOpacity = 0.5f;
@@ -99,6 +97,9 @@ float temp, feelsLike, humidity;
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:YES];
         
+    self.pieChart.layer.shadowColor = UIView.appearance.tintColor.CGColor;
+    self.log.backgroundColor = [UIButton.appearance.tintColor colorWithAlphaComponent:0.3];
+    
     if ([self.user.weatherEnabled isEqualToNumber:[NSNumber numberWithInt:1]]) {
         [self.weatherIcon setHidden:NO];
         [self.weatherIcon setUserInteractionEnabled:YES];

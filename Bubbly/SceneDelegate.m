@@ -21,6 +21,8 @@
 #import <Charts-Swift.h>
 #import "DarkTheme.h"
 #import "CollectionViewLabel.h"
+#import "ColorfulTheme.h"
+#import "ThemeColorOptions.h"
 
 @interface SceneDelegate ()
 
@@ -36,7 +38,7 @@
         NSNotificationCenter *center = NSNotificationCenter.defaultCenter;
         [center addObserver:self selector:@selector(didChangeTheme:) name:@"ThemeChangedEvent" object:nil];
                 
-        NSNotification *newTheme = [[NSNotification alloc] initWithName:@"ThemeChangedEvent" object:nil userInfo:@{@"ThemeName" : user.theme}];
+        NSNotification *newTheme = [[NSNotification alloc] initWithName:@"ThemeChangedEvent" object:nil userInfo:@{@"ThemeName" : user.theme, @"Color" : user.color}];
         [NSNotificationCenter.defaultCenter postNotification:newTheme];
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -49,11 +51,14 @@
     NSNumber *enumVal = notification.userInfo[@"ThemeName"];
     ThemeName themeName = enumVal.intValue;
     
-    id<Theme>theme = [self getThemeByName:themeName];
+    NSNumber *color = notification.userInfo[@"Color"];
+    
+    id<Theme>theme = [self getThemeByName:themeName withColor:color.intValue];
+    
     [self applyTheme:theme];
 }
 
-- (id<Theme>) getThemeByName:(ThemeName)name {
+- (id<Theme>) getThemeByName:(ThemeName)name withColor:(int)color {
     switch (name) {
         case DEFAULT:
             return [[DefaultTheme alloc] init];
@@ -61,8 +66,10 @@
             return [[LightTheme alloc] init];
         case DARK:
             return [[DarkTheme alloc] init];
+        case COLORFUL:
+            return [[ColorfulTheme alloc] initWithColor:[ThemeColorOptions getColorOptions][color]];
     }
-    return [[DefaultTheme alloc] init];
+    return nil;
 }
 
 - (void)applyTheme:(id<Theme>)theme {

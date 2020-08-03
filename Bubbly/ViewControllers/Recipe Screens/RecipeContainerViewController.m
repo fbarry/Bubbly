@@ -37,13 +37,11 @@
     
     self.gridView.alpha = 1;
     self.listView.alpha = 0;
-    
-    [self.closeKeyboard setEnabled:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
-    
+    [self.closeKeyboard setEnabled:NO];
     [self loadRecipes];
 }
 
@@ -95,9 +93,11 @@
 
 #pragma mark - Search Bar Delegate
 
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     [self.closeKeyboard setEnabled:YES];
-    
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     NSArray *words = [searchText componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     words = [words filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF != ''"]];
         

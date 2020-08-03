@@ -15,6 +15,7 @@ typedef enum {
     DEFAULT,
     LIGHT,
     DARK,
+    COLORFUL,
 } ThemeName;
 
 @protocol Theme <NSObject>
@@ -31,7 +32,6 @@ typedef enum {
 @property (readonly) UIColor *barColor;
 @property (readonly) UIColor *viewColor;
 @property (readonly) UIColor *shadow;
-//@property (readonly) UIColor *selectedCell;
 
 @end
 

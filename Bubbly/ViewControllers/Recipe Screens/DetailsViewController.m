@@ -14,6 +14,7 @@
 #import "FacebookShareView.h"
 #import <TTTAttributedLabel.h>
 #import "WebKitViewController.h"
+#import <ChameleonFramework/Chameleon.h>
 
 @interface DetailsViewController () <ComposeViewControllerDelegate, TTTAttributedLabelDelegate>
 
@@ -38,18 +39,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    NSLog(@"%@", self.recipe);
-    
+        
     self.user = [User currentUser];
     
     if (![self.recipe.creator.objectId isEqual:self.user.objectId]) {
         self.navigationItem.rightBarButtonItems = @[self.saveButton];
     }
-    
-    self.nameLabel.layer.cornerRadius = 16;
-    self.nameLabel.clipsToBounds = YES;
-    
+        
     [Utilities roundImage:self.profilePicture];
     
     [self.profilePicture setImageWithURL:[NSURL URLWithString:self.recipe.creator.profilePicture.url]];
@@ -82,7 +78,16 @@
     [super viewWillAppear:YES];
     
     self.nameLabel.text = self.recipe.name;
-    [self.picture setImageWithURL:[NSURL URLWithString:self.recipe.picture.url]];
+    [self.picture setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.recipe.picture.url]]
+                        placeholderImage:[UIImage systemImageNamed:@"book"]
+                                 success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        [self.picture setImage:image];
+        UIColor *color = AverageColorFromImage(image);
+        self.nameLabel.backgroundColor = [color colorWithAlphaComponent:0.5f];
+    }
+                                 failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+        // retry option
+    }];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"dd MMM, YYYY 'at' h:mm a zzz"];

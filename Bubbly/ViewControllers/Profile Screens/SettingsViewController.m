@@ -14,10 +14,12 @@
 #import "TPKeyboardAvoidingScrollView.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <UserNotifications/UserNotifications.h>
+#import "ThemeColorOptions.h"
+#import "ColorViewController.h"
 
 static const int numLogs = 4;
 
-@interface SettingsViewController () <CameraViewDelegate, UITextFieldDelegate>
+@interface SettingsViewController () <CameraViewDelegate, UITextFieldDelegate, ColorViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIButton *profilePicture;
@@ -33,7 +35,7 @@ static const int numLogs = 4;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *FBSegment;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *weatherSegment;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *notificationsSegment;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *appearanceSegment;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *themeSegment;
 @property (weak, nonatomic) IBOutlet UILabel *timeIntervalLabel;
 @property (weak, nonatomic) IBOutlet UITextField *timeIntervalField;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
@@ -49,7 +51,7 @@ BOOL themeChanged = NO;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-        
+            
     self.enterPasswordField.delegate = self;
     self.confirmPasswordField.delegate = self;
     
@@ -70,7 +72,7 @@ BOOL themeChanged = NO;
     
     self.timeIntervalField.text = [NSString stringWithFormat:@"%d", (self.user.notifictionTimeInterval.intValue / 60)];
     
-    self.appearanceSegment.selectedSegmentIndex = self.user.theme.intValue;
+    self.themeSegment.selectedSegmentIndex = self.user.theme.intValue;
     
     if ([self.user.FBConnected isEqualToNumber:[NSNumber numberWithInt:1]]) {
         self.FBSegment.selectedSegmentIndex = 1;
@@ -117,6 +119,14 @@ BOOL themeChanged = NO;
     }
 }
 
+- (IBAction)didToggleTheme:(id)sender {
+    if (self.themeSegment.selectedSegmentIndex == 3) {
+        [self performSegueWithIdentifier:@"Colors" sender:self];
+    } else {
+        self.themeSegment.selectedSegmentTintColor = UISegmentedControl.appearance.selectedSegmentTintColor;
+    }
+}
+
 - (IBAction)didTapImage:(UIButton *)sender {
     CameraView *camera = [[CameraView alloc] init];
     camera.delegate = self;
@@ -155,7 +165,7 @@ BOOL themeChanged = NO;
                                                         message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
         } else {
             if (themeChanged) {
-                NSNotification *newTheme = [[NSNotification alloc] initWithName:@"ThemeChangedEvent" object:nil userInfo:@{@"ThemeName" : self.user.theme}];
+                NSNotification *newTheme = [[NSNotification alloc] initWithName:@"ThemeChangedEvent" object:nil userInfo:@{@"ThemeName" : self.user.theme, @"Color" : self.user.color}];
                 [NSNotificationCenter.defaultCenter postNotification:newTheme];
             }
             
@@ -218,6 +228,13 @@ BOOL themeChanged = NO;
     }
 }
 
+#pragma mark - ColorViewControllerDelegate
+
+- (void)didSelectColor:(UIColor *)color {
+    self.themeSegment.selectedSegmentTintColor = color;
+    [self closeKeyboard:self];
+}
+
 #pragma mark - Helper Functions
 
 - (void)updateUser {
@@ -259,8 +276,9 @@ BOOL themeChanged = NO;
     }
     self.user.logAmounts = (NSArray *)newLogAmounts;
     
-    self.user.theme = [NSNumber numberWithInteger:self.appearanceSegment.selectedSegmentIndex];
-    if (self.appearanceSegment.selectedSegmentIndex != self.userCopy.theme.intValue) {
+    self.user.color = [NSNumber numberWithInteger:[[ThemeColorOptions getColorOptions] indexOfObject:self.themeSegment.selectedSegmentTintColor]];
+    self.user.theme = [NSNumber numberWithInteger:self.themeSegment.selectedSegmentIndex];
+    if (self.themeSegment.selectedSegmentIndex != self.userCopy.theme.intValue || self.user.color.intValue != self.userCopy.color.intValue) {
         themeChanged = YES;
     } else {
         themeChanged = NO;
@@ -271,14 +289,13 @@ BOOL themeChanged = NO;
     }
 }
 
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"Colors"]) {
+        ColorViewController *colorViewController = [segue destinationViewController];
+        colorViewController.delegate = self;
+    }
 }
-*/
 
 @end

@@ -32,6 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSNumber *notificationsEnabled;
 @property (strong, nonatomic) NSNumber *notifictionTimeInterval;
 @property (strong, nonatomic) NSNumber *theme;
+@property (strong, nonatomic) NSNumber *color;
 
 - (User *)copyUser;
 - (BOOL)compareTo:(User *)user;
