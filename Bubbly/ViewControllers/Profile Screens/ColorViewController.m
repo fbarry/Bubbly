@@ -45,6 +45,8 @@
     ColorCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ColorCell" forIndexPath:indexPath];
     cell.color = [ThemeColorOptions getColorOptions][indexPath.item];
     [cell setProperties];
+    [cell selected];
+    [cell deselected];
     return cell;
 }
 
@@ -53,13 +55,13 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *tappedCell = [collectionView cellForItemAtIndexPath:indexPath];
-    tappedCell.backgroundColor = [UIColor lightGrayColor];
+    ColorCell *tappedCell = (ColorCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    [tappedCell selected];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *tappedCell = [collectionView cellForItemAtIndexPath:indexPath];
-    tappedCell.backgroundColor = UIView.appearance.backgroundColor;
+    ColorCell *tappedCell = (ColorCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    [tappedCell deselected];
 }
 
 - (IBAction)didTapDone:(id)sender {

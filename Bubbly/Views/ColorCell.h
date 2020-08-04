@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) UIColor *color;
 
 - (void)setProperties;
+- (void)selected;
+- (void)deselected;
 
 @end
 

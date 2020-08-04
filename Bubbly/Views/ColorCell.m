@@ -20,4 +20,16 @@
     self.circle.tintColor = self.color;
 }
 
+- (void)selected {
+    [UIView animateWithDuration:0.3 animations:^{
+        self.circle.transform = CGAffineTransformMakeScale(1.1, 1.1);
+    }];
+}
+
+- (void)deselected {
+    [UIView animateWithDuration:0.3 animations:^{
+        self.circle.transform = CGAffineTransformMakeScale(1.0/1.1, 1.0/1.1);
+    }];
+}
+
 @end
