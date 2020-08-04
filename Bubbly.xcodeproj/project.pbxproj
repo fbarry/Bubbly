@@ -24,7 +24,6 @@
 		8C66985124CF4C6100BB2579 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 8C66985024CF4C6100BB2579 /* FacebookCore */; };
 		8C66985324CF4C6100BB2579 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 8C66985224CF4C6100BB2579 /* FacebookLogin */; };
 		8C66985F24CF7C2500BB2579 /* FacebookShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C66985E24CF7C2400BB2579 /* FacebookShareView.m */; };
-		8C6FECE324CA2EC500B14E8F /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6FECE224CA2EC500B14E8F /* BalloonMarker.swift */; };
 		8C7614A524D4A90700C02D1C /* RecipeContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C7614A424D4A90700C02D1C /* RecipeContainerViewController.m */; };
 		8C7614A824D4A93900C02D1C /* RecipeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C7614A724D4A93900C02D1C /* RecipeListViewController.m */; };
 		8C7614AB24D4A9C900C02D1C /* RecipeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C7614AA24D4A9C900C02D1C /* RecipeListCell.m */; };
@@ -62,6 +61,7 @@
 		8CE2E19C24D4A5C500C6BD71 /* WebKitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE2E19B24D4A5C500C6BD71 /* WebKitViewController.m */; };
 		8CE2E19E24D4A67600C6BD71 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CE2E19D24D4A67600C6BD71 /* WebKit.framework */; };
 		8CEBAEC224D9DF5F00334018 /* UserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CEBAEC124D9DF5F00334018 /* UserTests.m */; };
+		8CEBAEC424D9E74700334018 /* UtilitiesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CEBAEC324D9E74700334018 /* UtilitiesTests.m */; };
 		8CEEBCF424D8BA7B00E84F7B /* ColorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CEEBCF324D8BA7B00E84F7B /* ColorViewController.m */; };
 		8CEEBCF724D8BAF900E84F7B /* ColorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CEEBCF624D8BAF900E84F7B /* ColorCell.m */; };
 		8CF7B9A824C7858D00B0F8C3 /* IntakeDayLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF7B9A724C7858D00B0F8C3 /* IntakeDayLog.m */; };
@@ -114,7 +114,6 @@
 		8C49B40A24D21A31001D3F9C /* UIColor+ColorExtensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ColorExtensions.m"; sourceTree = "<group>"; };
 		8C66985D24CF7C2400BB2579 /* FacebookShareView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FacebookShareView.h; sourceTree = "<group>"; };
 		8C66985E24CF7C2400BB2579 /* FacebookShareView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FacebookShareView.m; sourceTree = "<group>"; };
-		8C6FECE224CA2EC500B14E8F /* BalloonMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
 		8C6FECE524CA321100B14E8F /* Bubbly-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bubbly-Bridging-Header.h"; sourceTree = "<group>"; };
 		8C7614A324D4A90700C02D1C /* RecipeContainerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecipeContainerViewController.h; sourceTree = "<group>"; };
 		8C7614A424D4A90700C02D1C /* RecipeContainerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecipeContainerViewController.m; sourceTree = "<group>"; };
@@ -189,6 +188,7 @@
 		8CE2E19B24D4A5C500C6BD71 /* WebKitViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebKitViewController.m; sourceTree = "<group>"; };
 		8CE2E19D24D4A67600C6BD71 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		8CEBAEC124D9DF5F00334018 /* UserTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserTests.m; sourceTree = "<group>"; };
+		8CEBAEC324D9E74700334018 /* UtilitiesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UtilitiesTests.m; sourceTree = "<group>"; };
 		8CEEBCF224D8BA7B00E84F7B /* ColorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorViewController.h; sourceTree = "<group>"; };
 		8CEEBCF324D8BA7B00E84F7B /* ColorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ColorViewController.m; sourceTree = "<group>"; };
 		8CEEBCF524D8BAF900E84F7B /* ColorCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorCell.h; sourceTree = "<group>"; };
@@ -406,6 +406,7 @@
 		8C9EBFBC24BCC1340031380E /* BubblyTests */ = {
 			isa = PBXGroup;
 			children = (
+				8CEBAEC324D9E74700334018 /* UtilitiesTests.m */,
 				8CEBAEC124D9DF5F00334018 /* UserTests.m */,
 				8C9EBFBD24BCC1340031380E /* HomeViewController.m */,
 				8C9EBFBF24BCC1340031380E /* Info.plist */,
@@ -437,7 +438,6 @@
 				8CBB59A524C0BB9E0062FB0F /* BuyCell.m */,
 				8C3C015824D0DA9F0016BEFB /* SidebarCell.h */,
 				8C3C015924D0DA9F0016BEFB /* SidebarCell.m */,
-				8C6FECE224CA2EC500B14E8F /* BalloonMarker.swift */,
 				8CEEBCF524D8BAF900E84F7B /* ColorCell.h */,
 				8CEEBCF624D8BAF900E84F7B /* ColorCell.m */,
 			);
@@ -727,7 +727,6 @@
 				8C3A356024D2235000124B52 /* DefaultTheme.m in Sources */,
 				8C9EBFDF24BCD2AC0031380E /* User.m in Sources */,
 				8C9B17DA24CA03FB00D84D18 /* ProfileContainerViewController.m in Sources */,
-				8C6FECE324CA2EC500B14E8F /* BalloonMarker.swift in Sources */,
 				8CEEBCF724D8BAF900E84F7B /* ColorCell.m in Sources */,
 				8CBB59A624C0BB9E0062FB0F /* BuyCell.m in Sources */,
 				8C66985F24CF7C2500BB2579 /* FacebookShareView.m in Sources */,
@@ -777,6 +776,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CEBAEC224D9DF5F00334018 /* UserTests.m in Sources */,
+				8CEBAEC424D9E74700334018 /* UtilitiesTests.m in Sources */,
 				8C9EBFBE24BCC1340031380E /* HomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -984,7 +984,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 697DCC4848E080A14A05DE47 /* Pods-BubblyTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R7MZ4U6N4Y;
@@ -1006,7 +1005,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 92E66C41AE6A44DA72D80C86 /* Pods-BubblyTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R7MZ4U6N4Y;
@@ -1028,7 +1026,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8DD8E7B2EC5916ED5A9ED63A /* Pods-Bubbly-BubblyUITests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R7MZ4U6N4Y;
 				INFOPLIST_FILE = BubblyUITests/Info.plist;
@@ -1048,7 +1045,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 35721D81EB89891511B44E78 /* Pods-Bubbly-BubblyUITests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R7MZ4U6N4Y;
 				INFOPLIST_FILE = BubblyUITests/Info.plist;

@@ -67,6 +67,7 @@ float temp, feelsLike, humidity;
     
     self.progressView.trackBackgroundColor = UINavigationBar.appearance.barTintColor;
     self.progressView.trackFillColor = UIButton.appearance.tintColor;
+    self.progressView.centerFillColor = UIView.appearance.backgroundColor;
     
     [self.closeKeyboard setEnabled:NO];
     
@@ -118,8 +119,11 @@ float temp, feelsLike, humidity;
     NSArray *name = [self.user.name componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     self.welcomeLabel.text = [NSString stringWithFormat:@"Welcome back, %@!", name[0]];
     
+    NSLog(@"%@", self.user);
+    NSLog(@"%@", self.user.backgroundPicture.url);
+    
     UIImageView *imageView = [[UIImageView alloc] init];
-    [imageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.user.backgroundPicture.url]] placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+    [imageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.user.backgroundPicture.url]] placeholderImage:[UIImage imageNamed:@"bottle"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
         self.progressView.centerImage = image;
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         // tap to try again

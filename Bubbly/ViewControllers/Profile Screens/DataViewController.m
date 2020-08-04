@@ -13,7 +13,6 @@
 #import "Utilities.h"
 #import "ProfileContainerViewController.h"
 #import <PopupDialog-Swift.h>
-#import <Bubbly-Swift.h>
 #import "BackgroundView.h"
 #import "UIColor+ColorExtensions.h"
 

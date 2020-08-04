@@ -48,6 +48,7 @@ static const int numLogs = 4;
 #pragma mark - View
 
 BOOL themeChanged = NO;
+BOOL imageChanged = NO;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -175,7 +176,7 @@ BOOL themeChanged = NO;
                 [NSNotificationCenter.defaultCenter postNotification:newTheme];
             }
             
-            if ([self.user.notificationsEnabled isEqualToNumber:[NSNumber numberWithInt:1]] && self.timeIntervalField.text.intValue > 0) {
+            if ([self.user.notificationsEnabled isEqualToNumber:[NSNumber numberWithInt:1]] && self.user.notifictionTimeInterval.doubleValue > 0) {
                 [Utilities changeNotificationsWithTimeInterval:self.user.notifictionTimeInterval.doubleValue inViewController:self];
             } else if ([self.user.notificationsEnabled isEqualToNumber:[NSNumber numberWithInt:0]]) {
                 [UNUserNotificationCenter.currentNotificationCenter removeAllPendingNotificationRequests];
@@ -196,7 +197,7 @@ BOOL themeChanged = NO;
 - (IBAction)closeKeyboard:(id)sender {
     [self updateUser];
     
-    if (![self.userCopy compareTo:self.user]) {
+    if (![self.userCopy compareTo:self.user] || imageChanged) {
         self.saveButton.enabled = YES;
         self.saveButton.tintColor = UIButton.appearance.tintColor;
     } else {
@@ -214,17 +215,19 @@ BOOL themeChanged = NO;
 #pragma mark - CameraViewDelegate
 
 - (void)setImage:(nonnull UIImage *)image withName:(nonnull NSString *)name {
-    [self closeKeyboard:self];
     if ([name isEqualToString:@"profile"]) {
         [self.profilePicture setImage:image forState:UIControlStateNormal];
     } else if ([name isEqualToString:@"background"]) {
         [self.backgroundPicture setImage:image forState:UIControlStateNormal];
     }
+    
+    imageChanged = YES;
+    [self closeKeyboard:self];
 }
 
 #pragma mark - TextFieldDelgate
 
-- (void)textFieldDidEndEditing:(UITextField *)textField {
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
     if (textField.text.length > 0) {
         self.saveButton.enabled = YES;
         self.saveButton.tintColor = UIButton.appearance.tintColor;
@@ -284,7 +287,7 @@ BOOL themeChanged = NO;
     
     self.user.color = [NSNumber numberWithInteger:[[ThemeColorOptions getColorOptions] indexOfObject:self.themeSegment.selectedSegmentTintColor]];
     self.user.theme = [NSNumber numberWithInteger:self.themeSegment.selectedSegmentIndex];
-    if (self.themeSegment.selectedSegmentIndex != self.userCopy.theme.intValue || self.user.color.intValue != self.userCopy.color.intValue) {
+    if (self.user.theme.intValue != self.userCopy.theme.intValue || self.user.color.intValue != self.userCopy.color.intValue) {
         themeChanged = YES;
     } else {
         themeChanged = NO;
