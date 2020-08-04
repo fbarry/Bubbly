@@ -78,6 +78,7 @@ static const int numOptions = 4;
             [Utilities presentConfirmationInViewController:self
                                                  withTitle:@"Are you sure you want to logout?"
                                                    message:nil
+                                                     image:nil
                                                 yesHandler:^{
                 NSNotification *newTheme = [[NSNotification alloc] initWithName:@"ThemeChangedEvent" object:nil userInfo:@{@"ThemeName" : [NSNumber numberWithInt:0]}];
                 [NSNotificationCenter.defaultCenter postNotification:newTheme];

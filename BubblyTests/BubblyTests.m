@@ -13,6 +13,15 @@
 
 @end
 
+@interface HomeViewController (UnitTest)
+
+@property (strong, nonatomic) IntakeDayLog *dayLog;
+@property (strong, nonatomic) User *user;
+
+- (void)createNewLog;
+
+@end
+
 @implementation BubblyTests
 
 HomeViewController *homeVC;
@@ -23,7 +32,7 @@ HomeViewController *homeVC;
 }
 
 - (void)tearDown {
-    // ??
+    
 }
 
 - (void)testCreateNewLog {

@@ -41,6 +41,8 @@ static const int numLogs = 4;
 @property (strong, nonatomic) NSDictionary *weather;
 @property (weak, nonatomic) IBOutlet UIButton *log;
 @property (weak, nonatomic) IBOutlet UIButton *delete;
+@property (strong, nonatomic) IntakeDayLog *dayLog;
+@property (strong, nonatomic) User *user;
 
 @end
 
@@ -121,6 +123,7 @@ float temp, feelsLike, humidity;
         self.progressView.centerImage = image;
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         // tap to try again
+        NSLog(@"failed to load");
     }];
     
     for (int i = 0; i < numLogs; i++) {
@@ -156,6 +159,7 @@ float temp, feelsLike, humidity;
     [Utilities presentConfirmationInViewController:self
                                          withTitle:@"Would you like to enable water consumption reminders?"
                                            message:@"You can change this option in app settings"
+                                             image:nil
                                         yesHandler:^{ [self setUpNotificationManager]; }
                                          noHandler:^{
         [self.user saveInBackground];
@@ -167,6 +171,7 @@ float temp, feelsLike, humidity;
     [Utilities presentConfirmationInViewController:self
                                          withTitle:@"Would you like to view the weather in your area for increased water intake recommendations?"
                                            message:@"You can change this option in app settings"
+                                             image:nil
                                         yesHandler:^{
         self.user.weatherEnabled = [NSNumber numberWithInt:1];
         [self setUpLocationManager];
@@ -260,8 +265,9 @@ float temp, feelsLike, humidity;
 #pragma mark - Facebook Sharing
 
 - (void)sharePost {
-    FacebookShareView *share = [[FacebookShareView alloc] initWithTitle:@"Congratulations on meeting your goal! Woud like you like to share to Facebook?"
-                                                                 photos:@[[UIImage systemImageNamed:@"book"]]
+    FacebookShareView *share = [[FacebookShareView alloc] initWithTitle:@"Congratulations on meeting your goal! Would you like to share to Facebook?"
+                                                                 photo:[UIImage imageNamed:@"share-goal"]
+                                                                caption:@"I reached my water intake goal on Bubbly!"
                                                        inViewController:self];
     [share presentShareView];
 }
@@ -390,6 +396,7 @@ float temp, feelsLike, humidity;
         [Utilities presentConfirmationInViewController:self
                                             withTitle:[NSString stringWithFormat:@"Are you sure you want to delete %@ ounces?", logChange.logAmount]
                                                 message:nil
+                                                 image:nil
                                             yesHandler:completion
                                              noHandler:nil];
     } else {
@@ -426,6 +433,7 @@ float temp, feelsLike, humidity;
                             [Utilities presentConfirmationInViewController:self
                                                                  withTitle:@"Would you like to enable share to Facebook?"
                                                                    message:@"You can change this option in app settings"
+                                                                     image:nil
                                                                 yesHandler:^{
                                 [self.user.FBConnected isEqualToNumber:[NSNumber numberWithInt:1]];
                                 [self sharePost];

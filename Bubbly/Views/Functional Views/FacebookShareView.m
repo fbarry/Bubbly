@@ -11,11 +11,12 @@
 
 @implementation FacebookShareView
 
-- (instancetype)initWithTitle:(NSString *)title photos:(NSArray *)photos inViewController:(UIViewController *)viewController {
+- (instancetype)initWithTitle:(NSString *)title photo:(UIImage *)photo caption:(NSString *)caption inViewController:(UIViewController *)viewController {
     self = [super init];
     if (self) {
         _title = title;
-        _photos = photos;
+        _photo = photo;
+        _caption = caption;
         _viewController = viewController;
     }
     return self;
@@ -25,6 +26,7 @@
     [Utilities presentConfirmationInViewController:self.viewController
                                          withTitle:self.title
                                            message:nil
+                                             image:self.photo
                                         yesHandler:^{
         if (![FBSDKAccessToken currentAccessToken]) {
             FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
@@ -46,12 +48,13 @@
 
 - (void)createPost {
     FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
-    photo.image = [UIImage systemImageNamed:@"Book"];
+    photo.image = self.photo;
+    photo.caption = self.caption;
     photo.userGenerated = YES;
-        
+    
     FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
     content.photos = @[photo];
-        
+    
     [FBSDKShareDialog showFromViewController:self.viewController
                                  withContent:content
                                     delegate:self];

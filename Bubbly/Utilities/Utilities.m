@@ -32,11 +32,12 @@
 + (void)presentConfirmationInViewController:(UIViewController *)viewController
                                   withTitle:(nonnull NSString *)title
                                     message:(NSString * _Nullable)message
+                                      image:(UIImage * _Nullable)image
                                  yesHandler:(void(^)(void))yesHandler
                                   noHandler:(void(^ _Nullable)(void))noHandler {
     PopupDialog *popup = [[PopupDialog alloc] initWithTitle:title
                                                     message:message
-                                                      image:nil
+                                                      image:image
                                             buttonAlignment:UILayoutConstraintAxisHorizontal
                                             transitionStyle:PopupDialogTransitionStyleFadeIn
                                              preferredWidth:200

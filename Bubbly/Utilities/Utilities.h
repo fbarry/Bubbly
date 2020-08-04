@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)presentConfirmationInViewController:(UIViewController *)viewController
                                   withTitle:(nonnull NSString *)title
                                     message:(NSString * _Nullable)message
+                                      image:(UIImage * _Nullable)image
                                  yesHandler:(void(^)(void))yesHandler
                                   noHandler:(void(^ _Nullable)(void))noHandler;
 

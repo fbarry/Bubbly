@@ -32,7 +32,7 @@
 }
 
 - (UIColor *)weatherIconBackground {
-    return self.accent;
+    return [self.accent colorWithAlphaComponent:1];
 }
 
 - (UIColor *)labelText {

@@ -22,6 +22,7 @@
 @dynamic notificationsEnabled;
 @dynamic notifictionTimeInterval;
 @dynamic theme;
+@dynamic color;
 
 - (NSURL *)profilePictureURL {
     return [NSURL URLWithString:self.profilePicture.url];

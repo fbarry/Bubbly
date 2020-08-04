@@ -159,7 +159,8 @@
 
 - (IBAction)didTapShare:(id)sender {
     FacebookShareView *share = [[FacebookShareView alloc] initWithTitle:@"Would you like to share this recipe to Facebook?"
-                                                                 photos:@[self.picture.image]
+                                                                  photo:self.picture.image
+                                                                caption:[NSString stringWithFormat:@"View recipe at %@", self.recipe.url]
                                                        inViewController:self];
     [share presentShareView];
 }

@@ -152,6 +152,7 @@ BOOL newRecipe = NO;
     [Utilities presentConfirmationInViewController:self
                                          withTitle:@"Are you sure you want to delete this recipe?"
                                            message:@"This action cannot be undone"
+                                             image:nil
                                         yesHandler:^{
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [self.recipe deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
