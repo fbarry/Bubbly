@@ -7,6 +7,7 @@ PODS:
   - Charts (3.5.0):
     - Charts/Core (= 3.5.0)
   - Charts/Core (3.5.0)
+  - CircleProgressView (1.2.0)
   - DynamicBlurView (4.1.0)
   - MBProgressHUD (1.2.0)
   - OpenWeatherMapAPI (0.0.5):
@@ -23,6 +24,7 @@ DEPENDENCIES:
   - AFNetworking
   - ChameleonFramework
   - Charts
+  - CircleProgressView
   - MBProgressHUD
   - OpenWeatherMapAPI
   - Parse
@@ -35,6 +37,7 @@ SPEC REPOS:
     - Bolts
     - ChameleonFramework
     - Charts
+    - CircleProgressView
     - DynamicBlurView
     - MBProgressHUD
     - OpenWeatherMapAPI
@@ -47,6 +50,7 @@ SPEC CHECKSUMS:
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Charts: 40a08591df1f8ad5c223ddedfb1a06da92f24f7c
+  CircleProgressView: 6b5b091d59dc5e5d2fda84e637a40498cdc39937
   DynamicBlurView: 58e18fae80bb614e34681a4486870e7d257b62e8
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   OpenWeatherMapAPI: 53613bba3dffc948f852a66a25f512f7a16643e7
@@ -54,6 +58,6 @@ SPEC CHECKSUMS:
   PopupDialog: 720c92befd8bc23c13442254945213db5612f149
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
-PODFILE CHECKSUM: 91c897fe92eca12c3cb35828ccc35fef4cad5e4f
+PODFILE CHECKSUM: 2448b16ff1ef4364993c18b0eee63e9850f5c6d5
 
 COCOAPODS: 1.9.3

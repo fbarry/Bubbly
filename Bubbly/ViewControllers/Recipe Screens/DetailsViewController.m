@@ -150,8 +150,6 @@
                     } else {
                         [self.saveButton setImage:[UIImage systemImageNamed:@"heart.fill"]];
                     }
-                } else {
-                    NSLog(@"Saved");
                 }
             }];
         }

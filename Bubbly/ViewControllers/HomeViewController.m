@@ -10,7 +10,6 @@
 #import "IntakeLog.h"
 #import "Utilities.h"
 #import "UIImageView+AFNetworking.h"
-#import <Charts-Swift.h>
 #import "IntakeDayLog.h"
 #import <CoreLocation/CoreLocation.h>
 #import "OWMWeatherAPI.h"
@@ -21,6 +20,7 @@
 #import "UIColor+ColorExtensions.h"
 #import "WeatherIcon.h"
 #import "BackgroundView.h"
+#import <CircleProgressView-Swift.h>
 
 static const int numLogs = 4;
 
@@ -28,12 +28,11 @@ static const int numLogs = 4;
 
 @property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UILabel *welcomeLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *backgroundPicture;
 @property (weak, nonatomic) IBOutlet UILabel *goalLabel;
 @property (weak, nonatomic) IBOutlet UILabel *acheivedLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-@property (weak, nonatomic) IBOutlet PieChartView *pieChart;
+@property (weak, nonatomic) IBOutlet CircleProgressView *progressView;
 @property (weak, nonatomic) IBOutlet WeatherIcon *weatherIcon;
 @property (weak, nonatomic) IBOutlet UIView *textView;
 @property (weak, nonatomic) IBOutlet UIButton *infoButton;
@@ -61,10 +60,13 @@ float temp, feelsLike, humidity;
     self.log.layer.cornerRadius = self.delete.layer.cornerRadius = 16;
     self.delete.backgroundColor = [UIColor extraLightGray];
     
-    self.pieChart.layer.shadowOffset = CGSizeMake(0, 8.0f);
-    self.pieChart.layer.shadowRadius = 8.0f;
-    self.pieChart.layer.shadowOpacity = 0.5f;
-    self.pieChart.layer.masksToBounds = NO;
+    self.progressView.layer.shadowOffset = CGSizeMake(0, 8.0f);
+    self.progressView.layer.shadowRadius = 8.0f;
+    self.progressView.layer.shadowOpacity = 0.5f;
+    self.progressView.layer.masksToBounds = NO;
+    
+    self.progressView.trackBackgroundColor = UINavigationBar.appearance.barTintColor;
+    self.progressView.trackFillColor = UIButton.appearance.tintColor;
     
     [self.closeKeyboard setEnabled:NO];
     
@@ -73,19 +75,12 @@ float temp, feelsLike, humidity;
     
     self.textView.layer.cornerRadius = 16;
         
-    [Utilities roundImage:self.backgroundPicture];
-    self.backgroundPicture.layer.borderColor = BackgroundView.appearance.backgroundColor.CGColor;
     [Utilities roundImage:self.weatherIcon];
     self.weatherIcon.layer.borderWidth = 0.5f;
     self.weatherIcon.layer.borderColor = [UIColor whiteColor].CGColor;
     [Utilities roundImage:(UIImageView *)self.infoButton];
     self.infoButton.layer.borderWidth = 0.5f;
     self.infoButton.layer.borderColor = [UIColor whiteColor].CGColor;
-    
-    [self.pieChart.legend setEnabled:NO];
-    self.pieChart.holeRadiusPercent = 0.9;
-    self.pieChart.holeColor = [UIColor clearColor];
-    [self.pieChart setUserInteractionEnabled:NO];
     
     [self getDayLog];
         
@@ -97,7 +92,7 @@ float temp, feelsLike, humidity;
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:YES];
         
-    self.pieChart.layer.shadowColor = UIView.appearance.tintColor.CGColor;
+    self.progressView.layer.shadowColor = UIView.appearance.tintColor.CGColor;
     self.log.backgroundColor = [UIButton.appearance.tintColor colorWithAlphaComponent:0.3];
     
     if ([self.user.weatherEnabled isEqualToNumber:[NSNumber numberWithInt:1]]) {
@@ -123,7 +118,12 @@ float temp, feelsLike, humidity;
     NSArray *name = [self.user.name componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     self.welcomeLabel.text = [NSString stringWithFormat:@"Welcome back, %@!", name[0]];
     
-    [self.backgroundPicture setImageWithURL:[NSURL URLWithString:self.user.backgroundPicture.url]];
+    UIImageView *imageView = [[UIImageView alloc] init];
+    [imageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.user.backgroundPicture.url]] placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        self.progressView.centerImage = image;
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+        // tap to try again
+    }];
     
     for (int i = 0; i < numLogs; i++) {
         [self.segmentedControl setTitle:[NSString stringWithFormat:@"%@ oz", self.user.logAmounts[i]] forSegmentAtIndex:i];
@@ -140,34 +140,15 @@ float temp, feelsLike, humidity;
     self.goalLabel.text = [NSString stringWithFormat:@"Goal: %d oz", [self.dayLog.goal intValue]];
     self.acheivedLabel.text = [NSString stringWithFormat:@"Achieved: %d oz", [self.dayLog.achieved intValue]];
     
-    double percent = [self.dayLog.achieved doubleValue]/[self.dayLog.goal doubleValue]*100;
-    PieChartDataSet *data = [[PieChartDataSet alloc] init];
-    [data setDrawValuesEnabled:NO];
-    data.colors = @[WeatherIcon.appearance.backgroundColor, [UIColor extraLightGray]];
-    
-    if (percent >= 100) {
-        if ([data addEntry:[[PieChartDataEntry alloc] initWithValue:100]]) {
-            data.colors = @[[UIColor systemGreenColor]];
-            self.pieChart.data = [[PieChartData alloc] initWithDataSet:data];
-        } else {
-            [Utilities presentOkAlertControllerInViewController:self
-                                                      withTitle:@"Error loading home screen"
-                                                        message:nil];
-        }
+    double percent = [self.dayLog.achieved doubleValue]/[self.dayLog.goal doubleValue];
+    if (percent >= 1) {
+        percent = 1;
+        self.progressView.trackFillColor = [UIColor greenColor];
     } else {
-        if ([data addEntry:[[PieChartDataEntry alloc] initWithValue:percent]] && [data addEntry:[[PieChartDataEntry alloc] initWithValue:100-percent]]) {
-            self.pieChart.data = [[PieChartData alloc] initWithDataSet:data];
-        } else {
-            [Utilities presentOkAlertControllerInViewController:self
-                                                      withTitle:@"Error loading home screen"
-                                                        message:nil];
-        }
+        self.progressView.trackFillColor = UIButton.appearance.tintColor;
     }
     
-    [Utilities roundImage:self.backgroundPicture];
-    self.backgroundPicture.layer.borderColor = BackgroundView.appearance.backgroundColor.CGColor;
-        
-    [self.pieChart animateWithXAxisDuration:1.2 easingOption:ChartEasingOptionEaseOutCirc];
+    [self.progressView setProgress:percent animated:YES];
 }
 
 #pragma mark - Define User Settings

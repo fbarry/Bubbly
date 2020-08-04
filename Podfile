@@ -14,6 +14,7 @@ target 'Bubbly' do
   pod 'PopupDialog'
   pod 'TTTAttributedLabel'
   pod 'ChameleonFramework'
+  pod 'CircleProgressView'
 
   target 'BubblyTests' do
     inherit! :search_paths

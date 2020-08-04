@@ -50,10 +50,7 @@
                                                     <action selector="didTapLog:" destination="mBS-3n-tB3" eventType="touchUpInside" id="350-AS-PcP"/>
                                                 </connections>
                                             </button>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bottle" translatesAutoresizingMaskIntoConstraints="NO" id="lxj-r3-lni">
-                                                <rect key="frame" x="27" y="113.5" width="360" height="360"/>
-                                            </imageView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uj4-Ft-90J" customClass="PieChartView" customModule="Charts">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uj4-Ft-90J" customClass="CircleProgressView" customModule="CircleProgressView">
                                                 <rect key="frame" x="10" y="96.5" width="394" height="394"/>
                                                 <subviews>
                                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cOp-vi-sqY">
@@ -92,6 +89,12 @@
                                                     <constraint firstItem="cOp-vi-sqY" firstAttribute="centerY" secondItem="uj4-Ft-90J" secondAttribute="centerY" id="qq5-CO-Xjj"/>
                                                     <constraint firstAttribute="width" secondItem="uj4-Ft-90J" secondAttribute="height" multiplier="1:1" id="u27-th-KTq"/>
                                                 </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clockwise" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="trackWidth">
+                                                        <real key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </view>
                                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="pyD-WW-oj3">
                                                 <rect key="frame" x="197" y="381" width="20" height="20"/>
@@ -134,22 +137,16 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <gestureRecognizers/>
                                         <constraints>
-                                            <constraint firstItem="lxj-r3-lni" firstAttribute="centerY" secondItem="uj4-Ft-90J" secondAttribute="centerY" id="0jy-32-ZqY"/>
-                                            <constraint firstItem="lxj-r3-lni" firstAttribute="bottom" secondItem="uj4-Ft-90J" secondAttribute="bottom" constant="-17" id="0yW-o5-O7X"/>
                                             <constraint firstItem="aqT-iU-wNQ" firstAttribute="centerX" secondItem="uvd-MV-ISW" secondAttribute="centerX" id="1z6-1I-E2E"/>
                                             <constraint firstItem="MBE-oQ-FdC" firstAttribute="centerX" secondItem="uvd-MV-ISW" secondAttribute="centerX" id="AXW-Mc-CnW"/>
                                             <constraint firstItem="FDl-Ih-rKm" firstAttribute="leading" secondItem="uvd-MV-ISW" secondAttribute="leading" constant="16" id="DqB-dO-aZu"/>
-                                            <constraint firstItem="lxj-r3-lni" firstAttribute="leading" secondItem="uj4-Ft-90J" secondAttribute="leading" constant="17" id="Dro-Ea-hPn"/>
                                             <constraint firstItem="P5N-ro-oI3" firstAttribute="height" secondItem="uj4-Ft-90J" secondAttribute="height" multiplier="1:4" id="KVZ-VR-dYf"/>
                                             <constraint firstAttribute="trailing" secondItem="FDl-Ih-rKm" secondAttribute="trailing" constant="16" id="Ojf-84-6xx"/>
-                                            <constraint firstItem="lxj-r3-lni" firstAttribute="centerX" secondItem="uj4-Ft-90J" secondAttribute="centerX" id="SQU-NZ-Ha9"/>
                                             <constraint firstItem="pyD-WW-oj3" firstAttribute="centerX" secondItem="uvd-MV-ISW" secondAttribute="centerX" id="Sij-lM-KeU"/>
                                             <constraint firstItem="4l8-9P-u7z" firstAttribute="leading" secondItem="P5N-ro-oI3" secondAttribute="leading" id="TIC-6V-MuF"/>
                                             <constraint firstItem="Ub8-Pm-rwB" firstAttribute="top" secondItem="uj4-Ft-90J" secondAttribute="bottom" constant="20" id="UMM-RJ-gBH"/>
-                                            <constraint firstItem="lxj-r3-lni" firstAttribute="trailing" secondItem="uj4-Ft-90J" secondAttribute="trailing" constant="-17" id="UQw-ib-V07"/>
                                             <constraint firstAttribute="trailing" secondItem="uj4-Ft-90J" secondAttribute="trailing" constant="10" id="UuV-1J-0n5"/>
                                             <constraint firstItem="P5N-ro-oI3" firstAttribute="bottom" secondItem="4l8-9P-u7z" secondAttribute="bottom" id="Xeg-94-gs5"/>
-                                            <constraint firstItem="lxj-r3-lni" firstAttribute="top" secondItem="uj4-Ft-90J" secondAttribute="top" constant="17" id="aVh-uk-g9s"/>
                                             <constraint firstAttribute="trailing" secondItem="Ub8-Pm-rwB" secondAttribute="trailing" constant="16" id="adJ-cr-KyO"/>
                                             <constraint firstItem="uj4-Ft-90J" firstAttribute="leading" secondItem="uvd-MV-ISW" secondAttribute="leading" constant="10" id="eDi-fY-XPB"/>
                                             <constraint firstAttribute="bottom" secondItem="aqT-iU-wNQ" secondAttribute="bottom" constant="16" id="eGG-zY-WW0"/>
@@ -198,13 +195,12 @@
                     <connections>
                         <outlet property="acheivedLabel" destination="scU-3v-OEX" id="ukU-zS-L5Z"/>
                         <outlet property="activityIndicator" destination="pyD-WW-oj3" id="lxy-ym-7Tz"/>
-                        <outlet property="backgroundPicture" destination="lxj-r3-lni" id="4Ht-69-n0u"/>
                         <outlet property="closeKeyboard" destination="D1E-1e-fnv" id="zww-do-g8k"/>
                         <outlet property="delete" destination="aqT-iU-wNQ" id="vxk-rX-D7f"/>
                         <outlet property="goalLabel" destination="Ety-D0-gvJ" id="FBh-Uf-BMg"/>
                         <outlet property="infoButton" destination="4l8-9P-u7z" id="DHm-2O-jPe"/>
                         <outlet property="log" destination="MBE-oQ-FdC" id="P20-dK-c6d"/>
-                        <outlet property="pieChart" destination="uj4-Ft-90J" id="6CT-d6-Mgv"/>
+                        <outlet property="progressView" destination="uj4-Ft-90J" id="Hpu-uL-DId"/>
                         <outlet property="scrollView" destination="JUW-KI-XDy" id="Y2w-PL-jVt"/>
                         <outlet property="segmentedControl" destination="Ub8-Pm-rwB" id="fxS-z7-jyX"/>
                         <outlet property="textView" destination="cOp-vi-sqY" id="Iy1-x5-23Q"/>
@@ -231,7 +227,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JH6-LH-pAu" customClass="TPKeyboardAvoidingScrollView">
-                                <rect key="frame" x="0.0" y="88" width="414" height="676"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tyn-8q-PkR" userLabel="Content View" customClass="BackgroundView">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="832"/>
@@ -2266,7 +2262,7 @@
         <segue reference="4Sc-WE-J3P"/>
         <segue reference="0pU-rW-bS3"/>
         <segue reference="Fdh-RY-nhU"/>
-        <segue reference="jz1-rq-rtR"/>
+        <segue reference="jbN-Zm-E9i"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="book" catalog="system" width="128" height="101"/>
