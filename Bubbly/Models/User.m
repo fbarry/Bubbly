@@ -37,10 +37,8 @@
     user.name = self.name;
     user.username = self.username;
     user.email = self.email;
-    user.profilePicture = self.profilePicture;
     user.weight = self.weight;
     user.exercise = self.exercise;
-    user.backgroundPicture = self.backgroundPicture;
     user.logAmounts = self.logAmounts;
     user.FBConnected = self.FBConnected;
     user.weatherEnabled = self.weatherEnabled;
@@ -58,13 +56,9 @@
         return NO;
     } if (![user.email isEqualToString:self.email]) {
         return NO;
-    } else if (user.profilePicture && ![user.profilePicture.url isEqualToString:self.profilePicture.url]) {
-        return NO;
     } else if (![user.weight isEqualToNumber:self.weight]) {
         return NO;
     } else if (![user.exercise isEqualToNumber:self.exercise]) {
-        return NO;
-    } else if (user.backgroundPicture && ![user.backgroundPicture isEqual:self.backgroundPicture]) {
         return NO;
     } else if (![user.logAmounts isEqualToArray:self.logAmounts]) {
         return NO;

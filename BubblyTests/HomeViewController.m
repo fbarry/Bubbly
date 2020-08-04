@@ -1,5 +1,5 @@
 //
-//  BubblyTests.m
+//  HomeViewControllerTests.m
 //  BubblyTests
 //
 //  Created by Fiona Barry on 7/13/20.
@@ -9,7 +9,7 @@
 #import <XCTest/XCTest.h>
 #import "HomeViewController.h"
 
-@interface HomeViewController : XCTestCase
+@interface HomeViewControllerTests : XCTestCase
 
 @end
 
@@ -22,7 +22,7 @@
 
 @end
 
-@implementation HomeViewController
+@implementation HomeViewControllerTests
 
 HomeViewController *homeVC;
 

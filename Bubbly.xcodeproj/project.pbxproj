@@ -35,7 +35,7 @@
 		8C9EBFAE24BCC1340031380E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C9EBFAD24BCC1340031380E /* Assets.xcassets */; };
 		8C9EBFB124BCC1340031380E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C9EBFAF24BCC1340031380E /* LaunchScreen.storyboard */; };
 		8C9EBFB424BCC1340031380E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFB324BCC1340031380E /* main.m */; };
-		8C9EBFBE24BCC1340031380E /* BubblyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFBD24BCC1340031380E /* BubblyTests.m */; };
+		8C9EBFBE24BCC1340031380E /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFBD24BCC1340031380E /* HomeViewController.m */; };
 		8C9EBFC924BCC1340031380E /* BubblyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFC824BCC1340031380E /* BubblyUITests.m */; };
 		8C9EBFDC24BCD27E0031380E /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFDB24BCD27E0031380E /* Utilities.m */; };
 		8C9EBFDF24BCD2AC0031380E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFDE24BCD2AC0031380E /* User.m */; };
@@ -61,6 +61,7 @@
 		8CD3628724CA0AA9007B02E8 /* SidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD3628624CA0AA9007B02E8 /* SidebarViewController.m */; };
 		8CE2E19C24D4A5C500C6BD71 /* WebKitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE2E19B24D4A5C500C6BD71 /* WebKitViewController.m */; };
 		8CE2E19E24D4A67600C6BD71 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CE2E19D24D4A67600C6BD71 /* WebKit.framework */; };
+		8CEBAEC224D9DF5F00334018 /* UserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CEBAEC124D9DF5F00334018 /* UserTests.m */; };
 		8CEEBCF424D8BA7B00E84F7B /* ColorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CEEBCF324D8BA7B00E84F7B /* ColorViewController.m */; };
 		8CEEBCF724D8BAF900E84F7B /* ColorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CEEBCF624D8BAF900E84F7B /* ColorCell.m */; };
 		8CF7B9A824C7858D00B0F8C3 /* IntakeDayLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF7B9A724C7858D00B0F8C3 /* IntakeDayLog.m */; };
@@ -134,7 +135,7 @@
 		8C9EBFB224BCC1340031380E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C9EBFB324BCC1340031380E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8C9EBFB924BCC1340031380E /* BubblyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BubblyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8C9EBFBD24BCC1340031380E /* BubblyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BubblyTests.m; sourceTree = "<group>"; };
+		8C9EBFBD24BCC1340031380E /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		8C9EBFBF24BCC1340031380E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C9EBFC424BCC1340031380E /* BubblyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BubblyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C9EBFC824BCC1340031380E /* BubblyUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BubblyUITests.m; sourceTree = "<group>"; };
@@ -187,6 +188,7 @@
 		8CE2E19A24D4A5C500C6BD71 /* WebKitViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebKitViewController.h; sourceTree = "<group>"; };
 		8CE2E19B24D4A5C500C6BD71 /* WebKitViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebKitViewController.m; sourceTree = "<group>"; };
 		8CE2E19D24D4A67600C6BD71 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		8CEBAEC124D9DF5F00334018 /* UserTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserTests.m; sourceTree = "<group>"; };
 		8CEEBCF224D8BA7B00E84F7B /* ColorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorViewController.h; sourceTree = "<group>"; };
 		8CEEBCF324D8BA7B00E84F7B /* ColorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ColorViewController.m; sourceTree = "<group>"; };
 		8CEEBCF524D8BAF900E84F7B /* ColorCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorCell.h; sourceTree = "<group>"; };
@@ -404,7 +406,8 @@
 		8C9EBFBC24BCC1340031380E /* BubblyTests */ = {
 			isa = PBXGroup;
 			children = (
-				8C9EBFBD24BCC1340031380E /* BubblyTests.m */,
+				8CEBAEC124D9DF5F00334018 /* UserTests.m */,
+				8C9EBFBD24BCC1340031380E /* HomeViewController.m */,
 				8C9EBFBF24BCC1340031380E /* Info.plist */,
 			);
 			path = BubblyTests;
@@ -773,7 +776,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C9EBFBE24BCC1340031380E /* BubblyTests.m in Sources */,
+				8CEBAEC224D9DF5F00334018 /* UserTests.m in Sources */,
+				8C9EBFBE24BCC1340031380E /* HomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
