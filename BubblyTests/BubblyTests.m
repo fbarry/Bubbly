@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "DetailsViewController.h"
+#import "HomeViewController.h"
 
 @interface BubblyTests : XCTestCase
 
@@ -15,24 +15,25 @@
 
 @implementation BubblyTests
 
+HomeViewController *homeVC;
+
 - (void)setUp {
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    homeVC = [[HomeViewController alloc] init];
+    homeVC.user = [User new];
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
+    // ??
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
-}
-
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+- (void)testCreateNewLog {
+    for (int i = 1; i <= 1000; i++) {
+        homeVC.user.weight = [NSNumber numberWithInt:i];
+        homeVC.user.exercise = [NSNumber numberWithInt:i];
+        [homeVC createNewLog];
+        XCTAssertEqual(homeVC.dayLog.achieved.intValue, 0);
+        XCTAssertEqual(homeVC.dayLog.goal.intValue, (int)(homeVC.user.weight.floatValue * 2.0 / 3.0 + 12.0 * homeVC.user.exercise.floatValue / 30.0));
+    }
 }
 
 @end

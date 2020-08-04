@@ -37,12 +37,10 @@ static const int numLogs = 4;
 @property (weak, nonatomic) IBOutlet UIView *textView;
 @property (weak, nonatomic) IBOutlet UIButton *infoButton;
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *closeKeyboard;
-@property (strong, nonatomic) IntakeDayLog *dayLog;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSDictionary *weather;
 @property (weak, nonatomic) IBOutlet UIButton *log;
 @property (weak, nonatomic) IBOutlet UIButton *delete;
-@property (strong, nonatomic) User *user;
 
 @end
 
@@ -295,7 +293,7 @@ float temp, feelsLike, humidity;
                 [Utilities presentOkAlertControllerInViewController:self
                                                           withTitle:@"The weather outside is frightful..."
                                                             message:[NSString stringWithFormat:@"A whopping %.0f°\nRemember to drink extra water!", feelsLike]];
-                self.infoButton.tintColor = [UIColor systemRedColor];
+                self.infoButton.tintColor = [UIColor redColor];
             } else {
                 self.infoButton.tintColor = [UIColor darkGrayColor];
             }
@@ -322,26 +320,30 @@ float temp, feelsLike, humidity;
                                                         message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
         } else {
             if (![self validLog:objects]) {
-                self.dayLog = [IntakeDayLog new];
-                self.dayLog.goal = [NSNumber numberWithFloat:[self.user.weight floatValue] * 2.0 / 3.0 + 12.0 * [self.user.exercise floatValue] / 30.0];
-                self.dayLog.achieved = [NSNumber numberWithInt:0];
-                self.dayLog.user = self.user;
-                
-                [self.dayLog saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                    if (error) {
-                        [Utilities presentOkAlertControllerInViewController:self
-                                                                  withTitle:@"Could not create new log"
-                                                                    message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
-                    } else {
-                        [self loadAnimation];
-                    }
-                }];
+                [self createNewLog];
             } else {
                 self.dayLog = objects[0];
                 [self loadAnimation];
             }
         }
         [self.activityIndicator stopAnimating];
+    }];
+}
+
+- (void)createNewLog {
+    self.dayLog = [IntakeDayLog new];
+    self.dayLog.goal = [NSNumber numberWithFloat:[self.user.weight floatValue] * 2.0 / 3.0 + 12.0 * [self.user.exercise floatValue] / 30.0];
+    self.dayLog.achieved = [NSNumber numberWithInt:0];
+    self.dayLog.user = self.user;
+    
+    [self.dayLog saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error) {
+            [Utilities presentOkAlertControllerInViewController:self
+                                                      withTitle:@"Could not create new log"
+                                                        message:[NSString stringWithFormat:@"%@", error.localizedDescription]];
+        } else {
+            [self loadAnimation];
+        }
     }];
 }
 

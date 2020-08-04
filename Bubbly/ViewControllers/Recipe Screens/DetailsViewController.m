@@ -95,6 +95,7 @@
     
     self.websiteLabel.delegate = self;
     self.websiteLabel.enabledTextCheckingTypes = NSTextCheckingTypeLink;
+    self.websiteLabel.textColor = UILabel.appearance.textColor;
     [self.websiteLabel setText:[NSString stringWithFormat:@"Website: %@", self.recipe.url && self.recipe.url.length > 0 ? self.recipe.url : @"Not Available"]];
     
     self.descriptionLabel.text = [NSString stringWithFormat:@"Description: %@", self.recipe.descriptionText && self.recipe.descriptionText.length > 0 ? self.recipe.descriptionText : @"Not Available"];
