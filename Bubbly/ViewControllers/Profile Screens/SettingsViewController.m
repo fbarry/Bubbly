@@ -63,12 +63,18 @@ BOOL themeChanged = NO;
     [Utilities roundImage:(UIImageView *)self.backgroundPicture];
         
     UIImageView *imageView = [[UIImageView alloc] init];
-    [imageView setImageWithURL:[NSURL URLWithString:self.user.profilePicture.url]];
-    [self.profilePicture setImage:imageView.image forState:UIControlStateNormal];
-    
-    imageView = [[UIImageView alloc] init];
-    [imageView setImageWithURL:[NSURL URLWithString:self.user.backgroundPicture.url]];
-    [self.backgroundPicture setImage:imageView.image forState:UIControlStateNormal];
+    [imageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.user.profilePicture.url]]
+                     placeholderImage:nil
+                              success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        [self.profilePicture setImage:image forState:UIControlStateNormal];
+    }
+                              failure:nil];
+    [imageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.user.backgroundPicture.url]]
+                     placeholderImage:nil
+                              success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        [self.backgroundPicture setImage:image forState:UIControlStateNormal];
+    }
+                              failure:nil];
     
     self.timeIntervalField.text = [NSString stringWithFormat:@"%d", (self.user.notifictionTimeInterval.intValue / 60)];
     
