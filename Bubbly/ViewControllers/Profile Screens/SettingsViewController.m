@@ -16,6 +16,7 @@
 #import <UserNotifications/UserNotifications.h>
 #import "ThemeColorOptions.h"
 #import "ColorViewController.h"
+#import "UIColor+ColorExtensions.h"
 
 static const int numLogs = 4;
 
@@ -127,10 +128,19 @@ BOOL imageChanged = NO;
 }
 
 - (IBAction)didToggleTheme:(id)sender {
-    if (self.themeSegment.selectedSegmentIndex == 3) {
-        [self performSegueWithIdentifier:@"Colors" sender:self];
-    } else {
-        self.themeSegment.selectedSegmentTintColor = UISegmentedControl.appearance.selectedSegmentTintColor;
+    switch (self.themeSegment.selectedSegmentIndex) {
+        case 0:
+            self.themeSegment.selectedSegmentTintColor = [UIColor customBlue];
+            break;
+        case 1:
+            self.themeSegment.selectedSegmentTintColor = [UIColor whiteColor];
+            break;
+        case 2:
+            self.themeSegment.selectedSegmentTintColor = [UIColor lightGrayColor];
+            break;
+        case 3:
+            [self performSegueWithIdentifier:@"Colors" sender:self];
+            break;
     }
 }
 

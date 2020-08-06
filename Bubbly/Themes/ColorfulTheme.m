@@ -71,5 +71,4 @@
     return self.accent;
 }
 
-
 @end
