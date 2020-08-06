@@ -19,6 +19,7 @@
 @property (strong, nonatomic) User *user;
 
 - (void)createNewLog;
+- (float)kelvinToFarenheit:(float)kelvin;
 
 @end
 
@@ -44,6 +45,12 @@ HomeViewController *homeVC;
             XCTAssertEqual(homeVC.dayLog.achieved.intValue, 0);
             XCTAssertEqual(homeVC.dayLog.goal.intValue, (int)(homeVC.user.weight.floatValue * 2.0 / 3.0 + 12.0 * homeVC.user.exercise.floatValue / 30.0));
         }
+    }
+}
+
+- (void)testConversionToFarenheit {
+    for (int i = 0; i < 120; i++) {
+        XCTAssertEqual((int)[homeVC kelvinToFarenheit:i], (int)((i - 273.15) * 9.0 / 5.0 + 32));
     }
 }
 

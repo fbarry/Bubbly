@@ -27,6 +27,7 @@
 		8C7614A524D4A90700C02D1C /* RecipeContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C7614A424D4A90700C02D1C /* RecipeContainerViewController.m */; };
 		8C7614A824D4A93900C02D1C /* RecipeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C7614A724D4A93900C02D1C /* RecipeListViewController.m */; };
 		8C7614AB24D4A9C900C02D1C /* RecipeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C7614AA24D4A9C900C02D1C /* RecipeListCell.m */; };
+		8C945A7B24DC72CC0092FBD2 /* ThemeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C945A7A24DC72CC0092FBD2 /* ThemeTests.m */; };
 		8C9B17DA24CA03FB00D84D18 /* ProfileContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9B17D924CA03FB00D84D18 /* ProfileContainerViewController.m */; };
 		8C9EBFA324BCC1330031380E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFA224BCC1330031380E /* AppDelegate.m */; };
 		8C9EBFA624BCC1330031380E /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBFA524BCC1330031380E /* SceneDelegate.m */; };
@@ -121,6 +122,7 @@
 		8C7614A724D4A93900C02D1C /* RecipeListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecipeListViewController.m; sourceTree = "<group>"; };
 		8C7614A924D4A9C900C02D1C /* RecipeListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecipeListCell.h; sourceTree = "<group>"; };
 		8C7614AA24D4A9C900C02D1C /* RecipeListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecipeListCell.m; sourceTree = "<group>"; };
+		8C945A7A24DC72CC0092FBD2 /* ThemeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThemeTests.m; sourceTree = "<group>"; };
 		8C9B17D824CA03FB00D84D18 /* ProfileContainerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileContainerViewController.h; sourceTree = "<group>"; };
 		8C9B17D924CA03FB00D84D18 /* ProfileContainerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileContainerViewController.m; sourceTree = "<group>"; };
 		8C9EBF9E24BCC1330031380E /* Bubbly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bubbly.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -406,6 +408,7 @@
 		8C9EBFBC24BCC1340031380E /* BubblyTests */ = {
 			isa = PBXGroup;
 			children = (
+				8C945A7A24DC72CC0092FBD2 /* ThemeTests.m */,
 				8CEBAEC324D9E74700334018 /* UtilitiesTests.m */,
 				8CEBAEC124D9DF5F00334018 /* UserTests.m */,
 				8C9EBFBD24BCC1340031380E /* HomeViewController.m */,
@@ -776,6 +779,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CEBAEC224D9DF5F00334018 /* UserTests.m in Sources */,
+				8C945A7B24DC72CC0092FBD2 /* ThemeTests.m in Sources */,
 				8CEBAEC424D9E74700334018 /* UtilitiesTests.m in Sources */,
 				8C9EBFBE24BCC1340031380E /* HomeViewController.m in Sources */,
 			);
