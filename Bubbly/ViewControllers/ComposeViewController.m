@@ -45,6 +45,7 @@ BOOL newRecipe = NO;
     self.deleteButton.layer.cornerRadius = 16;
     
     self.ingredients = [[NSMutableArray alloc] init];
+    [self.ingredients addObject:@""];
     
     if (!self.recipe) {
         self.recipe = [Recipe new];
@@ -81,11 +82,31 @@ BOOL newRecipe = NO;
     return self.ingredients.count;
 }
 
+#pragma mark - TextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    for (int i = 0; i < self.ingredients.count; i++) {
+        IngredientCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        if ([cell.ingredient.text isEqualToString:@""]) {
+            return YES;
+        }
+    }
+    [self didTapAdd:self];
+    return YES;
+}
+
 #pragma mark - IngredientCellDelegate
 
 - (void)didEndEditingCell:(id)sender withText:(NSString *)ingredient {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
     self.ingredients[indexPath.row] = ingredient;
+    for (int i = 0; i < self.ingredients.count; i++) {
+        IngredientCell *cell = sender;
+        if ([cell.ingredient.text isEqualToString:@""]) {
+            return;
+        }
+    }
+    [self didTapAdd:self];
 }
 
 #pragma mark - TextViewDelegate

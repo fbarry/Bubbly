@@ -20,6 +20,11 @@
     [super setSelected:selected animated:animated];
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     [self.delegate didEndEditingCell:self withText:self.ingredient.text];
 }
